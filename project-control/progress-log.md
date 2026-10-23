@@ -34,4 +34,17 @@
 
 ### Git
 
-- Repo local được init tại `D:\spss\.git` (không remote). Commit: ghi hash + ngày tại đây sau khi commit — cập nhật bên dưới.
+- Repo local được init tại `D:\spss\.git` (không remote, không đổi global config — identity đã có sẵn).
+- Commit khởi tạo: `4094497` — "Bootstrap SPSS Medical Learning Pack workspace (Task 01)", 53 file tracked.
+- `.gitignore` kiểm tra: `.workspace/*` (trừ `.gitkeep`) và `exports/*` (trừ README/.gitkeep) bị loại; `.sav/.sps/.csv` học liệu không bị ignore.
+
+### Kết quả validation cuối (chạy thật, không suy diễn)
+
+| Check | Lệnh/method | Kết quả |
+|---|---|---|
+| Blueprint nguyên vẹn | `sha256sum` đối chiếu | PASS — khớp `cdb0b973…0366036` |
+| Không nội dung bài học sớm | `find` lesson.md/workbook/answer-key/.sav/.sps/.csv/.spv | PASS — 0 file |
+| Production-plan M01–M03 | `ls` trực tiếp | PASS — đủ 3 file |
+| Đếm module | `ls -d lessons/M??-*` / `extensions/E??-*` | PASS — 12 + 3 |
+| Liên kết tương đối hỏng | Script kiểm tra mọi `](path)` nội bộ trong .md | PASS — 0 link hỏng |
+| Nhãn VERIFIED sai | `grep -rn VERIFIED` toàn repo | PASS — chỉ `VERIFIED_SOURCE` ở source-register (đã fetch thật) và từ vựng trạng thái; 0 artifact runtime được gắn VERIFIED |
