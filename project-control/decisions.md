@@ -1,0 +1,18 @@
+# Decision Register — Sổ quyết định
+
+Quy ước trạng thái: `PROPOSED` (đề xuất, chờ duyệt) · `APPROVED` (đã duyệt) · `DEFERRED` (hoãn, có điều kiện xem lại) · `REJECTED` (bác bỏ, kèm lý do).
+
+AI agent không tự chuyển quyết định sang `APPROVED` khi quyết định ảnh hưởng phạm vi giáo trình, nội dung y khoa/thống kê, hoặc phát hành. Quyết định kỹ thuật nội bộ (cấu trúc file, tooling) được ghi `APPROVED` chỉ khi nằm trong ủy quyền của task thiết lập.
+
+| ID | Ngày | Quyết định | Trạng thái | Lý do / căn cứ | Điều kiện xem lại |
+|---|---|---|---|---|---|
+| D-001 | 2026-10-24 | Đặt `findings-register.md` tại `qa/` thay vì `reviews/` như gợi ý §11 Blueprint | APPROVED (trong ủy quyền layout task) | Layout thư mục được giao trong Task 01 chỉ định `qa/`; `reviews/` giữ vai trò lưu report review độc lập | — |
+| D-002 | 2026-10-24 | Tài liệu điều hành (project-control, qa, assessment) viết tiếng Việt, thuật ngữ kỹ thuật song ngữ | PROPOSED | Blueprint viết tiếng Việt; giữ nhất quán ngôn ngữ cho team và học viên | Chủ dự án xác nhận hoặc yêu cầu song ngữ đầy đủ |
+| D-003 | 2026-10-24 | Giữ nguyên SPSS Statistics 32 làm version mục tiêu của giáo trình | DEFERRED | Blueprint chọn 32 nhưng ghi nhận SPSS 33 (ARM64) sắp tới; chưa xác nhận phát hành/tương thích chính thức | Khi IBM xác nhận SPSS 33 + license người học rõ |
+| D-004 | 2026-10-24 | Không đưa tuyên bố "macOS 15 và 26 được SPSS 32 hỗ trợ" vào tài liệu học viên như sự thật đã kiểm chứng | APPROVED (áp dụng nguyên tắc không tuyên bố chưa kiểm) | Tuyên bố xuất hiện trong Blueprint nhưng chưa đối chiếu tài liệu tương thích IBM chính thức trong workspace này | Sau khi kiểm chứng trang compatibility của IBM (U2) |
+| D-005 | 2026-10-24 | Khởi tạo Git repository local tại `D:\spss`, không remote, không push | APPROVED (task cho phép) | Task 01 §PHASE 6 cho phép; phục vụ version tracking | Khi chủ dự án muốn remote/backup |
+| D-006 | 2026-10-24 | Mọi artifact thực thi tạo trong workspace mặc định trạng thái `NOT_RUN` | APPROVED (bắt buộc theo Blueprint §9) | Workspace Windows không có SPSS; không thể kiểm chứng runtime | Khi có máy Mac QA có SPSS đúng version |
+| D-007 | 2026-10-24 | Tên thư mục module: `M04-descriptive-stats`, `M05-inference-thinking`, `M06-two-group-means`, `M07-nonparametric-tests`, `M08-crosstabs-binary`, `M09-multi-group`, `M10-correlation-regression`, `M11-logistic-regression`, `M12-capstone-project` | APPROVED (trong ủy quyền layout task) | Suy ra từ tên chủ đề trong Blueprint §3; Task 01 yêu cầu tạo thư mục M04–M12 "from Blueprint" | Có thể đổi khi thiết kế module tương ứng |
+| D-008 | 2026-10-24 | Không tạo dataset, không viết bài học, không tạo syntax trong Task 01 | APPROVED (ràng buộc STOP condition) | Task 01 §10: dừng sau setup, chờ review độc lập | Sau HUMAN_APPROVAL của báo cáo setup |
+| D-009 | 2026-10-24 | Bỏ qua đề xuất Make/automation ở §12 Blueprint trong giai đoạn này | DEFERRED | Blueprint tự đánh dấu "giai đoạn sau"; không để automation tự sửa/chốt giáo trình | Sau khi core pipeline ổn định |
+| D-010 | 2026-10-24 | Ghi S01, S10 là `PENDING_VERIFICATION` thay vì `VERIFIED_SOURCE` | APPROVED (nguyên tắc trung thực nguồn) | Fetch không mở được nội dung (JS portal / Salesforce) — không được claim đã kiểm chứng | Sau khi mở bằng trình duyệt thật + snapshot |

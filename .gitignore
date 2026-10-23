@@ -1,0 +1,47 @@
+# ---- Workspace internals (temp/cache/logs) ----
+.workspace/tmp/*
+.workspace/cache/*
+.workspace/logs/*
+!.workspace/tmp/.gitkeep
+!.workspace/cache/.gitkeep
+!.workspace/logs/.gitkeep
+
+# ---- Generated publishing outputs (rebuildable) ----
+exports/*
+!exports/README.md
+!exports/.gitkeep
+
+# ---- OS / editor noise ----
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# ---- Secrets & credentials (never commit) ----
+*.key
+*.pem
+*.p12
+.env
+.env.*
+secrets/
+credentials*
+*license*.lic
+
+# ---- Local runtimes (if generators use Python/R later) ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+.Rhistory
+.RData
+.Rproj.user/
+
+# ---- Temp ----
+*.tmp
+*.bak
+~$*
+
+# NOTE: .sav/.sps/.spv/.csv của học liệu là artifact quan trọng -> KHÔNG ignore.
