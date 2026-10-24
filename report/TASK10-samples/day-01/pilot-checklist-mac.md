@@ -15,6 +15,11 @@ phiên bản macOS ( → About This Mac).
 - [ ] **Cách A — qua website local:** mở `http://localhost:4321/du-lieu/` (sau khi
   `npm run preview` trong thư mục `website`), bấm link tải **`clinic_bp_v1_clean.csv`**
   (bản *sạch* — KHÔNG phải `_raw`). File vào `~/Downloads/`.
+  > ⚠️ **`localhost` chỉ trỏ về chính máy đang mở trình duyệt.** Nếu website đang chạy trên
+  > máy Windows còn pilot thực hiện trên MacBook khác, `localhost:4321` trên Mac sẽ **không**
+  > mở được. Hai cách xử lý: (a) chạy preview ngay trên Mac (`npm run preview` trong bản
+  > clone repo trên Mac); (b) trên Windows chạy `npx astro preview --host` rồi trên Mac mở
+  > `http://<IP-LAN-máy-Windows>:4321/du-lieu/`. Đơn giản nhất: dùng **Cách B** bên dưới.
 - [ ] **Cách B — copy trực tiếp:** lấy file tại
   `datasets/cleaned/clinic_bp_v1_clean.csv` trong repo.
 - [ ] Copy file vào thư mục khóa học: `~/Documents/spss-learning/`
@@ -42,7 +47,8 @@ phiên bản macOS ( → About This Mac).
   - [ ] *Decimal symbol* → **Period (.)**
   - [ ] Còn lại mặc định → **Finish/Done**.
 - [ ] **Chụp evidence E2:** màn hình wizard ở bước chọn delimiter/decimal.
-- [ ] **Chụp evidence E3:** Data View sau import (thấy đầy số liệu).
+- [ ] **Chụp evidence E3:** Data View sau import — **được phép 2 ảnh**: một ảnh thấy dòng đầu
+  (`P001…`), một ảnh cuộn xuống thấy dòng cuối (`P160`).
 
 **Kiểm chứng ngay — phải đúng cả 3:**
 
@@ -76,7 +82,7 @@ phiên bản macOS ( → About This Mac).
 | E0 | Screenshot | File `clinic_bp_v1_clean.csv` trong `~/Documents/spss-learning/` |
 | E1 | Screenshot | Data Editor trống + 2 tab Data/Variable View |
 | E2 | Screenshot | Wizard import (bước delimiter/decimal) |
-| E3 | Screenshot | Data View sau import — nhìn thấy P001… và dòng cuối P160 |
+| E3 | Screenshot | Data View sau import — nhìn thấy P001… và dòng cuối P160 (được phép 2 ảnh) |
 | E4 | Screenshot | `clinic_bp.sav` mở lại được sau khi thoát hẳn SPSS |
 | E5 | Text | Phiên bản SPSS + macOS; mọi mục `DIFFERS` gặp phải |
 

@@ -32,8 +32,9 @@ còn *định nghĩa* nằm ở Variable View (học kỹ Ngày 02).
 1. Ví dụ một id hợp lệ: bất kỳ dòng nào có `followup_completed = 0` sẽ có `sbp_followup` trống
    (trong bản sạch có 23 dòng như vậy).
 2. Vì bệnh nhân đó **không quay lại tái khám** → không có đo huyết áp 3 tháng.
-3. **Thiếu thật**, không phải lỗi nhập — dữ liệu không tồn tại. Trong phân tích, SPSS sẽ tự loại
-   dòng này ra khỏi các phép tính cần `sbp_followup` (listwise). **Không** điền 0 hay điền đoán.
+3. **Thiếu thật**, không phải lỗi nhập — dữ liệu không tồn tại. Trong phân tích, SPSS chỉ loại
+   dòng đó ra khỏi **riêng các phép tính cần `sbp_followup`** — dòng vẫn được đếm bình thường cho
+   các biến khác (loại theo từng phép tính, không xóa hẳn dòng). **Không** điền 0 hay điền đoán.
 
 ## BT4 — Bảng của phòng xét nghiệm
 

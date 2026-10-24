@@ -19,7 +19,10 @@ Kỳ vọng (Python, trên các ca có đủ 2 biến):
   - Biến tiếp xúc (hàng): `sex_code`; sự kiện SPSS dùng = cột mã đầu tiên `bp_controlled = 0` (không đạt kiểm soát).
   - Nhãn `Odds Ratio for sex_code (1 / 2)` kỳ vọng in **OR ≈ 0,91** = odds *không* đạt kiểm soát ở **Nữ** bằng 0,91 lần ở **Nam** [tính: (26×41)/(39×30)].
   - Phát biểu tương đương (đảo chiều): odds *đạt* kiểm soát ở Nữ ≈ **1,10** lần Nam.
-  - Cả 0,91 và 1,10 đều là **cùng một OR** — chỉ khác chiều phát biểu; cả hai đều gần 1 → không liên quan.
+  - Cả 0,91 và 1,10 đều là **cùng một OR** — chỉ khác chiều phát biểu. Điểm ước lượng OR gần 1
+    *phù hợp* với giả thuyết không có liên quan — nhưng **không được kết luận "không liên quan"**
+    chỉ từ OR: kết hợp p = 0,79, mẫu 136 ca chỉ cho phép nói "phân tích chưa đưa ra đủ bằng chứng
+    về khác biệt"; một liên quan thật nhỏ vẫn có thể bị bỏ sót (xem thêm CI của OR trong output).
 - Câu mẫu: "Tỷ lệ đạt kiểm soát HA ở nữ là 60,0% và nam 57,7%; phân tích không cho thấy
   bằng chứng về sự khác biệt giữa hai giới (χ²(1) = 0,07; p = 0,79; OR ≈ 0,91)."
 

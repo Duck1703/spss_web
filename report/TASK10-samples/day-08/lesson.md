@@ -31,9 +31,10 @@ tỷ lệ đạt kiểm soát huyết áp sau 3 tháng (`bp_controlled`) không?
 - **Expected < 5 → không chạy Chi-square nữa** → nhớ đến **Fisher exact test** (SPSS cho sẵn trong
   cùng bảng output cho 2×2) — đọc dòng "Fisher's Exact Test" thay thế.
 - **OR (odds ratio)**: tỷ số odds giữa 2 nhóm — hay dùng khi không tính trực tiếp nguy cơ.
-  OR=1: không liên quan. **OR ≠ RR** (RR = tỷ lệ % thực tế) — ở sự kiện hiếm OR≈RR, ở sự kiện
-  thường gặp OR "phóng đại" so với RR. Trong khóa này: đọc được OR, diễn giải hướng (nhỏ hơn/
-  lớn hơn 1), không biến nó thành RR.
+  OR=1: không liên quan. **OR ≠ RR**: RR (risk ratio) là **tỷ số của hai tỷ lệ/nguy cơ** —
+  ví dụ 72,6% ÷ 36,5% ≈ 1,99 — chứ không phải một con số phần trăm riêng lẻ. Ở sự kiện
+  hiếm OR≈RR, ở sự kiện thường gặp OR "phóng đại" so với RR. Trong khóa này: đọc được OR,
+  diễn giải hướng (nhỏ hơn/lớn hơn 1), không biến nó thành RR.
 
 ## D. Thực hành từng bước trên Mac
 
@@ -119,8 +120,10 @@ trong nhãn SPSS và (2) cột nào là sự kiện. Sai một trong hai → di�
   OR không còn in trực tiếp; kiểm tra expected count theo quy tắc ≤20% ô <5.
 - **Fisher exact test** = "đếm trực tiếp" thay xấp xỉ χ² — SPSS in dòng này ngay trong bảng
   Chi-Square Tests cho 2×2; dùng khi expected < 5.
-- **RR**: SPSS chỉ tính RR cho 2×2 (trong Risk Estimate). Công thức RR = (61/84)/(19/52) =
-  72,6%/36,5% ≈ **1,99** — tự tính tay được: "% đạt kiểm soát ở không-ĐTĐ gấp ~2 lần nhóm có ĐTĐ".
+- **RR (risk ratio)**: **tỷ số của hai tỷ lệ** — tử số là tỷ lệ sự kiện ở nhóm so sánh, mẫu số
+  là tỷ lệ ở nhóm tham chiếu (không phải một % riêng lẻ). SPSS chỉ tính RR cho 2×2 (trong
+  Risk Estimate). Công thức RR = (61/84)/(19/52) = 72,6%/36,5% ≈ **1,99** — tự tính tay được:
+  "% đạt kiểm soát ở không-ĐTĐ gấp ~2 lần nhóm có ĐTĐ".
   So với OR=0,22 (đảo) → thấy rõ OR và RR không giống nhau.
 
 ### Checklist tự kiểm chứng trên Mac (`MAC_SPSS_VERIFICATION_PENDING`)

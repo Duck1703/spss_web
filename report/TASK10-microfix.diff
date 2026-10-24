@@ -1,0 +1,98 @@
+diff --git a/track-14day/day-01-lan-dau-mo-spss/answer-key.md b/track-14day/day-01-lan-dau-mo-spss/answer-key.md
+index 5600061..cc27778 100644
+--- a/track-14day/day-01-lan-dau-mo-spss/answer-key.md
++++ b/track-14day/day-01-lan-dau-mo-spss/answer-key.md
+@@ -32,8 +32,9 @@ còn *định nghĩa* nằm ở Variable View (học kỹ Ngày 02).
+ 1. Ví dụ một id hợp lệ: bất kỳ dòng nào có `followup_completed = 0` sẽ có `sbp_followup` trống
+    (trong bản sạch có 23 dòng như vậy).
+ 2. Vì bệnh nhân đó **không quay lại tái khám** → không có đo huyết áp 3 tháng.
+-3. **Thiếu thật**, không phải lỗi nhập — dữ liệu không tồn tại. Trong phân tích, SPSS sẽ tự loại
+-   dòng này ra khỏi các phép tính cần `sbp_followup` (listwise). **Không** điền 0 hay điền đoán.
++3. **Thiếu thật**, không phải lỗi nhập — dữ liệu không tồn tại. Trong phân tích, SPSS chỉ loại
++   dòng đó ra khỏi **riêng các phép tính cần `sbp_followup`** — dòng vẫn được đếm bình thường cho
++   các biến khác (loại theo từng phép tính, không xóa hẳn dòng). **Không** điền 0 hay điền đoán.
+ 
+ ## BT4 — Bảng của phòng xét nghiệm
+ 
+diff --git a/track-14day/day-01-lan-dau-mo-spss/pilot-checklist-mac.md b/track-14day/day-01-lan-dau-mo-spss/pilot-checklist-mac.md
+index fdafc48..39d2c8c 100644
+--- a/track-14day/day-01-lan-dau-mo-spss/pilot-checklist-mac.md
++++ b/track-14day/day-01-lan-dau-mo-spss/pilot-checklist-mac.md
+@@ -15,6 +15,11 @@ phiên bản macOS ( → About This Mac).
+ - [ ] **Cách A — qua website local:** mở `http://localhost:4321/du-lieu/` (sau khi
+   `npm run preview` trong thư mục `website`), bấm link tải **`clinic_bp_v1_clean.csv`**
+   (bản *sạch* — KHÔNG phải `_raw`). File vào `~/Downloads/`.
++  > ⚠️ **`localhost` chỉ trỏ về chính máy đang mở trình duyệt.** Nếu website đang chạy trên
++  > máy Windows còn pilot thực hiện trên MacBook khác, `localhost:4321` trên Mac sẽ **không**
++  > mở được. Hai cách xử lý: (a) chạy preview ngay trên Mac (`npm run preview` trong bản
++  > clone repo trên Mac); (b) trên Windows chạy `npx astro preview --host` rồi trên Mac mở
++  > `http://<IP-LAN-máy-Windows>:4321/du-lieu/`. Đơn giản nhất: dùng **Cách B** bên dưới.
+ - [ ] **Cách B — copy trực tiếp:** lấy file tại
+   `datasets/cleaned/clinic_bp_v1_clean.csv` trong repo.
+ - [ ] Copy file vào thư mục khóa học: `~/Documents/spss-learning/`
+@@ -42,7 +47,8 @@ phiên bản macOS ( → About This Mac).
+   - [ ] *Decimal symbol* → **Period (.)**
+   - [ ] Còn lại mặc định → **Finish/Done**.
+ - [ ] **Chụp evidence E2:** màn hình wizard ở bước chọn delimiter/decimal.
+-- [ ] **Chụp evidence E3:** Data View sau import (thấy đầy số liệu).
++- [ ] **Chụp evidence E3:** Data View sau import — **được phép 2 ảnh**: một ảnh thấy dòng đầu
++  (`P001…`), một ảnh cuộn xuống thấy dòng cuối (`P160`).
+ 
+ **Kiểm chứng ngay — phải đúng cả 3:**
+ 
+@@ -76,7 +82,7 @@ phiên bản macOS ( → About This Mac).
+ | E0 | Screenshot | File `clinic_bp_v1_clean.csv` trong `~/Documents/spss-learning/` |
+ | E1 | Screenshot | Data Editor trống + 2 tab Data/Variable View |
+ | E2 | Screenshot | Wizard import (bước delimiter/decimal) |
+-| E3 | Screenshot | Data View sau import — nhìn thấy P001… và dòng cuối P160 |
++| E3 | Screenshot | Data View sau import — nhìn thấy P001… và dòng cuối P160 (được phép 2 ảnh) |
+ | E4 | Screenshot | `clinic_bp.sav` mở lại được sau khi thoát hẳn SPSS |
+ | E5 | Text | Phiên bản SPSS + macOS; mọi mục `DIFFERS` gặp phải |
+ 
+diff --git a/track-14day/day-08-crosstabs-chisquare/answer-key.md b/track-14day/day-08-crosstabs-chisquare/answer-key.md
+index 0ccc90e..bb6d379 100644
+--- a/track-14day/day-08-crosstabs-chisquare/answer-key.md
++++ b/track-14day/day-08-crosstabs-chisquare/answer-key.md
+@@ -19,7 +19,10 @@ Kỳ vọng (Python, trên các ca có đủ 2 biến):
+   - Biến tiếp xúc (hàng): `sex_code`; sự kiện SPSS dùng = cột mã đầu tiên `bp_controlled = 0` (không đạt kiểm soát).
+   - Nhãn `Odds Ratio for sex_code (1 / 2)` kỳ vọng in **OR ≈ 0,91** = odds *không* đạt kiểm soát ở **Nữ** bằng 0,91 lần ở **Nam** [tính: (26×41)/(39×30)].
+   - Phát biểu tương đương (đảo chiều): odds *đạt* kiểm soát ở Nữ ≈ **1,10** lần Nam.
+-  - Cả 0,91 và 1,10 đều là **cùng một OR** — chỉ khác chiều phát biểu; cả hai đều gần 1 → không liên quan.
++  - Cả 0,91 và 1,10 đều là **cùng một OR** — chỉ khác chiều phát biểu. Điểm ước lượng OR gần 1
++    *phù hợp* với giả thuyết không có liên quan — nhưng **không được kết luận "không liên quan"**
++    chỉ từ OR: kết hợp p = 0,79, mẫu 136 ca chỉ cho phép nói "phân tích chưa đưa ra đủ bằng chứng
++    về khác biệt"; một liên quan thật nhỏ vẫn có thể bị bỏ sót (xem thêm CI của OR trong output).
+ - Câu mẫu: "Tỷ lệ đạt kiểm soát HA ở nữ là 60,0% và nam 57,7%; phân tích không cho thấy
+   bằng chứng về sự khác biệt giữa hai giới (χ²(1) = 0,07; p = 0,79; OR ≈ 0,91)."
+ 
+diff --git a/track-14day/day-08-crosstabs-chisquare/lesson.md b/track-14day/day-08-crosstabs-chisquare/lesson.md
+index f485528..90e1e4a 100644
+--- a/track-14day/day-08-crosstabs-chisquare/lesson.md
++++ b/track-14day/day-08-crosstabs-chisquare/lesson.md
+@@ -31,9 +31,10 @@ tỷ lệ đạt kiểm soát huyết áp sau 3 tháng (`bp_controlled`) không?
+ - **Expected < 5 → không chạy Chi-square nữa** → nhớ đến **Fisher exact test** (SPSS cho sẵn trong
+   cùng bảng output cho 2×2) — đọc dòng "Fisher's Exact Test" thay thế.
+ - **OR (odds ratio)**: tỷ số odds giữa 2 nhóm — hay dùng khi không tính trực tiếp nguy cơ.
+-  OR=1: không liên quan. **OR ≠ RR** (RR = tỷ lệ % thực tế) — ở sự kiện hiếm OR≈RR, ở sự kiện
+-  thường gặp OR "phóng đại" so với RR. Trong khóa này: đọc được OR, diễn giải hướng (nhỏ hơn/
+-  lớn hơn 1), không biến nó thành RR.
++  OR=1: không liên quan. **OR ≠ RR**: RR (risk ratio) là **tỷ số của hai tỷ lệ/nguy cơ** —
++  ví dụ 72,6% ÷ 36,5% ≈ 1,99 — chứ không phải một con số phần trăm riêng lẻ. Ở sự kiện
++  hiếm OR≈RR, ở sự kiện thường gặp OR "phóng đại" so với RR. Trong khóa này: đọc được OR,
++  diễn giải hướng (nhỏ hơn/lớn hơn 1), không biến nó thành RR.
+ 
+ ## D. Thực hành từng bước trên Mac
+ 
+@@ -119,8 +120,10 @@ trong nhãn SPSS và (2) cột nào là sự kiện. Sai một trong hai → di
+   OR không còn in trực tiếp; kiểm tra expected count theo quy tắc ≤20% ô <5.
+ - **Fisher exact test** = "đếm trực tiếp" thay xấp xỉ χ² — SPSS in dòng này ngay trong bảng
+   Chi-Square Tests cho 2×2; dùng khi expected < 5.
+-- **RR**: SPSS chỉ tính RR cho 2×2 (trong Risk Estimate). Công thức RR = (61/84)/(19/52) =
+-  72,6%/36,5% ≈ **1,99** — tự tính tay được: "% đạt kiểm soát ở không-ĐTĐ gấp ~2 lần nhóm có ĐTĐ".
++- **RR (risk ratio)**: **tỷ số của hai tỷ lệ** — tử số là tỷ lệ sự kiện ở nhóm so sánh, mẫu số
++  là tỷ lệ ở nhóm tham chiếu (không phải một % riêng lẻ). SPSS chỉ tính RR cho 2×2 (trong
++  Risk Estimate). Công thức RR = (61/84)/(19/52) = 72,6%/36,5% ≈ **1,99** — tự tính tay được:
++  "% đạt kiểm soát ở không-ĐTĐ gấp ~2 lần nhóm có ĐTĐ".
+   So với OR=0,22 (đảo) → thấy rõ OR và RR không giống nhau.
+ 
+ ### Checklist tự kiểm chứng trên Mac (`MAC_SPSS_VERIFICATION_PENDING`)
