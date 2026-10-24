@@ -70,10 +70,19 @@ Bảng **Chi-Square Tests**:
 
 Bảng **Risk Estimate** → dòng `Odds Ratio for diabetes_flag (0 / 1)`: kỳ vọng **OR ≈ 0,22**.
 
-Diễn giải: odds đạt kiểm soát ở nhóm không-ĐTĐ thấp hơn… — khoan, đọc cẩn thận: OR≈0,22 ứng với
-thứ tự mã `diabetes_flag` 0/1; **odds đạt kiểm soát ở nhóm *có* ĐTĐ chỉ bằng ~0,22 lần nhóm không
-ĐTĐ** (đảo lại: không-ĐTĐ có odds cao gấp ~4,6 lần). Luôn kiểm tra thứ tự mã trước khi phát biểu
-hướng OR.
+Đọc OR đúng nghĩa phải trả lời được 3 câu — **tiếp xúc nào, sự kiện nào, chiều nào**:
+
+- **Biến tiếp xúc** = `diabetes_flag`; nhãn `(0 / 1)` nghĩa là SPSS lấy odds ở mã **0** chia cho
+  odds ở mã **1** → nhóm so sánh = không-ĐTĐ (0), nhóm tham chiếu = có-ĐTĐ (1).
+- **Sự kiện** = cột mã đầu tiên: `bp_controlled = 0` → **không đạt kiểm soát HA**.
+- Tự kiểm: OR = (23×19)/(61×33) = **0,22**.
+
+→ Đọc: *"odds **không** đạt kiểm soát ở nhóm không-ĐTĐ chỉ bằng ~0,22 lần nhóm có ĐTĐ."*
+Phát biểu tương đương (đảo đồng thời hai chiều): *"odds **đạt** kiểm soát ở nhóm có ĐTĐ chỉ bằng
+~0,22 lần nhóm không-ĐTĐ"* — cùng một con số, hai cách nói.
+
+**Quy tắc vàng:** trước khi phát biểu hướng của OR, luôn kiểm tra (1) mã nào đứng trước dấu `/`
+trong nhãn SPSS và (2) cột nào là sự kiện. Sai một trong hai → diễn giải ngược hướng.
 
 ### Bước 5 — Viết kết quả
 

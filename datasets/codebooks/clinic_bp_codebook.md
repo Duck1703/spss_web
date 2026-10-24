@@ -17,8 +17,9 @@ không phải phân nhóm ngẫu nhiên**. Đơn vị quan sát: **mỗi dòng =
 | `synthetic-raw/clinic_bp_v1_raw.csv` | Bản gốc **có lỗi gài có chủ đích** — dùng cho Ngày 03 (làm sạch). Bất biến. | 161 |
 | `cleaned/clinic_bp_v1_clean.csv` | Bản sạch tham chiếu sau khi áp quy tắc sửa đã công bố — dùng từ Ngày 01–02 và Ngày 04 trở đi. | 160 |
 
-CSV: UTF-8, header ở dòng đầu (sau 1 dòng comment `#` nhãn SIMULATED), dấu `,` phân cột, dấu `.` thập phân,
-ô trống = missing.
+CSV: UTF-8 (có BOM), **dòng đầu tiên của file chính là header tên biến — không có dòng comment nào
+trước header** (nhãn SIMULATED nằm ở file `00-SIMULATED-NOTICE.md` kèm theo, không ghi vào trong CSV
+để tránh phá wizard import của SPSS). Dấu `,` phân cột, dấu `.` thập phân, ô trống = missing.
 
 ## Từ điển biến
 
@@ -26,7 +27,7 @@ CSV: UTF-8, header ở dòng đầu (sau 1 dòng comment `#` nhãn SIMULATED), d
 |---|---|---|---|---|---|
 | `patient_id` | Mã bệnh nhân (hư cấu) | P001–P160 | String | Nominal | — |
 | `age_years` | Tuổi | năm | Numeric | Scale | trống |
-| `sex_code` | Giới | 1 = Nữ · 2 = Nam | Numeric | Nominal | trống, 9 |
+| `sex_code` | Giới | 1 = Nữ · 2 = Nam | Numeric | Nominal | trống |
 | `bmi` | Chỉ số khối cơ thể | kg/m² | Numeric | Scale | trống |
 | `sbp_baseline` | Huyết áp tâm thu lúc nhập chương trình | mmHg | Numeric | Scale | trống |
 | `treatment_group` | Nhóm điều trị | A = điều trị chuẩn · B = chuẩn + hỗ trợ tuân thủ | String (1) | Nominal | — |
@@ -39,8 +40,11 @@ CSV: UTF-8, header ở dòng đầu (sau 1 dòng comment `#` nhãn SIMULATED), d
 
 ## Quy ước missing
 
-- Ô trống trong CSV → SPSS đọc là **system missing** (hiển thị `.` trong Data View).
-- Mã `sex_code = 9` là **lỗi gài** (ngoài miền {1,2}) — không phải quy ước missing hợp lệ; bài Ngày 03 xử lý.
+- Ô trống trong CSV → SPSS đọc là **system missing** (hiển thị `.` trong Data View). Đây là quy ước
+  missing duy nhất của file.
+- **Chú ý — `sex_code = 9` KHÔNG phải quy ước missing.** Đó là một *giá trị không hợp lệ* chỉ có trong
+  `clinic_bp_v1_raw.csv` (lỗi nhập liệu gài có chủ đích, ngoài miền {1,2}); bài Ngày 03 phát hiện và
+  xử lý thành missing. Trong `clinic_bp_v1_clean.csv` không còn giá trị 9 nào.
 - `sbp_followup`/`bp_controlled` trống khi `followup_completed = 0` (bệnh nhân không tái khám).
 
 ## Giới hạn diễn giải

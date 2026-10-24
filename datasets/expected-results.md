@@ -31,9 +31,9 @@ Bản raw: 161 dòng (160 id duy nhất + 1 dòng trùng). Sạch: 160 dòng.
 
 ### Day 06 BT1 — Independent t-test: `bmi` theo `diabetes_flag`
 
-- Nhóm 0 (không ĐTĐ): n=98, mean=25,6, SD=3,5 · Nhóm 1 (có ĐTĐ): n=60, mean=26,4, SD=4,1
+- Nhóm 0 (không ĐTĐ): n=98, mean=25,6, SD=3,5 · Nhóm 1 (có ĐTĐ): n=60, mean=26,3, SD=4,1
 - Levene: F=0,75, p=0,387 → Equal variances assumed
-- t=−1,24, df=156, p(2-sided)=0,216, diff(0−1)=−0,76 kg/m², 95% CI [−1,97; 0,45] — **không có ý nghĩa thống kê**
+- t=-1,24, df=156, p(2-sided)=0,216, diff(0−1)=-0,76 kg/m², 95% CI [-1,97; 0,45] — **không có ý nghĩa thống kê**
 
 ### Day 07 — Paired t-test: `sbp_baseline` vs `sbp_followup` (n=136)
 
@@ -51,8 +51,9 @@ Bản raw: 161 dòng (160 id duy nhất + 1 dòng trùng). Sạch: 160 dòng.
 
 ### Day 08 BT1 — Crosstabs `sex_code` × `bp_controlled`
 
-- Bảng [sex=1:[0,1], sex=2:[0,1]]: [[26,39],[30,41]] (n=136)
-- % đạt: Nữ 60,0% · Nam 57,7% · χ²=0,07, df=1, p=0,79 (Yates χ²=0,01, p=0,93) · OR=1,10 · min expected=26,8 — **không có nghĩa thống kê**
+- Bảng [sex=1:[0,1], sex=2:[0,1]]: [[26.0, 39.0], [30.0, 41.0]] (n=136)
+- % đạt: Nữ 60,0% · Nam 57,7% · χ²=0,07, df=1, p=0,790 (Yates χ²=0,01, p=0,926) · min expected=26,8 — **không có nghĩa thống kê**
+- OR (định hướng rõ): nhãn SPSS `Odds Ratio for sex_code (1 / 2)` với cột sắp theo mã (0 rồi 1) → sự kiện = `bp_controlled`=0 → **OR = (26×41)/(39×30) = 0,91** = odds *không* đạt kiểm soát ở Nữ so với Nam. Phát biểu tương đương: odds *đạt* kiểm soát ở Nữ ≈ 1/0,91 ≈ **1,10** lần Nam. Cả hai số là cùng một OR — khác chiều phát biểu, không phải hai kết quả.
 
 ### Day 09 — Correlation
 
@@ -86,7 +87,7 @@ Bản raw: 161 dòng (160 id duy nhất + 1 dòng trùng). Sạch: 160 dòng.
 
 - `age_years`: n=59, mean=47,3, SD=11,9, min=20,0, max=72,0
 - `bmi`: n=60, mean=25,4, SD=3,7, min=17,0, max=34,5
-- `waist_cm`: n=60, mean=63,0, SD=8,8, min=43,2, max=80,9
+- `waist_cm`: n=60, mean=89,0, SD=8,8, min=69,2, max=106,9
 - `sbp`: n=59, mean=115,5, SD=12,0, min=95,0, max=146,0
 - `fasting_glucose`: n=60, mean=5,4, SD=0,7, min=4,0, max=7,1
 - `sex_code`: {'1': 32, '2': 27} · missing=1

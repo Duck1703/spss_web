@@ -7,7 +7,7 @@
 ## BT1 — t-test `bmi` theo `diabetes_flag`
 
 1. Kỳ vọng (Python): nhóm 0 (không ĐTĐ): n=98, mean=25,6 (SD=3,5); nhóm 1 (có ĐTĐ): n=60,
-   mean=26,4 (SD=4,1). Levene p=0,387 > 0,05 → đọc dòng Equal variances assumed;
+   mean=26,3 (SD=4,1). Levene p=0,387 > 0,05 → đọc dòng Equal variances assumed;
    **t = −1,24, df=156, p = 0,216**, Mean Difference = −0,76 kg/m², 95% CI [−1,97 ; 0,45].
 2. Câu mẫu: "BMI trung bình của nhóm có đái tháo đường cao hơn nhóm không ĐTĐ 0,76 kg/m²,
    nhưng khác biệt này tương thích với dao động ngẫu nhiên (95% CI: −0,45 đến 1,97;

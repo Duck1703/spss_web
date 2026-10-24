@@ -24,7 +24,7 @@
 | Tuổi, mean ± SD | 47,3 ± 11,9 (n=59) |
 | Nữ, n (%) | 32/59 (54,2%) — 1 missing |
 | BMI, mean ± SD | 25,4 ± 3,7 |
-| Vòng eo (cm), mean ± SD | 63,0 ± 8,8 |
+| Vòng eo (cm), mean ± SD | 89,0 ± 8,8 |
 | SBP (mmHg), mean ± SD | 115,5 ± 12,0 (n=59) |
 | Đường huyết đói (mmol/L), mean ± SD | 5,4 ± 0,7 |
 | Đang hút thuốc, n (%) | 12/60 (20,0%) |

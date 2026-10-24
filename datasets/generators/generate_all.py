@@ -250,7 +250,7 @@ def gen_assessment(seed=20261027):
         age = int(round(min(78, max(20, rng.gauss(45, 13)))))
         sex = 2 if rng.random() < 0.48 else 1
         bmi = round(min(37.0, max(17.0, rng.gauss(25.0, 3.5))), 1)
-        waist = round(62 + 1.6 * (bmi - 24) + rng.gauss(0, 6), 1)
+        waist = round(88 + 1.6 * (bmi - 24) + rng.gauss(0, 6), 1)
         sbp = 88 + 0.55 * age + 0.80 * (bmi - 24) + rng.gauss(0, 9)
         sbp = int(round(min(185, max(95, sbp))))
         glucose = round(min(11.5, max(4.0, 4.2 + 0.05 * bmi + rng.gauss(0, 0.7))), 1)
@@ -433,6 +433,17 @@ def main():
     md.append(f"- Welch: t={fmt(t_ind['t_welch'])}, df={fmt(t_ind['df_welch'],1)}, "
               f"p={ptxt(t_ind['p_welch'])}")
 
+    t_bmi = ttest_ind(clean_rows, 'bmi', 'diabetes_flag', '0', '1')
+    md.append(f"\n### Day 06 BT1 — Independent t-test: `bmi` theo `diabetes_flag`\n")
+    md.append(f"- Nhóm 0 (không ĐTĐ): n={t_bmi['n1']}, mean={fmt(t_bmi['m1'],1)}, "
+              f"SD={fmt(t_bmi['sd1'],1)} · Nhóm 1 (có ĐTĐ): n={t_bmi['n2']}, "
+              f"mean={fmt(t_bmi['m2'],1)}, SD={fmt(t_bmi['sd2'],1)}")
+    md.append(f"- Levene: F={fmt(t_bmi['levene_F'])}, p={ptxt(t_bmi['levene_p'])} "
+              f"→ Equal variances assumed")
+    md.append(f"- t={fmt(t_bmi['t'])}, df={fmt(t_bmi['df'],0)}, p(2-sided)={ptxt(t_bmi['p'])}, "
+              f"diff(0−1)={fmt(t_bmi['diff'])} kg/m², 95% CI [{fmt(t_bmi['ci_lo'])}; "
+              f"{fmt(t_bmi['ci_hi'])}] — **không có ý nghĩa thống kê**")
+
     t_pair = ttest_paired(clean_rows, 'sbp_baseline', 'sbp_followup')
     md.append(f"\n### Day 07 — Paired t-test: `sbp_baseline` vs `sbp_followup` (n={t_pair['n']})\n")
     md.append(f"- Baseline: mean={fmt(t_pair['m0'],1)}, SD={fmt(t_pair['sd0'],1)}")
@@ -451,6 +462,23 @@ def main():
     md.append(f"- Expected count min={fmt(chi['min_expected'],1)}; ô có expected<5: "
               f"{chi['n_small_expected']}/4; OR={fmt(chi['odds_ratio'])}")
 
+    chi_sex = chi2(clean_rows, 'sex_code', 'bp_controlled', ['1', '2'], ['0', '1'])
+    tbl = chi_sex['table']
+    md.append(f"\n### Day 08 BT1 — Crosstabs `sex_code` × `bp_controlled`\n")
+    md.append(f"- Bảng [sex=1:[0,1], sex=2:[0,1]]: {tbl} (n={int(sum(sum(r) for r in tbl))})")
+    md.append(f"- % đạt: Nữ {fmt(chi_sex['row_pct'][0][1],1)}% · Nam "
+              f"{fmt(chi_sex['row_pct'][1][1],1)}% · χ²={fmt(chi_sex['chi'])}, "
+              f"df={chi_sex['dof']}, p={ptxt(chi_sex['p'])} (Yates χ²={fmt(chi_sex['chi_yates'])}, "
+              f"p={ptxt(chi_sex['p_yates'])}) · min expected={fmt(chi_sex['min_expected'],1)} "
+              f"— **không có nghĩa thống kê**")
+    md.append(f"- OR (định hướng rõ): nhãn SPSS `Odds Ratio for sex_code (1 / 2)` với cột sắp "
+              f"theo mã (0 rồi 1) → sự kiện = `bp_controlled`=0 → **OR = "
+              f"({int(tbl[0][0])}×{int(tbl[1][1])})/({int(tbl[0][1])}×{int(tbl[1][0])}) = "
+              f"{fmt(chi_sex['odds_ratio'])}** = odds *không* đạt kiểm soát ở Nữ so với Nam. "
+              f"Phát biểu tương đương: odds *đạt* kiểm soát ở Nữ ≈ 1/{fmt(chi_sex['odds_ratio'])} ≈ "
+              f"**{fmt(1 / chi_sex['odds_ratio'])}** lần Nam. Cả hai số là cùng một OR — khác "
+              f"chiều phát biểu, không phải hai kết quả.")
+
     corr1 = pearson(clean_rows, 'bmi', 'sbp_baseline')
     md.append(f"\n### Day 09 — Correlation\n")
     md.append(f"- `bmi` × `sbp_baseline`: Pearson r={fmt(corr1['r'])}, 95% CI "
@@ -464,6 +492,10 @@ def main():
     md.append(f"- `adherence_score` × `sbp_change` (baseline−followup): Pearson r={fmt(corr2['r'])}, "
               f"p={ptxt(corr2['p'])}; Spearman ρ={fmt(corr2['rho'])}, "
               f"p={ptxt(corr2['p_spearman'])}, n={corr2['n']}")
+    corr_age = pearson(clean_rows, 'age_years', 'sbp_baseline')
+    md.append(f"- `age_years` × `sbp_baseline` (Day 09 BT1): Pearson r={fmt(corr_age['r'])}, "
+              f"p={ptxt(corr_age['p'])}; Spearman ρ={fmt(corr_age['rho'])}, "
+              f"p={ptxt(corr_age['p_spearman'])}, n={corr_age['n']}")
     # ANOVA across smoking (optional Day 10)
     groups = [np.array(col([r for r in clean_rows if r['smoking_status'] == s], 'sbp_baseline'))
               for s in ['0', '1', '2']]
@@ -574,6 +606,7 @@ def main():
         chk(r['shift_type'] in ('0', '1', ''), f"cap shift {r['worker_id']}")
     for r in asm_clean:
         if r['sbp'] != '': chk(80 <= f(r['sbp']) <= 200, f"asm sbp {r['patient_id']}")
+        if r['waist_cm'] != '': chk(55 <= f(r['waist_cm']) <= 140, f"asm waist {r['patient_id']}")
         chk(r['activity_level'] in ('1', '2', '3', ''), f"asm act {r['patient_id']}")
 
     # Kiem tra tinh tai tao: chay lai generator -> khop 100%

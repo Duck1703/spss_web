@@ -190,3 +190,27 @@
 - 2 số ước lượng trong draft (bmi×diabetes t-test, sex×ctrl crosstab, age×sbp r) bị bắt lỗi khi verify → đã sửa đúng và bổ sung vào `expected-results.md`.
 - Toàn bộ 14 ngày `DRAFTING` — chưa independent review, chưa HUMAN_APPROVAL.
 - `design-prototypes/` untracked giữ nguyên ngoài phạm vi.
+
+## 2026-10-24 — Task 10: Remediation sau independent review (CHANGES_REQUIRED)
+
+### Quyết định
+
+- Review file gốc `SPSS_Task09_Independent_Review.md` không có trong repo → findings xử lý theo mô tả trong task brief, xác minh lại trực tiếp trên source.
+- `waist_cm` assessment: chẩn đoán **lỗi intercept generator** (62 → 88), KHÔNG phải lỗi gài/lỗi đơn vị. Fix bằng shift +26 toàn cột — mọi giá trị khác và mọi correlation giữ nguyên.
+- BT4 Ngày 08: chọn phương án B (interpret-only, nêu rõ số không tính được) — không fabricate bảng đếm.
+
+### Đã làm
+
+- **F1**: codebook `clinic_bp` bỏ claim comment `#` trước header (khớp CSV thật); `sex_code=9` ghi rõ là invalid code trong raw, không phải missing convention.
+- **F2**: OR Ngày 08 định hướng rõ — nhãn SPSS `sex_code (1/2)` = **0,91** (sự kiện ctrl=0) ⇔ **1,10** đảo chiều; lesson viết lại quy trình đọc OR 3 câu hỏi; BT3 đánh dấu GIẢ ĐỊNH + tách khỏi `smoking_status` 3 mức.
+- **F3**: BT4 thành "chỉ có p+OR, chưa có bảng" — bài tập nhận diện số không tính được.
+- **F4**: ngôn ngữ p=0,79 sửa thành "chưa đủ bằng chứng", không khẳng định đồng nhất.
+- **F5**: generator intercept waist 62→88 (mean 63,0→89,0 cm, min 43,2→69,2); r=0,11/0,75 giữ nguyên; +validation chk 55–140; `expected-results.md` giờ do generator emit cả 3 mục BT1/age (trước đây thủ công, sẽ mất khi regen); sửa mean 26,4→26,3.
+- **F6**: `day-01/pilot-checklist-mac.md` — checklist pilot Mac đầy đủ (download, import settings, 160×12, .sav, evidence E0–E5, DIFFERS, checkpoint).
+- **F7**: validation sweep — 7 CSV đúng header/count; crosstab+OR đúng; rubric=100đ; build 54 trang PASS; 11 route + CSV 200; 0 internal leak; progress key nguyên; `git diff --check` sạch.
+- `reviews/TASK10-PRACTICE-FIRST-REMEDIATION.md` + refresh `report/` (D-018: TASK10-report + samples day-01/day-08 + codebooks + expected-results + manifest 167 file).
+
+### Trung thực
+
+- Mọi số vẫn `NOT_RUN`; menu `MAC_SPSS_VERIFICATION_PENDING`; chưa `HUMAN_APPROVAL`.
+- Pilot Ngày 01 chưa chạy — chờ owner trên Mac thật với evidence E0–E5.
