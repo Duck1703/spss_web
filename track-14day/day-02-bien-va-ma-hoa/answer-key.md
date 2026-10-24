@@ -1,48 +1,52 @@
 # Ngày 02 — Đáp án & giải thích
 
-> Đọc sau khi làm xong `workbook.md`. Quy ước: mỗi đáp án gồm đáp án → lý do → lỗi hay gặp → tự sửa.
+> Đọc sau khi làm xong `workbook.md`.
 
 ---
 
-## BT1 — Định nghĩa `hba1c_pairs.sav`
+## BT1 — Định nghĩa biến cho `hba1c_pairs.sav`
 
-1. Label gợi ý: `patient_id` → "Mã bệnh nhân"; `hba1c_t0` → "HbA1c trước chương trình (%)";
-   `hba1c_t3` → "HbA1c sau 3 tháng (%)".
-2. `hba1c_t0`/`hba1c_t3` → **Scale**: HbA1c là đại lượng đo bằng số, trung bình có nghĩa
-   (ví dụ "HbA1c trung bình giảm 0,3%").
-3. `patient_id` **không cần** Value Labels — nó là mã định danh, mỗi giá trị là một người duy nhất,
-   không phải mã hóa nhóm.
-4. Nhật ký làm việc nên có: ngày, file, việc đã làm ("điền Label + Measure cho 3 biến").
+1. Label (tra codebook `exercise_hba1c_codebook.md`):
+   - `patient_id` → Mã bệnh nhân (giả lập)
+   - `hba1c_t0` → HbA1c trước tư vấn (%)
+   - `hba1c_t3` → HbA1c sau 3 tháng (%)
+2. `hba1c_t0/t3` → **Scale** — đây là phép đo định lượng; trung bình HbA1c có ý nghĩa lâm sàng
+   (vd: HbA1c trung bình nhóm = 7,2%).
+3. **Không cần** — `patient_id` là mã định danh, mỗi bệnh nhân một giá trị riêng; gắn nhãn
+   cho 24 mã riêng lẻ không giúp ai hiểu thêm. Value Labels dành cho biến có **số mã hữu hạn,
+   mỗi mã là một nhóm** (0/1, 1/2/3).
+4. File đã lưu — mở lại kiểm tra Label còn đó.
 
-*Lỗi hay gặp:* đặt `hba1c` là Ordinal vì "có lớn nhỏ" — Ordinal dành cho biến *định tính có thứ tự*
-(nhẹ/vừa/nặng); HbA1c là số đo thật → Scale.
+*Lỗi hay gặp:* gắn Value Labels cho `patient_id` từng mã một — không sai nhưng vô nghĩa và
+mất thời gian.
 
-## BT2 — Measure
+## BT2 — Chọn Measure
 
-| # | Biến | Measure | Lý do |
-|---|---|---|---|
-| 1 | `ward_code` | Nominal | Khoa chỉ là nhãn nhóm, không thứ tự |
-| 2 | `pain_score` | Ordinal (chấp nhận Scale nếu giải thích được) | Thang 0–10 có thứ tự nhưng "đau 8 đau gấp đôi đau 4" là không đúng → bản chất thứ bậc; nhiều nghiên cứu vẫn coi như Scale khi phân tích — quan trọng là *biết mình đang giả định gì* |
-| 3 | `nyha_class` | Ordinal | I→IV là thứ tự nặng dần rõ ràng, khoảng cách không đều |
-| 4 | `weight_kg` | Scale | Đo thật, trung bình có nghĩa |
-| 5 | `hospital_id` | Nominal | Mã định danh |
-
-*Lỗi hay gặp:* cho `pain_score` và `satisfaction` là Scale "vì là số". Quy tắc: số có *khoảng cách đều*
-và phép tính có nghĩa mới là Scale.
+| Biến | Measure | Lý do |
+|---|---|---|
+| `ward_code` | Nominal | Mã khoa chỉ là nhóm, không thứ tự, "khoa trung bình = 2" vô nghĩa |
+| `pain_score` | Ordinal | Có thứ tự 0→10 nhưng khoảng cách giữa các mức không đảm bảo đều (đau 2→4 và 7→9 không hẳn "bằng nhau"). Nhiều nghiên cứu vẫn tính trung bình điểm đau — đó là tranh luận có thật, ở mức nhập môn chọn Ordinal là an toàn |
+| `nyha_class` | Ordinal | I < II < III < IV rõ ràng thứ tự, khoảng cách không đều |
+| `weight_kg` | Scale | Phép đo định lượng |
+| `hospital_id` | Nominal | Mã định danh |
 
 ## BT3 — Đối chiếu codebook
 
-1. Tự kiểm tra — tất cả biến phải khớp cột Measure trong codebook.
-2. `bp_controlled = 1` = huyết áp tâm thu sau 3 tháng `< 140 mmHg` (đạt kiểm soát); `0` = ≥140;
-   trống khi chưa có đo tái khám.
-3. `patient_id` và `treatment_group` là **String** vì chứa chữ cái (`P001`, `A`/`B`).
-   Biến chữ không nhận "missing rời rạc" theo số — ô trống của nó là chuỗi rỗng.
+1. Tự kiểm theo bảng Measure trong lesson Bước 5.
+2. `bp_controlled = 1` = bệnh nhân **đạt kiểm soát huyết áp sau 3 tháng**, ngưỡng
+   `sbp_followup < 140 mmHg` (và có đo tái khám).
+3. Hai biến **String**: `patient_id` (chứa chữ "P001") và `treatment_group` (chứa chữ "A"/"B").
+   SPSS để String vì trong CSV chúng là văn bản — đây là **String chủ đích** (text thật),
+   khác với `sex_code` ở file raw sẽ gặp Ngày 03: một cột số bị SPSS ép thành String chỉ vì
+   *một ô chứa chữ*.
 
 ## BT4 — Phiếu khảo sát
 
-1. `satisfaction` 1–5 → **Ordinal**: có thứ tự rõ, nhưng khoảng cách giữa "rất không hài lòng" và
-   "không hài lòng" không đo được bằng số. (Báo cáo thực tế hay tả bằng % chọn từng mức.)
-2. `sex_text` nên **recode thành biến số mới** (ví dụ `sex_code`: 1=F, 2=M) kèm Value Labels —
-   biến số tiện cho lọc, đếm, chia nhóm; giữ nguyên cột chữ gốc để truy vết.
-3. Sau 3 tháng không ai nhớ 1 là nam hay nữ → file trở nên mơ hồ, dễ diễn giải ngược.
-   **Bài học: mã hóa luôn phải đi kèm Value Labels + ghi vào codebook.**
+1. **Ordinal** — có thứ tự rõ (1→5) nhưng khoảng cách giữa các mức không đảm bảo đều;
+   không hẳn Scale vì "trung bình hài lòng 3,7" chỉ tương đối có nghĩa.
+2. Tạo biến số mới (vd `sex_code`) mã hóa `F = 1`, `M = 2` (hoặc quy ước khác — **ghi nhãn
+   ngay**); gắn Value Labels; đặt Measure = Nominal. Giữ nguyên `sex_text` làm gốc.
+   Đây chính là tình huống `sex_code = "F"` sẽ làm tay ở Ngày 03.
+3. Sau 3 tháng, ai đó mở file thấy cột 1/2 trần — **không ai chắc 1 là nam hay nữ**.
+   Phân tích theo giới vẫn "chạy" được nhưng diễn giải kết quả theo hướng ngược nhau là
+   rủi ro thật. Bài học: **mã hóa và nhãn phải đi cùng nhau**.

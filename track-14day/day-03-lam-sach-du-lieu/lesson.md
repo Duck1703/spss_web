@@ -1,156 +1,306 @@
-# Ngày 03 — Làm sạch dữ liệu
+# Ngày 03 — Làm sạch dữ liệu: từ file gốc tới bản sạch
 
-> **Lộ trình:** Practice-first 14 ngày · **Thời lượng:** ~120 phút · **Dataset:** `clinic_bp_v1_raw.csv` (GIẢ LẬP, có lỗi gài)
-> **Trạng thái:** DRAFT — thao tác menu `MAC_SPSS_VERIFICATION_PENDING`.
+> **Lộ trình:** Practice-first 14 ngày · **Thời lượng:** ~120 phút · **Dataset:** `clinic_bp_v1_raw.csv` (GIẢ LẬP — có lỗi gài)
+> **Trạng thái:** DRAFT v2 (rebuild Task 11) — thao tác menu `MAC_SPSS_VERIFICATION_PENDING`;
+> riêng bước đổi kiểu String→Numeric của `sex_code` đánh dấu `⏳ PENDING thao tác` kèm đường phục hồi.
 
 ---
 
-## A. Hôm nay bạn sẽ làm gì
+## A. Điểm xuất phát — bạn cần có sẵn gì
 
-1. Import file dữ liệu **gốc** (raw) vừa nhận từ phòng khám.
-2. Dùng Frequencies và Descriptives để **soi lỗi**: giá trị bất khả thi, mã lạ, ô trống.
-3. Phát hiện **dòng trùng lặp** bằng công cụ của SPSS.
-4. Sửa lỗi trên **bản sao** bằng Recode/Compute — ghi cleaning log.
-5. Lưu file sạch `clinic_bp_my_clean.sav` và đối chiếu với bản chuẩn.
+- [ ] **`clinic_bp.sav`** có đầy đủ nhãn (Ngày 02) — hôm nay đóng vai trò **bản tham chiếu**,
+  không sửa.
+- [ ] **`clinic_bp_v1_raw.csv`** đã tải trong thư mục khóa học — đây là file *bẩn*, khác file
+  `_clean` hôm trước. Kiểm tên file kỹ.
+- [ ] Một trình soạn văn bản (TextEdit / VS Code / Notes) để ghi **cleaning log**.
+- [ ] Đã quen: Variable View, Value Labels, Frequencies (Ngày 02 Bước 7).
+
+### 🗂 Bản đồ file — đọc trước khi làm (rất quan trọng)
+
+Ba file `.sav` sẽ tồn tại trong thư mục của bạn sau hôm nay. Đây là lý do nhiều người mới học
+bị lẫn — đọc bảng này hai lần:
+
+| File | Là gì | Tạo khi nào | Có nhãn không | Dùng để làm gì |
+|---|---|---|---|---|
+| `clinic_bp.sav` | Bản **sạch chuẩn** + đã gắn nhãn (Ngày 01–02) | Ngày 01–02 | ✅ Đủ | **Bản tham chiếu** — mượn nhãn, đối chiếu kết quả. Không sửa nữa |
+| `clinic_bp_work.sav` | Bản **làm việc tạm** từ file raw | Hôm nay, Bước 2 | ❌ (CSV không mang nhãn) | Phòng hờ — nếu lỡ phá, mở lại file này làm lại |
+| `clinic_bp_my_clean.sav` | **Bản BẠN tự làm sạch** + gắn lại nhãn | Hôm nay, Bước 7–8 | ✅ (bạn gắn lại) | **FILE CHÍNH từ Ngày 04 trở đi** — mọi phân tích sau này dùng file này |
+
+> ❓ *Vì sao không sửa luôn trong `clinic_bp.sav` cho tiện?* Vì file đó là **bản sạch chuẩn**
+> phòng khám cung cấp — bạn cần giữ nó nguyên để đối chiếu "bản của tôi làm có đúng không".
+> Đây cũng là nguyên tắc thật: *không bao giờ ghi đè dữ liệu tham chiếu.*
 
 ## B. Tình huống y khoa
 
-Phòng khám gửi bạn file gốc `clinic_bp_v1_raw.csv` — *khác* với bản sạch bạn dùng 2 ngày qua.
-File này được nhập tay từ hồ sơ giấy bởi hai điều dưỡng khác nhau — và như mọi dữ liệu nhập tay
-trên đời, **nó có lỗi**.
+Bác sĩ Lan xin lỗi: file hôm trước là "bản đã qua xử lý". Hôm nay cô ấy gửi **file gốc nhập
+tay** (`clinic_bp_v1_raw.csv`) — cùng 160 bệnh nhân đó nhưng là bản thô, chưa ai kiểm tra.
 
-Nếu bạn phân tích thẳng file này: tuổi trung bình sẽ bị kéo lên bởi một bệnh nhân "250 tuổi",
-bảng giới tính sẽ xuất hiện "giới số 9", và một bệnh nhân được đếm hai lần. **Dữ liệu bẩn →
-kết quả sai → kết luận sai.** Công việc hôm nay: tìm và xử lý đúng quy trình.
+Nhiệm vụ: làm sạch bản thô này sao cho **kết quả cuối tương đương bản sạch chuẩn** — và ghi lại
+mọi thứ bạn sửa. Trong nghiên cứu thật, đây chính là công việc chiếm ~80% thời gian.
 
-## C. Những điều cần biết trước
+## C. Chỉ cần biết điều này trước
 
-- **Nguyên tắc raw bất biến:** không bao giờ sửa file gốc. Mọi sửa chữa làm trên bản sao `.sav`,
-  mọi quyết định ghi vào **cleaning log** (nhật ký: lỗi gì, vì sao là lỗi, xử lý ra sao).
-- **Ba loại vấn đề thường gặp:**
-  1. *Giá trị bất khả thi* — tuổi 250, huyết áp âm, BMI 152.
-  2. *Mã không hợp lệ* — `sex_code = 9` khi codebook chỉ cho phép 1/2.
-  3. *Dữ liệu thiếu (missing)* — ô trống: có khi là lỗi nhập, có khi là thiếu thật.
-- **"Sửa" ≠ "đoán":** khi không đối chiếu được hồ sơ gốc, giá trị bất khả thi được đặt thành
-  **missing** (thiếu) — không bịa con số. Missing trong SPSS hiển thị là `.` và tự bị loại khỏi
-  phép tính liên quan.
-- **Trùng lặp (duplicate):** cùng một đơn vị quan sát bị nhập hai dòng → mọi thống kê bị đếm kép.
+- **Nguyên tắc 1 — file raw bất biến.** Không bao giờ sửa trực tiếp `clinic_bp_v1_raw.csv`.
+  Mọi sửa đổi làm trên bản `.sav` sao chép → luôn truy vết được.
+- **Nguyên tắc 2 — không đoán.** `tuổi = 250` không "sửa thành 25" — bạn không biết ý định
+  người nhập. Xử lý chuẩn của người mới: **đặt về missing** và **ghi log**.
+- **Nguyên tắc 3 — ghi log mọi thay đổi.** Một dòng log cho một hành động:
+  *ai (dòng/biến) — vấn đề gì — phát hiện bằng cách nào — xử lý ra sao.*
+- **Hai loại "dữ liệu không đúng miền":**
+  - *Bất khả thi* (tuổi 250, SBP −30) → chắc chắn lỗi → missing.
+  - *Ngoài codebook* (`sex_code = 9`) → không biết ý → missing (khai báo mã 9 = missing,
+    giữ được vết tích).
+  - *Cực trị nhưng có thể thật* (BMI 45) → **không** xóa — outlier ≠ lỗi, kiểm ngữ cảnh.
+- **Missing hiển thị là `.`** trong Data View (system missing) — SPSS tự loại khỏi phép
+  tính cần biến đó, dòng vẫn còn cho các biến khác.
 
-## D. Thực hành từng bước trên Mac
+## D. Làm theo từng bước
 
-> ⚠️ `MAC_SPSS_VERIFICATION_PENDING` — checklist ở cuối phần.
+> ⚠️ `MAC_SPSS_VERIFICATION_PENDING`. Có **2 điểm dễ phá** được đánh dấu ⚠️⚠️ — làm chậm
+> đúng như hướng dẫn, file `clinic_bp_work.sav` chính là phao cứu sinh.
 
 ### Bước 1 — Import file raw
 
-1. File → Import Data → CSV Data… → chọn `clinic_bp_v1_raw.csv` → qua wizard như Ngày 01
-   (tên biến ở dòng đầu, delimiter `,`, decimal `.`).
-2. **Ngay lập tức** File → Save As → `clinic_bp_work.sav` — file làm việc của bạn. File CSV gốc để nguyên.
-3. **Đếm dòng:** cuộn xuống cuối Data View → bạn sẽ thấy **161 dòng** (không phải 160!) — dấu hiệu đầu tiên.
+- **Làm:** y như Ngày 01 — File → Import Data → CSV Data… → chọn `clinic_bp_v1_raw.csv`
+  → header **Yes** · comma · period → Finish.
+- **Kiểm chứng:** **161 dòng** (không phải 160 — có một dòng trùng gài sẵn), 12 cột.
+- **Nếu sai:** thấy 160 → bạn mở nhầm file `_clean`. Thấy cột đầu tên lạ (vd `ï»¿patient_id`
+  hoặc `?patient_id`) → vấn đề encoding của file — xem mục I.
+- **Nhìn Variable View ngay:** lưu ý cột `Type` của `sex_code` — đang là **`String`**
+  thay vì Numeric (vì sao — ở Bước 4). Đây là dấu hiệu đầu tiên của một lỗi gài.
 
-### Bước 2 — Soi lỗi bằng Frequencies (biến định tính)
+### Bước 2 — Lưu ngay `clinic_bp_work.sav` (TRƯỚC khi sửa bất cứ thứ gì)
 
-**Analyze → Descriptive Statistics → Frequencies…** → đưa `sex_code`, `diabetes_flag`,
-`smoking_status`, `followup_completed`, `bp_controlled` vào ô Variable(s) → OK.
+- **Làm:** File → Save As… → **`clinic_bp_work.sav`** → Save.
+- **Vì sao trước tiên:** từ giờ mọi sửa đổi đều có thể sai. File này là "điểm lưu" —
+  phá hỏng thì đóng không lưu, mở lại file này, làm lại từ đầu. **Đây là thói quen
+  chuyên nghiệp, không phải thừa bước.**
 
-Đọc bảng trong Output Viewer, tìm:
-- `sex_code`: ngoài `1`/`2` có xuất hiện **`9`** và **`F`** không? *(Ghi lại tần số từng mã.)*
-- `diabetes_flag`: có dòng **System missing** nào không?
-- Các biến còn lại có mã ngoài miền không?
+### Bước 3 — Soi lỗi bằng thống kê mô tả (đọc output kỹ)
 
-### Bước 3 — Soi lỗi bằng Descriptives (biến định lượng)
+Dùng **hai dialog khác nhau** cho hai loại biến — đây là lần đầu bạn tự mở dialog phân tích,
+làm chậm:
 
-**Analyze → Descriptive Statistics → Descriptives…** → đưa `age_years`, `bmi`,
-`sbp_baseline`, `adherence_score`, `sbp_followup` vào → **Options…** tick thêm
-`Minimum`, `Maximum` (mặc định đã có Mean, Std. deviation) → Continue → OK.
+**3a. Frequencies cho biến mã hóa** (sex_code, diabetes_flag, smoking_status,
+followup_completed, bp_controlled, treatment_group):
 
-Đọc cột **Minimum** và **Maximum**:
-- `age_years`: max = **250** → bất khả thi (con người không 250 tuổi).
-- `bmi`: max = **152.4** → bất khả thi (BMI người lớn ~15–60).
-- `sbp_baseline`: min = **−30** → bất khả thi (huyết áp không âm).
-- `adherence_score`: max = **118** > thang 100 → vượt miền cho phép.
-- `sbp_followup`: min/max trong khoảng hợp lý — nhưng để ý N (số dòng có dữ liệu) nhỏ hơn 161.
+- **Làm:** menu **Analyze → Descriptive Statistics → Frequencies…**
+- **Màn hình mong đợi:** dialog hai khung — **trái**: danh sách tất cả biến; **phải**:
+  khung `Variable(s)` đang trống; giữa hai khung là nút mũi tên **►**. `[SHOT-9]`
+- **Làm:** bấm chọn `sex_code` trong danh sách trái → bấm **►** (hoặc **double-click** tên
+  biến) → `sex_code` nhảy sang khung phải. Lặp lại cho 6 biến.
+- **Làm:** bấm **OK** → Output Viewer hiện bảng tần số cho từng biến.
+- **Đọc gì ở mỗi bảng:** cột `Frequency` — giá trị nào **ngoài codebook**? Soi:
+  - `sex_code`: thấy `F`, `1`, `2`, `9` → **`F` và `9` là lỗi** (codebook chỉ cho 1, 2).
+  - `diabetes_flag`: có một ô **System missing** → ghi nhận (thiếu thật, giữ nguyên).
+  - Các biến còn lại: giá trị đều trong codebook.
 
-> 🧭 **Cách nghĩ của người làm dữ liệu:** min/max là "cỗ máy dò lỗi" nhanh nhất — mọi biến định lượng
-> đều có miền hợp lý sinh học; giá trị ngoài miền đó cần kiểm tra.
+**3b. Descriptives cho biến định lượng** (age_years, bmi, sbp_baseline, adherence_score,
+sbp_followup):
 
-### Bước 4 — Tìm dòng trùng lặp
+- **Làm:** **Analyze → Descriptive Statistics → Descriptives…** → đưa 5 biến sang khung
+  `Variable(s)` → **OK**. `[SHOT-10]`
+- **Đọc gì:** cột **Minimum** và **Maximum** của từng biến, so với miền hợp lý:
+  - `age_years`: **max 250** → lỗi (người không thể 250 tuổi).
+  - `bmi`: **max 152,4** → lỗi (BMI người không thể 152).
+  - `sbp_baseline`: **min −30** → lỗi (huyết áp không âm).
+  - `adherence_score`: **max 118** → lỗi (thang chỉ tới 100 — xem codebook).
+  - `sbp_followup`: N chỉ ~137 và min/max hợp lý → OK.
 
-**Data → Identify Duplicate Cases…** → ô "Define matching cases by": đưa `patient_id` vào → OK.
+- **Nếu sai:** bảng Descriptives thiếu `sex_code` → đúng ý — nó đang là String, Descriptives
+  bỏ qua biến chuỗi. Không phải lỗi của bạn.
 
-Output liệt kê các `patient_id` xuất hiện >1 lần — bạn sẽ thấy **P088** (2 dòng, không kề nhau).
+**Viết lại** mọi thứ vừa phát hiện vào giấy/log nháp: giá trị lạ + biến nào.
 
-### Bước 5 — Soi lỗi mâu thuẫn giữa hai biến
+### Bước 4 — Sửa `sex_code` (⚠️⚠️ điểm dễ phá #1 — `⏳ PENDING thao tác`)
 
-**Data → Sort Cases…** → sort theo `followup_completed` (Descending) rồi nhìn cột `sbp_followup`:
-tìm dòng có `followup_completed = 1` nhưng `sbp_followup` trống → **P119**: ghi "đã tái khám"
-nhưng không có con số đo → mâu thuẫn.
+**Hiểu trước đã:** trong CSV, cột `sex_code` gần như toàn số `1`/`2` — nhưng **một ô** chứa
+chữ `F`. CSV không phân kiểu từng ô, nên SPSS buộc chọn **String cho cả cột**. Hệ quả:
+Descriptives bỏ qua nó, và bạn không thể khai báo missing bằng số. Phải: **sửa chữ →
+đổi cả cột về Numeric → khai báo mã 9 là missing.** Làm sai thứ tự sẽ mất dữ liệu.
 
-*(Cách khác nhanh hơn khi quen: dùng Frequencies crosstab giữa hai biến — học Crosstabs ở Ngày 08.)*
+**4a. Sửa ô `F` trong khi cột còn là String**
 
-### Bước 6 — Sửa lỗi trên file làm việc
+- **Làm:** Data View → tìm dòng `patient_id = P022` (cuộn hoặc dùng Edit → Find… gõ `P022`
+  trên cột `patient_id`) → bấm vào ô `sex_code` chứa `F` → gõ `1` → Enter.
+- **Vì sao `1`:** tra codebook/logic — `F` = Female = nữ = mã `1`. Đây là trường hợp hiếm
+  "sửa theo nghĩa rõ ràng", không phải đoán.
+- **Ghi log ngay:** `P022 · sex_code 'F' → 1 (nữ)`.
 
-Quy tắc xử lý tham chiếu (đối chiếu logic codebook, không đoán số):
+**4b. Đổi Type của cột về Numeric**
 
-| Lỗi | Cách sửa trên `clinic_bp_work.sav` |
-|---|---|
-| `age=250` (P037) | Đặt về missing |
-| `sex_code=9` (P052) | Đặt về missing |
-| `sex_code='F'` (P022) | Cột sẽ bị import thành **String** vì có chữ → đổi 'F'→'1' rồi chuyển kiểu |
-| `sbp_baseline=−30` (P074) | missing |
-| `bmi=152.4` (P103) | missing |
-| Trùng P088 | Xóa 1 dòng |
-| `adherence=118` (P007) | missing |
-| P119 mâu thuẫn | `followup_completed` → 0 (thực tế không có đo) |
-| `diabetes_flag` trống (P141) | **giữ missing** — không bịa |
+- **Làm:** Variable View → dòng `sex_code` → bấm ô `Type` → nút **…** hiện ra → bấm **…** →
+  hộp thoại chọn kiểu → chọn **Numeric** → OK.
+- **Màn hình mong đợi:** ô Type đổi thành `Numeric`. Các giá trị `'1','2','9'` trong Data
+  View chuyển thành số 1, 2, 9 (nội dung giống hệt, chỉ khác kiểu). `[SHOT-11]`
+- **Nếu sai:**
+  - Vài ô hiển thị `.` sau khi đổi → tức còn ký tự không phải số → **Ctrl+Z** hoặc đóng
+    không lưu → mở lại `clinic_bp_work.sav` → kiểm tra lại cột kỹ (Frequencies trên biến
+    String sẽ liệt kê mọi giá trị lạ) rồi làm lại 4a.
+  - *Mẹo an toàn:* trước khi đổi Type, chạy **Frequencies trên `sex_code` khi còn String** —
+    danh sách hiện đúng các giá trị `{1, 2, 9}` (sau khi đã sửa F) → an toàn để đổi.
 
-**Cách đặt một ô thành missing** (đơn giản nhất cho người mới): bấm thẳng vào ô đó trong
-Data View → bấm **Delete** → ô chuyển thành `.`. *(Nhanh và minh bạch cho file nhỏ; dữ liệu lớn
-sẽ dùng syntax — xem mục I.)*
+**4c. Khai báo mã `9` là missing**
 
-**Xóa dòng trùng:** click chọn dòng trùng thứ hai của P088 → chuột phải → **Clear** (xóa cả dòng).
+- **Làm:** vẫn Variable View → dòng `sex_code` → bấm ô `Missing` → nút **…** → chọn
+  **Discrete missing values** → gõ `9` vào ô đầu → OK.
+- **Kiểm chứng:** chạy lại Frequencies `sex_code` → bảng chỉ còn **1 và 2**, dòng Missing
+  hiển thị `9` với số đếm 1.
+- **Vì sao không xóa ô `9`:** khai báo missing giữ lại *vết tích* — ai mở file cũng biết
+  từng có mã lạ; xóa ô sẽ giống hệt "thiếu thật".
+- **Ghi log:** `sex_code=9 (P052) → khai báo discrete missing`.
+- **Cấm:** **đừng** dùng Transform → Automatic Recode cho việc này — nó sẽ remap {1,2,9}
+  → {1,2,3} âm thầm, phá nghĩa của mã.
 
-**Ô chữ 'F':** sửa thành `1` trực tiếp; sau đó trong Variable View đổi `Type` của `sex_code`
-về Numeric nếu SPSS đã nhận là String.
+### Bước 5 — Sửa các giá trị bất khả thi → missing
 
-### Bước 7 — Ghi cleaning log + lưu + đối chiếu
+Với mỗi ô lỗi đã soi ra ở Bước 3, làm đúng chu trình: **tìm dòng → xóa nội dung ô → ghi log.**
 
-1. Tạo file `cleaning_log.md` (TextEdit/VSCode đều được) ghi bảng: lỗi | dòng | cách phát hiện | cách xử lý.
-2. File → Save As → **`clinic_bp_my_clean.sav`**.
-3. Kiểm tra lại: chạy lại Descriptives — `age_years` max giờ phải ≤ 82, `sbp_baseline` min > 0,
-   số dòng = 160.
-4. Đối chiếu với bản chuẩn: mở `datasets/cleaned/clinic_bp_v1_clean.csv` — hai bản phải khớp nhau
-   về mặt *quyết định xử lý* (cùng 160 dòng, cùng các ô missing).
+- **Tìm dòng:** Edit → Find… (hoặc cuộn) theo `patient_id`.
+- **Xóa ô:** bấm ô lỗi → nhấn **Delete** → ô chuyển thành `.` (system missing).
 
-## E. Hiểu kết quả của bạn
+| Dòng | Biến | Giá trị lỗi | → |
+|---|---|---|---|
+| `P037` | `age_years` | 250 | `.` |
+| `P074` | `sbp_baseline` | −30 | `.` |
+| `P103` | `bmi` | 152,4 | `.` |
+| `P007` | `adherence_score` | 118 | `.` |
 
-Sau bài này bạn có: file `clinic_bp_my_clean.sav` (160 dòng sạch) + `cleaning_log.md` + kinh nghiệm
-"đọc lỗi" bằng min/max và bảng tần số.
+- **Ghi log mỗi dòng:** `P037 · age_years 250 → missing (bất khả thi sinh học)`.
+- **Nếu sai:** xóa nhầm ô đúng → Ctrl+Z ngay; hoặc gõ lại giá trị gốc (tra file raw bằng
+  trình soạn văn bản — file raw không đổi, đó là lý do nó phải bất biến).
 
-**Điều quan trọng cần hiểu:** làm sạch không phải "làm đẹp số liệu". Mỗi quyết định đều phải
-giải thích được *vì sao* — và luôn có thể quay về file raw để kiểm tra lại.
+### Bước 6 — Xử lý dòng trùng (⚠️⚠️ điểm dễ phá #2)
 
-## F. Bài tập tự làm
+- **Làm:** menu **Data → Identify Duplicate Cases…** `[SHOT-12]`
+- **Màn hình mong đợi:** dialog — khung "Define matching cases by" trống.
+- **Làm:** đưa `patient_id` vào khung đó (► hoặc double-click) → **OK**.
+- **Kết quả:** SPSS tạo biến mới `PrimaryLast` ở cuối bảng + một bảng output báo số nhóm
+  trùng. Dòng nào là bản trùng thứ hai sẽ mang giá trị **0** ở `PrimaryLast`
+  (0 = không phải bản chính).
+- **Làm:** tìm dòng có `PrimaryLast = 0` (sẽ là bệnh nhân **P088** — xuất hiện 2 lần ở hai
+  chỗ khác nhau trong file). Kiểm tra hai dòng P088 có **giống hệt nhau** → đúng là trùng.
+- **Xóa bản trùng:** bấm **chuột phải vào số dòng** (header xám bên trái — trên Mac:
+  Ctrl+click hoặc chạm hai ngón) của dòng có `PrimaryLast = 0` → chọn **Clear** → dòng
+  biến mất. Còn **160 dòng**.
+- **Dọn dẹp:** xóa biến tạm `PrimaryLast` — Variable View → chuột phải (Ctrl+click) số
+  dòng của biến → **Clear**.
+- **Ghi log:** `P088 trùng lặp → giữ dòng đầu, xóa bản trùng`.
+- **Nếu sai:** xóa nhầm dòng P088 chính → Ctrl+Z; hoặc đóng không lưu → mở lại
+  `clinic_bp_work.sav` → làm lại từ Bước 4 (mất ít nhất thời gian — đó là lý do Bước 2 tồn tại).
 
-`workbook.md` — một bảng lỗi mini mới + câu hỏi về quy trình.
+### Bước 7 — Lỗi "khớp logic" cuối cùng + lưu bản sạch
 
-## G. Đáp án
+- **Soi bằng mắt / sort:** có một dòng `followup_completed = 1` nhưng `sbp_followup` trống
+  (P119) — mâu thuẫn: đánh dấu "đã tái khám" mà không có đo tái khám.
+- **Xử lý:** sửa `followup_completed` của P119 thành `0` (sửa *cờ*, vì đo không tồn tại —
+  không thể bịa con số). `sbp_followup` và `bp_controlled` vẫn missing — đúng.
+- **Ghi log:** `P119 · followup_completed 1→0 (không có đo tái khám)`.
+- **Làm:** **File → Save As… → `clinic_bp_my_clean.sav`** → Save.
+  *(Giữ `clinic_bp_work.sav` — nó là bản "giữa chừng" phòng hờ.)*
 
-`answer-key.md` — chỉ mở sau khi tự làm. *(Danh mục lỗi đầy đủ của file này nằm ở
-`datasets/codebooks/planted-errors-INTERNAL.md` — nội bộ, bạn không cần mở.)*
+### Bước 8 — Gắn lại nhãn cho `clinic_bp_my_clean.sav` (đừng bỏ qua!)
 
-## H. Checkpoint qua bài
+File vừa lưu **chưa có một nhãn nào** — CSV không mang theo định nghĩa bạn gắn hôm Ngày 02.
+Hai cách:
 
-- [ ] Tự tìm được **ít nhất 7/9 lỗi** trong file raw.
-- [ ] File `clinic_bp_my_clean.sav` có đúng 160 dòng; Descriptives không còn giá trị bất khả thi.
-- [ ] `cleaning_log.md` ghi được từng quyết định + lý do.
-- [ ] Nói được vì sao không sửa thẳng vào file CSV gốc.
+- **Cách nhanh (tùy chọn, `⏳ PENDING thao tác`):** mở `clinic_bp_my_clean.sav` →
+  **File → Apply Data Dictionary…** → chọn `clinic_bp.sav` làm nguồn → Apply. SPSS sao
+  chép toàn bộ Label/Values/Measure/Missing sang. Chạy Frequencies kiểm tra nhãn hiện.
+- **Cách chắc chắn (ôn lại Ngày 02, ~10 phút):** gắn lại bằng tay như Bước 3–5 Ngày 02 —
+  12 Label + Value Labels cho 5 biến mã hóa + Measure. Làm xong chạy Frequencies `sex_code`:
+  bảng hiện **Nữ/Nam** là đúng.
+- **Kiểm chứng:** View → Value Labels trong Data View → `sex_code` hiển thị Nữ/Nam.
 
-## I. Đọc thêm (không bắt buộc)
+### Bước 9 — Hoàn thiện cleaning log
 
-- **Syntax cách nhanh tái lập:** thay vì bấm tay, thao tác sửa có thể ghi thành lệnh, ví dụ
-  `RECODE age_years (250=SYSMIS).` — Ngày 11 sẽ giới thiệu cách lưu syntax để tái tạo quy trình.
-- **Missing có "mã riêng":** nghiên cứu thật hay phân biệt `99 = từ chối trả lời` vs `98 = không biết`
-  vs trống. Khai báo ở cột `Missing` trong Variable View → SPSS loại chúng khỏi phân tích nhưng
-  vẫn giữ thông tin "thiếu vì sao".
-- **Khi nào xóa hẳn một dòng?** Chỉ khi dòng đó *không phải một quan sát thật* (trùng lặp, dòng
-  tiêu đề lẫn vào). Giá trị sai trong một dòng thật → sửa ô thành missing, không xóa người đó.
+Mở trình soạn văn bản → tạo file **`cleaning_log.md`** trong thư mục khóa học, theo mẫu:
+
+```markdown
+# Cleaning log — clinic_bp_v1_raw.csv → clinic_bp_my_clean.sav
+> Ngày làm: … · Người làm: … · File raw giữ nguyên bất biến.
+
+| # | Vị trí | Vấn đề | Phát hiện bằng | Xử lý |
+|---|---|---|---|---|
+| 1 | P022 · sex_code | chữ 'F' trong cột số | cột thành String khi import | 'F'→1 (nữ), đổi Type về Numeric |
+| 2 | … | … | … | … |
+```
+
+Log đầy đủ của bạn phải có **7–8 dòng** tương ứng số lỗi đã xử lý.
+
+## E. Minh họa & danh sách ảnh cần chụp
+
+| Mã | Ảnh cần | Chụp khi |
+|---|---|---|
+| SHOT-9 | Dialog Frequencies (2 khung + nút ►) | Bước 3a |
+| SHOT-10 | Bảng Descriptives có min/max | Bước 3b |
+| SHOT-11 | Variable View: sex_code đổi String→Numeric | Bước 4b |
+| SHOT-12 | Dialog Identify Duplicate Cases + cột PrimaryLast | Bước 6 |
+
+## F. Ví dụ hoàn chỉnh — một vòng đời làm sạch
+
+| # | Hành động | Kiểm chứng |
+|---|---|---|
+| 1 | Import `_raw.csv` → lưu `clinic_bp_work.sav` | 161 dòng, sex_code = String |
+| 2 | Frequencies (mã hóa) + Descriptives (định lượng) | Soi ra giá trị lạ: F, 9, 250, −30, 152,4, 118, trùng |
+| 3 | Sửa 'F'→1, đổi Type, khai báo 9=missing | sex_code chỉ còn 1/2 |
+| 4 | 4 ô bất khả thi → missing | Min/max về miền hợp lý |
+| 5 | Identify Duplicates → xóa bản trùng | 160 dòng |
+| 6 | Sửa P119 flag → lưu `clinic_bp_my_clean.sav` | File mới, 160 dòng sạch |
+| 7 | Gắn lại nhãn + cleaning_log.md | Nhãn hiện, log đủ dòng |
+
+## G. Bài tập tự làm
+
+[Workbook](/d03/bai-tap/): soi lỗi trên bảng giấy mini, hai loại missing, và một tình
+huống bảng "dài" (nhiều dòng/bệnh nhân) — nơi "trùng id" **không** phải lỗi.
+
+## H. Checkpoint — sản phẩm bạn phải có
+
+- [ ] `clinic_bp_my_clean.sav` — **160 dòng**, không còn giá trị ngoài miền, **có nhãn**.
+- [ ] `cleaning_log.md` — ghi đủ các lỗi đã xử lý (7–8 mục).
+- [ ] `clinic_bp_work.sav` vẫn tồn tại (bản phòng hờ).
+- [ ] `clinic_bp.sav` **không bị sửa** — vẫn là bản chuẩn để đối chiếu.
+- [ ] Trả lời được: vì sao không sửa raw trực tiếp? Outlier khác lỗi thế nào?
+
+## I. Gỡ rối khi bị kẹt
+
+| Triệu chứng | Nguyên nhân | Cách gỡ |
+|---|---|---|
+| Cột đầu tên `ï»¿patient_id`/`?patient_id` | File CSV có ký tự BOM đầu file | Trong wizard import, thử chọn encoding **UTF-8** nếu được hỏi; nếu đã import và chỉ sai tên cột đầu → sửa Name thủ công về `patient_id` ở Variable View |
+| `sex_code` không đổi được Type | Đang gõ trực tiếp thay vì bấm **…** | Bấm ô Type → nút … → chọn Numeric |
+| Sau đổi Type nhiều ô thành `.` | Còn ký tự lạ chưa sửa | Ctrl+Z → Frequencies khi còn String để liệt kê giá trị lạ → sửa hết → đổi lại |
+| Phá hỏng giữa chừng | — | **Đóng không lưu → mở `clinic_bp_work.sav` → làm lại từ Bước 4** (file này chính là lý do Bước 2 bắt lưu trước) |
+| Xóa nhầm dòng / ô | — | Ctrl+Z tức thì; hoặc tra giá trị gốc trong file `_raw.csv` bằng trình soạn văn bản rồi gõ lại |
+| Descriptives không hiện `sex_code` | Nó đang là String | Đúng ý — sửa ở Bước 4 |
+| Không thấy `PrimaryLast` | Identify Duplicates chưa đưa `patient_id` vào "matching" | Mở lại dialog, kéo đúng khung |
+| 161 dòng sau khi xóa | Xóa nhầm dòng hoặc chưa xóa | Đếm lại; PrimaryLast=0 chỉ 1 dòng |
+| N trong output < 160 | Biến có missing — bình thường | Đọc N của từng bảng, không hoảng |
+
+## J. Chuyển giao sang Ngày 04
+
+**File sau hôm nay:**
+
+| File | Trạng thái | Ngày mai |
+|---|---|---|
+| `clinic_bp_my_clean.sav` | Bản sạch CỦA BẠN, có nhãn | **File làm việc chính** — mở ngay đầu Ngày 04 |
+| `clinic_bp_work.sav` | Bản phòng hờ | Có thể xóa sau khi đối chiếu xong Ngày 04 |
+| `clinic_bp.sav` | Bản chuẩn tham chiếu | Chỉ dùng để soi đáp — không phân tích trên nó |
+| `cleaning_log.md` | Minh chứng làm sạch | Giữ cùng thư mục — Ngày 12–14 sẽ viết log tương tự |
+| `clinic_bp_v1_raw.csv` | File gốc bất biến | Để nguyên mãi mãi |
+
+**Kỹ năng mang theo:** đọc min/max để bắt lỗi; khai báo missing; Identify Duplicate Cases;
+tư duy "phát hiện → xử lý → ghi log".
+
+**Thay đổi ngày mai:** dữ liệu đã sạch — bắt đầu **mô tả** nó (tỷ lệ %, trung bình, biểu đồ)
+để trả lời câu hỏi đầu tiên của Bác sĩ Lan: "bệnh nhân của tôi là những ai?"
+
+## K. Đọc thêm (không bắt buộc)
+
+- **Sort Cases** (Data → Sort Cases…) — cách khác soi cực trị nhanh: sort giảm dần rồi nhìn
+  đầu bảng. Trong lớp này Descriptives min/max là đủ.
+- **Select Cases / Filter** — khi muốn phân tích trên một nhóm con (vd: chỉ người có
+  tái khám). Dùng từ Ngày 08.
+- **Vì sao khai báo missing thay vì xóa ô:** `Discrete missing values` ghi lại *mã nào*
+  từng xuất hiện — log trong chính file dữ liệu, khỏi tra file ngoài.
+- **Outlier thật:** BMI 152,4 là lỗi chắc chắn; nhưng BMI 45 là người thật — quyết định
+  xử lý cần ngữ cảnh + bằng chứng, không chỉ nhìn con số (BT4 workbook đào sâu điều này).

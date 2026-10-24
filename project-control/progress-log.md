@@ -214,3 +214,24 @@
 
 - Mọi số vẫn `NOT_RUN`; menu `MAC_SPSS_VERIFICATION_PENDING`; chưa `HUMAN_APPROVAL`.
 - Pilot Ngày 01 chưa chạy — chờ owner trên Mac thật với evidence E0–E5.
+
+---
+
+## Task 11 — Critical pedagogical rebuild: audit + vertical slice Ngày 01–03 (2026-11-15)
+
+### Đã làm
+
+- **Phase 1 audit** (`reviews/TASK11-PEDAGOGICAL-REBUILD.md` §1–2): 12 phát hiện sư phạm có evidence + dependency map 14 ngày. Gãy chính: metadata Ngày 02 mất ngầm khi Ngày 03 import raw (P1); 3 file `.sav` không bản đồ (P2); `sex_code` mơ hồ (P4); expected-results + clean CSV leak trên `/du-lieu/` (P6); textarea thay artifact (P7).
+- **Rebuild Ngày 01–03** theo khung A–J: điểm xuất phát → tình huống → lý thuyết vừa đủ → walkthrough granular (mỗi bước: ở đâu/bấm gì/màn hình mong đợi/nếu sai) → screenshot plan `[SHOT-n]` → worked example → BT có gợi ý nấc → checkpoint artifact → troubleshooting → handoff file tường minh.
+- **Continuity (D-022):** `clinic_bp.sav`=tham chiếu không sửa · `clinic_bp_work.sav`=phòng hờ lưu trước khi sửa · `clinic_bp_my_clean.sav`=file chính từ Ngày 04, gắn lại nhãn ở Bước 8 D03. sex_code: 4a sửa 'F' khi còn String → 4b đổi Type → 4c khai báo 9=discrete missing, recovery đầy đủ + cấm Automatic Recode. Phát hiện thêm: 7 CSV đều UTF-8 BOM → troubleshooting row.
+- **Website (D-023):** `/du-lieu/` tách 4 tầng, gỡ expected-results khỏi trang learner; mỗi lesson có ô `📦 File cần hôm nay` (CSV link tải / `.sav` ghi nguồn); workbook marker `> ✅ Sản phẩm` → ExerciseCard checklist `data-check`; progress.js lưu `answers[id#i]` — cùng key/schema; CSS checklist; fix link `START-HERE-MAC.md`, status-strip nhiều dòng.
+- **Artifacts:** `track-14day/screenshot-checklist.md` (SHOT-1…12 `NOT_CAPTURED`), `curriculum/TEACHING-TEMPLATE-DAY.md` + backlog ưu tiên D04–14 (D04/D06/D12–13 cao nhất).
+- **Minimal patch D04** (chỉ dòng dataset): `clinic_bp_my_clean.sav` là file chính — không mass-rewrite.
+- **Walkthrough mô phỏng** (§6 report): mọi bước có hướng dẫn cấp-thao-tác; EXEC toàn bộ `NOT_TESTED`/`PENDING`.
+- Build 54 trang PASS; dist du-lieu 0 leak; checklist render trên d01/d03; `git diff --check` sạch.
+
+### Trung thực
+
+- Không có SPSS runtime → mọi thao tác `MAC_SPSS_VERIFICATION_PENDING`; 2 điểm `⏳ PENDING thao tác` (đổi Type sex_code, Apply Data Dictionary, menu Clear).
+- Walkthrough là mô phỏng tác giả, KHÔNG phải usability test người thật.
+- Ngày 04–14 vẫn mẫu cũ theo thiết kế stop-condition — chờ owner duyệt slice 01–03.

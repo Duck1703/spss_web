@@ -45,6 +45,20 @@
       b.classList.toggle('is-done', !!state.done[id]);
       b.textContent = state.done[id] ? '✓ Đã làm' : 'Đánh dấu đã làm';
     });
+    // checklist artifact cards: restore checked + status theo số mục đã tick
+    document.querySelectorAll('.exercise-card__checklist').forEach(function (ul) {
+      var card = ul.closest('.exercise-card');
+      var boxes = ul.querySelectorAll('[data-check]');
+      var n = 0;
+      boxes.forEach(function (cb) {
+        var cid = cb.getAttribute('data-check');
+        cb.checked = state.answers[cid] === '1';
+        if (cb.checked) n++;
+      });
+      if (card && !state.done[card.getAttribute('data-exercise')]) {
+        setStatus(card.querySelector('[data-status]'), n ? 'draft' : 'empty');
+      }
+    });
     // module done
     document.querySelectorAll('[data-module-done]').forEach(function (b) {
       var id = b.getAttribute('data-module-done');
@@ -62,7 +76,7 @@
     var nDone = Object.keys(state.done).filter(function (k) { return k.indexOf('bt') === 0; }).length;
     var nDays = Object.keys(state.done).filter(function (k) { return /^module:d\d{2}$/.test(k); }).length;
     var nDraft = Object.keys(state.answers).filter(function (k) {
-      return !state.done[k] && String(state.answers[k]).trim();
+      return k.indexOf('#') === -1 && !state.done[k] && String(state.answers[k]).trim();
     }).length;
     document.querySelectorAll('[data-progress-count]').forEach(function (el) {
       if (!nDays && !nDone && !nDraft) { el.textContent = 'Chưa có dữ liệu — bắt đầu từ Ngày 01'; return; }
@@ -100,6 +114,23 @@
         flashSaved(card);
       }
       if (t.tagName === 'SELECT') t.classList.toggle('is-answered', !!String(t.value).trim());
+    }
+  });
+  // checklist checkbox: lưu trạng thái tick vào answers[<id>#<i>] — cùng schema, tương thích ngược
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.matches && t.matches('[data-check]')) {
+      var cid = t.getAttribute('data-check');
+      if (t.checked) { state.answers[cid] = '1'; } else { delete state.answers[cid]; }
+      save(state);
+      var card = t.closest('.exercise-card');
+      if (card && !state.done[card.getAttribute('data-exercise')]) {
+        var boxes = card.querySelectorAll('[data-check]');
+        var n = 0;
+        boxes.forEach(function (cb) { if (cb.checked) n++; });
+        setStatus(card.querySelector('[data-status]'), n ? 'draft' : 'empty');
+        flashSaved(card);
+      }
     }
   });
   document.addEventListener('click', function (e) {

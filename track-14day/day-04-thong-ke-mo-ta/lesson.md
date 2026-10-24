@@ -1,6 +1,6 @@
 # Ngày 04 — Thống kê mô tả
 
-> **Lộ trình:** Practice-first 14 ngày · **Thời lượng:** ~90–120 phút · **Dataset:** `clinic_bp_my_clean.sav` (hoặc bản chuẩn `clinic_bp_v1_clean.csv` nếu bạn chưa kịp làm sạch)
+> **Lộ trình:** Practice-first 14 ngày · **Thời lượng:** ~90–120 phút · **Dataset:** `clinic_bp_my_clean.sav` — **file BẠN tự làm sạch + gắn nhãn ở Ngày 03** (đây là file làm việc chính từ giờ). *Chưa có?* → quay lại Ngày 03; tạm thời dùng `clinic_bp.sav` (bản chuẩn có nhãn) để không vỡ nhịp, nhưng phải hoàn thành Ngày 03 trước Ngày 12.
 > **Trạng thái:** DRAFT — thao tác menu `MAC_SPSS_VERIFICATION_PENDING`. Con số mong đợi = cross-check Python, nhãn `NOT_RUN`.
 
 ---

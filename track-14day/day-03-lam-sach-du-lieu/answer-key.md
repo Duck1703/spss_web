@@ -4,6 +4,28 @@
 
 ---
 
+## BT0 — Đối chiếu với bản chuẩn
+
+Kết quả tham chiếu khi chạy trên `clinic_bp_my_clean.sav` (phải khớp gần hệt bản chuẩn —
+cross-check Python, `NOT_RUN`):
+
+- `age_years`: N=159, min=24,0, max=82,0 (mất 1 N vì ô 250 đã về missing)
+- `bmi`: N=159, min=17,5, max=36,1
+- `sbp_baseline`: N=159, min=98,0, max=177,0
+- `adherence_score`: N=159, min=18,3, max=96,2
+- `sbp_followup`: N=137, min=95,0, max=171,0
+- `sex_code`: chỉ 1 (n=76) và 2 (n=83) + 1 missing · `diabetes_flag`: 0/1 + 1 missing ·
+  `smoking_status`: 0/1/2 · `followup_completed`: 0/1 · `bp_controlled`: 0/1 + 23 missing
+- **160 dòng** — đúng một dòng P088 duy nhất.
+
+*Chênh lệch nhỏ do làm tròn là bình thường.* Nếu con số lệch nhiều → tra `cleaning_log.md`
+đối chiếu với các lỗi trong bảng bên dưới.
+
+**Đối chiếu nhanh các lỗi gài trong `_raw.csv`** (để bạn tự kiểm — đây là phần "đáp án
+làm sạch" của lesson): tuổi 250 (P037), 'F'→1 (P022), `9`→missing (P052), SBP −30 (P074),
+P088 trùng ×2, BMI 152,4 (P103), P119 flag→0, `diabetes_flag` trống P141 (giữ missing),
+adherence 118 (P007).
+
 ## BT1 — Bảng lỗi mini
 
 | Vấn đề | Dòng | Xử lý tham chiếu | Lý do |
@@ -29,8 +51,9 @@ dòng đó là một quan sát thật, chỉ một ô thiếu; (c) quên kiểm 
 1. `sbp_followup` có **23 ô missing** — bệnh nhân không tái khám (`followup_completed = 0`).
    Đây là **missing có chủ đích/có lý do**, không phải lỗi; không "sửa" được vì dữ liệu không tồn tại.
 2. Khác nhau: missing do *không có đo* (bản chất nghiên cứu) vs missing do *lỗi nhập bạn vừa đặt về
-   missing* (dữ liệu từng có nhưng sai). Giống nhau: SPSS xử lý giống nhau — loại khỏi phép tính
-   liên quan (listwise), nên **N trong mỗi bảng output có thể khác nhau** — luôn đọc N của từng bảng.
+   missing* (dữ liệu từng có nhưng sai). Giống nhau: SPSS chỉ loại dòng đó khỏi **riêng phép tính
+   cần biến bị missing** — dòng vẫn được đếm bình thường cho các biến khác. Vì vậy **N trong mỗi
+   bảng output có thể khác nhau** — luôn đọc N của từng bảng.
 
 *Lỗi hay gặp:* hoảng khi thấy N < 160 trong output — đó là bình thường khi biến có missing.
 

@@ -1,0 +1,35 @@
+---
+interface Props { id: string; label?: string; answerHref?: string; checklist?: string[]; }
+const { id, label = 'Nháp', answerHref = '/m01/dap-an/', checklist } = Astro.props;
+---
+<div class="exercise-card" data-exercise={id}>
+  <div class="exercise-card__head">
+    <span class="exercise-card__label">{label}</span>
+    <span class="exercise-card__status" data-status data-state="empty">Chưa làm</span>
+  </div>
+  {checklist ? (
+    <ul class="exercise-card__checklist">
+      {checklist.map((item, i) => (
+        <li>
+          <label>
+            <input type="checkbox" data-check={`${id}#${i}`} />
+            <span>{item}</span>
+          </label>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <textarea
+      class="exercise-card__input"
+      rows="4"
+      placeholder="Viết câu trả lời của bạn ở đây — tự động lưu trong trình duyệt này…"
+      aria-label={`Câu trả lời ${id}`}
+      data-answer={id}
+    ></textarea>
+  )}
+  <div class="exercise-card__actions">
+    <span class="exercise-card__saved" data-saved aria-live="polite">Đã lưu tự động</span>
+    <a class="exercise-card__link" href={answerHref}>Xem đáp án (sau khi đã làm) →</a>
+    <button type="button" class="exercise-card__done" data-done={id}>Đánh dấu đã làm</button>
+  </div>
+</div>

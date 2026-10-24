@@ -7,12 +7,12 @@
 
 ## BT1 — Import `exercise_hba1c_pairs.csv`
 
-1. **24 dòng × 3 cột** (`patient_id`, `hba1c_t0`, `hba1c_t3`). Nếu bạn thấy 24 dòng + 1 dòng toàn
-   khoảng trống ở cuối thì vẫn đúng — SPSS đôi khi hiển thị thêm dòng trống sau dữ liệu.
+1. **24 dòng × 3 cột** (`patient_id`, `hba1c_t0`, `hba1c_t3`). Nếu thấy thêm một dòng
+   trống ở cuối thì vẫn đúng — SPSS đôi khi hiển thị thêm dòng trống sau dữ liệu.
 2. Một dòng = **một bệnh nhân đái tháo đường** được đo HbA1c hai lần (trước và sau 3 tháng
-   tư vấn dinh dưỡng). Hai cột `hba1c_t0/t3` là hai lần đo **của cùng một người** — chi tiết này
-   sẽ quan trọng ở Ngày 07 (paired t-test).
-3. R01: `hba1c_t0` = **6.5%** → đọc: "Bệnh nhân R01 có HbA1c 6,5% trước chương trình."
+   tư vấn dinh dưỡng). Hai cột `hba1c_t0/t3` là hai lần đo **của cùng một người** — chi tiết
+   này sẽ quan trọng ở Ngày 07 (paired t-test).
+3. R01: `hba1c_t0` = **6,5%** → đọc: "Bệnh nhân R01 có HbA1c 6,5% trước chương trình."
 4. Có — file `.sav` lưu được và mở lại đầy đủ.
 
 *Lỗi hay gặp:* quên chọn "dòng đầu = tên biến" → SPSS đặt tên biến `V1, V2, V3` và dòng

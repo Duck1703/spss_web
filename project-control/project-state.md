@@ -58,8 +58,8 @@
 
 ## 4. Blockers / phụ thuộc đang mở
 
-1. **Track 14 ngày vẫn `DRAFTING`** — Task 09 review `CHANGES_REQUIRED` đã remediation xong (Task 10); chờ reviewer đánh giá lại bằng chứng pilot thật + HUMAN_APPROVAL.
-2. **`MAC_SPSS_VERIFICATION_PENDING` trên toàn bộ 14 ngày** — cần pilot trên MacBook có SPSS; checklist riêng cho Ngày 01 tại `track-14day/day-01-lan-dau-mo-spss/pilot-checklist-mac.md` (yêu cầu evidence E0–E5); số expected `NOT_RUN`.
+1. **Track 14 ngày vẫn `DRAFTING`** — Task 11 đã rebuild vertical slice Ngày 01–03 theo mẫu sư phạm mới (A–J, `reviews/TASK11-PEDAGOGICAL-REBUILD.md`); Ngày 04–14 vẫn mẫu cũ, chờ owner duyệt slice trước khi áp template (`curriculum/TEACHING-TEMPLATE-DAY.md` + backlog trong report).
+2. **`MAC_SPSS_VERIFICATION_PENDING` trên toàn bộ 14 ngày** — cần pilot trên MacBook có SPSS; checklist riêng cho Ngày 01 tại `track-14day/day-01-lan-dau-mo-spss/pilot-checklist-mac.md` (yêu cầu evidence E0–E5); danh sách ảnh cần chụp tại `track-14day/screenshot-checklist.md` (SHOT-1…12, `NOT_CAPTURED`); số expected `NOT_RUN`.
 3. **Phiếu preflight chưa điền** — `MAC-SPSS-PREFLIGHT.md` cần học viên/owner.
 4. **SPCR + portal S01 JS-gated** → mở bằng trình duyệt thật để chốt macOS/footnote ARM64 (TB-003/TB-004).
 5. **Không có môi trường chạy SPSS trong workspace** → mọi artifact thực thi `NOT_RUN` cho tới khi có MacBook QA.
