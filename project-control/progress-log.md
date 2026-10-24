@@ -78,3 +78,38 @@
 
 - Không viết/sửa nội dung bài học, production-plan (trừ amendment đề xuất ghi log), dataset, exercises/solutions.
 - Không sửa Blueprint, không đổi scope curriculum, không push remote.
+
+## 2026-10-24 — Task 03: M01 Lesson Production (agent Devin)
+
+### Preflight
+
+- Root `D:/spss`, branch `master`, HEAD `26c7f91`, tree clean, Blueprint hash khớp — baseline Task 02 đúng.
+- Rules precheck: giống Task 02 (D-011) — không có cấm lệnh ưu tiên cao hơn cho `D:\spss` → PROCEED.
+
+### Đã sản xuất (trong phạm vi ủy quyền M01)
+
+| File | Nội dung |
+|---|---|
+| `lessons/M01-research-thinking/lesson.md` | Bài học đủ 12 mục §6 Blueprint; §05/§06 ghi KHÔNG ÁP DỤNG; §07 đọc kết quả tính tay (phần SPSS `NOT_APPLICABLE`); bảng `mini_records` 12 hồ sơ giả lập + codebook mini |
+| `lessons/M01-research-thinking/workbook.md` | BT1–BT4 theo plan: phân loại câu hỏi, 12 biến (2 bẫy), kết luận vượt quyền, phiếu nghiên cứu tình huống mới (tiêm vaccine) |
+| `lessons/M01-research-thinking/answer-key.md` | Đáp án + lý do + lỗi hay gặp + cách tự sửa; kèm đáp án checkpoint |
+| `lessons/M01-research-thinking/source-map.md` | 10 claim → nguồn; nhãn SUPPORTED/INTERPRETATION/SYNTHETIC; cờ spot-check §1.3 ISLBS cho Pass 4 |
+| `lessons/M01-research-thinking/qa/M01-author-selfcheck.md` | 10 kiểm tra đã chạy + 4 self-findings OPEN + giới hạn |
+| `reviews/M01-review-package.md` | Handoff review độc lập: scope, nguồn, 5 lựa chọn sư phạm cần đánh giá, câu hỏi reviewer, bằng chứng đã chạy |
+
+### Kiểm chứng đã chạy
+
+- **Số học `mini_records`:** recompute Python độc lập — khớp 100% (age 46,0; ĐTĐ 3/12=25,0%; SBP 129,75→129,8; ĐTĐ vs không: SBP 149,0/123,3; tuổi 62,7/40,4; BMI 29,4/24,9; sex 50/50).
+- **Nguồn:** ISLBS outline PDF chính thức — xác nhận Ch.1 §1.2/§1.3/§1.6; CC BY-SA 3.0 attribution ghi trong source-map.
+- **Cấu trúc:** đủ 12 mục §6; thuật ngữ khớp glossary §A; link nội bộ hợp lệ.
+- **Decisions:** D-016 (inline dataset), D-017 (thêm `bmi`).
+- **Backlog:** R-04 → DONE (nợ spot-check §1.3); TB-005 → `DRAFT_DONE`.
+
+### Trạng thái cuối
+
+- M01 = `DRAFTING` hoàn tất → chờ `STATISTICAL_QA` (= "DRAFT_READY_FOR_INDEPENDENT_REVIEW" của task).
+- Không chạy: Pass 1/3/4/5, Pass 2 (`NOT_APPLICABLE`), pilot, HUMAN_APPROVAL — đúng ràng buộc.
+
+### Cố ý KHÔNG làm
+
+- Không M02/M03, không dataset DS-A, không `.sav`/`.sps`, không sửa production-plan/Blueprint, không push remote, không tự gán HUMAN_APPROVAL.

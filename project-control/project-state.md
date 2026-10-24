@@ -2,10 +2,10 @@
 
 > Đây là **nguồn thật duy nhất** về trạng thái dự án. Mọi agent tiếp nối phải đọc file này trước khi làm việc. Quy ước trạng thái module theo `WORKFLOW-CONTRACT.md`.
 
-- **Cập nhật lần cuối:** 2026-10-24 (Task 02 — verification & source validation)
-- **Phase hiện tại:** VERIFICATION xong — **`READY_WITH_LIMITATIONS`** (xem `reviews/TASK02-readiness-assessment.md`); chờ owner duyệt báo cáo Task 02 để vào sản xuất M01
-- **Blueprint:** nguyên vẹn — SHA-256 `cdb0b9736d20893a540320b88dc8b849928a2ff3976ecfe8718ccc7fc8066036` (re-verified Task 02)
-- **Git:** branch `master`, 2 commits (`4094497`, `f6d1ff5`) + commit Task 02; clean, không remote
+- **Cập nhật lần cuối:** 2026-10-24 (Task 03 — M01 draft)
+- **Phase hiện tại:** M01 draft hoàn tất → chờ **independent review** (Pass 1/3/4 — xem `reviews/M01-review-package.md`); M02–M12 chưa sản xuất
+- **Blueprint:** nguyên vẹn — SHA-256 `cdb0b9736d20893a540320b88dc8b849928a2ff3976ecfe8718ccc7fc8066036` (re-verified Task 03)
+- **Git:** branch `master`, commits `4094497` → `f6d1ff5` → `26c7f91` (Task 02) → commit Task 03; clean, không remote
 
 ## 1. Trạng thái tổng quan
 
@@ -19,7 +19,7 @@
 | Preflight môi trường | ⏳ Form sẵn sàng, chưa điền | `project-control/MAC-SPSS-PREFLIGHT.md` — cần học viên/owner |
 | Tương thích macOS/SPSS 32 | ⚠️ PARTIALLY_VERIFIED | SPCR liệt kê Sequoia 15.0 + Tahoe 26.0 (qua reproduction); S10a/b xác nhận Apple Silicon + Rosetta 2; cần mở SPCR trình duyệt chốt |
 | Production-plan M01–M03 | ✅ Đã soạn | Chưa được duyệt; 1 amendment đề xuất (D-015) |
-| Nội dung bài học (lesson/workbook/answer-key) | ⛔ Chưa bắt đầu | Cố ý — cần ủy quyền sau review |
+| Nội dung bài học (lesson/workbook/answer-key) | 🟡 M01 draft xong; M02–M12 chưa | Chỉ M01 — chờ independent review trước khi coi là nội dung được chấp nhận |
 | Dataset DS-A/B/C | ⛔ Chưa tạo | Chỉ có README mô tả data contract |
 | Git repository | ✅ Local | Không remote, không push, không đổi global config |
 | Bất kỳ artifact nào mang nhãn VERIFIED | ⛔ Không có | Workspace không có SPSS — mọi thứ mặc định `NOT_RUN` |
@@ -28,7 +28,7 @@
 
 | Module | Trạng thái lifecycle | Vị trí | Ghi chú |
 |---|---|---|---|
-| M01 | `PLANNED` (chưa vào lifecycle — chờ duyệt) | `lessons/M01-research-thinking/production-plan.md` | Pilot |
+| M01 | `DRAFTING` **hoàn tất → chờ `STATISTICAL_QA`** | `lessons/M01-research-thinking/` (lesson, workbook, answer-key, source-map, qa/selfcheck) + `reviews/M01-review-package.md` | Pilot; "DRAFT_READY_FOR_INDEPENDENT_REVIEW" của task = đủ exit criteria DRAFTING |
 | M02 | `PLANNED` (chờ duyệt) | `lessons/M02-spss-mac-foundations/production-plan.md` | Pilot; phụ thuộc U1–U3 (version/macOS/license) |
 | M03 | `PLANNED` (chờ duyệt) | `lessons/M03-data-preparation/production-plan.md` | Pilot; cần dataset giả lập nhỏ |
 | M04–M11 | `NOT_STARTED` | `lessons/M04-*` … `lessons/M11-*` | Chỉ có README giữ chỗ |
@@ -55,7 +55,7 @@
 ## 5. Trạng thái kiểm chứng (kiên quyết không thổi phồng)
 
 - Số artifact gắn `VERIFIED`: **0**
-- Số artifact gắn `NOT_RUN`: toàn bộ artifact thực thi tương lai (hiện chưa có file nào)
-- Số bài học đã soạn: **0** (chỉ có 3 production-plan)
-- Số dataset đã tạo: **0**
-- Số finding QA: **0** (register đã khởi tạo)
+- Số artifact gắn `NOT_RUN`: **0** (M01 không chứa artifact thực thi — phần SPSS `NOT_APPLICABLE`)
+- Số bài học đã soạn: **1 draft** (M01 — chưa qua review độc lập)
+- Số dataset đã tạo: **0** (`mini_records` là bảng inline trong bài, không phải file dataset — D-016)
+- Số finding QA: **4** (trong `qa/M01-author-selfcheck.md` — self-findings, OPEN, chờ reviewer phán xét)

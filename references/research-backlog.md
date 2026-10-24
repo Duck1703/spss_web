@@ -32,7 +32,7 @@
 | R-01 | Mở S01 bằng trình duyệt thật, snapshot mục lục docs SPSS 32; xác định trang tham chiếu menu cho M02–M03 | M02, M03 | `TODO` — chặn bởi portal JS | **Giảm nhờ:** PDF deep links `ibm.com/docs/en/SSLVMB_32.0.0/pdf/…` đã kiểm chứng truy cập được (2026-10-24); chỉ còn cần snapshot mục lục portal |
 | R-02 | Mở S10 bằng trình duyệt; nếu không truy cập được, tìm tài liệu IBM chính thức tương đương về SPSS 32 + Apple Silicon/Rosetta | M02 | `DONE` | URL gốc không mở được → SUPERSEDED; thay bằng S10a (IBM Q&A ARM, VERIFIED) + S10b (blog Rosetta 2, VERIFIED) |
 | R-03 | Từ S02, ghi nhận đúng tên PDF cần: `Core_System_User_Guide`, `Command_Syntax_Reference`, hướng dẫn cài macOS; lưu link (không phân phối lại) | M02, M03 | `DONE` (trang đã xác minh có các mục này) | Link trong register |
-| R-04 | Đọc Ch.1 OpenIntro ISLBS; trích khung "data matrix / types of variables / study design" cho M01 | M01 | `TODO` | Viết lại bằng lời riêng |
+| R-04 | Đọc Ch.1 OpenIntro ISLBS; trích khung "data matrix / types of variables / study design" cho M01 | M01 | `DONE` (TOC/outline chính thức đã kiểm — §1.2, §1.3, §1.6) | Đã dùng cho M01 draft; **còn nợ:** đọc nguyên văn §1.3 để spot-check claim confounding/observational-experimental (source-map C3–C4, giao Pass 4) |
 | R-05 | Đối chiếu cách giải thích CI/p giữa OpenIntro Ch.4 và mục tiêu M05 | M05 | `TODO` | Chuẩn bị cho GATE 2 |
 | R-06 | Đối chiếu menu/syntax M03 (import CSV, MISSING VALUE, VALUE LABELS) với S01 khi R-01 xong | M03 | `TODO` — phụ thuộc R-01 | |
 | R-07 | Xác nhận module SPSS nào chứa: Logistic Regression, ROC, Survival, Complex Samples, Exact Tests — theo tài liệu IBM | M08, M11, E01–E03 | `TODO` | Ảnh hưởng preflight license |
