@@ -7,8 +7,25 @@ export default defineConfig({
       title: 'SPSS Medical Learning Pack',
       defaultLocale: 'root',
       locales: { root: { label: 'Tiếng Việt', lang: 'vi' } },
-      customCss: ['./src/styles/custom.css'],
-      head: [{ tag: 'script', attrs: { src: '/js/progress.js', defer: true } }],
+      logo: { src: './src/assets/logo.svg', alt: 'SPSS MLP' },
+      favicon: '/favicon.svg',
+      customCss: ['./src/styles/tokens.css', './src/styles/custom.css'],
+      components: {
+        PageTitle: './src/components/PageTitle.astro',
+        Pagination: './src/components/Pagination.astro',
+      },
+      head: [
+        { tag: 'script', attrs: { src: '/js/progress.js', defer: true } },
+        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
+        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap',
+          },
+        },
+      ],
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
       sidebar: [
         { label: 'Bắt đầu', items: [

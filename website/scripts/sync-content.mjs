@@ -95,6 +95,14 @@ function syncWorkbook() {
     const mSub = l.match(/^\*\*(BT\d[a-z]?)\./);
     if (mSub) { closeItem(); flushPrompt(); subBase = mSub[1].toLowerCase(); pendingPrompt = subBase; out.push(l); continue; }
     if (/^\*\*Nhiệm vụ/.test(l)) { closeItem(); flushPrompt(); out.push(l); continue; }
+    // BT2: bảng phân loại 12 biến — đổi ô trống "Kiểu của bạn" thành <select> từng dòng.
+    // ID mới bt2-1..bt2-12, lưu cùng schema answers{id:text}; card bt2 gốc vẫn giữ.
+    if (inBT === 'bt2' && /^\| \d+ \|/.test(l) && /\|\s*\|$/.test(l)) {
+      const rowNum = l.match(/^\| (\d+) \|/)[1];
+      const sel = `<select class="bt2-select" data-answer="bt2-${rowNum}" aria-label="Kiểu của biến dòng ${rowNum}"><option value="">— Chọn kiểu —</option><option>định danh</option><option>định tính danh định</option><option>định tính thứ bậc</option><option>định lượng</option></select>`;
+      out.push(l.replace(/\|\s*\|$/, `| ${sel} |`));
+      continue;
+    }
     const mNum = l.match(/^(\d+)\.\s/);
     if (mNum) {
       closeItem();
@@ -134,7 +142,14 @@ function syncAnswers() {
 
 /* ---------- 4. Roadmap (thêm bảng trạng thái generated) ---------- */
 function syncRoadmap() {
-  const md = fixLinks(read('curriculum/roadmap.md'));
+  let md = fixLinks(read('curriculum/roadmap.md'));
+  // Badge trạng thái sau mỗi heading ## Mxx — presentation-only, không đổi nội dung module.
+  md = md.replace(/^## (M\d{2})[^\n]*$/gm, (line, code) => {
+    if (code === 'M01') {
+      return `${line}\n\n<div class="module-status module-status--ready"><span class="ms-badge">Đã có bài học</span><a href="/m01/bai-hoc/">Vào bài học →</a><a href="/m01/bai-tap/">Bài tập</a><a href="/m01/dap-an/">Đáp án</a></div>`;
+    }
+    return `${line}\n\n<div class="module-status"><span class="ms-badge ms-badge--soon">Đang biên soạn</span></div>`;
+  });
   const status = `> 📋 **Trạng thái hiện tại:** chỉ **M01** đã có bài học trên website này. M02–M12 và E01–E03 đang được biên soạn theo kế hoạch — các trang sẽ xuất hiện khi nội dung hoàn thiện và qua review.\n\n`;
   write('lo-trinh.md', `---\ntitle: Lộ trình học — 16 tuần\ndescription: 12 module cốt lõi + 3 chuyên đề mở rộng, từ chưa biết SPSS đến tự phân tích nghiên cứu y khoa.\n---\n\n${BANNER}${status}${md}`);
 }

@@ -1,5 +1,6 @@
 /* progress.js — tiến độ học tập localStorage (MVP, không backend).
  * Key: 'spss-mlp-progress-v1' = { lastPage, done: {id:true}, answers: {id:text} }
+ * Schema giữ nguyên tương thích ngược — chỉ mở rộng cách hiển thị.
  */
 (function () {
   var KEY = 'spss-mlp-progress-v1';
@@ -16,49 +17,85 @@
     save(state);
   }
 
+  var BT_TOTAL = 16; // số câu hỏi có id bt* trong workbook M01
+
+  function setStatus(el, mode) {
+    if (!el) return;
+    el.dataset.state = mode;
+    el.textContent = mode === 'done' ? '✓ Đã làm' : mode === 'draft' ? 'Đang soạn' : 'Chưa làm';
+  }
+
   function paint() {
     // nút continue-learning trên homepage
     document.querySelectorAll('[data-continue]').forEach(function (b) {
       if (state.lastPage) { b.hidden = false; b.setAttribute('href', state.lastPage); }
     });
-    // exercise textareas + done states
+    // exercise inputs (textarea + select) + done states
     document.querySelectorAll('[data-answer]').forEach(function (t) {
       var id = t.getAttribute('data-answer');
-      if (state.answers[id]) t.value = state.answers[id];
-      var status = t.closest('.exercise-card').querySelector('[data-status]');
-      if (state.done[id]) status.textContent = '✓ đã làm';
-      else if (state.answers[id] && state.answers[id].trim()) status.textContent = 'đang soạn';
+      var hasText = !!(state.answers[id] && String(state.answers[id]).trim());
+      if (state.answers[id] !== undefined) t.value = state.answers[id];
+      var card = t.closest('.exercise-card');
+      if (card) setStatus(card.querySelector('[data-status]'), state.done[id] ? 'done' : hasText ? 'draft' : 'empty');
+      if (t.tagName === 'SELECT') t.classList.toggle('is-answered', hasText);
     });
     document.querySelectorAll('[data-done]').forEach(function (b) {
       var id = b.getAttribute('data-done');
-      if (state.done[id]) { b.textContent = '✓ Đã làm'; b.classList.add('is-done'); }
+      b.classList.toggle('is-done', !!state.done[id]);
+      b.textContent = state.done[id] ? '✓ Đã làm' : 'Đánh dấu đã làm';
     });
     // module done
     document.querySelectorAll('[data-module-done]').forEach(function (b) {
       var id = b.getAttribute('data-module-done');
-      if (state.done['module:' + id]) { b.textContent = '✓ Đã hoàn thành module'; b.classList.add('is-done'); }
+      b.classList.toggle('is-done', !!state.done['module:' + id]);
+      b.textContent = state.done['module:' + id] ? '✓ Đã hoàn thành module' : b.dataset.label || 'Đánh dấu đã học xong M01';
     });
-    // roadmap badges
+    // roadmap / homepage badges
     document.querySelectorAll('[data-module-badge]').forEach(function (el) {
       var id = el.getAttribute('data-module-badge');
-      el.textContent = state.done['module:' + id] ? '✓ Đã học' : '';
+      var done = !!state.done['module:' + id];
+      el.textContent = done ? '✓ Đã học xong' : '';
+      if (el.classList.contains('pill')) el.classList.toggle('pill--ready', done);
     });
-    // progress summary
+    // progress summary (homepage panel)
+    var nDone = Object.keys(state.done).filter(function (k) { return k.indexOf('bt') === 0; }).length;
+    var nDraft = Object.keys(state.answers).filter(function (k) {
+      return k.indexOf('bt') === 0 && !state.done[k] && String(state.answers[k]).trim();
+    }).length;
     document.querySelectorAll('[data-progress-count]').forEach(function (el) {
-      var n = Object.keys(state.done).filter(function (k) { return k.indexOf('bt') === 0; }).length;
-      el.textContent = n + ' bài tập đã đánh dấu';
+      if (!nDone && !nDraft) { el.textContent = 'Chưa có dữ liệu — bắt đầu từ M01'; return; }
+      var txt = nDone + '/' + BT_TOTAL + ' bài tập đã đánh dấu';
+      if (nDraft) txt += ' · ' + nDraft + ' đang soạn';
+      if (state.done['module:m01']) txt += ' · M01 hoàn thành';
+      el.textContent = txt;
+    });
+    document.querySelectorAll('[data-progress-fill]').forEach(function (el) {
+      el.style.width = Math.round((nDone / BT_TOTAL) * 100) + '%';
     });
   }
 
-  // autosave answers (delegated)
+  var saveTimer = null;
+  function flashSaved(card) {
+    var el = card && card.querySelector('[data-saved]');
+    if (!el) return;
+    el.classList.add('is-visible');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { el.classList.remove('is-visible'); }, 1600);
+  }
+
+  // autosave answers (delegated) — hoạt động cho cả textarea và select
   document.addEventListener('input', function (e) {
     var t = e.target;
     if (t.matches && t.matches('[data-answer]')) {
-      state.answers[t.getAttribute('data-answer')] = t.value;
+      var id = t.getAttribute('data-answer');
+      state.answers[id] = t.value;
       save(state);
-      var status = t.closest('.exercise-card').querySelector('[data-status]');
-      if (!state.done[t.getAttribute('data-answer')])
-        status.textContent = t.value.trim() ? 'đang soạn' : '—';
+      var card = t.closest('.exercise-card');
+      if (card) {
+        if (!state.done[id]) setStatus(card.querySelector('[data-status]'), t.value.trim() ? 'draft' : 'empty');
+        flashSaved(card);
+      }
+      if (t.tagName === 'SELECT') t.classList.toggle('is-answered', !!String(t.value).trim());
     }
   });
   document.addEventListener('click', function (e) {

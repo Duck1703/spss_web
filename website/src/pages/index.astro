@@ -1,5 +1,7 @@
 ---
-// Landing page tùy chỉnh — không dùng Starlight template để có hero + progress.
+// Landing page — không dùng Starlight template (cần hero + progress UI tùy ý).
+import '../styles/tokens.css';
+
 const modules = [
   { id: 'm01', code: 'M01', title: 'Tư duy nghiên cứu y khoa & ngôn ngữ thống kê', week: 'Tuần 1', available: true },
   { code: 'M02', title: 'SPSS trên MacBook', week: 'Tuần 2' },
@@ -19,6 +21,19 @@ const extensions = [
   { code: 'E02', title: 'Kaplan–Meier, log-rank, Cox' },
   { code: 'E03', title: 'Missing data, complex survey, multiple testing' },
 ];
+const outcomes = [
+  'Viết câu hỏi nghiên cứu và xây codebook cho bộ dữ liệu của mình.',
+  'Nhập, làm sạch dữ liệu trên SPSS — giữ file gốc bất biến, có cleaning log.',
+  'Chọn đúng phép phân tích từ câu hỏi + kiểu dữ liệu, và giải thích được vì sao.',
+  'Đọc output, diễn giải kết quả đúng giới hạn — không nhầm liên quan với nhân quả.',
+  'Viết đoạn Methods/Results có trách nhiệm cho một mini-project.',
+];
+const howTo = [
+  { title: 'Học theo thứ tự module', text: 'Bài sau dùng lại khái niệm bài trước — đừng nhảy cóc.' },
+  { title: 'Tự nhắc lại trước khi xem checkpoint', text: 'Đọc xong một phần, nói lại bằng lời mình.' },
+  { title: 'Làm bài tập trước, xem đáp án sau', text: 'Lỗi sai là nơi học nhiều nhất.' },
+  { title: 'Mọi dữ liệu đều giả lập', text: 'Mục đích luyện tư duy, không phải bằng chứng lâm sàng.' },
+];
 ---
 <!doctype html>
 <html lang="vi">
@@ -27,104 +42,389 @@ const extensions = [
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SPSS Medical Learning Pack — Học thống kê y khoa bằng tiếng Việt</title>
   <meta name="description" content="Khóa tự học SPSS và thống kê y khoa cho người chưa có nền tảng — tiếng Việt, từng bước, trên MacBook." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <script is:inline>
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem('starlight-theme'); } catch (e) {}
+      var theme = stored === 'light' || stored === 'dark'
+        ? stored
+        : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.dataset.theme = theme;
+      window.__slpThemeMode = stored === 'light' || stored === 'dark' ? stored : 'auto';
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" />
   <style>
-    :root { --accent:#2563eb; --bg:#f8fafc; --card:#fff; --line:#e2e8f0; --text:#0f172a; --muted:#64748b; }
     * { box-sizing: border-box; }
-    body { margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
-    .wrap { max-width:960px; margin:0 auto; padding:0 20px 64px; }
-    header.hero { padding:56px 0 32px; }
-    .kicker { color:var(--accent); font-weight:600; font-size:.9rem; letter-spacing:.05em; text-transform:uppercase; }
-    h1 { font-size:2.1rem; line-height:1.25; margin:.4em 0; }
-    .lead { font-size:1.1rem; color:var(--muted); max-width:56ch; }
-    .cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
-    .btn { display:inline-block; padding:12px 22px; border-radius:10px; font-weight:600; text-decoration:none; border:1px solid var(--line); background:var(--card); color:var(--text); }
-    .btn-primary { background:var(--accent); border-color:var(--accent); color:#fff; }
-    section { margin-top:40px; }
-    h2 { font-size:1.4rem; }
-    .cards { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
-    .card .code { font-weight:700; color:var(--accent); }
-    .card .week { font-size:.8rem; color:var(--muted); }
-    .card.available { border-color:var(--accent); }
-    .badge { font-size:.75rem; font-weight:600; padding:2px 8px; border-radius:999px; }
-    .badge-ok { background:#dcfce7; color:#166534; }
-    .badge-soon { background:#f1f5f9; color:var(--muted); }
-    ul.tips { padding-left:1.2em; }
-    .note { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:12px 16px; font-size:.95rem; }
-    footer { margin-top:48px; color:var(--muted); font-size:.85rem; }
-    @media (prefers-color-scheme:dark) {
-      :root { --bg:#0b1220; --card:#111827; --line:#1f2937; --text:#e5e7eb; --muted:#9ca3af; }
-      .note { background:#1c1917; border-color:#78350f; }
-      .badge-ok { background:#14532d; color:#bbf7d0; }
-      .badge-soon { background:#1f2937; }
+    body {
+      margin: 0;
+      font-family: var(--slp-font-body);
+      background: var(--slp-bg);
+      color: var(--slp-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--slp-accent-strong); }
+    ::selection { background: var(--slp-accent-soft-2); }
+    :focus-visible { outline: 2px solid var(--slp-accent); outline-offset: 2px; }
+
+    .wrap { max-width: var(--slp-wide-width); margin: 0 auto; padding: 0 24px; }
+
+    /* Top nav */
+    .topnav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--slp-bg) 82%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--slp-border);
+    }
+    .topnav__inner { display: flex; align-items: center; gap: 16px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--slp-text); font-weight: 700; letter-spacing: -0.01em; }
+    .brand svg { border-radius: 7px; display: block; }
+    .topnav__links { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+    .topnav__links a {
+      text-decoration: none; color: var(--slp-text-2); font-size: var(--slp-text-small);
+      font-weight: 500; padding: 8px 12px; border-radius: var(--slp-radius-md);
+      transition: background var(--slp-motion-fast) var(--slp-ease), color var(--slp-motion-fast) var(--slp-ease);
+    }
+    .topnav__links a:hover { background: var(--slp-surface-2); color: var(--slp-text); }
+    .theme-toggle {
+      font: inherit; cursor: pointer; border: 1px solid var(--slp-border);
+      background: var(--slp-surface); color: var(--slp-text-2);
+      width: 36px; height: 36px; border-radius: var(--slp-radius-full);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: border-color var(--slp-motion-fast) var(--slp-ease), color var(--slp-motion-fast) var(--slp-ease);
+    }
+    .theme-toggle:hover { border-color: var(--slp-accent); color: var(--slp-accent-strong); }
+    .theme-toggle .icon-sun { display: none; }
+    [data-theme='dark'] .theme-toggle .icon-sun { display: block; }
+    [data-theme='dark'] .theme-toggle .icon-moon { display: none; }
+
+    /* Hero */
+    .hero { padding: var(--slp-space-12) 0 var(--slp-space-10); max-width: 56rem; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: var(--slp-text-caption); font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--slp-accent-strong);
+      background: var(--slp-accent-soft); border-radius: var(--slp-radius-full);
+      padding: 6px 14px;
+    }
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 3.1rem); line-height: 1.2; letter-spacing: -0.02em;
+      font-weight: 700; margin: 20px 0 0; max-width: 20ch;
+    }
+    .lead { font-size: 1.15rem; color: var(--slp-text-2); max-width: 56ch; margin: 18px 0 0; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 24px; border-radius: var(--slp-radius-full);
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      border: 1px solid var(--slp-border); background: var(--slp-surface); color: var(--slp-text);
+      transition: border-color var(--slp-motion-fast) var(--slp-ease),
+        box-shadow var(--slp-motion-fast) var(--slp-ease),
+        transform var(--slp-motion-fast) var(--slp-ease);
+    }
+    .btn:hover { border-color: var(--slp-border-strong); box-shadow: var(--slp-shadow-md); transform: translateY(-1px); }
+    .btn-primary { background: var(--slp-accent); border-color: var(--slp-accent); color: var(--slp-on-accent); }
+    .btn-primary:hover { border-color: var(--slp-accent-strong); box-shadow: var(--slp-shadow-md); }
+    .btn-accent-ghost { border-color: var(--slp-accent); color: var(--slp-accent-strong); background: transparent; }
+    .btn-accent-ghost:hover { background: var(--slp-accent-soft); }
+    .btn-small { padding: 8px 16px; font-size: var(--slp-text-small); }
+    .hero__meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--slp-border); }
+    .hero__meta div { font-size: var(--slp-text-small); color: var(--slp-muted); }
+    .hero__meta strong { display: block; font-size: 1.05rem; color: var(--slp-text); font-weight: 700; }
+
+    /* Sections */
+    section { margin-top: var(--slp-space-12); }
+    .section-head { max-width: 44rem; margin-bottom: var(--slp-space-6); }
+    .section-head .eyebrow { font-size: var(--slp-text-caption); font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--slp-accent-strong); }
+    .section-head h2 { font-size: var(--slp-text-h2); font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; margin: 8px 0 0; }
+    .section-head p { color: var(--slp-text-2); margin: 12px 0 0; }
+
+    /* Progress panel */
+    .progress-panel {
+      background: var(--slp-surface); border: 1px solid var(--slp-border);
+      border-radius: var(--slp-radius-xl); padding: var(--slp-space-5) var(--slp-space-6);
+      box-shadow: var(--slp-shadow-md);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .progress-panel__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .progress-panel__title { font-weight: 700; font-size: 1.05rem; }
+    .progress-panel__count { font-size: var(--slp-text-small); color: var(--slp-text-2); }
+    .progress-bar { height: 8px; border-radius: var(--slp-radius-full); background: var(--slp-surface-2); overflow: hidden; }
+    .progress-bar__fill { height: 100%; width: 0%; border-radius: inherit; background: var(--slp-accent); transition: width 400ms var(--slp-ease); }
+    .progress-panel__actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .progress-panel__note { font-size: var(--slp-text-small); color: var(--slp-muted); margin: 0; }
+
+    /* Cards */
+    .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .cards--compact { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+    .card {
+      background: var(--slp-surface); border: 1px solid var(--slp-border);
+      border-radius: var(--slp-radius-lg); padding: 18px 20px;
+      display: flex; flex-direction: column; gap: 8px;
+      box-shadow: var(--slp-shadow-sm);
+    }
+    .card__top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .card__code { font-family: var(--slp-font-mono); font-size: var(--slp-text-caption); font-weight: 700; letter-spacing: 0.06em; color: var(--slp-accent-strong); }
+    .card__week { font-size: var(--slp-text-caption); color: var(--slp-muted); }
+    .card__title { font-weight: 600; font-size: 0.98rem; line-height: 1.45; }
+    .card__title a { color: inherit; text-decoration: none; }
+    .card__title a:hover { color: var(--slp-accent-strong); }
+    .card--muted { background: var(--slp-surface); }
+    .card--muted .card__code { color: var(--slp-muted); }
+    .card--muted .card__title { color: var(--slp-text-2); }
+
+    .pill {
+      align-self: flex-start;
+      font-size: var(--slp-text-caption); font-weight: 600; letter-spacing: 0.05em;
+      padding: 4px 12px; border-radius: var(--slp-radius-full);
+      background: var(--slp-surface-2); color: var(--slp-muted); border: 1px solid var(--slp-border);
+    }
+    .pill--ready { background: var(--slp-success-soft); color: var(--slp-success-strong); border-color: transparent; }
+
+    /* Featured module */
+    .module-feature {
+      grid-column: 1 / -1;
+      background: var(--slp-surface);
+      border: 1px solid var(--slp-accent);
+      border-radius: var(--slp-radius-xl);
+      padding: var(--slp-space-6) var(--slp-space-6);
+      display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+      box-shadow: var(--slp-shadow-md);
+      position: relative; overflow: hidden;
+    }
+    .module-feature::before {
+      content: ''; position: absolute; inset: 0 auto 0 0; width: 5px;
+      background: var(--slp-accent);
+    }
+    .module-feature .card__code { font-size: var(--slp-text-small); }
+    .module-feature h3 { font-size: var(--slp-text-h3); font-weight: 700; letter-spacing: -0.01em; margin: 6px 0 0; line-height: 1.3; }
+    .module-feature p { color: var(--slp-text-2); font-size: 0.95rem; margin: 10px 0 0; max-width: 52ch; }
+    .module-feature__badges { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
+    .module-feature__actions { display: flex; flex-direction: column; gap: 10px; }
+    @media (max-width: 48rem) {
+      .module-feature { grid-template-columns: 1fr; }
+      .module-feature__actions { flex-direction: row; flex-wrap: wrap; }
+    }
+
+    /* Outcomes */
+    .outcomes { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+    .outcome {
+      display: flex; gap: 14px; padding: 18px 20px;
+      background: var(--slp-surface); border: 1px solid var(--slp-border);
+      border-radius: var(--slp-radius-lg); box-shadow: var(--slp-shadow-sm);
+    }
+    .outcome__num {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: var(--slp-radius-full);
+      background: var(--slp-accent-soft); color: var(--slp-accent-strong);
+      font-size: var(--slp-text-small); font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .outcome p { margin: 0; font-size: 0.95rem; color: var(--slp-text-2); }
+
+    /* How to study */
+    .steps { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); counter-reset: step; }
+    .step {
+      padding: 18px 20px; border-radius: var(--slp-radius-lg);
+      background: var(--slp-bg-soft); border: 1px solid var(--slp-border);
+    }
+    .step::before {
+      counter-increment: step; content: counter(step, decimal-leading-zero);
+      font-family: var(--slp-font-mono); font-size: var(--slp-text-caption);
+      font-weight: 700; color: var(--slp-accent-strong); letter-spacing: 0.08em;
+    }
+    .step strong { display: block; margin-top: 10px; font-size: 0.98rem; }
+    .step span { display: block; margin-top: 4px; font-size: var(--slp-text-small); color: var(--slp-text-2); }
+
+    footer.site-footer {
+      margin-top: var(--slp-space-12);
+      padding: var(--slp-space-6) 0;
+      border-top: 1px solid var(--slp-border);
+      color: var(--slp-muted); font-size: var(--slp-text-small);
+    }
+
+    @media (max-width: 48rem) {
+      .hero { padding: var(--slp-space-8) 0 var(--slp-space-8); }
+      section { margin-top: var(--slp-space-8); }
+      .topnav__links a { padding: 8px 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
     }
   </style>
 </head>
 <body>
+  <nav class="topnav">
+    <div class="wrap topnav__inner">
+      <a class="brand" href="/">
+        <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#4F46E5"/>
+          <rect x="7.5" y="18.5" width="4" height="7" rx="1.4" fill="#fff" opacity="0.85"/>
+          <rect x="14" y="13.5" width="4" height="12" rx="1.4" fill="#fff" opacity="0.92"/>
+          <rect x="20.5" y="8.5" width="4" height="17" rx="1.4" fill="#fff"/>
+        </svg>
+        <span>SPSS Medical Learning Pack</span>
+      </a>
+      <div class="topnav__links">
+        <a href="/lo-trinh/">Lộ trình</a>
+        <a href="/tai-lieu/thuat-ngu/">Tài liệu</a>
+        <button class="theme-toggle" type="button" aria-label="Chuyển giao diện sáng/tối" data-theme-toggle>
+          <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+          <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.4" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
   <div class="wrap">
     <header class="hero">
-      <div class="kicker">SPSS Medical Learning Pack</div>
+      <span class="kicker">Khóa tự học · 16 tuần</span>
       <h1>Học thống kê y khoa và SPSS — bằng tiếng Việt, từng bước một.</h1>
-      <p class="lead">Khóa tự học dành cho người <strong>chưa từng dùng SPSS</strong> và <strong>gần như chưa học thống kê</strong>, muốn làm nghiên cứu y khoa. Bạn sẽ hiểu tư duy trước, rồi mới bấm phần mềm — trên MacBook, 16 tuần.</p>
+      <p class="lead">
+        Dành cho người <strong>chưa từng dùng SPSS</strong> và <strong>gần như chưa học thống kê</strong>
+        mà muốn làm nghiên cứu y khoa. Bạn sẽ hiểu tư duy trước, rồi mới bấm phần mềm —
+        trên MacBook, theo lộ trình 16 tuần.
+      </p>
       <div class="cta">
         <a class="btn btn-primary" href="/m01/bai-hoc/">Bắt đầu học — M01</a>
-        <a class="btn" data-continue hidden href="#">▶ Tiếp tục học</a>
-        <a class="btn" href="/lo-trinh/">Xem lộ trình đầy đủ</a>
+        <a class="btn btn-accent-ghost" data-continue hidden href="#">Tiếp tục học →</a>
+        <a class="btn" href="/lo-trinh/">Xem lộ trình</a>
       </div>
-      <p class="note" style="margin-top:20px">💾 Tiến độ được lưu trên <strong>trình duyệt này</strong> — có thể mất khi xóa dữ liệu trình duyệt và không tự đồng bộ sang thiết bị khác. <span data-progress-count></span>
-        <button class="btn" style="padding:4px 10px;font-size:.8rem" onclick="slpExport()">⬇ Xuất tiến độ (JSON)</button>
-        <label class="btn" style="padding:4px 10px;font-size:.8rem">⬆ Nhập tiến độ<input type="file" accept=".json" hidden onchange="slpImport(this.files[0])"></label>
-      </p>
+      <div class="hero__meta">
+        <div><strong>12 + 3</strong>module cốt lõi &amp; chuyên đề</div>
+        <div><strong>16 tuần</strong>4–6 giờ mỗi tuần</div>
+        <div><strong>100% tiếng Việt</strong>không cần tài khoản</div>
+      </div>
     </header>
 
-    <section>
-      <h2>Khóa học này dành cho ai?</h2>
-      <p>Người làm y tế/sinh viên/mọi người muốn tự phân tích dữ liệu nghiên cứu y khoa bằng SPSS — <em>không cần</em> nền thống kê, không cần biết lập trình.</p>
-      <h2>Sau khóa học bạn làm được gì?</h2>
-      <ul class="tips">
-        <li>Viết câu hỏi nghiên cứu và xây codebook cho bộ dữ liệu của mình.</li>
-        <li>Nhập, làm sạch dữ liệu trên SPSS (giữ file gốc bất biến, có cleaning log).</li>
-        <li>Chọn đúng phép phân tích từ câu hỏi + kiểu dữ liệu — và <em>giải thích được vì sao</em>.</li>
-        <li>Đọc output, diễn giải kết quả đúng giới hạn (không nhầm liên quan với nhân quả).</li>
-        <li>Viết đoạn Methods/Results có trách nhiệm cho một mini-project.</li>
-      </ul>
+    <section aria-label="Tiến độ">
+      <div class="progress-panel">
+        <div class="progress-panel__row">
+          <span class="progress-panel__title">Tiến độ của bạn</span>
+          <span class="progress-panel__count" data-progress-count>Chưa có dữ liệu</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-label="Tiến độ bài tập" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar__fill" data-progress-fill></div>
+        </div>
+        <div class="progress-panel__actions">
+          <button class="btn btn-small" type="button" onclick="slpExport()">Xuất tiến độ (JSON)</button>
+          <label class="btn btn-small">Nhập tiến độ
+            <input type="file" accept=".json" hidden onchange="slpImport(this.files[0])" />
+          </label>
+        </div>
+        <p class="progress-panel__note">
+          Tiến độ lưu trên <strong>trình duyệt này</strong> — có thể mất khi xóa dữ liệu trình duyệt
+          và không tự đồng bộ sang thiết bị khác.
+        </p>
+      </div>
     </section>
 
     <section>
-      <h2>Lộ trình 12 module</h2>
+      <div class="section-head">
+        <span class="eyebrow">Kết quả học tập</span>
+        <h2>Sau khóa học bạn làm được gì?</h2>
+        <p>Dành cho người làm y tế, sinh viên — muốn tự phân tích dữ liệu nghiên cứu, <em>không cần</em> nền thống kê hay lập trình.</p>
+      </div>
+      <div class="outcomes">
+        {outcomes.map((o, i) => (
+          <div class="outcome"><span class="outcome__num">{i + 1}</span><p>{o}</p></div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <span class="eyebrow">Chương trình học</span>
+        <h2>Lộ trình 12 module</h2>
+        <p>M01 đã mở — các module còn lại đang được biên soạn và sẽ mở khi qua review.</p>
+      </div>
       <div class="cards">
-        {modules.map(m => (
-          <div class:list={['card', { available: m.available }]}>
-            <div><span class="code">{m.code}</span> <span class="week">{m.week}</span></div>
-            <div>{m.available ? <a href="/m01/bai-hoc/">{m.title}</a> : m.title}</div>
-            {m.available
-              ? <span class="badge badge-ok">Có bài học <span data-module-badge={m.id}></span></span>
-              : <span class="badge badge-soon">Đang biên soạn</span>}
+        <div class="module-feature">
+          <div>
+            <span class="card__code">M01 · Tuần 1</span>
+            <h3>Tư duy nghiên cứu y khoa &amp; ngôn ngữ thống kê</h3>
+            <p>
+              Module nền tảng: viết câu hỏi nghiên cứu, phân loại biến, phân biệt quần thể–mẫu,
+              và hiểu vì sao liên quan không đồng nghĩa nhân quả — trước khi chạm vào SPSS.
+            </p>
+            <div class="module-feature__badges">
+              <span class="pill pill--ready">Đã có bài học</span>
+              <span class="pill" data-module-badge="m01"></span>
+            </div>
+          </div>
+          <div class="module-feature__actions">
+            <a class="btn btn-primary" href="/m01/bai-hoc/">Vào bài học</a>
+            <a class="btn" href="/m01/bai-tap/">Bài tập M01</a>
+          </div>
+        </div>
+      </div>
+      <div class="cards cards--compact" style="margin-top:16px">
+        {modules.slice(1).map((m) => (
+          <div class="card card--muted">
+            <div class="card__top">
+              <span class="card__code">{m.code}</span>
+              <span class="card__week">{m.week}</span>
+            </div>
+            <span class="card__title">{m.title}</span>
+            <span class="pill">Đang biên soạn</span>
           </div>
         ))}
       </div>
-      <h2 style="margin-top:24px">Chuyên đề mở rộng (sau core)</h2>
-      <div class="cards">
-        {extensions.map(e => (
-          <div class="card"><div><span class="code">{e.code}</span></div><div>{e.title}</div><span class="badge badge-soon">Đang biên soạn</span></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <span class="eyebrow">Chuyên đề mở rộng</span>
+        <h2>Cho sau khi xong phần core</h2>
+      </div>
+      <div class="cards cards--compact">
+        {extensions.map((e) => (
+          <div class="card card--muted">
+            <div class="card__top"><span class="card__code">{e.code}</span></div>
+            <span class="card__title">{e.title}</span>
+            <span class="pill">Đang biên soạn</span>
+          </div>
         ))}
       </div>
     </section>
 
     <section>
-      <h2>Cách học hiệu quả</h2>
-      <ul class="tips">
-        <li>Học theo thứ tự module — bài sau dùng lại khái niệm bài trước.</li>
-        <li>Đọc xong một phần, tự nhắc lại bằng lời mình trước khi xem checkpoint.</li>
-        <li>Làm bài tập <em>trước</em>, xem đáp án <em>sau</em> — lỗi sai là nơi học nhiều nhất.</li>
-        <li>Dữ liệu trong khóa đều là <strong>giả lập</strong> — mục đích luyện tư duy, không phải bằng chứng lâm sàng.</li>
-      </ul>
+      <div class="section-head">
+        <span class="eyebrow">Cách học hiệu quả</span>
+        <h2>Bốn nguyên tắc khi tự học</h2>
+      </div>
+      <div class="steps">
+        {howTo.map((s) => (
+          <div class="step"><strong>{s.title}</strong><span>{s.text}</span></div>
+        ))}
+      </div>
     </section>
 
-    <footer>
-      SPSS Medical Learning Pack v1 · Website tự học build từ giáo trình Markdown canonical · Chỉ mới có M01, các module khác đang biên soạn.
+    <footer class="site-footer">
+      SPSS Medical Learning Pack v1 · Website tự học build từ giáo trình Markdown canonical ·
+      M01 đã mở, các module khác đang biên soạn.
     </footer>
   </div>
+
   <script src="/js/progress.js" defer></script>
+  <script is:inline>
+    (function () {
+      var btn = document.querySelector('[data-theme-toggle]');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('starlight-theme', next); } catch (e) {}
+      });
+    })();
+  </script>
 </body>
 </html>

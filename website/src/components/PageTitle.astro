@@ -1,0 +1,40 @@
+---
+const { entry, id } = Astro.locals.starlightRoute;
+const { title, description } = entry.data;
+const slug = id ?? '';
+const [section, page] = slug.split('/');
+
+const kindLabels: Record<string, string> = {
+  'bai-hoc': 'Bài học',
+  'bai-tap': 'Bài tập',
+  'dap-an': 'Đáp án',
+};
+
+const crumbs: { label: string; module?: boolean }[] = [];
+if (/^m\d{2}$/.test(section)) {
+  crumbs.push({ label: section.toUpperCase(), module: true });
+  crumbs.push({ label: kindLabels[page] ?? 'Bài học' });
+} else if (slug === 'lo-trinh') {
+  crumbs.push({ label: 'Lộ trình' });
+} else if (section === 'tai-lieu') {
+  crumbs.push({ label: 'Tài liệu' });
+}
+---
+
+<header class="page-title">
+  {
+    crumbs.length > 0 && (
+      <nav class="page-title__crumbs" aria-label="Phân loại trang">
+        <span>SPSS MLP</span>
+        {crumbs.map((c) => (
+          <>
+            <span class="crumb-sep" aria-hidden="true">/</span>
+            <span class:list={[{ 'crumb-module': c.module }]}>{c.label}</span>
+          </>
+        ))}
+      </nav>
+    )
+  }
+  <h1 id="_top">{title}</h1>
+  {description && <p class="page-title__desc">{description}</p>}
+</header>

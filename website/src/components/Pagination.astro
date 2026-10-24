@@ -1,0 +1,42 @@
+---
+const { dir, pagination } = Astro.locals.starlightRoute;
+const { prev, next } = pagination;
+const t = Astro.locals.t;
+---
+
+<div class="slp-pagination print:hidden" dir={dir}>
+  {
+    prev ? (
+      <a href={prev.href} rel="prev">
+        <span class="pg-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12.5 4.5 7 10l5.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span>
+          <span class="pg-label">{t('page.previousLink')}</span>
+          <span class="pg-title">{prev.label}</span>
+        </span>
+      </a>
+    ) : (
+      <span class="pg-empty" aria-hidden="true" />
+    )
+  }
+  {
+    next ? (
+      <a href={next.href} rel="next">
+        <span class="pg-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 4.5 13 10l-5.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span>
+          <span class="pg-label">{t('page.nextLink')}</span>
+          <span class="pg-title">{next.label}</span>
+        </span>
+      </a>
+    ) : (
+      <span class="pg-empty" aria-hidden="true" />
+    )
+  }
+</div>
