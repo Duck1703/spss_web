@@ -48,3 +48,33 @@
 | Đếm module | `ls -d lessons/M??-*` / `extensions/E??-*` | PASS — 12 + 3 |
 | Liên kết tương đối hỏng | Script kiểm tra mọi `](path)` nội bộ trong .md | PASS — 0 link hỏng |
 | Nhãn VERIFIED sai | `grep -rn VERIFIED` toàn repo | PASS — chỉ `VERIFIED_SOURCE` ở source-register (đã fetch thật) và từ vựng trạng thái; 0 artifact runtime được gắn VERIFIED |
+
+## 2026-10-24 — Task 02: Verification & Academic Source Validation (agent Devin)
+
+### Workspace rule precheck
+
+- Phân tích injected rules `D:\SpeakMinto` (repo-scoped) + `global_rules.md` (spendwise): **không có rule ưu tiên cao hơn owner cấm `D:\spss`** → PROCEED (D-011). Không đọc/ghi file project khác.
+
+### Đã làm
+
+| Phase | Việc | Kết quả |
+|---|---|---|
+| A1 | Filesystem audit | Root/Blueprint hash/53 file/38 dir/0 untracked/0 ignored-thật/0 symlink/không root lồng — đều khớp baseline |
+| A2 | Git read-only audit | master, 2 commits baseline, clean, không remote, không secrets tracked |
+| A3 | Content reverification vs Blueprint | Không BLOCKER/MAJOR; 3 MINOR (T1-F1 typo "thiếtế"→đã sửa; T1-F2 M02 plan không nhất quán→amendment D-015; T1-F3 S03 tác giả→đã sửa) + 4 NOTE → `reviews/TASK01-evidence-reverification.md` |
+| B | Source validation 5-field | `references/source-validation-report.md`; cập nhật `source-register.md` (10 VERIFIED + 2 PENDING + 1 SUPERSEDED); `research-backlog.md` (R-02/R-09 DONE, R-08 PARTIALLY, typo sửa) |
+| B-alt | Đường truy cập thay thế IBM | S01: PDF deep link `SSLVMB_32.0.0/pdf/…` trả PDF thật (install macOS + Command Syntax Reference); S10 → S10a (Q&A ARM, VERIFIED) + S10b (blog Rosetta 2, VERIFIED); S11 SPCR tìm được (JS-gated, dữ kiện macOS qua vendor reproduction) |
+| C | Tương thích Mac/SPSS 32 | `project-control/MAC-SPSS-PREFLIGHT.md`; phân loại phụ thuộc: M01 không cần SPSS; M02/M03 runtime chặn tới khi preflight + SPCR chốt |
+| D | Readiness assessment | `reviews/TASK02-readiness-assessment.md` — verdict `READY_WITH_LIMITATIONS` |
+| — | Control files | decisions +D-011…D-015; project-state cập nhật Task 02; task-backlog TB-001…TB-004 điều chỉnh |
+
+### Bị chặn / chưa thể làm
+
+- SPCR + portal S01 yêu cầu JS → mở bằng trình duyệt thật (TB-003/TB-004).
+- Phiếu preflight chưa có dữ liệu học viên (TB-002).
+- Không chạy được Pass 2 trong workspace (không SPSS/macOS).
+
+### Cố ý KHÔNG làm (STOP condition Task 02)
+
+- Không viết/sửa nội dung bài học, production-plan (trừ amendment đề xuất ghi log), dataset, exercises/solutions.
+- Không sửa Blueprint, không đổi scope curriculum, không push remote.

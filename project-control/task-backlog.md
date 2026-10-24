@@ -1,6 +1,6 @@
 # Task Backlog — Hàng chờ công việc có ưu tiên
 
-- **Cập nhật:** 2026-10-24
+- **Cập nhật:** 2026-10-24 (Task 02)
 - **Quy ước ưu tiên:** P0 = chặn mọi việc khác · P1 = cần cho pilot · P2 = cần cho giai đoạn sau · P3 = cải tiến
 - **Quy tắc:** không hạng mục nào được tự ý vượt cổng `HUMAN_APPROVAL` (xem `WORKFLOW-CONTRACT.md`).
 
@@ -8,15 +8,15 @@
 
 | ID | Việc | Phụ thuộc | Tiêu chí chấp nhận | Trạng thái |
 |---|---|---|---|---|
-| TB-001 | Con người review báo cáo setup Task 01 và cấp ủy quyền sản xuất | — | Quyết định ghi vào `decisions.md`; phạm vi được phép nêu rõ (chỉ M01 hay cả M01–M03) | `OPEN` — chờ chủ dự án |
+| TB-001 | Con người review báo cáo Task 01 + **Task 02** và cấp ủy quyền sản xuất | — | Quyết định ghi vào `decisions.md`; phạm vi được phép nêu rõ (đề xuất: M01, có thể kèm phần không-runtime của M03) | `OPEN` — chờ chủ dự án |
 
 ## P1 — Phục vụ pilot M01–M03 (chạy sau TB-001)
 
 | ID | Việc | Phụ thuộc | Tiêu chí chấp nhận | Trạng thái |
 |---|---|---|---|---|
-| TB-002 | Thu thập preflight máy người học: chip, macOS, version SPSS, license, modules | Người dùng chạy checklist `START-HERE-MAC.md` | Bản ghi preflight lưu tại `project-control/` (không chứa thông tin license nhạy cảm — chỉ loại license + danh sách module) | `OPEN` — cần input người dùng |
-| TB-003 | Xác minh tương thích SPSS 32 ↔ macOS của người học qua tài liệu IBM chính thức | TB-002; nguồn S01/S02 | Kết luận ghi vào `decisions.md` (D-003/D-004 cập nhật); snapshot vào `references/snapshots/` | `OPEN` |
-| TB-004 | Mở + snapshot S01 (IBM docs SPSS 32) và S10 (Apple Silicon notice) bằng trình duyệt thật | Trình duyệt có JS | `source-register.md` chuyển S01/S10 → `VERIFIED_SOURCE` hoặc `UNAVAILABLE` kèm bằng chứng | `OPEN` |
+| TB-002 | Thu thập preflight máy người học: chip, macOS, version SPSS, license, modules | Người dùng/học viên điền `project-control/MAC-SPSS-PREFLIGHT.md` (form đã sẵn sàng) | Phiếu đã điền lưu trong `project-control/` (không chứa secret); chặn tiêu chí runtime M02/M03, không chặn M01 | `OPEN` — cần input người dùng |
+| TB-003 | Mở SPCR (S11) bằng trình duyệt thật; xác nhận trực tiếp hàng macOS + footnote ARM64 cho SPSS 32 | Trình duyệt có JS; nguồn S11 | Dữ kiện SPCR trực tiếp lưu snapshot `references/snapshots/`; D-014 → VERIFIED hoặc điều chỉnh | `OPEN` — dữ kiện gián tiếp đã PARTIALLY_VERIFIED |
+| TB-004 | Snapshot mục lục portal S01 bằng trình duyệt (PDF deep links đã kiểm chứng sẵn — chỉ còn cần mục lục điều hướng) | Trình duyệt có JS | Snapshot vào `references/snapshots/`; S01 → `VERIFIED_SOURCE` hoặc ghi chính sách "dùng PDF-only" | `OPEN` — mức ưu tiên giảm (đường PDF đã dùng được) |
 | TB-005 | Sản xuất M01 (lesson + workbook + answer-key) theo `production-plan.md` | TB-001 | Đủ 12 mục chuẩn §6 Blueprint; không dùng SPSS; claim có nguồn trong register | `OPEN` — chưa ủy quyền |
 | TB-006 | Sản xuất M02 theo `production-plan.md` | TB-001, TB-002, TB-003 | Menu/phiên bản khớp môi trường kiểm chứng; ảnh chụp chỉ từ chạy thật | `OPEN` |
 | TB-007 | Tạo dataset giả lập nhỏ cho M03 (raw có lỗi cố tình + codebook + expected) | TB-001; `datasets/README.md` | Seed cố định, script generator trong `datasets/generators/`, raw bất biến, nhãn SIMULATED | `OPEN` |
