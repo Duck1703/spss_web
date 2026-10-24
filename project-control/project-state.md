@@ -2,8 +2,8 @@
 
 > Đây là **nguồn thật duy nhất** về trạng thái dự án. Mọi agent tiếp nối phải đọc file này trước khi làm việc. Quy ước trạng thái module theo `WORKFLOW-CONTRACT.md`.
 
-- **Cập nhật lần cuối:** 2026-10-24 (Task 07 — final beginner-quality remediation)
-- **Phase hiện tại:** M01 **draft-4** (post-remediation + readability + giảm tải §3.7) → chờ **re-audit độc lập**; M02–M12 chưa sản xuất
+- **Cập nhật lần cuối:** 2026-10-24 (Task 08 — website MVP)
+- **Phase hiện tại:** M01 **draft-4** chờ re-audit độc lập; **website MVP đã build + preview được local** (`website/` → `npm run dev`); M02–M12 chưa sản xuất
 - **Blueprint:** nguyên vẹn — SHA-256 `cdb0b9736d20893a540320b88dc8b849928a2ff3976ecfe8718ccc7fc8066036` (re-verified Task 03)
 - **Git:** branch `master`, commits `4094497` → `f6d1ff5` → `26c7f91` (Task 02) → commit Task 03; clean, không remote
 

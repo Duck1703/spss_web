@@ -1,0 +1,8 @@
+---
+interface Props { id: string; label?: string; }
+const { id, label = 'Đánh dấu đã học xong' } = Astro.props;
+---
+<div class="complete-module" data-module={id}>
+  <button type="button" data-module-done={id}>✅ {label}</button>
+  <span class="complete-module__hint">Tiến độ lưu trong trình duyệt này.</span>
+</div>

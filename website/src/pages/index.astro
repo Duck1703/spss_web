@@ -1,0 +1,130 @@
+---
+// Landing page tùy chỉnh — không dùng Starlight template để có hero + progress.
+const modules = [
+  { id: 'm01', code: 'M01', title: 'Tư duy nghiên cứu y khoa & ngôn ngữ thống kê', week: 'Tuần 1', available: true },
+  { code: 'M02', title: 'SPSS trên MacBook', week: 'Tuần 2' },
+  { code: 'M03', title: 'Codebook, nhập liệu & làm sạch dữ liệu', week: 'Tuần 3–4' },
+  { code: 'M04', title: 'Thống kê mô tả và biểu đồ', week: 'Tuần 5' },
+  { code: 'M05', title: 'Tư duy suy luận thống kê', week: 'Tuần 6–7' },
+  { code: 'M06', title: 'So sánh trung bình 2 nhóm', week: 'Tuần 8' },
+  { code: 'M07', title: 'Khi giả định hoặc thang đo không phù hợp', week: 'Tuần 9' },
+  { code: 'M08', title: 'Bảng chéo và biến nhị phân', week: 'Tuần 10' },
+  { code: 'M09', title: 'So sánh từ 3 nhóm', week: 'Tuần 11' },
+  { code: 'M10', title: 'Tương quan và hồi quy tuyến tính', week: 'Tuần 12–13' },
+  { code: 'M11', title: 'Hồi quy logistic nhập môn', week: 'Tuần 14' },
+  { code: 'M12', title: 'Mini-project nghiên cứu y khoa', week: 'Tuần 15–16' },
+];
+const extensions = [
+  { code: 'E01', title: 'Chẩn đoán: sensitivity, specificity, ROC/AUC' },
+  { code: 'E02', title: 'Kaplan–Meier, log-rank, Cox' },
+  { code: 'E03', title: 'Missing data, complex survey, multiple testing' },
+];
+---
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SPSS Medical Learning Pack — Học thống kê y khoa bằng tiếng Việt</title>
+  <meta name="description" content="Khóa tự học SPSS và thống kê y khoa cho người chưa có nền tảng — tiếng Việt, từng bước, trên MacBook." />
+  <style>
+    :root { --accent:#2563eb; --bg:#f8fafc; --card:#fff; --line:#e2e8f0; --text:#0f172a; --muted:#64748b; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+    .wrap { max-width:960px; margin:0 auto; padding:0 20px 64px; }
+    header.hero { padding:56px 0 32px; }
+    .kicker { color:var(--accent); font-weight:600; font-size:.9rem; letter-spacing:.05em; text-transform:uppercase; }
+    h1 { font-size:2.1rem; line-height:1.25; margin:.4em 0; }
+    .lead { font-size:1.1rem; color:var(--muted); max-width:56ch; }
+    .cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
+    .btn { display:inline-block; padding:12px 22px; border-radius:10px; font-weight:600; text-decoration:none; border:1px solid var(--line); background:var(--card); color:var(--text); }
+    .btn-primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+    section { margin-top:40px; }
+    h2 { font-size:1.4rem; }
+    .cards { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+    .card .code { font-weight:700; color:var(--accent); }
+    .card .week { font-size:.8rem; color:var(--muted); }
+    .card.available { border-color:var(--accent); }
+    .badge { font-size:.75rem; font-weight:600; padding:2px 8px; border-radius:999px; }
+    .badge-ok { background:#dcfce7; color:#166534; }
+    .badge-soon { background:#f1f5f9; color:var(--muted); }
+    ul.tips { padding-left:1.2em; }
+    .note { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:12px 16px; font-size:.95rem; }
+    footer { margin-top:48px; color:var(--muted); font-size:.85rem; }
+    @media (prefers-color-scheme:dark) {
+      :root { --bg:#0b1220; --card:#111827; --line:#1f2937; --text:#e5e7eb; --muted:#9ca3af; }
+      .note { background:#1c1917; border-color:#78350f; }
+      .badge-ok { background:#14532d; color:#bbf7d0; }
+      .badge-soon { background:#1f2937; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="kicker">SPSS Medical Learning Pack</div>
+      <h1>Học thống kê y khoa và SPSS — bằng tiếng Việt, từng bước một.</h1>
+      <p class="lead">Khóa tự học dành cho người <strong>chưa từng dùng SPSS</strong> và <strong>gần như chưa học thống kê</strong>, muốn làm nghiên cứu y khoa. Bạn sẽ hiểu tư duy trước, rồi mới bấm phần mềm — trên MacBook, 16 tuần.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="/m01/bai-hoc/">Bắt đầu học — M01</a>
+        <a class="btn" data-continue hidden href="#">▶ Tiếp tục học</a>
+        <a class="btn" href="/lo-trinh/">Xem lộ trình đầy đủ</a>
+      </div>
+      <p class="note" style="margin-top:20px">💾 Tiến độ được lưu trên <strong>trình duyệt này</strong> — có thể mất khi xóa dữ liệu trình duyệt và không tự đồng bộ sang thiết bị khác. <span data-progress-count></span>
+        <button class="btn" style="padding:4px 10px;font-size:.8rem" onclick="slpExport()">⬇ Xuất tiến độ (JSON)</button>
+        <label class="btn" style="padding:4px 10px;font-size:.8rem">⬆ Nhập tiến độ<input type="file" accept=".json" hidden onchange="slpImport(this.files[0])"></label>
+      </p>
+    </header>
+
+    <section>
+      <h2>Khóa học này dành cho ai?</h2>
+      <p>Người làm y tế/sinh viên/mọi người muốn tự phân tích dữ liệu nghiên cứu y khoa bằng SPSS — <em>không cần</em> nền thống kê, không cần biết lập trình.</p>
+      <h2>Sau khóa học bạn làm được gì?</h2>
+      <ul class="tips">
+        <li>Viết câu hỏi nghiên cứu và xây codebook cho bộ dữ liệu của mình.</li>
+        <li>Nhập, làm sạch dữ liệu trên SPSS (giữ file gốc bất biến, có cleaning log).</li>
+        <li>Chọn đúng phép phân tích từ câu hỏi + kiểu dữ liệu — và <em>giải thích được vì sao</em>.</li>
+        <li>Đọc output, diễn giải kết quả đúng giới hạn (không nhầm liên quan với nhân quả).</li>
+        <li>Viết đoạn Methods/Results có trách nhiệm cho một mini-project.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Lộ trình 12 module</h2>
+      <div class="cards">
+        {modules.map(m => (
+          <div class:list={['card', { available: m.available }]}>
+            <div><span class="code">{m.code}</span> <span class="week">{m.week}</span></div>
+            <div>{m.available ? <a href="/m01/bai-hoc/">{m.title}</a> : m.title}</div>
+            {m.available
+              ? <span class="badge badge-ok">Có bài học <span data-module-badge={m.id}></span></span>
+              : <span class="badge badge-soon">Đang biên soạn</span>}
+          </div>
+        ))}
+      </div>
+      <h2 style="margin-top:24px">Chuyên đề mở rộng (sau core)</h2>
+      <div class="cards">
+        {extensions.map(e => (
+          <div class="card"><div><span class="code">{e.code}</span></div><div>{e.title}</div><span class="badge badge-soon">Đang biên soạn</span></div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2>Cách học hiệu quả</h2>
+      <ul class="tips">
+        <li>Học theo thứ tự module — bài sau dùng lại khái niệm bài trước.</li>
+        <li>Đọc xong một phần, tự nhắc lại bằng lời mình trước khi xem checkpoint.</li>
+        <li>Làm bài tập <em>trước</em>, xem đáp án <em>sau</em> — lỗi sai là nơi học nhiều nhất.</li>
+        <li>Dữ liệu trong khóa đều là <strong>giả lập</strong> — mục đích luyện tư duy, không phải bằng chứng lâm sàng.</li>
+      </ul>
+    </section>
+
+    <footer>
+      SPSS Medical Learning Pack v1 · Website tự học build từ giáo trình Markdown canonical · Chỉ mới có M01, các module khác đang biên soạn.
+    </footer>
+  </div>
+  <script src="/js/progress.js" defer></script>
+</body>
+</html>

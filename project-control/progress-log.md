@@ -158,3 +158,12 @@
 - Metadata: review-package/selfcheck → draft-4; xóa phát biểu cũ "§1.3 chưa đọc"; source-map phân biệt full-text vs abstract-only.
 - D-019 giữ PROPOSED; `BEGINNER-TEACHING-STANDARD.md` kèm trong `report/`.
 - M01 → **draft-4**, chờ re-audit độc lập.
+
+## 2026-10-24 — Task 08: Website MVP (Astro + Starlight)
+
+- Tạo `website/`: Astro 7.4.0 + Starlight 0.42.7 (pinned) — landing, roadmap, M01 lesson/workbook/answer-key, tài liệu.
+- Adapter `scripts/sync-content.mjs`: canonical → `src/content/docs/` (generated, gitignored); inject 16 ExerciseCard, bọc đáp án trong `<details>`, link rewrite, strip path nội bộ. Chỉ đọc canonical, không sửa nội dung.
+- Progress: `progress.js` localStorage (autosave nháp, đánh dấu, lastPage, export/import JSON); cảnh báo localStorage trên homepage.
+- Build PASS (10 trang + Pagefind), preview smoke 6×200, số liệu M01 canonical↔web khớp 1:1, không leak file nội bộ vào dist.
+- NOT_TESTED (trung thực): Safari thật, browser interaction thực, pilot.
+- Chưa deploy, chưa set `site`. Chi tiết `reviews/TASK08-website-mvp-review.md`, `website/{ARCHITECTURE,DEPLOYMENT}.md`.

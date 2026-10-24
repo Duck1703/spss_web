@@ -1,0 +1,16 @@
+{
+  "name": "spss-medical-learning-website",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Website hoc SPSS Medical Learning Pack - generated from canonical Markdown",
+  "scripts": {
+    "sync": "node scripts/sync-content.mjs",
+    "dev": "npm run sync && astro dev",
+    "build": "npm run sync && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.42.7",
+    "astro": "^7.4.0"
+  }
+}
