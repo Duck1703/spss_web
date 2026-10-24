@@ -113,3 +113,8 @@
 ### Cố ý KHÔNG làm
 
 - Không M02/M03, không dataset DS-A, không `.sav`/`.sps`, không sửa production-plan/Blueprint, không push remote, không tự gán HUMAN_APPROVAL.
+
+### Bổ sung — quy ước `report/` (chỉ thị owner)
+
+- Owner chỉ thị: file cần review copy vào `D:\spss\report\`; report sau xóa nội dung cũ, ghi mới → `report/` chỉ chứa report mới nhất (D-018).
+- Đã tạo `report/TASK03-report.md` + `report/M01-needs-review/` (copy 6 file review). Bản chính vẫn ở đường dẫn gốc.
