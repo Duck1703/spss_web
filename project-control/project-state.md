@@ -2,10 +2,10 @@
 
 > Đây là **nguồn thật duy nhất** về trạng thái dự án. Mọi agent tiếp nối phải đọc file này trước khi làm việc. Quy ước trạng thái module theo `WORKFLOW-CONTRACT.md`.
 
-- **Cập nhật lần cuối:** 2026-10-24 (Task 08 — website MVP)
-- **Phase hiện tại:** M01 **draft-4** chờ re-audit độc lập; **website MVP đã build + preview được local** (`website/` → `npm run dev`); M02–M12 chưa sản xuất
-- **Blueprint:** nguyên vẹn — SHA-256 `cdb0b9736d20893a540320b88dc8b849928a2ff3976ecfe8718ccc7fc8066036` (re-verified Task 03)
-- **Git:** branch `master`, commits `4094497` → `f6d1ff5` → `26c7f91` (Task 02) → commit Task 03; clean, không remote
+- **Cập nhật lần cuối:** 2026-10-24 (Task 09 — practice-first 14-day track)
+- **Phase hiện tại:** **Lộ trình 14 ngày practice-first là default learning path** (D-020); 14/14 ngày có đủ lesson+workbook+answer-key dạng **DRAFTING** (chưa independent review); website build PASS 54 trang, CSV download 200; M01 nguyên bản giữ làm tham khảo
+- **Blueprint:** nguyên vẹn — SHA-256 `cdb0b9736d20893a540320b88dc8b849928a2ff3976ecfe8718ccc7fc8066036` (không đổi qua Task 09)
+- **Git:** branch `master`, local-only không remote; commit mới nhất = Task 09 commit (xem `git log`)
 
 ## 1. Trạng thái tổng quan
 
@@ -19,18 +19,30 @@
 | Preflight môi trường | ⏳ Form sẵn sàng, chưa điền | `project-control/MAC-SPSS-PREFLIGHT.md` — cần học viên/owner |
 | Tương thích macOS/SPSS 32 | ⚠️ PARTIALLY_VERIFIED | SPCR liệt kê Sequoia 15.0 + Tahoe 26.0 (qua reproduction); S10a/b xác nhận Apple Silicon + Rosetta 2; cần mở SPCR trình duyệt chốt |
 | Production-plan M01–M03 | ✅ Đã soạn | Chưa được duyệt; 1 amendment đề xuất (D-015) |
-| Nội dung bài học (lesson/workbook/answer-key) | 🟡 M01 draft xong; M02–M12 chưa | Chỉ M01 — chờ independent review trước khi coi là nội dung được chấp nhận |
-| Dataset DS-A/B/C | ⛔ Chưa tạo | Chỉ có README mô tả data contract |
+| Nội dung bài học (lesson/workbook/answer-key) | 🟡 M01 draft-4 (tham khảo) + **14/14 ngày draft** mới | Track 14 ngày đủ bộ 3/ngày — đều chưa qua independent review |
+| Dataset DS-A/B/C | ✅ 4 dataset giả lập đã tạo (Task 09) | `datasets/` — clinic_bp 160 · hba1c 24 · capstone 90 · assessment 60; codebook + generator seed cố định |
 | Git repository | ✅ Local | Không remote, không push, không đổi global config |
 | Bất kỳ artifact nào mang nhãn VERIFIED | ⛔ Không có | Workspace không có SPSS — mọi thứ mặc định `NOT_RUN` |
 
 ## 2. Trạng thái từng module
 
+### Lộ trình chính thức — PRACTICE-FIRST 14 NGÀY (D-020)
+
+| Ngày | Trạng thái | Vị trí | Ghi chú |
+|---|---|---|---|
+| D01–D05 (P0) | `DRAFTING` — đủ 3 file/ngày, chưa independent review | `track-14day/day-0{1..5}-*/` | Menu `MAC_SPSS_VERIFICATION_PENDING`; số `NOT_RUN` |
+| D06–D11 (P1) | `DRAFTING` — đủ 3 file/ngày | `track-14day/day-0{6..9}-*/`, `day-1{0,1}-*/` | Inferential: t-test độc lập/paired, χ²+OR+Fisher, Pearson/Spearman, chọn phương pháp, báo cáo output |
+| D12–D14 (P2) | `DRAFTING` — capstone + rubric 100đ | `track-14day/day-1{2..4}-*/` | D12 6 lỗi gài · D13 phân tích mở · D14 rubric ≥85/100 |
+| Datasets | ✅ Created + validated | `datasets/{synthetic-raw,cleaned,codebooks,generators}` | 4 dataset giả lập, seed cố định, 19 lỗi gài có catalog nội bộ |
+| Roadmap | ✅ | `curriculum/PRACTICE-FIRST-14-DAY-TRACK.md` | Default path |
+
+### Chương trình 16 tuần (Blueprint gốc — tham khảo, KHÔNG còn default)
+
 | Module | Trạng thái lifecycle | Vị trí | Ghi chú |
 |---|---|---|---|
-| M01 | `DRAFTING` **draft-4 → chờ re-audit (`STATISTICAL_QA`)** | `lessons/M01-research-thinking/` + `reviews/` (package + readability + Task07) | Pilot; Task 05→07 đã sửa 15 findings |
-| M02 | `PLANNED` (chờ duyệt) | `lessons/M02-spss-mac-foundations/production-plan.md` | Pilot; phụ thuộc U1–U3 (version/macOS/license) |
-| M03 | `PLANNED` (chờ duyệt) | `lessons/M03-data-preparation/production-plan.md` | Pilot; cần dataset giả lập nhỏ |
+| M01 | `DRAFTING` **draft-4 → chờ re-audit (`STATISTICAL_QA`)** — giữ nguyên làm tham khảo | `lessons/M01-research-thinking/` + `reviews/` | Pilot; Task 05→07 đã sửa 15 findings; website hiển thị dưới nhóm "Tham khảo" |
+| M02 | `PLANNED` (chờ duyệt) | `lessons/M02-spss-mac-foundations/production-plan.md` | Nội dung lớp phủ trùng lộ trình 14 ngày — xem lại khi resume track 16 tuần |
+| M03 | `PLANNED` (chờ duyệt) | `lessons/M03-data-preparation/production-plan.md` | Tương tự |
 | M04–M11 | `NOT_STARTED` | `lessons/M04-*` … `lessons/M11-*` | Chỉ có README giữ chỗ |
 | M12 | `NOT_STARTED` | `lessons/M12-capstone-project/` | Capstone; phụ thuộc toàn bộ core |
 | E01–E03 | `NOT_STARTED` | `extensions/` | Học sau core |
@@ -46,16 +58,17 @@
 
 ## 4. Blockers / phụ thuộc đang mở
 
-1. **Cần con người duyệt báo cáo Task 02** trước khi sản xuất nội dung (STOP condition).
-2. **Phiếu preflight chưa điền** — `MAC-SPSS-PREFLIGHT.md` cần học viên/owner (chặn M02-runtime, M03-runtime; **không** chặn M01).
-3. **SPCR + portal S01 JS-gated** → mở bằng trình duyệt thật để chốt macOS/footnote ARM64 (TB-003/TB-004).
-4. **Không có môi trường chạy SPSS trong workspace** → mọi artifact thực thi `NOT_RUN` cho tới khi có MacBook QA.
-5. **Chưa có học viên pilot** cho Pass 3 thật.
+1. **Track 14 ngày chưa qua independent review** — toàn bộ `DRAFTING`; ngưỡng release theo QA-POLICY (≥85/100, 0 BLOCKER/MAJOR, đủ 5 pass, HUMAN_APPROVAL).
+2. **`MAC_SPSS_VERIFICATION_PENDING` trên toàn bộ 14 ngày** — cần pilot trên MacBook có SPSS (checklist cuối mỗi lesson); số expected `NOT_RUN`.
+3. **Phiếu preflight chưa điền** — `MAC-SPSS-PREFLIGHT.md` cần học viên/owner.
+4. **SPCR + portal S01 JS-gated** → mở bằng trình duyệt thật để chốt macOS/footnote ARM64 (TB-003/TB-004).
+5. **Không có môi trường chạy SPSS trong workspace** → mọi artifact thực thi `NOT_RUN` cho tới khi có MacBook QA.
+6. **Chưa có học viên pilot** cho Pass 3 thật.
 
 ## 5. Trạng thái kiểm chứng (kiên quyết không thổi phồng)
 
 - Số artifact gắn `VERIFIED`: **0**
-- Số artifact gắn `NOT_RUN`: **0** (M01 không chứa artifact thực thi — phần SPSS `NOT_APPLICABLE`)
-- Số bài học đã soạn: **1 draft** (M01 — chưa qua review độc lập)
-- Số dataset đã tạo: **0** (`mini_records` là bảng inline trong bài, không phải file dataset — D-016)
-- Số finding QA: **4** (trong `qa/M01-author-selfcheck.md` — self-findings, OPEN, chờ reviewer phán xét)
+- Số artifact gắn `NOT_RUN`: **tất cả expected-results + menu SPSS trong 14 ngày** (Python cross-check ≠ SPSS runtime)
+- Số bài học đã soạn: **M01 draft-4 (tham khảo) + 14/14 ngày draft** — chưa qua independent review
+- Số dataset đã tạo: **4** (clinic_bp / hba1c_pairs / capstone_screening / assessment_gp — giả lập, seed cố định)
+- Số finding QA: **4** (trong `qa/M01-author-selfcheck.md` — self-findings, OPEN, chờ reviewer phán xét); + Task 09 chưa có findings register riêng

@@ -2,19 +2,25 @@
 // Landing page — không dùng Starlight template (cần hero + progress UI tùy ý).
 import '../styles/tokens.css';
 
-const modules = [
-  { id: 'm01', code: 'M01', title: 'Tư duy nghiên cứu y khoa & ngôn ngữ thống kê', week: 'Tuần 1', available: true },
-  { code: 'M02', title: 'SPSS trên MacBook', week: 'Tuần 2' },
-  { code: 'M03', title: 'Codebook, nhập liệu & làm sạch dữ liệu', week: 'Tuần 3–4' },
-  { code: 'M04', title: 'Thống kê mô tả và biểu đồ', week: 'Tuần 5' },
-  { code: 'M05', title: 'Tư duy suy luận thống kê', week: 'Tuần 6–7' },
-  { code: 'M06', title: 'So sánh trung bình 2 nhóm', week: 'Tuần 8' },
-  { code: 'M07', title: 'Khi giả định hoặc thang đo không phù hợp', week: 'Tuần 9' },
-  { code: 'M08', title: 'Bảng chéo và biến nhị phân', week: 'Tuần 10' },
-  { code: 'M09', title: 'So sánh từ 3 nhóm', week: 'Tuần 11' },
-  { code: 'M10', title: 'Tương quan và hồi quy tuyến tính', week: 'Tuần 12–13' },
-  { code: 'M11', title: 'Hồi quy logistic nhập môn', week: 'Tuần 14' },
-  { code: 'M12', title: 'Mini-project nghiên cứu y khoa', week: 'Tuần 15–16' },
+const days = [
+  { slug: 'd01', code: 'Ngày 01', title: 'Lần đầu mở SPSS — import CSV, lưu .sav' },
+  { slug: 'd02', code: 'Ngày 02', title: 'Biến và mã hóa — Variable View, nhãn giá trị' },
+  { slug: 'd03', code: 'Ngày 03', title: 'Làm sạch dữ liệu — lỗi, trùng lặp, missing' },
+  { slug: 'd04', code: 'Ngày 04', title: 'Thống kê mô tả — Bảng 1 đầu tiên của bạn' },
+  { slug: 'd05', code: 'Ngày 05', title: 'Biểu đồ và mô tả theo nhóm' },
+  { slug: 'd06', code: 'Ngày 06', title: 'T-test hai nhóm độc lập' },
+  { slug: 'd07', code: 'Ngày 07', title: 'T-test mẫu ghép cặp (trước–sau)' },
+  { slug: 'd08', code: 'Ngày 08', title: 'Bảng chéo và Chi-square' },
+  { slug: 'd09', code: 'Ngày 09', title: 'Tương quan — Pearson và Spearman' },
+  { slug: 'd10', code: 'Ngày 10', title: 'Chọn phép phân tích phù hợp' },
+  { slug: 'd11', code: 'Ngày 11', title: 'Đọc và báo cáo output' },
+  { slug: 'd12', code: 'Ngày 12', title: 'Capstone 1 — chuẩn bị dữ liệu' },
+  { slug: 'd13', code: 'Ngày 13', title: 'Capstone 2 — phân tích' },
+  { slug: 'd14', code: 'Ngày 14', title: 'Đánh giá thực hành cuối khóa' },
+];
+const references = [
+  { href: '/m01/bai-hoc/', code: 'M01', title: 'Tư duy nghiên cứu y khoa & ngôn ngữ thống kê', week: 'Tham khảo' },
+  { href: '/lo-trinh/', code: '16w', title: 'Lộ trình 16 tuần — Blueprint gốc (không phải lộ trình hiện tại)', week: 'Tham khảo' },
 ];
 const extensions = [
   { code: 'E01', title: 'Chẩn đoán: sensitivity, specificity, ROC/AUC' },
@@ -22,17 +28,18 @@ const extensions = [
   { code: 'E03', title: 'Missing data, complex survey, multiple testing' },
 ];
 const outcomes = [
-  'Viết câu hỏi nghiên cứu và xây codebook cho bộ dữ liệu của mình.',
-  'Nhập, làm sạch dữ liệu trên SPSS — giữ file gốc bất biến, có cleaning log.',
-  'Chọn đúng phép phân tích từ câu hỏi + kiểu dữ liệu, và giải thích được vì sao.',
-  'Đọc output, diễn giải kết quả đúng giới hạn — không nhầm liên quan với nhân quả.',
-  'Viết đoạn Methods/Results có trách nhiệm cho một mini-project.',
+  'Mở SPSS, import CSV, thiết lập Variable View và lưu/mở lại file .sav.',
+  'Làm sạch dữ liệu: phát hiện lỗi, trùng lặp, missing — có cleaning log.',
+  'Tạo Bảng 1 mô tả và biểu đồ phù hợp cho dữ liệu nghiên cứu.',
+  'Chọn đúng phép phân tích (t-test, chi-square, tương quan) và chạy trên SPSS.',
+  'Đọc output, viết kết quả thận trọng — không nhầm liên quan với nhân quả.',
+  'Hoàn thành một mini-project phân tích độc lập từ dataset mới.',
 ];
 const howTo = [
-  { title: 'Học theo thứ tự module', text: 'Bài sau dùng lại khái niệm bài trước — đừng nhảy cóc.' },
-  { title: 'Tự nhắc lại trước khi xem checkpoint', text: 'Đọc xong một phần, nói lại bằng lời mình.' },
-  { title: 'Làm bài tập trước, xem đáp án sau', text: 'Lỗi sai là nơi học nhiều nhất.' },
-  { title: 'Mọi dữ liệu đều giả lập', text: 'Mục đích luyện tư duy, không phải bằng chứng lâm sàng.' },
+  { title: 'Học theo thứ tự ngày', text: 'Bài sau dùng lại file và kỹ năng bài trước — đừng nhảy cóc.' },
+  { title: 'Mở SPSS ngay', text: '80% thời lượng mỗi ngày là thao tác thật — đọc lý thuyết đúng lúc cần.' },
+  { title: 'Làm bài tập trước, xem đáp án sau', text: 'Đáp án ẩn sau <details> — chỉ mở khi đã tự làm.' },
+  { title: 'Mọi dữ liệu đều giả lập', text: 'Luyện kỹ năng, không phải bằng chứng lâm sàng.' },
 ];
 ---
 <!doctype html>
@@ -269,7 +276,8 @@ const howTo = [
         <span>SPSS Medical Learning Pack</span>
       </a>
       <div class="topnav__links">
-        <a href="/lo-trinh/">Lộ trình</a>
+        <a href="/lo-trinh-14-ngay/">Lộ trình 14 ngày</a>
+        <a href="/du-lieu/">Dữ liệu</a>
         <a href="/tai-lieu/thuat-ngu/">Tài liệu</a>
         <button class="theme-toggle" type="button" aria-label="Chuyển giao diện sáng/tối" data-theme-toggle>
           <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -286,22 +294,23 @@ const howTo = [
 
   <div class="wrap">
     <header class="hero">
-      <span class="kicker">Khóa tự học · 16 tuần</span>
-      <h1>Học thống kê y khoa và SPSS — bằng tiếng Việt, từng bước một.</h1>
+      <span class="kicker">Khóa tự học · 14 ngày · practice-first</span>
+      <h1>Học SPSS y khoa bằng thực hành — 14 ngày, tiếng Việt.</h1>
       <p class="lead">
         Dành cho người <strong>chưa từng dùng SPSS</strong> và <strong>gần như chưa học thống kê</strong>
-        mà muốn làm nghiên cứu y khoa. Bạn sẽ hiểu tư duy trước, rồi mới bấm phần mềm —
-        trên MacBook, theo lộ trình 16 tuần.
+        mà muốn tự phân tích dữ liệu nghiên cứu y khoa. Mở SPSS ngay từ Ngày 01 —
+        ~80% thời lượng là thao tác thật trên MacBook, lý thuyết chỉ đúng lúc cần.
       </p>
       <div class="cta">
-        <a class="btn btn-primary" href="/m01/bai-hoc/">Bắt đầu học — M01</a>
+        <a class="btn btn-primary" href="/d01/bai-hoc/">Bắt đầu — Ngày 01</a>
         <a class="btn btn-accent-ghost" data-continue hidden href="#">Tiếp tục học →</a>
-        <a class="btn" href="/lo-trinh/">Xem lộ trình</a>
+        <a class="btn" href="/lo-trinh-14-ngay/">Xem lộ trình 14 ngày</a>
+        <a class="btn" href="/du-lieu/">Tải dữ liệu</a>
       </div>
       <div class="hero__meta">
-        <div><strong>12 + 3</strong>module cốt lõi &amp; chuyên đề</div>
-        <div><strong>16 tuần</strong>4–6 giờ mỗi tuần</div>
-        <div><strong>100% tiếng Việt</strong>không cần tài khoản</div>
+        <div><strong>14 ngày</strong>bài học + workbook + đáp án</div>
+        <div><strong>90–120 phút</strong>mỗi ngày, 80% thực hành</div>
+        <div><strong>100% giả lập</strong>dữ liệu — không cần tài khoản</div>
       </div>
     </header>
 
@@ -343,38 +352,18 @@ const howTo = [
     <section>
       <div class="section-head">
         <span class="eyebrow">Chương trình học</span>
-        <h2>Lộ trình 12 module</h2>
-        <p>M01 đã mở — các module còn lại đang được biên soạn và sẽ mở khi qua review.</p>
+        <h2>Lộ trình 14 ngày — practice-first</h2>
+        <p>Mỗi ngày ~90–120 phút trên SPSS thật (macOS). 14/14 ngày đã có bài học + bài tập + đáp án.</p>
       </div>
-      <div class="cards">
-        <div class="module-feature">
-          <div>
-            <span class="card__code">M01 · Tuần 1</span>
-            <h3>Tư duy nghiên cứu y khoa &amp; ngôn ngữ thống kê</h3>
-            <p>
-              Module nền tảng: viết câu hỏi nghiên cứu, phân loại biến, phân biệt quần thể–mẫu,
-              và hiểu vì sao liên quan không đồng nghĩa nhân quả — trước khi chạm vào SPSS.
-            </p>
-            <div class="module-feature__badges">
-              <span class="pill pill--ready">Đã có bài học</span>
-              <span class="pill" data-module-badge="m01"></span>
-            </div>
-          </div>
-          <div class="module-feature__actions">
-            <a class="btn btn-primary" href="/m01/bai-hoc/">Vào bài học</a>
-            <a class="btn" href="/m01/bai-tap/">Bài tập M01</a>
-          </div>
-        </div>
-      </div>
-      <div class="cards cards--compact" style="margin-top:16px">
-        {modules.slice(1).map((m) => (
-          <div class="card card--muted">
+      <div class="cards cards--compact">
+        {days.map((d) => (
+          <div class="card">
             <div class="card__top">
-              <span class="card__code">{m.code}</span>
-              <span class="card__week">{m.week}</span>
+              <span class="card__code">{d.code}</span>
+              <span class="pill" data-module-badge={d.slug}></span>
             </div>
-            <span class="card__title">{m.title}</span>
-            <span class="pill">Đang biên soạn</span>
+            <span class="card__title"><a href={`/${d.slug}/bai-hoc/`}>{d.title}</a></span>
+            <span class="pill pill--ready">Đã có bài học</span>
           </div>
         ))}
       </div>
@@ -382,10 +371,21 @@ const howTo = [
 
     <section>
       <div class="section-head">
-        <span class="eyebrow">Chuyên đề mở rộng</span>
-        <h2>Cho sau khi xong phần core</h2>
+        <span class="eyebrow">Tham khảo</span>
+        <h2>Chương trình 16 tuần — bản Blueprint gốc</h2>
+        <p>Giữ làm tài liệu tham khảo dài hạn. Khi có thêm thời gian, quay lại học sâu phần tư duy nghiên cứu.</p>
       </div>
       <div class="cards cards--compact">
+        {references.map((r) => (
+          <div class="card">
+            <div class="card__top">
+              <span class="card__code">{r.code}</span>
+              <span class="card__week">{r.week}</span>
+            </div>
+            <span class="card__title"><a href={r.href}>{r.title}</a></span>
+            {r.code === 'M01' && <span class="pill" data-module-badge="m01"></span>}
+          </div>
+        ))}
         {extensions.map((e) => (
           <div class="card card--muted">
             <div class="card__top"><span class="card__code">{e.code}</span></div>
@@ -409,8 +409,8 @@ const howTo = [
     </section>
 
     <footer class="site-footer">
-      SPSS Medical Learning Pack v1 · Website tự học build từ giáo trình Markdown canonical ·
-      M01 đã mở, các module khác đang biên soạn.
+      SPSS Medical Learning Pack · Lộ trình thực hành 14 ngày (D-020) ·
+      Website build từ giáo trình Markdown canonical · toàn bộ dữ liệu giả lập.
     </footer>
   </div>
 

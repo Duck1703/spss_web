@@ -1,6 +1,6 @@
 # datasets/ — Data contract và tổ chức
 
-- **Trạng thái:** chưa có dataset nào (dự kiến tạo khi sản xuất M03+ được duyệt).
+- **Trạng thái:** đã có 4 dataset giả lập phục vụ lộ trình 14 ngày (Task 09, quyết định D-020). Mọi file là SIMULATED.
 
 ## Data contract (theo Blueprint §5)
 
@@ -10,15 +10,21 @@
 4. `expected_results` chỉ được tạo bằng cách tái tính từ dữ liệu nguồn; gắn `NOT_RUN` cho tới khi chạy SPSS thật.
 5. Không dữ liệu bệnh nhân thật khi chưa có cơ sở pháp lý/bảo mật (Blueprint §5).
 
-## Bộ dữ liệu dự kiến (chưa tạo)
+## Bộ dữ liệu
 
-| Mã | Tên | Dùng cho | Trạng thái |
+| Mã | Tên / file | Dùng cho | Trạng thái |
 |---|---|---|---|
-| DS-A | `clinic_bp_synthetic` (160 hồ sơ) | M04–M11 | `NOT_CREATED` |
-| DS-A-mini | dataset nhỏ có lỗi gài cho pilot | M03 | `PLANNED` (xem `lessons/M03-data-preparation/production-plan.md`) |
-| DS-B | `diagnostic_test_synthetic` | E01 | `NOT_CREATED` |
-| DS-C | `survival_synthetic` | E02 | `NOT_CREATED` |
+| DS-A | `synthetic-raw/clinic_bp_v1_raw.csv` (161 dòng, 9 lỗi gài) + `cleaned/clinic_bp_v1_clean.csv` (160 dòng) | Ngày 01–11 lộ trình 14 ngày | CREATED — seed 20261024, `NOT_RUN` trên SPSS |
+| DS-EX1 | `synthetic-raw/exercise_hba1c_pairs.csv` (24 dòng, không lỗi gài) | Bài tập paired Ngày 07 | CREATED — seed 20261025, `NOT_RUN` |
+| DS-CAP | `synthetic-raw/capstone_screening_raw.csv` (91 dòng, 6 lỗi gài) + `cleaned/capstone_screening_clean.csv` (90) | Capstone Ngày 12–13 | CREATED — seed 20261026, `NOT_RUN` |
+| DS-FINAL | `synthetic-raw/assessment_gp_raw.csv` (60 dòng, 4 lỗi gài) + `cleaned/assessment_gp_clean.csv` (60) | Đánh giá Ngày 14 | CREATED — seed 20261027, `NOT_RUN` |
+| DS-B | `diagnostic_test_synthetic` | E01 (tham khảo, chương trình 16 tuần) | `NOT_CREATED` |
+| DS-C | `survival_synthetic` | E02 (tham khảo) | `NOT_CREATED` |
 | — | CDC NHANES (public, tùy chọn) | E03 | `NOT_CREATED` — chỉ sau khi dạy complex sampling + weights |
+
+- Codebook: `codebooks/*.md` · Danh mục lỗi gài (nội bộ): `codebooks/planted-errors-INTERNAL.md`.
+- Expected results cross-check bằng Python: `expected-results.md` (nhãn `NOT_RUN` — không phải SPSS output).
+- Generator: `generators/generate_all.py` — chạy `python datasets/generators/generate_all.py` từ project root; seed cố định → tái tạo 100%.
 
 ## Cấu trúc con
 

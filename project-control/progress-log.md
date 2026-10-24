@@ -167,3 +167,26 @@
 - Build PASS (10 trang + Pagefind), preview smoke 6×200, số liệu M01 canonical↔web khớp 1:1, không leak file nội bộ vào dist.
 - NOT_TESTED (trung thực): Safari thật, browser interaction thực, pilot.
 - Chưa deploy, chưa set `site`. Chi tiết `reviews/TASK08-website-mvp-review.md`, `website/{ARCHITECTURE,DEPLOYMENT}.md`.
+
+## 2026-10-24 — Task 09: Practice-first 14-day accelerated track (owner-directed override)
+
+### Quyết định
+
+- **D-020**: default learning path → lộ trình 14 ngày practice-first; Blueprint 16 tuần = tham khảo. Mâu thuẫn Blueprint↔yêu cầu owner ghi nhận tường minh.
+- **D-021**: layout `track-14day/day-NN-slug/` + data contract mới.
+
+### Đã làm
+
+- `curriculum/PRACTICE-FIRST-14-DAY-TRACK.md` — roadmap đầy đủ (outcomes, lịch, datasets, postponed topics, quan hệ 16w, verification tồn đọng).
+- `datasets/`: generator seed cố định → 4 dataset giả lập (clinic_bp 161→160 · hba1c 24 · capstone 91→90 · assessment 60); 19 lỗi gài có catalog nội bộ; codebook ×4; `expected-results.md` cross-check Python (NOT_RUN); sửa lỗi CSV comment line phá SPSS import.
+- `track-14day/` — **14/14 ngày** đủ lesson+workbook+answer-key theo khung A–I (lesson) / capstone format (D12–14); rubric 100đ + ngưỡng ≥85 ở D14.
+- Website: sync +3 trang loại mới (`lo-trinh-14-ngay`, `dNN/*` ×42, `du-lieu` + 7 CSV public); sidebar mặc định = 14 ngày, M01+16w → "Tham khảo" (collapsed); index → CTA Ngày 01; `ExerciseCard +answerHref`; `progress.js` giữ key/schema (tiến độ cũ an toàn) + đếm `module:dNN`.
+- Build PASS 54 trang; smoke 13 route + 3 CSV = 200; grep dist: 0 internal leak.
+- `reviews/TASK09-PRACTICE-FIRST-REPORT.md` + refresh `report/` (D-018 latest-only: report + roadmap + samples + codebook + expected-results + manifest 153 file).
+
+### Trung thực
+
+- Số expected = Python cross-check, nhãn `NOT_RUN`; menu SPSS `MAC_SPSS_VERIFICATION_PENDING` + checklist/bài.
+- 2 số ước lượng trong draft (bmi×diabetes t-test, sex×ctrl crosstab, age×sbp r) bị bắt lỗi khi verify → đã sửa đúng và bổ sung vào `expected-results.md`.
+- Toàn bộ 14 ngày `DRAFTING` — chưa independent review, chưa HUMAN_APPROVAL.
+- `design-prototypes/` untracked giữ nguyên ngoài phạm vi.

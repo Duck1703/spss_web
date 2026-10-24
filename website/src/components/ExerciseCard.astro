@@ -1,6 +1,6 @@
 ---
-interface Props { id: string; label?: string; }
-const { id, label = 'Nháp' } = Astro.props;
+interface Props { id: string; label?: string; answerHref?: string; }
+const { id, label = 'Nháp', answerHref = '/m01/dap-an/' } = Astro.props;
 ---
 <div class="exercise-card" data-exercise={id}>
   <div class="exercise-card__head">
@@ -16,7 +16,7 @@ const { id, label = 'Nháp' } = Astro.props;
   ></textarea>
   <div class="exercise-card__actions">
     <span class="exercise-card__saved" data-saved aria-live="polite">Đã lưu tự động</span>
-    <a class="exercise-card__link" href="/m01/dap-an/">Xem đáp án (sau khi đã làm) →</a>
+    <a class="exercise-card__link" href={answerHref}>Xem đáp án (sau khi đã làm) →</a>
     <button type="button" class="exercise-card__done" data-done={id}>Đánh dấu đã làm</button>
   </div>
 </div>

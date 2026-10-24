@@ -11,13 +11,14 @@
   function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
   var state = load();
 
-  // Ghi lastPage cho trang học (docs pages)
-  if (/^\/(m01|m\d|tai-lieu|lo-trinh)\//.test(location.pathname)) {
+  // Ghi lastPage cho trang học (docs pages) — bao gồm lộ trình 14 ngày (dNN) + du-lieu
+  if (/^\/(m01|m\d|d\d{2}|du-lieu|tai-lieu|lo-trinh|lo-trinh-14-ngay)\//.test(location.pathname)) {
     state.lastPage = location.pathname;
     save(state);
   }
 
   var BT_TOTAL = 16; // số câu hỏi có id bt* trong workbook M01
+  var DAY_TOTAL = 14; // 14 ngày — done keys 'module:dNN'
 
   function setStatus(el, mode) {
     if (!el) return;
@@ -59,18 +60,21 @@
     });
     // progress summary (homepage panel)
     var nDone = Object.keys(state.done).filter(function (k) { return k.indexOf('bt') === 0; }).length;
+    var nDays = Object.keys(state.done).filter(function (k) { return /^module:d\d{2}$/.test(k); }).length;
     var nDraft = Object.keys(state.answers).filter(function (k) {
-      return k.indexOf('bt') === 0 && !state.done[k] && String(state.answers[k]).trim();
+      return !state.done[k] && String(state.answers[k]).trim();
     }).length;
     document.querySelectorAll('[data-progress-count]').forEach(function (el) {
-      if (!nDone && !nDraft) { el.textContent = 'Chưa có dữ liệu — bắt đầu từ M01'; return; }
-      var txt = nDone + '/' + BT_TOTAL + ' bài tập đã đánh dấu';
-      if (nDraft) txt += ' · ' + nDraft + ' đang soạn';
-      if (state.done['module:m01']) txt += ' · M01 hoàn thành';
-      el.textContent = txt;
+      if (!nDays && !nDone && !nDraft) { el.textContent = 'Chưa có dữ liệu — bắt đầu từ Ngày 01'; return; }
+      var parts = [nDays + '/' + DAY_TOTAL + ' ngày hoàn thành'];
+      if (nDone) parts.push(nDone + '/' + BT_TOTAL + ' bài tập M01');
+      if (nDraft) parts.push(nDraft + ' đang soạn');
+      if (state.done['module:m01']) parts.push('M01 (tham khảo) hoàn thành');
+      el.textContent = parts.join(' · ');
     });
     document.querySelectorAll('[data-progress-fill]').forEach(function (el) {
-      el.style.width = Math.round((nDone / BT_TOTAL) * 100) + '%';
+      var pct = nDays ? (nDays / DAY_TOTAL) : (nDone / BT_TOTAL);
+      el.style.width = Math.round(pct * 100) + '%';
     });
   }
 
