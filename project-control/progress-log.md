@@ -141,3 +141,10 @@
 - Thêm S12 vào source-register; grep không còn câu tuyệt đối; Blueprint hash khớp; `git diff --check` sạch.
 
 ### Trạng thái: M01 draft-2 → chờ re-audit độc lập (Pass 1/3/4).
+
+## 2026-10-24 — Task 06: Beginner Teaching Standard + M01 readability
+
+- Tạo `project-control/BEGINNER-TEACHING-STANDARD.md` (10 RULE owner → 11 mục chuẩn áp cho toàn khóa; D-019).
+- Audit M01 theo chuẩn: sửa 16 chỗ thuật-ngữ-dùng-trước-khi-giải-thích (BMI, HbA1c, ĐTĐ, huyết áp tâm thu, RCT, tử/mẫu số, missing, mean, script, target trial emulation...).
+- Báo cáo: `reviews/M01-beginner-readability-review.md`. Không đụng bảng `mini_records`/số học → không tái xuất lỗi Task 05.
+- M01 → **draft-3**, chờ re-audit; Pass 3 (người học thật) vẫn NOT_RUN.

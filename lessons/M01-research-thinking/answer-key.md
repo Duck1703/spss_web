@@ -7,11 +7,11 @@
 
 ## Đáp án Checkpoint (lesson.md mục 11)
 
-1. **Vì sao viết câu hỏi trước khi thu dữ liệu?** — Vì câu hỏi quyết định đo cái gì, trên ai, và kết luận được phép đến đâu. Thu dữ liệu trước → thường thiếu biến cần thiết hoặc thu thừa, và dễ "câu cá" kết luận sau khi thấy số liệu.
+1. **Vì sao viết câu hỏi trước khi thu dữ liệu?** — Vì câu hỏi quyết định đo cái gì, trên ai, và kết luận được phép đến đâu. Thu dữ liệu trước → thường thiếu biến cần thiết hoặc thu thừa, và dễ rơi vào thói quen xấu: nhìn số liệu có sẵn rồi mới nghĩ ra kết luận muốn có.
 2. **`sex_code` là số nhưng vẫn định tính** — vì 1/2 chỉ là *mã nhãn* cho nhóm Nữ/Nam, không có ý nghĩa toán (1,5 giới = vô nghĩa). Ví dụ tương tự: mã khoa `1=Nội, 2=Ngoại`, mã nhóm máu.
 3. **Quần thể/mẫu của bác sĩ Lan:** quần thể = bệnh nhân khám định kỳ tại phòng khám của cô (mà câu hỏi nhắm tới); mẫu = nhóm hồ sơ thực tế được đo. Trong bài: mẫu là 12 hồ sơ **giả lập**.
 4. **Hai lý do "ĐTĐ gây tăng huyết áp" chưa đứng:** (a) bảng này chỉ cho thấy *liên quan* trong 12 hồ sơ giả lập — mối liên quan quan sát được tự nó không chứng minh nhân quả; (b) yếu tố nhiễu: nhóm ĐTĐ già hơn hẳn (62,7 vs 40,4 tuổi) và BMI cao hơn — chênh lệch huyết áp có thể do tuổi/BMI, không hẳn do ĐTĐ.
-5. **Quan sát có kết luận nhân quả được không?** — Chính xác hơn: *một mối liên quan quan sát được thuần túy thì không*; nhưng dữ liệu quan sát **vẫn có thể** hỗ trợ lập luận nhân quả khi có thiết kế, giả định và phân tích phù hợp để xử lý yếu tố nhiễu (ví dụ khung "thử nghiệm mục tiêu" — Matthews và cs., BMJ 2022). Thử nghiệm ngẫu nhiên là chuẩn được ưu tiên cho hiệu quả can thiệp, nhưng nhiều câu hỏi không thể ngẫu nhiên hóa (đạo đức/chi phí) → quan sát thiết kế tốt vẫn là công cụ nghiên cứu nhân quả. Với bảng `mini_records`: chưa có thiết kế/phân tích như vậy → chỉ kết luận được liên quan trong mẫu.
+5. **Quan sát có kết luận nhân quả được không?** — Chính xác hơn: *một mối liên quan quan sát được thuần túy thì không*; nhưng dữ liệu quan sát **vẫn có thể** hỗ trợ lập luận nhân quả khi có thiết kế, giả định và phân tích phù hợp để xử lý yếu tố nhiễu (ví dụ cách làm "mô phỏng thử nghiệm mục tiêu" — tức thiết kế nghiên cứu quan sát giống thử nghiệm ngẫu nhiên hết mức có thể; Matthews và các đồng nghiệp, BMJ 2022). Thử nghiệm ngẫu nhiên là chuẩn được ưu tiên cho hiệu quả can thiệp, nhưng nhiều câu hỏi không thể ngẫu nhiên hóa (đạo đức/chi phí) → quan sát thiết kế tốt vẫn là công cụ nghiên cứu nhân quả. Với bảng `mini_records`: chưa có thiết kế/phân tích như vậy → chỉ kết luận được liên quan trong mẫu.
 
 ---
 

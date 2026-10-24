@@ -31,13 +31,14 @@
 | 8 | Link nội bộ | Kiểm tham chiếu tương đối trong lesson | PASS — `../../START-HERE-MAC.md`, `workbook.md`, `answer-key.md`, `source-map.md`, `qa/M01-author-selfcheck.md` đều tồn tại |
 | 9 | Trạng thái kỹ thuật | Rà nhãn | PASS — không artifact nào gắn `VERIFIED`; phần SPSS = `NOT_APPLICABLE` (đúng hơn `NOT_RUN` vì không có gì để chạy) |
 | 10 | Attribution | `source-map.md` | PASS — S03 metadata đầy đủ (Vu & Harrington, 1st ed ©2020, CC BY-SA 3.0), không sao chép, không branding |
+| 11 | Beginner-readability (Task 06) | Tự audit theo `project-control/BEGINNER-TEACHING-STANDARD.md` | PASS (AI-audit) — gloss lần đầu: BMI, HbA1c, ĐTĐ, SBP, RCT, tử/mẫu số, missing, mean, script, target trial emulation; chi tiết `reviews/M01-beginner-readability-review.md`. **Không phải** pilot người thật (NOT_RUN) |
 
 ## B. Findings tự phát hiện (severity theo `WORKFLOW-CONTRACT.md` §4)
 
 | id | severity | claim/vấn đề | trạng thái |
 |---|---|---|---|
 | M01-SC-1 | NOTE | §07 dùng nhãn `NOT_APPLICABLE` cho phần SPSS Output — vượt ngoài bộ 3 trạng thái phụ (NOT_RUN/RUN_PENDING_REVIEW/VERIFIED); hợp lý nhưng là diễn giải của tác giả | RESOLVED draft-2 — `NOT_APPLICABLE` chỉ là mô tả nội dung trong bài, KHÔNG phải lifecycle state; contract không bị sửa (đồng chiều finding review M01-09) |
-| M01-SC-2 | MINOR | Mục 3.7 đưa "confounder" sớm hơn glossary C (confounder nằm mục C-M06+) — giải thích ngay tại chỗ nên chấp nhận được, nhưng có thể quá tải nhẹ | OPEN — Pass 3 đánh giá (đoạn "thử nghiệm mục tiêu" mới thêm ở draft-2 cũng cần rà mức độ phù hợp) |
+| M01-SC-2 | MINOR | Mục 3.7 đưa "confounder" sớm hơn glossary C (confounder nằm mục C-M06+) — giải thích ngay tại chỗ nên chấp nhận được, nhưng có thể quá tải nhẹ | OPEN — Pass 3 đánh giá (draft-3 đã gloss "thử nghiệm mục tiêu"; mức tải §3.7 chỉ pilot thật mới phán xét được) |
 | M01-SC-3 | MINOR | BT2 #12 `smoking_status` có 2 đáp án có thể bảo vệ được (danh định/thứ bậc) — đáp án đã ghi cách chấm linh hoạt; nếu muốn chặt thì đổi mô tả biến | RESOLVED draft-2 — theo review M01-04: danh định là đáp án duy nhất; thứ bậc chỉ khi định nghĩa lại biến thành thang có thứ tự |
 | M01-SC-4 | NOTE | Claim C3–C4 (source-map) dựa trên TOC + outline PDF chính thức; **chưa đọc nguyên văn §1.3** — đã ghi cờ spot-check cho Pass 4 | RESOLVED draft-2 — đã trích nguyên văn §1.2.1/1.2.2/§1.3.1–1.3.7 từ PDF chính thức; quote cụ thể trong source-map (đồng chiều review M01-05) |
 

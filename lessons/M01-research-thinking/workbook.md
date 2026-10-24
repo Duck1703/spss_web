@@ -10,9 +10,9 @@
 
 **BT1a.** Với mỗi tình huống, xếp loại câu hỏi (**mô tả / so sánh / liên quan**):
 
-1. "Ở người bệnh đái tháo đường type 2 điều trị ngoại trú tại phòng khám X, HbA1c trung bình là bao nhiêu?"
+1. "Ở người bệnh đái tháo đường type 2 điều trị ngoại trú tại phòng khám X, HbA1c trung bình là bao nhiêu?" *(HbA1c: xét nghiệm máu cho biết đường huyết trung bình của khoảng 3 tháng trước)*
 2. "Thời gian lành vết thương ở bệnh nhân dùng băng gạc A có khác bệnh nhân dùng băng gạc B không?"
-3. "Số giờ ngủ trung bình mỗi đêm có liên quan với đường huyết đói không?"
+3. "Số giờ ngủ trung bình mỗi đêm có liên quan với đường huyết đói không?" *(đường huyết đói: lượng đường trong máu đo lúc chưa ăn sáng)*
 
 **BT1b.** Viết lại câu hỏi mơ hồ sau thành câu hỏi đủ 3 thành phần (quần thể + biến + đơn vị quan sát):
 > "Thuốc hạ huyết áp có tốt không?"
@@ -31,7 +31,7 @@ Bảng dưới liệt kê 12 cột trong một hồ sơ phòng khám giả lập
 | 4 | `blood_group` | A / B / O / AB | |
 | 5 | `bmi` | Chỉ số khối cơ thể (kg/m²) | |
 | 6 | `sbp_baseline` | Huyết áp tâm thu lúc nhập (mmHg) | |
-| 7 | `diabetes_flag` | 0 = không, 1 = có ĐTĐ | |
+| 7 | `diabetes_flag` | 0 = không, 1 = có ĐTĐ (đái tháo đường) | |
 | 8 | `pain_level` | không / nhẹ / vừa / nặng | |
 | 9 | `satisfaction` | rất không hài lòng … rất hài lòng (1–5) | |
 | 10 | `admission_ward` | Khoa nhập viện (Nội / Ngoại / Sản / Nhi) | |
@@ -66,7 +66,7 @@ Dùng đúng bảng `mini_records` (lesson.md mục 3.4). Với mỗi câu, đá
 2. Nêu **quần thể** và **mẫu** của tình huống. Đơn vị quan sát là gì?
 3. Thiết kế bảng biến tối thiểu cho tình huống: liệt kê ≥5 biến, ghi kiểu của từng biến (kèm mã hóa nếu là biến định tính).
 4. Đây là thiết kế **quan sát hay thực nghiệm**? Kết luận về "vaccine *gây* sốt" có được phép không?
-5. Trạm trưởng yêu cầu: "Tính cho tôi tỷ lệ người sốt sau tiêm." — Với thông tin trong tình huống, **tính được chưa?** Nếu chưa, chỉ rõ đang thiếu những con số nào (tử số là gì? mẫu số là gì? có chắc mẫu số là 200 không?).
+5. Trạm trưởng yêu cầu: "Tính cho tôi tỷ lệ người sốt sau tiêm." — Với thông tin trong tình huống, **tính được chưa?** Nếu chưa, chỉ rõ đang thiếu những con số nào. *(Gợi ý cách nghĩ: một tỷ lệ = tử số / mẫu số — tử số là số người bị sốt, mẫu số là số người được theo dõi đủ. Có chắc mẫu số là 200 không?)*
 6. Viết 1 câu kết luận **vượt quyền** mà một người hấp tấp có thể rút ra từ tình huống này — rồi viết lại phiên bản hợp lệ.
 
 ---

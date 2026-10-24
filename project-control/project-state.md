@@ -2,8 +2,8 @@
 
 > Đây là **nguồn thật duy nhất** về trạng thái dự án. Mọi agent tiếp nối phải đọc file này trước khi làm việc. Quy ước trạng thái module theo `WORKFLOW-CONTRACT.md`.
 
-- **Cập nhật lần cuối:** 2026-10-24 (Task 05 — M01 remediation)
-- **Phase hiện tại:** Reviewer độc lập (Task 04) trả `CHANGES_REQUIRED` → **draft-2 đã sửa 9/9 findings** → chờ **re-audit độc lập** (Pass 1/3/4); M02–M12 chưa sản xuất
+- **Cập nhật lần cuối:** 2026-10-24 (Task 06 — teaching standard + M01 readability)
+- **Phase hiện tại:** M01 **draft-3** (post-remediation + readability theo `BEGINNER-TEACHING-STANDARD.md`, D-019) → chờ **re-audit độc lập**; M02–M12 chưa sản xuất
 - **Blueprint:** nguyên vẹn — SHA-256 `cdb0b9736d20893a540320b88dc8b849928a2ff3976ecfe8718ccc7fc8066036` (re-verified Task 03)
 - **Git:** branch `master`, commits `4094497` → `f6d1ff5` → `26c7f91` (Task 02) → commit Task 03; clean, không remote
 
@@ -28,7 +28,7 @@
 
 | Module | Trạng thái lifecycle | Vị trí | Ghi chú |
 |---|---|---|---|
-| M01 | `DRAFTING` **draft-2 post-remediation → chờ re-audit (`STATISTICAL_QA`)** | `lessons/M01-research-thinking/` (lesson, workbook, answer-key, source-map, qa/selfcheck) + `reviews/M01-review-package.md` | Pilot; 9/9 review findings xử lý (Task 05) |
+| M01 | `DRAFTING` **draft-3 → chờ re-audit (`STATISTICAL_QA`)** | `lessons/M01-research-thinking/` + `reviews/M01-review-package.md` + `reviews/M01-beginner-readability-review.md` | Pilot; Task 05 sửa 9/9 findings, Task 06 sửa readability |
 | M02 | `PLANNED` (chờ duyệt) | `lessons/M02-spss-mac-foundations/production-plan.md` | Pilot; phụ thuộc U1–U3 (version/macOS/license) |
 | M03 | `PLANNED` (chờ duyệt) | `lessons/M03-data-preparation/production-plan.md` | Pilot; cần dataset giả lập nhỏ |
 | M04–M11 | `NOT_STARTED` | `lessons/M04-*` … `lessons/M11-*` | Chỉ có README giữ chỗ |

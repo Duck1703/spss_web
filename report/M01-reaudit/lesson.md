@@ -9,7 +9,7 @@
 
 ## 01. Tình huống y khoa
 
-Bác sĩ Lan phụ trách một phòng khám quận nhỏ. Cô nhận thấy nhiều bệnh nhân khám định kỳ có huyết áp cao hơn mong đợi, và tự hỏi: *"Bệnh nhân có chỉ số BMI cao có thường có huyết áp cao hơn không? Nếu đúng, mình nên chú ý điều gì khi tư vấn?"*
+Bác sĩ Lan phụ trách một phòng khám quận nhỏ. Cô nhận thấy nhiều bệnh nhân khám định kỳ có huyết áp cao hơn mong đợi, và tự hỏi: *"Bệnh nhân có chỉ số BMI cao có thường có huyết áp cao hơn không? Nếu đúng, mình nên chú ý điều gì khi tư vấn?"* — BMI (Body Mass Index) là chỉ số đo độ mập gầy, tính bằng cân nặng chia cho bình phương chiều cao (kg/m²).
 
 Để trả lời câu hỏi này có trách nhiệm, bác sĩ Lan không vội mở phần mềm. Trước hết cô cần trả lời được: *câu hỏi nghiên cứu chính xác là gì? Cần đo những thông tin nào? Trên ai? Và dữ liệu thu được cho phép kết luận đến đâu?*
 
@@ -44,6 +44,8 @@ So sánh:
 | "Bệnh đái tháo đường có nguy hiểm không?" | Quá mơ hồ — không biết cần đo gì, trên ai, "nguy hiểm" nghĩa là gì |
 | "Ở bệnh nhân đái tháo đường type 2 đang điều trị ngoại trú tại phòng khám X, chỉ số HbA1c trung bình là bao nhiêu?" | Đủ rõ: quần thể (bệnh nhân ĐTĐ type 2 ngoại trú, phòng khám X), biến (HbA1c), đơn vị quan sát (mỗi bệnh nhân) |
 
+*(Hai thuật ngữ y khoa ở câu trên: **đái tháo đường** — bệnh tăng đường huyết mạn tính, từ đây viết tắt **ĐTĐ**; **HbA1c** — xét nghiệm máu phản ánh đường huyết trung bình của khoảng 3 tháng trước.)*
+
 > ⚠️ **Hiểu lầm hay gặp:** câu hỏi "có hiệu quả không?" luôn cần thêm "hiệu quả đo bằng chỉ số nào, trên nhóm nào, so với cái gì".
 
 ### 3.2 Quần thể và mẫu
@@ -52,7 +54,7 @@ So sánh:
 - **Mẫu (sample):** nhóm thực sự được đo — một phần của quần thể.
 
 - **Thống kê mô tả (descriptive statistics):** tóm tắt *đúng những gì có trong mẫu* — ví dụ "tuổi trung bình của 12 hồ sơ này là 46".
-- **Suy luận thống kê (statistical inference):** dùng mẫu để nói về quần thể — luôn kèm độ bất định (học kỹ ở M05).
+- **Suy luận thống kê (statistical inference):** dùng mẫu để nói về quần thể — vì mẫu chỉ là một phần, kết quả luôn có sai số nhất định mà ta phải nêu rõ (cách đo sai số đó học kỹ ở M05).
 
 > ⚠️ **Phản ví dụ:** 12 hồ sơ ở mục 3.4 là mẫu **giả lập minh họa**, không đại diện cho bệnh nhân Việt Nam. Nếu bạn viết "bệnh nhân Việt Nam có tỷ lệ đái tháo đường 25%" từ bảng này, đó là kết luận vượt quyền.
 
@@ -96,8 +98,8 @@ Mỗi dòng = **một bệnh nhân giả lập** (đơn vị quan sát = bệnh 
 | `patient_id` | Mã hồ sơ hư cấu | P001…P012 | Định danh — **không phải biến phân tích** (nhưng vẫn giữ trong file: để đối chiếu dòng, truy vết lỗi nhập, sau này nối bảng — sẽ thấy rõ vai trò này ở M03) |
 | `age_years` | Tuổi | năm | Định lượng |
 | `sex_code` | Giới (mã hóa) | 1 = Nữ, 2 = Nam | Định tính danh định *(dù ghi bằng số)* |
-| `bmi` | Chỉ số khối cơ thể | kg/m² | Định lượng |
-| `sbp_baseline` | Huyết áp tâm thu lúc nhập | mmHg | Định lượng |
+| `bmi` | Chỉ số khối cơ thể — đo độ mập gầy | kg/m² | Định lượng |
+| `sbp_baseline` | Huyết áp tâm thu lúc nhập — con số lớn trong cặp huyết áp (áp lực khi tim bóp máu đi) | mmHg | Định lượng |
 | `diabetes_flag` | Có chẩn đoán đái tháo đường | 0 = không, 1 = có | Định tính danh định (nhị phân) |
 
 ### 3.5 Biến và kiểu biến
@@ -135,20 +137,20 @@ Quy tắc nhận diện nhanh: **hỏi "trung bình của biến này có nghĩa
 | Thiết kế | Đặc điểm | Kết luận cho phép |
 |---|---|---|
 | **Quan sát** (observational) | Chỉ đo/ghi nhận, không can thiệp | Liên quan là kết luận trực tiếp. Nhân quả **không tự có** — nhưng *có thể* được lập luận nếu thiết kế, giả định và phân tích xử lý được nhiễu (chi tiết ngoài phạm vi M01) |
-| **Thực nghiệm** (experimental, ví dụ thử nghiệm ngẫu nhiên RCT) | Nhà nghiên cứu *chủ động* phân nhóm can thiệp, lý tưởng là ngẫu nhiên | Chuẩn được ưu tiên cho hiệu quả can thiệp — nhưng không phải con đường duy nhất để nghiên cứu nhân quả |
+| **Thực nghiệm** (experimental) | Nhà nghiên cứu *chủ động* phân nhóm can thiệp, lý tưởng là chia nhóm ngẫu nhiên — thiết kế đó gọi là thử nghiệm ngẫu nhiên có đối chứng (randomized controlled trial, viết tắt **RCT**) | Chuẩn được ưu tiên cho hiệu quả can thiệp — nhưng không phải con đường duy nhất để nghiên cứu nhân quả |
 
-> 📌 **Phát biểu cần nhớ đúng:** *"Chỉ có mối liên quan thì chưa chứng minh nhân quả"* — **không phải** *"nghiên cứu quan sát không bao giờ nói được nhân quả"*. Nhiều câu hỏi y khoa không thể ngẫu nhiên hóa (ví dụ không thể cố tình cho trẻ phơi nhiễm chì để xem hại thần kinh — phi đạo đức); khi đó người ta vẫn suy luận nhân quả từ dữ liệu quan sát nhờ thiết kế và phân tích thích hợp (xử lý yếu tố nhiễu, mô phỏng "thử nghiệm mục tiêu"...). Ở bảng `mini_records` này chưa có thiết kế/phân tích như vậy — nên **từ bảng này không thể nói đái tháo đường gây tăng huyết áp**, chỉ nói được hai thứ *đi cùng nhau trong 12 hồ sơ*.
+> 📌 **Phát biểu cần nhớ đúng:** *"Chỉ có mối liên quan thì chưa chứng minh nhân quả"* — **không phải** *"nghiên cứu quan sát không bao giờ nói được nhân quả"*. Nhiều câu hỏi y khoa không thể ngẫu nhiên hóa (ví dụ không thể cố tình cho trẻ phơi nhiễm chì để xem hại thần kinh — phi đạo đức); khi đó người ta vẫn suy luận nhân quả từ dữ liệu quan sát nhờ thiết kế và phân tích thích hợp — ví dụ thiết kế lại nghiên cứu quan sát để *giống một thử nghiệm ngẫu nhiên hết mức có thể* (kỹ thuật này gọi là mô phỏng thử nghiệm mục tiêu, target trial emulation; chỉ cần biết nó tồn tại, chưa cần học cách làm). Ở bảng `mini_records` này chưa có thiết kế/phân tích như vậy — nên **từ bảng này không thể nói đái tháo đường gây tăng huyết áp**, chỉ nói được hai thứ *đi cùng nhau trong 12 hồ sơ*.
 
 **Checklist phát hiện kết luận vượt quyền:**
 1. Câu kết luận có từ nhân quả ("gây", "làm tăng", "ngăn được") trong khi dữ liệu chỉ cho thấy liên quan thuần túy (không có thiết kế/phân tích xử lý nhiễu)?
 2. Nói về quần thể lớn khi chỉ đo một mẫu nhỏ/không đại diện?
 3. Bỏ qua yếu tố thứ ba hiển nhiên (tuổi, bệnh nền, thuốc đang dùng)?
 4. Tóm tắt trong mẫu bị phát biểu như chân lý lâm sàng?
-5. Tính một chỉ số khi **thiếu tử số hoặc mẫu số** (ví dụ chưa biết bao nhiêu người bị sốt, bao nhiêu người được theo dõi đủ)?
+5. Tính một chỉ số khi **thiếu dữ kiện để tính**? Một tỷ lệ luôn gồm *tử số* (số người bị/hay có đặc điểm đó) chia *mẫu số* (tổng số người được theo dõi) — nếu chưa biết một trong hai (ví dụ chưa biết bao nhiêu người bị sốt, bao nhiêu người được theo dõi đủ) thì chưa tính được.
 
 ### 3.8 Codebook và đạo đức dữ liệu — vì sao quan trọng ngay từ đầu
 
-- **Codebook** = "giấy khai sinh" của bộ dữ liệu: tên biến, ý nghĩa, đơn vị, mã hóa, quy ước missing. Không có nó, `sex_code=1` sẽ là bí ẩn cho người khác (và cho chính bạn sau 3 tháng).
+- **Codebook** = "giấy khai sinh" của bộ dữ liệu: tên biến, ý nghĩa, đơn vị, mã hóa, quy ước khi dữ liệu bị thiếu (missing). Không có nó, `sex_code=1` sẽ là bí ẩn cho người khác (và cho chính bạn sau 3 tháng).
 - **Đạo đức dữ liệu y khoa:** dữ liệu bệnh nhân thật là thông tin nhạy cảm — cần sự đồng ý, giấu danh tính, và cơ sở pháp lý. Trong khóa này **chỉ dùng dữ liệu giả lập có nhãn SIMULATED** hoặc dữ liệu công khai hợp lệ; tuyệt đối không dùng hồ sơ bệnh nhân thật khi chưa có thẩm quyền.
 
 ---
@@ -185,11 +187,11 @@ Không có syntax trong M01. Syntax được giới thiệu từ M03 sau khi que
 
 | Câu hỏi | Chỉ số | Kết quả (tính tay — đã kiểm lại) | Đơn vị |
 |---|---|---|---|
-| Tuổi trung bình của 12 hồ sơ? | mean(`age_years`) | **46,0** | năm |
+| Tuổi trung bình của 12 hồ sơ? | trung bình cộng (`mean`) của `age_years` | **46,0** | năm |
 | Tỷ lệ có đái tháo đường? | đếm `diabetes_flag=1` / 12 | **3/12 = 25,0%** | % (trong mẫu) |
 | Huyết áp tâm thu trung bình? | mean(`sbp_baseline`) | **129,8** | mmHg |
-| Nhóm có ĐTĐ vs không: huyết áp TB? | mean SBP theo nhóm | **149,0 vs 123,3** | mmHg |
-| Câu hỏi mở đầu của bác sĩ Lan: nhóm BMI cao (≥26) vs BMI thấp (<26): huyết áp TB? | mean SBP theo nhóm BMI | **140,8 vs 118,7** | mmHg |
+| Nhóm có ĐTĐ vs không: huyết áp trung bình? | mean SBP theo nhóm | **149,0 vs 123,3** | mmHg |
+| Câu hỏi mở đầu của bác sĩ Lan: nhóm BMI cao (≥26) vs BMI thấp (<26): huyết áp trung bình? | mean SBP theo nhóm BMI | **140,8 vs 118,7** | mmHg |
 
 Quay lại câu hỏi mở bài — *"bệnh nhân BMI cao có huyết áp cao hơn không?"*: đây là câu hỏi loại **liên quan**, và trong 12 hồ sơ này câu trả lời mô tả là *có đi kèm* (140,8 vs 118,7 mmHg). Nhưng để ý: nhóm BMI cao cũng **già hơn hẳn** (trung bình 56,0 vs 36,0 tuổi) — tuổi lại là yếu tố nhiễu tiềm năng, nên ta vẫn không thể nói "BMI cao gây huyết áp cao" từ bảng này.
 
@@ -228,7 +230,7 @@ Tự hỏi (trả lời bằng lời, không nhìn trên):
 ## 12. Đáp án & bằng chứng
 
 - Đáp án đầy đủ + giải thích: `answer-key.md` (checkpoint + workbook BT1–BT4).
-- Các con số ở mục 07 đã **tái tính độc lập bằng script** (xem `qa/M01-author-selfcheck.md`, mục kiểm số học) — tính từ chính bảng trong bài, không dùng SPSS.
+- Các con số ở mục 07 đã **tái tính độc lập bằng một đoạn lệnh máy tính** (xem `qa/M01-author-selfcheck.md`, mục kiểm số học) — tính từ chính bảng trong bài, không dùng SPSS.
 - Nguồn khái niệm: `source-map.md` — chủ yếu OpenIntro ISLBS Ch.1 (Vu & Harrington, 2020, CC BY-SA 3.0); không sao chép nguyên văn, ví dụ y khoa do tác giả tạo.
 
 ---
