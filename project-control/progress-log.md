@@ -148,3 +148,13 @@
 - Audit M01 theo chuẩn: sửa 16 chỗ thuật-ngữ-dùng-trước-khi-giải-thích (BMI, HbA1c, ĐTĐ, huyết áp tâm thu, RCT, tử/mẫu số, missing, mean, script, target trial emulation...).
 - Báo cáo: `reviews/M01-beginner-readability-review.md`. Không đụng bảng `mini_records`/số học → không tái xuất lỗi Task 05.
 - M01 → **draft-3**, chờ re-audit; Pass 3 (người học thật) vẫn NOT_RUN.
+
+## 2026-10-24 — Task 07: M01 final beginner-quality remediation (draft-4)
+
+- BT4: sửa mâu thuẫn mẫu số — tách "200 được tiêm" vs "số có dữ liệu theo dõi (chưa biết)"; giải thích vì sao thiếu theo dõi quan trọng; mẫu số = nhóm câu hỏi nói về (không máy móc = số hoàn thành).
+- §3.2: "sai số nhất định" → ví dụ bốc mẫu khác → "biến động mẫu (sampling variability)".
+- §3.7 giảm tải: phần nâng cao (RCT, TTE) → hộp "Đọc thêm"; chính bài giữ association ≠ causation + ví dụ; checkpoint Q5 rút gọn.
+- "confounder" → "**yếu tố nhiễu tiềm năng**" ở mọi chỗ nói về tuổi/BMI trong mini_records.
+- Metadata: review-package/selfcheck → draft-4; xóa phát biểu cũ "§1.3 chưa đọc"; source-map phân biệt full-text vs abstract-only.
+- D-019 giữ PROPOSED; `BEGINNER-TEACHING-STANDARD.md` kèm trong `report/`.
+- M01 → **draft-4**, chờ re-audit độc lập.

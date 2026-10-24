@@ -10,8 +10,8 @@
 1. **Vì sao viết câu hỏi trước khi thu dữ liệu?** — Vì câu hỏi quyết định đo cái gì, trên ai, và kết luận được phép đến đâu. Thu dữ liệu trước → thường thiếu biến cần thiết hoặc thu thừa, và dễ rơi vào thói quen xấu: nhìn số liệu có sẵn rồi mới nghĩ ra kết luận muốn có.
 2. **`sex_code` là số nhưng vẫn định tính** — vì 1/2 chỉ là *mã nhãn* cho nhóm Nữ/Nam, không có ý nghĩa toán (1,5 giới = vô nghĩa). Ví dụ tương tự: mã khoa `1=Nội, 2=Ngoại`, mã nhóm máu.
 3. **Quần thể/mẫu của bác sĩ Lan:** quần thể = bệnh nhân khám định kỳ tại phòng khám của cô (mà câu hỏi nhắm tới); mẫu = nhóm hồ sơ thực tế được đo. Trong bài: mẫu là 12 hồ sơ **giả lập**.
-4. **Hai lý do "ĐTĐ gây tăng huyết áp" chưa đứng:** (a) bảng này chỉ cho thấy *liên quan* trong 12 hồ sơ giả lập — mối liên quan quan sát được tự nó không chứng minh nhân quả; (b) yếu tố nhiễu: nhóm ĐTĐ già hơn hẳn (62,7 vs 40,4 tuổi) và BMI cao hơn — chênh lệch huyết áp có thể do tuổi/BMI, không hẳn do ĐTĐ.
-5. **Quan sát có kết luận nhân quả được không?** — Chính xác hơn: *một mối liên quan quan sát được thuần túy thì không*; nhưng dữ liệu quan sát **vẫn có thể** hỗ trợ lập luận nhân quả khi có thiết kế, giả định và phân tích phù hợp để xử lý yếu tố nhiễu (ví dụ cách làm "mô phỏng thử nghiệm mục tiêu" — tức thiết kế nghiên cứu quan sát giống thử nghiệm ngẫu nhiên hết mức có thể; Matthews và các đồng nghiệp, BMJ 2022). Thử nghiệm ngẫu nhiên là chuẩn được ưu tiên cho hiệu quả can thiệp, nhưng nhiều câu hỏi không thể ngẫu nhiên hóa (đạo đức/chi phí) → quan sát thiết kế tốt vẫn là công cụ nghiên cứu nhân quả. Với bảng `mini_records`: chưa có thiết kế/phân tích như vậy → chỉ kết luận được liên quan trong mẫu.
+4. **Hai lý do "ĐTĐ gây tăng huyết áp" chưa đứng:** (a) bảng này chỉ cho thấy *liên quan* trong 12 hồ sơ giả lập — mối liên quan quan sát được tự nó không chứng minh nhân quả; (b) có yếu tố nhiễu tiềm năng: nhóm ĐTĐ già hơn hẳn (62,7 vs 40,4 tuổi) và BMI cao hơn — chênh lệch huyết áp *có thể* do tuổi/BMI, không hẳn do ĐTĐ.
+5. **Từ quan sát, khi nào lập luận được nhân quả?** — Câu trả lời ngắn: **liên quan thuần túy thì chưa đủ**; được khi có thiết kế và phân tích thích hợp để xử lý yếu tố nhiễu. *(Muốn hiểu sâu hơn — thử nghiệm ngẫu nhiên và "mô phỏng thử nghiệm mục tiêu" — đọc hộp "Đọc thêm" ở cuối mục 3.7 trong `lesson.md`.)* Với bảng `mini_records`: chưa có thiết kế/phân tích đó → chỉ kết luận được liên quan trong mẫu.
 
 ---
 
@@ -61,8 +61,8 @@ Câu gốc "có tốt không?" thiếu: **quần thể** (ai?), **biến/kết c
 | 1 | "25% có ĐTĐ trong 12 hồ sơ giả lập" | ✅ | Mô tả đúng mẫu, đúng phạm vi, có nhãn giả lập |
 | 2 | "Người VN có tỷ lệ ĐTĐ ~25%" | ❌ | Nhảy từ mẫu 12 hồ sơ giả lập → quần thể quốc gia: mẫu không đại diện + dữ liệu không thật |
 | 3 | "Nhóm ĐTĐ huyết áp TB cao hơn (149,0 vs 123,3)" | ✅ | Mô tả trong bảng — đúng cả con số lẫn phạm vi |
-| 4 | "ĐTĐ gây tăng huyết áp" | ❌ | Tuyên bố nhân quả từ một bảng quan sát chưa xử lý nhiễu; bỏ qua confounder tuổi/BMI; mẫu nhỏ không đại diện |
-| 5 | "Nhóm ĐTĐ lớn tuổi hơn (62,7 vs 40,4)" | ✅ | Mô tả đúng — và chính là bằng chứng confounder cho #4 |
+| 4 | "ĐTĐ gây tăng huyết áp" | ❌ | Tuyên bố nhân quả từ một bảng quan sát chưa xử lý nhiễu; bỏ qua yếu tố nhiễu tiềm năng (tuổi, BMI); mẫu nhỏ không đại diện |
+| 5 | "Nhóm ĐTĐ lớn tuổi hơn (62,7 vs 40,4)" | ✅ | Mô tả đúng — và chính là dấu hiệu của yếu tố nhiễu tiềm năng ở #4 |
 
 *Lỗi hay gặp:* cho rằng câu đúng con số = câu hợp lệ. Câu 2 và 4 đều "đúng số" nhưng **sai phạm vi kết luận** — đây là lỗi nguy hiểm nhất.
 
@@ -76,7 +76,7 @@ Câu gốc "có tốt không?" thiếu: **quần thể** (ai?), **biến/kết c
 
 **2. Quần thể / mẫu / đơn vị quan sát:**
 - Quần thể: người ≥60 tuổi tại phường đủ điều kiện tiêm cúm (nhóm câu hỏi muốn nói về).
-- Mẫu: 200 người thực tế được tiêm và theo dõi.
+- Mẫu: phân hai mức cho rõ — **200 người được tiêm** là số ghi nhận ban đầu; còn **số người có dữ liệu theo dõi 7 ngày** thì tình huống chưa cho biết (được *hẹn* quay lại ≠ chắc đã quay lại).
 - Đơn vị quan sát: **mỗi người được tiêm** (không phải mỗi mũi tiêm hay mỗi cuộc gọi).
 
 **3. Bảng biến tối thiểu (ví dụ chấp nhận được):**
@@ -94,12 +94,16 @@ Câu gốc "có tốt không?" thiếu: **quần thể** (ai?), **biến/kết c
 
 **5. Tính được tỷ lệ sốt chưa?** — **Chưa.** Thiếu cả hai thành phần:
 - *Tử số:* số người sốt trong 7 ngày sau tiêm — tình huống chưa cho con số này.
-- *Mẫu số:* số người **hoàn thành theo dõi 7 ngày** — không chắc bằng 200, vì có thể có người không quay lại/không nghe điện. Mẫu số đúng là số người có dữ liệu theo dõi, không phải số người được tiêm.
+- *Mẫu số:* số người **có dữ liệu theo dõi về sốt** — không chắc bằng 200, vì có thể có người không quay lại/không nghe điện. Mẫu số đúng là số người mà ta *thực sự biết* có sốt hay không, không phải số người được tiêm.
+
+**Vì sao thiếu thông tin theo dõi lại quan trọng?** Nếu tính tỷ lệ sốt trên nhóm không đủ theo dõi rồi nói như thể đó là toàn bộ 200 người, con số sẽ lệch theo hướng không biết trước — những người không quay lại có thể khác (khỏe hơn, hoặc ốm hơn) những người quay lại. Khi báo cáo phải nói rõ: "tỷ lệ X% **trong số N người có dữ liệu theo dõi**".
+
+**Làm rõ để không hiểu máy móc:** mẫu số không phải lúc nào cũng là "số người hoàn thành theo dõi" — nó là **nhóm mà câu hỏi đang nói về**. Nếu câu hỏi là "tỷ lệ người sốt trong 200 người được tiêm" thì mẫu số là 200, nhưng khi đó tử số phải biết được trên cả 200 người — điều tình huống chưa đảm bảo. Còn nếu chỉ có dữ liệu trên một phần, tỷ lệ tính ra chỉ mô tả phần đó và phải ghi rõ.
 
 Đây là kỹ năng quan trọng: **nhận ra khi chưa đủ dữ kiện để tính** thay vì tự bịa con số.
 
 **6. Kết luận vượt quyền → phiên bản hợp lệ:**
 - ❌ "Vaccine cúm gây sốt ở người già." (vượt quyền kép: vừa nhân quả vừa tự có con số khi chưa đủ dữ kiện)
-- ✅ "Chưa tính được tỷ lệ sốt vì chưa biết số người sốt và số người hoàn thành theo dõi. Khi có đủ, đó là tỷ lệ mô tả trong mẫu quan sát — muốn nói vaccine *gây* sốt cần thiết kế có nhóm so sánh và xử lý yếu tố nhiễu."
+- ✅ "Chưa tính được tỷ lệ sốt vì chưa biết số người sốt và số người có dữ liệu theo dõi. Khi có đủ, đó là tỷ lệ mô tả trong nhóm được theo dõi — muốn nói vaccine *gây* sốt cần thiết kế có nhóm so sánh và xử lý yếu tố nhiễu tiềm năng."
 
 *Lỗi hay gặp ở BT4:* chọn đơn vị quan sát = "mũi tiêm" (sai — mỗi người 1 mũi nhưng bảng theo dõi theo người); quên mã hóa cho biến định tính trong bảng biến.

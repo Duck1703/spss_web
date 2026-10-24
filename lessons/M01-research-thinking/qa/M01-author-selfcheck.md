@@ -1,7 +1,7 @@
 # M01 — Author Self-Check (tự kiểm phía tác giả)
 
 > **Bản chất:** đây là self-check của người biên soạn — **KHÔNG phải** Pass 1 (statistical QA độc lập), Pass 3 (beginner QA), Pass 4 (source audit), Pass 5, hay HUMAN_APPROVAL.
-> Ngày: 2026-10-24 · Phiên bản artifact: **draft-2 (post-remediation Task 05)**.
+> Ngày: 2026-10-24 · Phiên bản artifact: **draft-4** (draft-2 post-Task-05 → draft-3 readability Task-06 → draft-4 final remediation Task-07).
 
 ## A0. Remediation theo review độc lập (Task 04 → CHANGES_REQUIRED)
 
@@ -16,6 +16,17 @@
 | M01-07 quá đá vs 80/20% | MINOR | "mẫu quá nhỏ để kết luận gì" → phân biệt mô tả mẫu vs suy luận; bỏ khẳng định 80/20 ở §04 | RESOLVED |
 | M01-08 patient_id sau này | NOTE | Codebook mini ghi rõ: giữ cột ID để truy vết/nối bảng, không phân tích (vai trò rõ ở M03) | RESOLVED |
 | M01-09 NOT_APPLICABLE | NOTE | Giữ nhãn mô tả "KHÔNG ÁP DỤNG" trong bài; giải thích trong file này (mục C) rằng nó không phải lifecycle state — contract lifecycle không đổi | RESOLVED |
+
+### A0b. Remediation theo re-audit (Task 07, draft-4)
+
+| Finding | Xử lý | Trạng thái |
+|---|---|---|
+| BT4 mâu thuẫn mẫu số (200 tiêm ≠ 200 theo dõi) | Answer-key BT4.2 tách "200 được tiêm" vs "số có dữ liệu theo dõi: chưa biết"; BT4.5 bổ sung "vì sao thiếu theo dõi quan trọng" + đoạn làm rõ mẫu số = nhóm câu hỏi nói về (không phải luôn là số hoàn thành) | RESOLVED (chờ re-audit) |
+| §3.2 "sai số nhất định" khó hiểu | Viết lại bằng ví dụ bốc 12 hồ sơ khác → số khác; sau đó mới giới thiệu "biến động mẫu (sampling variability)"; không nhầm với sai sót đo lường | RESOLVED |
+| §3.7 quá tải | Phần nâng cao (RCT, target trial emulation, "quan sát vẫn lập luận nhân quả được") đưa xuống hộp `<details>` "Đọc thêm — chưa cần ghi nhớ"; phần chính chỉ giữ association ≠ causation + 2 ví dụ + bảng thiết kế rút gọn + câu cần nhớ; checkpoint Q5 answer rút gọn, trỏ về hộp đọc thêm | RESOLVED |
+| Confounder trình bày như sự thật | Tuổi trong `mini_records` đổi thành "**yếu tố nhiễu tiềm năng**" (chỉ nghi, chưa khẳng định) ở lesson §3.7/§09 + answer-key Q4, BT3 #4–#5, BT4.6 | RESOLVED |
+| Metadata cũ | review-package → draft-4 + lịch sử review bảo tồn; xóa phát biểu "§1.3 chưa đọc" (đã đọc nguyên văn Task 05); source-map phân biệt rõ full-text (S03) vs abstract-only (S12) | RESOLVED |
+| D-019 (chuẩn teaching) | Giữ PROPOSED — không tự duyệt; file đầy đủ kèm trong `report/` để owner/reviewer xem | RESOLVED |
 
 ## A. Kiểm tra đã thực hiện (có bằng chứng)
 
@@ -38,7 +49,7 @@
 | id | severity | claim/vấn đề | trạng thái |
 |---|---|---|---|
 | M01-SC-1 | NOTE | §07 dùng nhãn `NOT_APPLICABLE` cho phần SPSS Output — vượt ngoài bộ 3 trạng thái phụ (NOT_RUN/RUN_PENDING_REVIEW/VERIFIED); hợp lý nhưng là diễn giải của tác giả | RESOLVED draft-2 — `NOT_APPLICABLE` chỉ là mô tả nội dung trong bài, KHÔNG phải lifecycle state; contract không bị sửa (đồng chiều finding review M01-09) |
-| M01-SC-2 | MINOR | Mục 3.7 đưa "confounder" sớm hơn glossary C (confounder nằm mục C-M06+) — giải thích ngay tại chỗ nên chấp nhận được, nhưng có thể quá tải nhẹ | OPEN — Pass 3 đánh giá (draft-3 đã gloss "thử nghiệm mục tiêu"; mức tải §3.7 chỉ pilot thật mới phán xét được) |
+| M01-SC-2 | MINOR | Mục 3.7 đưa "confounder" sớm hơn glossary C (confounder nằm mục C-M06+) — giải thích ngay tại chỗ nên chấp nhận được, nhưng có thể quá tải nhẹ | OPEN — Pass 3 đánh giá (draft-4 đã giảm tải: phần nâng cao xuống hộp "Đọc thêm", confounder nói "tiềm năng"; mức tải chỉ pilot thật mới phán xét được) |
 | M01-SC-3 | MINOR | BT2 #12 `smoking_status` có 2 đáp án có thể bảo vệ được (danh định/thứ bậc) — đáp án đã ghi cách chấm linh hoạt; nếu muốn chặt thì đổi mô tả biến | RESOLVED draft-2 — theo review M01-04: danh định là đáp án duy nhất; thứ bậc chỉ khi định nghĩa lại biến thành thang có thứ tự |
 | M01-SC-4 | NOTE | Claim C3–C4 (source-map) dựa trên TOC + outline PDF chính thức; **chưa đọc nguyên văn §1.3** — đã ghi cờ spot-check cho Pass 4 | RESOLVED draft-2 — đã trích nguyên văn §1.2.1/1.2.2/§1.3.1–1.3.7 từ PDF chính thức; quote cụ thể trong source-map (đồng chiều review M01-05) |
 

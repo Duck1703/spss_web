@@ -7,9 +7,9 @@
 
 | Source ID | Nguồn | Tác giả/Tổ chức | Trạng thái | URL |
 |---|---|---|---|---|
-| S03 | Introductory Statistics for the Life and Biomedical Sciences, First Edition (©2020) | **Julie Vu & David Harrington** (derivative của OpenIntro Statistics 3rd, Diez/Barr/Çetinkaya-Rundel) | `VERIFIED_SOURCE` — book page + PDF chính thức đã tải và trích text §1.2/§1.3 (2026-10-24) | https://www.openintro.org/book/biostat/ |
-| S05 | SAMPL Guidelines | Lang TA, Altman DG / EQUATOR Network | `VERIFIED_SOURCE` | https://www.equator-network.org/reporting-guidelines/sampl/ |
-| S12 | "Target trial emulation: applying principles of randomised trials to observational studies", BMJ 2022;378:e071108 | Matthews AA, Danaei G, Islam N, Kurth T | `VERIFIED_SOURCE` — abstract/metadata qua doi.org/bmj.com search extract (2026-10-24); fetch trực tiếp bị 403 | https://www.bmj.com/content/378/bmj-2022-071108 |
+| S03 | Introductory Statistics for the Life and Biomedical Sciences, First Edition (©2020) | **Julie Vu & David Harrington** (derivative của OpenIntro Statistics 3rd, Diez/Barr/Çetinkaya-Rundel) | `VERIFIED_SOURCE` — **mức full-text:** PDF chính thức đã tải và trích nguyên văn §1.2.1, §1.2.2, §1.3.1–1.3.7 (2026-10-24) | https://www.openintro.org/book/biostat/ |
+| S05 | SAMPL Guidelines | Lang TA, Altman DG / EQUATOR Network | `VERIFIED_SOURCE` — **mức trang guideline** (đã mở, chỉ mượn nguyên tắc tổng quát) | https://www.equator-network.org/reporting-guidelines/sampl/ |
+| S12 | "Target trial emulation: applying principles of randomised trials to observational studies", BMJ 2022;378:e071108 | Matthews AA, Danaei G, Islam N, Kurth T | `VERIFIED_SOURCE` — **mức abstract/metadata chứ không full-text** (doi.org + search extract 2026-10-24; fetch bmj.com bị 403). Claim trong bài chỉ dùng ý có trong abstract | https://www.bmj.com/content/378/bmj-2022-071108 |
 | BP | Blueprint v1 | Internal | Internal | `SPSS_Medical_Learning_Pack_v1_Blueprint.md` |
 
 **License note (S03):** CC BY-SA 3.0. Bài học **viết lại hoàn toàn bằng lời riêng**, không sao chép đoạn văn/hình/bài tập của sách; ví dụ y khoa là nguyên tác giả. Khi phát hành giáo trình cần ghi công OpenIntro/Vu & Harrington (ghi công đã có trong bảng trên) — không dùng branding/gợi ý endorsement.

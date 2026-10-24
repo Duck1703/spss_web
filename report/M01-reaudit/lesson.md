@@ -54,7 +54,9 @@ So sánh:
 - **Mẫu (sample):** nhóm thực sự được đo — một phần của quần thể.
 
 - **Thống kê mô tả (descriptive statistics):** tóm tắt *đúng những gì có trong mẫu* — ví dụ "tuổi trung bình của 12 hồ sơ này là 46".
-- **Suy luận thống kê (statistical inference):** dùng mẫu để nói về quần thể — vì mẫu chỉ là một phần, kết quả luôn có sai số nhất định mà ta phải nêu rõ (cách đo sai số đó học kỹ ở M05).
+- **Suy luận thống kê (statistical inference):** dùng mẫu để nói về quần thể — ví dụ từ 12 hồ sơ này ước lượng tuổi trung bình của *toàn bộ* bệnh nhân phòng khám.
+
+Vì sao suy luận cần thận trọng? Hình dung: nếu bác sĩ Lan bốc 12 hồ sơ *khác* của cùng phòng khám, tuổi trung bình gần như chắc chắn sẽ **không còn là 46,0** — có thể 44 hay 49. Không phải ai đo sai; chỉ vì mỗi mẫu là một phần khác nhau của quần thể, nên mỗi mẫu cho một con số hơi khác. Hiện tượng "mẫu nào cũng lệch quần thể một ít theo cách riêng của nó" gọi là **biến động mẫu (sampling variability)** — và đo nó lệch bao nhiêu là công việc của suy luận thống kê (học kỹ ở M05).
 
 > ⚠️ **Phản ví dụ:** 12 hồ sơ ở mục 3.4 là mẫu **giả lập minh họa**, không đại diện cho bệnh nhân Việt Nam. Nếu bạn viết "bệnh nhân Việt Nam có tỷ lệ đái tháo đường 25%" từ bảng này, đó là kết luận vượt quyền.
 
@@ -128,18 +130,29 @@ Quy tắc nhận diện nhanh: **hỏi "trung bình của biến này có nghĩa
 
 **Mối liên quan (association):** hai thứ thay đổi cùng nhau. **Nhân quả (causation):** cái này *gây ra* cái kia. Association **không suy ra** causation.
 
-**Ví dụ phản biện trong bảng trên:** 3 bệnh nhân có `diabetes_flag=1` có huyết áp trung bình 149 mmHg, cao hơn 9 người còn lại (123 mmHg). Nhưng nhóm này cũng **già hơn nhiều** (trung bình 62,7 tuổi so với 40,4) và **BMI cao hơn**. Tuổi ở đây là một **yếu tố nhiễu (confounder)** — biến thứ ba có thể giải thích một phần mối liên quan. Lưu ý phạm vi: bảng này **đủ để mô tả chính 12 hồ sơ này** (ai cao hơn, bao nhiêu mmHg), nhưng quá nhỏ và không đại diện để nói gì về quần thể bệnh nhân hay suy ra khuyến nghị lâm sàng.
+**Ví dụ ngay trong bảng trên:** 3 bệnh nhân có `diabetes_flag=1` có huyết áp trung bình 149 mmHg, cao hơn 9 người còn lại (123 mmHg). Nhưng nhóm này cũng **già hơn nhiều** (trung bình 62,7 tuổi so với 40,4) và **BMI cao hơn**. Tuổi ở đây là một **yếu tố nhiễu tiềm năng** — tức một biến thứ ba đi kèm cả hai phía và *có thể* giải thích một phần mối liên quan; một yếu tố như vậy trong thống kê gọi là yếu tố nhiễu (confounder). Với 12 hồ sơ giả lập ta chỉ *nghi* tuổi nhiễu, chưa khẳng định được. Lưu ý phạm vi: bảng này **đủ để mô tả chính 12 hồ sơ này** (ai cao hơn, bao nhiêu mmHg), nhưng quá nhỏ và không đại diện để nói gì về quần thể bệnh nhân hay suy ra khuyến nghị lâm sàng.
 
 **Phản ví dụ kinh điển:** người uống nhiều cà phê có tỷ lệ mất ngủ cao hơn. Cà phê gây mất ngủ? Có thể — nhưng cũng có thể: (a) người mất ngủ uống nhiều cà phê hơn để tỉnh (**nhân quả ngược**); (b) người làm việc căng thẳng vừa uống nhiều cà phê vừa khó ngủ (**yếu tố nhiễu**). Dữ liệu quan sát thuần túy không tự phân biệt được 3 khả năng này.
 
 **Thiết kế nghiên cứu quyết định mức kết luận cho phép:**
 
-| Thiết kế | Đặc điểm | Kết luận cho phép |
+| Thiết kế | Đặc điểm | Kết luận trực tiếp cho phép |
 |---|---|---|
-| **Quan sát** (observational) | Chỉ đo/ghi nhận, không can thiệp | Liên quan là kết luận trực tiếp. Nhân quả **không tự có** — nhưng *có thể* được lập luận nếu thiết kế, giả định và phân tích xử lý được nhiễu (chi tiết ngoài phạm vi M01) |
-| **Thực nghiệm** (experimental) | Nhà nghiên cứu *chủ động* phân nhóm can thiệp, lý tưởng là chia nhóm ngẫu nhiên — thiết kế đó gọi là thử nghiệm ngẫu nhiên có đối chứng (randomized controlled trial, viết tắt **RCT**) | Chuẩn được ưu tiên cho hiệu quả can thiệp — nhưng không phải con đường duy nhất để nghiên cứu nhân quả |
+| **Quan sát** (observational) | Chỉ đo/ghi nhận, không can thiệp | Liên quan — nhưng nhân quả **không tự có** |
+| **Thực nghiệm** (experimental) | Nhà nghiên cứu *chủ động* phân nhóm can thiệp | Có thể nói về nhân quả nếu thiết kế tốt |
 
-> 📌 **Phát biểu cần nhớ đúng:** *"Chỉ có mối liên quan thì chưa chứng minh nhân quả"* — **không phải** *"nghiên cứu quan sát không bao giờ nói được nhân quả"*. Nhiều câu hỏi y khoa không thể ngẫu nhiên hóa (ví dụ không thể cố tình cho trẻ phơi nhiễm chì để xem hại thần kinh — phi đạo đức); khi đó người ta vẫn suy luận nhân quả từ dữ liệu quan sát nhờ thiết kế và phân tích thích hợp — ví dụ thiết kế lại nghiên cứu quan sát để *giống một thử nghiệm ngẫu nhiên hết mức có thể* (kỹ thuật này gọi là mô phỏng thử nghiệm mục tiêu, target trial emulation; chỉ cần biết nó tồn tại, chưa cần học cách làm). Ở bảng `mini_records` này chưa có thiết kế/phân tích như vậy — nên **từ bảng này không thể nói đái tháo đường gây tăng huyết áp**, chỉ nói được hai thứ *đi cùng nhau trong 12 hồ sơ*.
+> 📌 **Câu cần nhớ:** *"Chỉ có mối liên quan thì chưa chứng minh nhân quả."* Từ bảng `mini_records`, ta không thể nói "đái tháo đường gây tăng huyết áp" — chỉ nói được hai thứ *đi cùng nhau trong 12 hồ sơ*.
+
+<details><summary>📖 <b>Đọc thêm — chưa cần ghi nhớ:</b> vậy có bao giờ suy luận nhân quả từ dữ liệu quan sát không?</summary>
+
+Câu trả lời ngắn: **có**, nhưng cần nhiều hơn một bảng số liệu thô.
+
+- Thử nghiệm chia nhóm **ngẫu nhiên** (randomized controlled trial, viết tắt **RCT**) là thiết kế được ưu tiên để đánh giá hiệu quả can thiệp — vì ngẫu nhiên hóa làm hai nhóm tương đương, xóa phần lớn nhiễu.
+- Nhưng nhiều câu hỏi y khoa **không thể ngẫu nhiên hóa** — ví dụ không ai được cố tình cho trẻ phơi nhiễm chì để xem hại thần kinh (phi đạo đức). Khi đó người ta vẫn lập luận nhân quả từ dữ liệu quan sát, nhờ thiết kế và phân tích thích hợp để xử lý yếu tố nhiễu.
+- Một cách làm hiện đại là thiết kế lại nghiên cứu quan sát để *giống một thử nghiệm ngẫu nhiên hết mức có thể* — kỹ thuật gọi là **mô phỏng thử nghiệm mục tiêu** (target trial emulation). Chỉ cần biết nó tồn tại; cách làm ngoài phạm vi khóa này.
+
+Vì vậy phát biểu đúng là *"liên quan thuần túy chưa chứng minh nhân quả"* — **không phải** *"nghiên cứu quan sát không bao giờ nói được nhân quả"*. Bảng `mini_records` chưa có thiết kế/phân tích như vậy, nên vẫn dừng ở mức liên quan.
+</details>
 
 **Checklist phát hiện kết luận vượt quyền:**
 1. Câu kết luận có từ nhân quả ("gây", "làm tăng", "ngăn được") trong khi dữ liệu chỉ cho thấy liên quan thuần túy (không có thiết kế/phân tích xử lý nhiễu)?
@@ -209,7 +222,7 @@ Nhận thấy cấu trúc: *thiết kế → chỉ số kèm đơn vị → gi�
 |---|---|---|
 | "`sex_code` là số → định lượng" | Mã hóa không đổi bản chất biến; "giới trung bình" vô nghĩa | Hỏi "trung bình có nghĩa không?" — xem 3.5 |
 | "Tỷ lệ ĐTĐ 25% → người VN có 25% ĐTĐ" | Mẫu 12 hồ sơ giả lập, không đại diện | Chỉ mô tả "trong mẫu này"; suy luận cần công cụ M05 |
-| "Nhóm ĐTĐ huyết áp cao hơn → ĐTĐ gây tăng huyết áp" | Dữ liệu quan sát + confounder (tuổi, BMI) | Kết luận dừng ở "liên quan trong mẫu" — 3.7 |
+| "Nhóm ĐTĐ huyết áp cao hơn → ĐTĐ gây tăng huyết áp" | Dữ liệu quan sát + yếu tố nhiễu tiềm năng (tuổi, BMI) | Kết luận dừng ở "liên quan trong mẫu" — 3.7 |
 | Đếm `patient_id` như một biến phân tích | Mã định danh không chứa thông tin đo | Đánh dấu "định danh" trong codebook — 3.4 |
 | "Một dòng = một lần đo" khi bảng là theo bệnh nhân | Nhầm đơn vị quan sát → sai mọi tỷ lệ | Hỏi "một dòng là ai?" trước khi đếm — 3.3 |
 
