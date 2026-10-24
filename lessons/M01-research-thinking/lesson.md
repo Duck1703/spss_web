@@ -93,7 +93,7 @@ Mỗi dòng = **một bệnh nhân giả lập** (đơn vị quan sát = bệnh 
 
 | Tên biến | Nghĩa | Đơn vị/Mã | Kiểu biến |
 |---|---|---|---|
-| `patient_id` | Mã hồ sơ hư cấu | P001…P012 | Định danh — **không phải biến phân tích** |
+| `patient_id` | Mã hồ sơ hư cấu | P001…P012 | Định danh — **không phải biến phân tích** (nhưng vẫn giữ trong file: để đối chiếu dòng, truy vết lỗi nhập, sau này nối bảng — sẽ thấy rõ vai trò này ở M03) |
 | `age_years` | Tuổi | năm | Định lượng |
 | `sex_code` | Giới (mã hóa) | 1 = Nữ, 2 = Nam | Định tính danh định *(dù ghi bằng số)* |
 | `bmi` | Chỉ số khối cơ thể | kg/m² | Định lượng |
@@ -126,7 +126,7 @@ Quy tắc nhận diện nhanh: **hỏi "trung bình của biến này có nghĩa
 
 **Mối liên quan (association):** hai thứ thay đổi cùng nhau. **Nhân quả (causation):** cái này *gây ra* cái kia. Association **không suy ra** causation.
 
-**Ví dụ phản biện trong bảng trên:** 3 bệnh nhân có `diabetes_flag=1` có huyết áp trung bình 149 mmHg, cao hơn 9 người còn lại (123 mmHg). Nhưng nhóm này cũng **già hơn nhiều** (trung bình 62,7 tuổi so với 40,4) và **BMI cao hơn**. Tuổi ở đây là một **yếu tố nhiễu (confounder)** — biến thứ ba có thể giải thích một phần mối liên quan. Chưa kể 12 hồ sơ giả lập là mẫu quá nhỏ để kết luận gì.
+**Ví dụ phản biện trong bảng trên:** 3 bệnh nhân có `diabetes_flag=1` có huyết áp trung bình 149 mmHg, cao hơn 9 người còn lại (123 mmHg). Nhưng nhóm này cũng **già hơn nhiều** (trung bình 62,7 tuổi so với 40,4) và **BMI cao hơn**. Tuổi ở đây là một **yếu tố nhiễu (confounder)** — biến thứ ba có thể giải thích một phần mối liên quan. Lưu ý phạm vi: bảng này **đủ để mô tả chính 12 hồ sơ này** (ai cao hơn, bao nhiêu mmHg), nhưng quá nhỏ và không đại diện để nói gì về quần thể bệnh nhân hay suy ra khuyến nghị lâm sàng.
 
 **Phản ví dụ kinh điển:** người uống nhiều cà phê có tỷ lệ mất ngủ cao hơn. Cà phê gây mất ngủ? Có thể — nhưng cũng có thể: (a) người mất ngủ uống nhiều cà phê hơn để tỉnh (**nhân quả ngược**); (b) người làm việc căng thẳng vừa uống nhiều cà phê vừa khó ngủ (**yếu tố nhiễu**). Dữ liệu quan sát thuần túy không tự phân biệt được 3 khả năng này.
 
@@ -134,14 +134,17 @@ Quy tắc nhận diện nhanh: **hỏi "trung bình của biến này có nghĩa
 
 | Thiết kế | Đặc điểm | Kết luận cho phép |
 |---|---|---|
-| **Quan sát** (observational) | Chỉ đo/ghi nhận, không can thiệp | Liên quan — không nhân quả |
-| **Thực nghiệm** (experimental, ví dụ thử nghiệm ngẫu nhiên RCT) | Nhà nghiên cứu *chủ động* phân nhóm can thiệp, lý tưởng là ngẫu nhiên | Có thể lập luận nhân quả (có điều kiện — học sau) |
+| **Quan sát** (observational) | Chỉ đo/ghi nhận, không can thiệp | Liên quan là kết luận trực tiếp. Nhân quả **không tự có** — nhưng *có thể* được lập luận nếu thiết kế, giả định và phân tích xử lý được nhiễu (chi tiết ngoài phạm vi M01) |
+| **Thực nghiệm** (experimental, ví dụ thử nghiệm ngẫu nhiên RCT) | Nhà nghiên cứu *chủ động* phân nhóm can thiệp, lý tưởng là ngẫu nhiên | Chuẩn được ưu tiên cho hiệu quả can thiệp — nhưng không phải con đường duy nhất để nghiên cứu nhân quả |
+
+> 📌 **Phát biểu cần nhớ đúng:** *"Chỉ có mối liên quan thì chưa chứng minh nhân quả"* — **không phải** *"nghiên cứu quan sát không bao giờ nói được nhân quả"*. Nhiều câu hỏi y khoa không thể ngẫu nhiên hóa (ví dụ không thể cố tình cho trẻ phơi nhiễm chì để xem hại thần kinh — phi đạo đức); khi đó người ta vẫn suy luận nhân quả từ dữ liệu quan sát nhờ thiết kế và phân tích thích hợp (xử lý yếu tố nhiễu, mô phỏng "thử nghiệm mục tiêu"...). Ở bảng `mini_records` này chưa có thiết kế/phân tích như vậy — nên **từ bảng này không thể nói đái tháo đường gây tăng huyết áp**, chỉ nói được hai thứ *đi cùng nhau trong 12 hồ sơ*.
 
 **Checklist phát hiện kết luận vượt quyền:**
-1. Câu kết luận có từ nhân quả ("gây", "làm tăng", "ngăn được") trong khi dữ liệu chỉ quan sát?
+1. Câu kết luận có từ nhân quả ("gây", "làm tăng", "ngăn được") trong khi dữ liệu chỉ cho thấy liên quan thuần túy (không có thiết kế/phân tích xử lý nhiễu)?
 2. Nói về quần thể lớn khi chỉ đo một mẫu nhỏ/không đại diện?
 3. Bỏ qua yếu tố thứ ba hiển nhiên (tuổi, bệnh nền, thuốc đang dùng)?
 4. Tóm tắt trong mẫu bị phát biểu như chân lý lâm sàng?
+5. Tính một chỉ số khi **thiếu tử số hoặc mẫu số** (ví dụ chưa biết bao nhiêu người bị sốt, bao nhiêu người được theo dõi đủ)?
 
 ### 3.8 Codebook và đạo đức dữ liệu — vì sao quan trọng ngay từ đầu
 
@@ -160,7 +163,7 @@ Quy tắc nhận diện nhanh: **hỏi "trung bình của biến này có nghĩa
 4. **Dữ liệu từ thiết kế quan sát hay thực nghiệm?** → quyết định trần kết luận được phép.
 5. **Tôi muốn mô tả mẫu hay suy luận quần thể?** → quyết định có cần công cụ suy luận (M05+).
 
-> 🎯 Trả lời được 5 câu này trên giấy = đã làm 80% tư duy của một phân tích. SPSS chỉ làm 20% còn lại — và làm **sai** nếu 80% kia chưa rõ.
+> 🎯 Với người mới, phần khó nhất của một phân tích thường là trả lời đúng 5 câu này trên giấy — phần bấm menu trên SPSS chỉ là bước thực thi sau đó, và sẽ cho kết quả **sai** nếu tư duy phía trước chưa rõ.
 
 ---
 
@@ -186,6 +189,9 @@ Không có syntax trong M01. Syntax được giới thiệu từ M03 sau khi que
 | Tỷ lệ có đái tháo đường? | đếm `diabetes_flag=1` / 12 | **3/12 = 25,0%** | % (trong mẫu) |
 | Huyết áp tâm thu trung bình? | mean(`sbp_baseline`) | **129,8** | mmHg |
 | Nhóm có ĐTĐ vs không: huyết áp TB? | mean SBP theo nhóm | **149,0 vs 123,3** | mmHg |
+| Câu hỏi mở đầu của bác sĩ Lan: nhóm BMI cao (≥26) vs BMI thấp (<26): huyết áp TB? | mean SBP theo nhóm BMI | **140,8 vs 118,7** | mmHg |
+
+Quay lại câu hỏi mở bài — *"bệnh nhân BMI cao có huyết áp cao hơn không?"*: đây là câu hỏi loại **liên quan**, và trong 12 hồ sơ này câu trả lời mô tả là *có đi kèm* (140,8 vs 118,7 mmHg). Nhưng để ý: nhóm BMI cao cũng **già hơn hẳn** (trung bình 56,0 vs 36,0 tuổi) — tuổi lại là yếu tố nhiễu tiềm năng, nên ta vẫn không thể nói "BMI cao gây huyết áp cao" từ bảng này.
 
 Lưu ý cách đọc: "149,0 mmHg vs 123,3 mmHg" chỉ là **mô tả trong 12 hồ sơ giả lập này** — không phải khẳng định về bệnh nhân nói chung, và càng không phải "đái tháo đường gây tăng huyết áp" (xem lại 3.7: nhóm ĐTĐ già hơn hẳn).
 
@@ -217,7 +223,7 @@ Tự hỏi (trả lời bằng lời, không nhìn trên):
 2. `sex_code` ghi 1/2 — vì sao vẫn là biến định tính? Cho một ví dụ tương tự khác.
 3. "Mẫu" và "quần thể" trong câu hỏi của bác sĩ Lan (mục 01) là gì?
 4. Nêu 2 lý do kết luận "đái tháo đường gây tăng huyết áp" từ bảng mini là không hợp lệ.
-5. Một nghiên cứu quan sát có thể kết luận nhân quả không? Vì sao?
+5. Từ một nghiên cứu quan sát, khi nào có thể lập luận nhân quả — và vì sao mối liên quan thuần túy thì chưa đủ?
 
 ## 12. Đáp án & bằng chứng
 

@@ -19,7 +19,7 @@
 | Suy luận | inference | Việc rút kết luận về quần thể từ mẫu — luôn kèm bất định. |
 | Mô tả | description/descriptive | Tóm tắt dữ liệu *trong mẫu mình có* (trung bình tuổi của 160 hồ sơ). |
 | Liên quan / tương quan | association / correlation | Hai thứ thay đổi cùng nhau — **không có nghĩa cái này gây cái kia**. |
-| Nhân quả | causation | Cái này thật sự làm cái kia thay đổi — cần thiết kế nghiên cứu mạnh hơn quan sát thường. |
+| Nhân quả | causation | Cái này thật sự làm cái kia thay đổi — cần thiết kế + phân tích thích hợp (thử nghiệm ngẫu nhiên là chuẩn ưu tiên cho can thiệp; quan sát vẫn có thể lập luận nhân quả khi xử lý được nhiễu). |
 | Codebook | codebook/data dictionary | "Sổ tay" của bộ dữ liệu: tên biến, ý nghĩa, đơn vị, mã, giá trị missing. |
 | Dữ liệu khuyết | missing data | Ô trống/không có thông tin. Phải ghi rõ mã missing, đừng để SPSS đoán. |
 | Giá trị bất thường | outlier | Số liệu xa hẳn phần còn lại — có thể lỗi nhập, có thể thật: phải kiểm tra, không xóa bừa. |

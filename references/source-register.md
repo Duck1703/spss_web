@@ -22,10 +22,11 @@
 | S10a | IBM Support | Q&A: Are IBM SPSS client products supported on ARM architecture devices? | https://www.ibm.com/support/pages/are-ibm-spss-client-products-supported-arm-architecture-devices | M02, D-003, preflight | Xác nhận chính thức: hỗ trợ Intel Macs + x86_64; **từ 27.0.1.0 + macOS 11 Big Sur hỗ trợ Apple Silicon**; trỏ SPCR | `VERIFIED_SOURCE` | Trang support chính thức, modified 2026-06-19 | 2026-10-24 |
 | S10b | IBM Community (Todd Peterson, IBM) | SPSS Statistics on macOS Big Sur (11.0) | https://community.ibm.com/community/user/ai-datascience/blogs/todd-peterson1/2020/11/20/spss-statistics-on-macos-big-sur-110 | M02, D-003 | Xác nhận cơ chế: SPSS bản **Intel chạy trên Apple Silicon qua Rosetta 2** | `VERIFIED_SOURCE` | Blog IBM Community 2020-11-20; cơ chế vẫn đúng cho bản Intel mới hơn | 2026-10-24 |
 | S11 | IBM | Software Product Compatibility Report (SPCR) — SPSS Statistics 32.0.0.0 | https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/softwareReqsForProduct?deliverableId=788A8F840F664D6BB6C09C290CC7D709 (cổng: https://www.ibm.com/software/reports/compatibility/clarity/index.html?name=IBM+SPSS+Statistics) | M02, M03, D-003/D-004, preflight | Bảng tương thích OS/hardware chính thức của IBM | `PENDING_VERIFICATION` (app yêu cầu JS) | Hàng macOS đọc được qua reproduction vendor của SPCR: **macOS Sequoia 15.0 (x86-64) + macOS Tahoe 26.0 (ARM64, note 1)**; 4GB disk / 4GB RAM (8 rec) / 1024×768 — **bắt buộc mở bằng trình duyệt trước khi chốt** | 2026-10-24 |
+| S12 | BMJ (Matthews AA, Danaei G, Islam N, Kurth T) | Target trial emulation: applying principles of randomised trials to observational studies | https://www.bmj.com/content/378/bmj-2022-071108 (doi:10.1136/bmj-2022-071108) | M01 (nghiên cứu nhân quả từ dữ liệu quan sát), M05+, M12 | Cân bằng "quan sát vs thực nghiệm": RCT ưu tiên nhưng không duy nhất | `VERIFIED_SOURCE` | BMJ 2022;378:e071108, published 2022-08-30; abstract/metadata trích qua search extract (direct fetch bị 403) — full-text spot-check cho Pass 4 | 2026-10-24 |
 
 ## Tóm tắt trạng thái (sau Task 02)
 
-- `VERIFIED_SOURCE`: **9** (S02, S03, S04, S05, S06, S07, S08, S09, S10a, S10b — tức 10 dòng, S10a/b là bổ sung).
+- `VERIFIED_SOURCE`: **11** (S02, S03, S04, S05, S06, S07, S08, S09, S10a, S10b, S12 — S10a/b/S12 là bổ sung).
 - `PENDING_VERIFICATION`: **2** (S01 portal — có đường PDF thay thế đã kiểm chứng; S11 SPCR — dữ liệu gián tiếp).
 - `SUPERSEDED`: **1** (S10 URL gốc — thay bằng S10a + S10b).
 - `UNAVAILABLE`: 0.
@@ -44,3 +45,4 @@
 |---|---|---|
 | 2026-10-24 | Khởi tạo 10 nguồn S01–S10; 8 VERIFIED, S01/S10 PENDING | Task 01 |
 | 2026-10-24 | Sửa tác giả S03 → Vu & Harrington (lỗi T1-F3); S10 → SUPERSEDED; thêm S10a, S10b (VERIFIED), S11 (PENDING); bổ sung license OpenIntro CC BY-SA 3.0; ghi đường PDF thay thế cho S01 | `source-validation-report.md` |
+| 2026-10-24 | Thêm S12 (BMJ 2022;378:e071108, target trial emulation) phục vụ claim nhân quả-quan sát M01; S03 nâng cấp bằng chứng (đã trích nguyên văn §1.2/§1.3 từ PDF chính thức) | Task 05 remediation (review M01-02, M01-05) |

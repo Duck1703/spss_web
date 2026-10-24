@@ -118,3 +118,26 @@
 
 - Owner chỉ thị: file cần review copy vào `D:\spss\report\`; report sau xóa nội dung cũ, ghi mới → `report/` chỉ chứa report mới nhất (D-018).
 - Đã tạo `report/TASK03-report.md` + `report/M01-needs-review/` (copy 6 file review). Bản chính vẫn ở đường dẫn gốc.
+
+## 2026-10-24 — Task 05: M01 Remediation (sau review CHANGES_REQUIRED)
+
+### Xử lý 9 findings
+
+| ID | Sev | Sửa | Trạng thái |
+|---|---|---|---|
+| M01-01 | MAJOR | BT4 thêm câu nhận diện thiếu dữ kiện; xóa "8%" bịa — dạy tử số/mẫu số | RESOLVED |
+| M01-02 | MAJOR | Viết lại §3.7 + checkpoint Q5 + answer-key + glossary: liên quan thuần túy ≠ nhân quả; quan sát + thiết kế/phân tích đúng vẫn lập luận được; nguồn S03 §1.3.5/§1.3.7 + S12 BMJ (target trial emulation) | RESOLVED |
+| M01-03 | MINOR | §07 thêm hàng trả lời câu mở đầu BMI–BP (140,8 vs 118,7; tuổi nhóm 56,0 vs 36,0 — recompute) | RESOLVED |
+| M01-04 | MINOR | `smoking_status` chốt danh định; thứ bậc chỉ khi định nghĩa lại thang có thứ tự | RESOLVED |
+| M01-05 | MINOR | Trích nguyên văn ISLBS §1.2.1/1.2.2/§1.3.1–1.3.7 từ PDF chính thức → source-map cập nhật quote | RESOLVED |
+| M01-06 | MINOR | `days_off` → `days_limited` (hạn chế sinh hoạt — phù hợp ≥60t không đi làm) | RESOLVED |
+| M01-07 | MINOR | Bỏ "quá nhỏ để kết luận gì" → phân biệt mô tả mẫu vs suy luận; xóa 80/20% | RESOLVED |
+| M01-08/09 | NOTE | `patient_id` ghi vai trò truy vết/nối bảng (M03); `NOT_APPLICABLE` chỉ là mô tả nội dung, không phải lifecycle state | RESOLVED |
+
+### Bằng chứng
+
+- Recompute `mini_records` + split BMI≥26: khớp (140,8/118,7; 56,0/36,0).
+- Đọc nguyên văn ISLBS Ch.1 (PDF → text extract `.workspace/tmp/`); BMJ e071108 qua abstract/metadata (direct fetch 403 → ghi note).
+- Thêm S12 vào source-register; grep không còn câu tuyệt đối; Blueprint hash khớp; `git diff --check` sạch.
+
+### Trạng thái: M01 draft-2 → chờ re-audit độc lập (Pass 1/3/4).

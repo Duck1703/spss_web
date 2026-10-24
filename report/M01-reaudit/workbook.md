@@ -58,7 +58,7 @@ Dùng đúng bảng `mini_records` (lesson.md mục 3.4). Với mỗi câu, đá
 
 **Tình huống mới — chưa xuất hiện trong bài học:**
 
-> Trạm y tế phường tổ chức tiêm vaccine cúm mùa cho người ≥60 tuổi. Trong 2 tuần, trạm tiêm cho 200 người. Sau tiêm, mỗi người được hẹn quay lại hoặc gọi điện sau 7 ngày để hỏi: có sốt không (có/không), mức độ đau tại chỗ tiêm (không/nhẹ/vừa/nặng), số ngày nghỉ làm sau tiêm, và có hài lòng với quy trình không (1–5 sao). Trạm trưởng muốn biết: "Tỷ lệ người sốt sau tiêm trong đợt này là bao nhiêu? Người lớn tuổi hơn có nhiều ngày nghỉ hơn không?"
+> Trạm y tế phường tổ chức tiêm vaccine cúm mùa cho người ≥60 tuổi. Trong 2 tuần, trạm tiêm cho 200 người. Sau tiêm, mỗi người được hẹn quay lại hoặc gọi điện sau 7 ngày để hỏi: có sốt không (có/không), mức độ đau tại chỗ tiêm (không/nhẹ/vừa/nặng), số ngày phải hạn chế sinh hoạt thường ngày sau tiêm, và có hài lòng với quy trình không (1–5 sao). Trạm trưởng muốn biết: "Tỷ lệ người sốt sau tiêm trong đợt này là bao nhiêu? Người lớn tuổi hơn có nhiều ngày hạn chế sinh hoạt hơn không?"
 
 **Nhiệm vụ — phiếu nghiên cứu 1 trang của bạn** (sản phẩm bắt buộc theo Blueprint, nộp cho người hướng dẫn):
 
@@ -66,7 +66,8 @@ Dùng đúng bảng `mini_records` (lesson.md mục 3.4). Với mỗi câu, đá
 2. Nêu **quần thể** và **mẫu** của tình huống. Đơn vị quan sát là gì?
 3. Thiết kế bảng biến tối thiểu cho tình huống: liệt kê ≥5 biến, ghi kiểu của từng biến (kèm mã hóa nếu là biến định tính).
 4. Đây là thiết kế **quan sát hay thực nghiệm**? Kết luận về "vaccine *gây* sốt" có được phép không?
-5. Viết 1 câu kết luận **vượt quyền** mà một người hấp tấp có thể rút ra từ tình huống này — rồi viết lại phiên bản hợp lệ.
+5. Trạm trưởng yêu cầu: "Tính cho tôi tỷ lệ người sốt sau tiêm." — Với thông tin trong tình huống, **tính được chưa?** Nếu chưa, chỉ rõ đang thiếu những con số nào (tử số là gì? mẫu số là gì? có chắc mẫu số là 200 không?).
+6. Viết 1 câu kết luận **vượt quyền** mà một người hấp tấp có thể rút ra từ tình huống này — rồi viết lại phiên bản hợp lệ.
 
 ---
 
