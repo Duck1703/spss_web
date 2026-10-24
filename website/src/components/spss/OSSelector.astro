@@ -1,0 +1,15 @@
+---
+/**
+ * OSSelector.astro — chọn hệ điều hành toàn cục (macOS/Windows).
+ * Lựa chọn lưu ở localStorage['spss-os'], áp cho mọi guide trên trang
+ * qua html[data-spss-os] — xử lý bởi /js/spss-guides.js.
+ * props.inline: true → bản nhỏ đặt trong bài; false → bản to (mặc định).
+ */
+interface Props { inline?: boolean; }
+const { inline = false } = Astro.props;
+---
+<div class={`os-sel${inline ? ' os-sel--inline' : ''}`} role="group" aria-label="Chọn hệ điều hành của bạn">
+  <span class="os-sel-lbl">Bạn dùng SPSS trên:</span>
+  <button type="button" class="os-sel-btn" data-os-pick="mac" aria-pressed="false">🍎 macOS</button>
+  <button type="button" class="os-sel-btn" data-os-pick="win" aria-pressed="false">🪟 Windows</button>
+</div>

@@ -90,6 +90,10 @@
       var pct = nDays ? (nDays / DAY_TOTAL) : (nDone / BT_TOTAL);
       el.style.width = Math.round(pct * 100) + '%';
     });
+    // step checkpoint (hướng dẫn trực quan SPSS): data-stepdone → done['step:id']
+    document.querySelectorAll('[data-stepdone]').forEach(function (cb) {
+      cb.checked = !!state.done['step:' + cb.getAttribute('data-stepdone')];
+    });
   }
 
   var saveTimer = null;
@@ -131,6 +135,11 @@
         setStatus(card.querySelector('[data-status]'), n ? 'draft' : 'empty');
         flashSaved(card);
       }
+    }
+    if (t.matches && t.matches('[data-stepdone]')) {
+      var sid = 'step:' + t.getAttribute('data-stepdone');
+      if (t.checked) { state.done[sid] = true; } else { delete state.done[sid]; }
+      save(state);
     }
   });
   document.addEventListener('click', function (e) {

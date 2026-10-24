@@ -16,6 +16,7 @@ export default defineConfig({
       },
       head: [
         { tag: 'script', attrs: { src: '/js/progress.js', defer: true } },
+        { tag: 'script', attrs: { src: '/js/spss-guides.js', defer: true } },
         { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
         { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
         {

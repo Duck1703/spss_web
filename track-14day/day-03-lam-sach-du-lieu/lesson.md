@@ -76,6 +76,8 @@ mọi thứ bạn sửa. Trong nghiên cứu thật, đây chính là công vi�
   phá hỏng thì đóng không lưu, mở lại file này, làm lại từ đầu. **Đây là thói quen
   chuyên nghiệp, không phải thừa bước.**
 
+{{guide:d03-import-work}}
+
 ### Bước 3 — Soi lỗi bằng thống kê mô tả (đọc output kỹ)
 
 Dùng **hai dialog khác nhau** cho hai loại biến — đây là lần đầu bạn tự mở dialog phân tích,
@@ -111,6 +113,10 @@ sbp_followup):
   bỏ qua biến chuỗi. Không phải lỗi của bạn.
 
 **Viết lại** mọi thứ vừa phát hiện vào giấy/log nháp: giá trị lạ + biến nào.
+
+{{guide:d03-frequencies}}
+
+{{guide:d03-descriptives}}
 
 ### Bước 4 — Sửa `sex_code` (⚠️⚠️ điểm dễ phá #1 — `⏳ PENDING thao tác`)
 
@@ -152,6 +158,8 @@ Descriptives bỏ qua nó, và bạn không thể khai báo missing bằng số.
 - **Cấm:** **đừng** dùng Transform → Automatic Recode cho việc này — nó sẽ remap {1,2,9}
   → {1,2,3} âm thầm, phá nghĩa của mã.
 
+{{guide:d03-sexcode}}
+
 ### Bước 5 — Sửa các giá trị bất khả thi → missing
 
 Với mỗi ô lỗi đã soi ra ở Bước 3, làm đúng chu trình: **tìm dòng → xóa nội dung ô → ghi log.**
@@ -189,6 +197,8 @@ Với mỗi ô lỗi đã soi ra ở Bước 3, làm đúng chu trình: **tìm d
 - **Nếu sai:** xóa nhầm dòng P088 chính → Ctrl+Z; hoặc đóng không lưu → mở lại
   `clinic_bp_work.sav` → làm lại từ Bước 4 (mất ít nhất thời gian — đó là lý do Bước 2 tồn tại).
 
+{{guide:d03-duplicates}}
+
 ### Bước 7 — Lỗi "khớp logic" cuối cùng + lưu bản sạch
 
 - **Soi bằng mắt / sort:** có một dòng `followup_completed = 1` nhưng `sbp_followup` trống
@@ -211,6 +221,8 @@ Hai cách:
   12 Label + Value Labels cho 5 biến mã hóa + Measure. Làm xong chạy Frequencies `sex_code`:
   bảng hiện **Nữ/Nam** là đúng.
 - **Kiểm chứng:** View → Value Labels trong Data View → `sex_code` hiển thị Nữ/Nam.
+
+{{guide:d03-finish}}
 
 ### Bước 9 — Hoàn thiện cleaning log
 

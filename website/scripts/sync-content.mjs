@@ -160,13 +160,24 @@ function syncTrack() {
     // --- lesson ---
     let md = stripInternalStatus(read(`${base}/lesson.md`));
     md = fixLinksTrack(md, d.slug);
+    // {{guide:id}} → <SPSSActionGuide> (phải chạy TRƯỚC mdxEscapeBraces)
+    const hasGuides = /\{\{guide:[\w-]+\}\}/.test(md);
+    if (hasGuides) {
+      md = md.replace(/\{\{guide:([\w-]+)\}\}/g, '\n<SPSSActionGuide id="$1" />\n');
+    }
     md = mdxEscapeBraces(md);
     md = mdxEscapeLt(md);
     md += `\n\n---\n\n<CompleteModuleButton id="${d.slug}" label="Đánh dấu đã học xong Ngày ${d.num}" />\n`;
     const lessonPrev = prevDay
       ? `prev:\n  link: /${prevDay.slug}/dap-an/\n  label: Ngày ${prevDay.num} — đáp án`
       : `prev:\n  link: /lo-trinh-14-ngay/\n  label: Lộ trình 14 ngày`;
-    write(`${d.slug}/bai-hoc.mdx`, `---\ntitle: "${d.title}"\ndescription: "Bài học thực hành ${d.title} — lộ trình practice-first 14 ngày."\n${lessonPrev}\nnext:\n  link: /${d.slug}/bai-tap/\n  label: Làm bài tập Ngày ${d.num}\n---\n\nimport CompleteModuleButton from '../../../components/CompleteModuleButton.astro';\n\n${BANNER}${TRACK_NOTICE}${fileBox(d)}${md}`);
+    const guideImports = hasGuides
+      ? `import SPSSActionGuide from '../../../components/spss/SPSSActionGuide.astro';\nimport OSSelector from '../../../components/spss/OSSelector.astro';\n`
+      : '';
+    const osBlock = hasGuides
+      ? '\n<OSSelector />\n\n'
+      : '';
+    write(`${d.slug}/bai-hoc.mdx`, `---\ntitle: "${d.title}"\ndescription: "Bài học thực hành ${d.title} — lộ trình practice-first 14 ngày."\n${lessonPrev}\nnext:\n  link: /${d.slug}/bai-tap/\n  label: Làm bài tập Ngày ${d.num}\n---\n\nimport CompleteModuleButton from '../../../components/CompleteModuleButton.astro';\n${guideImports}\n${BANNER}${TRACK_NOTICE}${fileBox(d)}${osBlock}${md}`);
 
     // --- workbook ---
     let wb = fixLinksTrack(read(`${base}/workbook.md`), d.slug);

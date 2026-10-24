@@ -1,0 +1,496 @@
+{
+  "guides": {
+    "d03-import-work": {
+      "step": "Bước 1–2",
+      "title": "Nhập file _raw và lưu bản làm việc an toàn",
+      "purpose": "Đưa clinic_bp_v1_raw.csv (file có lỗi gài, 161 dòng) vào SPSS, rồi lưu ngay một bản .sav trước khi sửa — để có điểm quay lại nếu làm hỏng.",
+      "where": "Data Editor → File → Import Data → CSV Data; sau đó File → Save As…",
+      "menuPath": ["File", "Save As…"],
+      "osNote": {"mac": "Lưu nhanh sau này: ⌘S", "win": "Lưu nhanh sau này: Ctrl+S"},
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp_v1_raw.csv — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "data",
+          "grid": {
+            "cols": ["patient_id", "age_years", "sex_code", "bmi", "sbp_baseline", "…"],
+            "rows": [
+              [{"label": "P001"}, {"label": "36"}, {"label": "2"}, {"label": "22.1"}, {"label": "139"}, {"label": "…"}],
+              [{"label": "P022", "hot": 1}, {"label": "48"}, {"label": "F", "hot": 1}, {"label": "26.3"}, {"label": "141"}, {"label": "…"}],
+              [{"label": "P037", "hot": 2}, {"label": "250", "hot": 2}, {"label": "1"}, {"label": "28.0"}, {"label": "150"}, {"label": "…"}],
+              [{"label": "…"}, {"label": "…"}, {"label": "…"}, {"label": "…"}, {"label": "…"}, {"label": "…"}]
+            ]
+          },
+          "caption": "File _raw đã import (quy trình giống Ngày 01). Nhìn thoáng qua đã thấy lạ: chữ 'F' trong cột số, tuổi 250.",
+          "callouts": [
+            {"n": 1, "label": "'F' — chữ trong cột mã số; vì nó, cả cột sex_code bị SPSS coi là String"},
+            {"n": 2, "label": "Tuổi 250 — giá trị bất khả thi"}
+          ]
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp_v1_raw.csv — Data Editor",
+          "openMenu": "File",
+          "items": [
+            {"label": "New"}, {"label": "Open"}, {"label": "Import Data"}, {"label": "Open Database"},
+            {"label": "Save"},
+            {"label": "Save As…", "hot": 3, "advance": true},
+            {"label": "Export"}, {"label": "Exit"}
+          ],
+          "grid": {"cols": ["patient_id", "age_years", "…"], "rows": [[{"label": "P001"}, {"label": "36"}, {"label": "…"}]]},
+          "caption": "TRƯỚC KHI sửa bất cứ ô nào: File → Save As…",
+          "callouts": [{"n": 3, "label": "Save As… — tạo bản làm việc"}]
+        },
+        {
+          "kind": "dialog",
+          "title": "Save Data As",
+          "dim": true,
+          "dialog": {
+            "title": "Save Data As",
+            "rows": [
+              {"type": "field", "label": "File name:", "value": "clinic_bp_work.sav", "hot": 4},
+              {"type": "select", "label": "Save as type:", "value": "SPSS Statistics (*.sav)"},
+              {"type": "note", "text": "Tên '_work' = bản làm việc. clinic_bp.sav (tham chiếu sạch) và CSV gốc đều giữ nguyên không động vào."}
+            ],
+            "buttons": [{"label": "Save", "primary": true, "advance": true, "hot": 5}, {"label": "Cancel"}]
+          },
+          "caption": "Đặt tên clinic_bp_work.sav → Save. Từ đây mọi sửa đổi nằm trên bản này.",
+          "callouts": [
+            {"n": 4, "label": "Tên file mới — bản làm việc"},
+            {"n": 5, "label": "Save"}
+          ]
+        }
+      ],
+      "expected": "File clinic_bp_work.sav được lưu; thanh tiêu đề đổi sang 'clinic_bp_work.sav'. Dữ liệu 161 dòng vẫn y nguyên.",
+      "ifWrong": [
+        "Lỡ sửa trước khi lưu → Ctrl+Z / ⌘Z hoàn tác, hoặc File → Open lại CSV và import lại.",
+        "Quên đặt tên, lưu đè lên file khác → vẫn còn CSV gốc làm điểm quay lại: import lại từ đầu."
+      ]
+    },
+
+    "d03-frequencies": {
+      "step": "Bước 3",
+      "title": "Chạy Frequencies — săn giá trị lạ trong biến mã",
+      "purpose": "Đếm từng giá trị của các biến mã/nhóm để phát hiện mã không hợp lệ (như 9, F) và dòng trống.",
+      "where": "Analyze → Descriptive Statistics → Frequencies…",
+      "menuPath": ["Analyze", "Descriptive Statistics", "Frequencies…"],
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp_work.sav — Data Editor",
+          "openMenu": "Analyze",
+          "items": [
+            {"label": "Reports"},
+            {"label": "Descriptive Statistics", "hot": 1, "sub": [{"label": "Frequencies…", "hot": 2, "advance": true}, {"label": "Descriptives…"}, {"label": "Explore…"}]},
+            {"label": "Compare Means"},
+            {"label": "Correlate"}
+          ],
+          "grid": {"cols": ["patient_id", "sex_code", "…"], "rows": [[{"label": "P001"}, {"label": "2"}, {"label": "…"}]]},
+          "caption": "Analyze → Descriptive Statistics → Frequencies…",
+          "callouts": [
+            {"n": 1, "label": "Analyze → Descriptive Statistics"},
+            {"n": 2, "label": "Frequencies…"}
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Frequencies",
+          "dim": true,
+          "dialog": {
+            "title": "Frequencies",
+            "rows": [
+              {"type": "lists", "left": ["patient_id", "age_years", "sex_code", "bmi", "followup_completed", "diabetes_flag"], "right": ["sex_code", "treatment_group", "followup_completed", "diabetes_flag"], "hot": 3, "rightLabel": "Variable(s):"},
+              {"type": "check", "label": "Display frequency tables", "checked": true},
+              {"type": "note", "text": "Chỉ đưa biến MÃ/NHÓM vào Frequencies. Đưa biến số (tuổi, BMI) vào sẽ in bảng hàng trăm dòng vô nghĩa — việc đó dành cho Descriptives."}
+            ],
+            "buttons": [{"label": "OK", "primary": true, "advance": true, "hot": 4}, {"label": "Reset"}, {"label": "Cancel"}]
+          },
+          "caption": "Đưa các biến nhóm (sex_code, treatment_group, followup_completed, diabetes_flag) sang ô Variable(s) → OK.",
+          "callouts": [
+            {"n": 3, "label": "Chọn biến trái → mũi tên → sang phải"},
+            {"n": 4, "label": "OK"}
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output1 — IBM SPSS Statistics Viewer",
+          "dim": true,
+          "outline": [{"t": "Frequencies"}, {"t": "Statistics", "ind": true}, {"t": "sex_code", "ind": true}],
+          "tables": [
+            {
+              "title": "sex_code",
+              "cols": ["", "Frequency", "Percent", "Valid Percent", "Cumulative Percent"],
+              "rows": [
+                ["1", "76", "47.2", "47.2", "47.2"],
+                ["2", "83", "51.6", "51.6", "98.8"],
+                ["9", "1", "0.6", "0.6", "99.4"],
+                ["F", "1", "0.6", "0.6", "100.0"],
+                ["Total", "161", "100.0", "100.0", ""]
+              ]
+            }
+          ],
+          "caption": "Đọc bảng: ngoài 1 và 2 còn có '9' (1 dòng) và 'F' (1 dòng) — đây là 2 lỗi cần xử lý. Tổng 161 (thừa 1 dòng so với dự kiến 160 → nghi trùng lặp).",
+          "callouts": [
+            {"n": 5, "label": "'9' — mã không nằm trong codebook"},
+            {"n": 6, "label": "'F' — chữ lạc vào cột số"},
+            {"n": 7, "label": "Total 161 ≠ 160 → có dòng thừa"}
+          ]
+        }
+      ],
+      "expected": "Bảng tần số sex_code hiện 4 giá trị: 1 (76), 2 (83), 9 (1), F (1); tổng 161 dòng.",
+      "ifWrong": [
+        "Không thấy 'F' trong bảng → cột có thể đã bị đọc sai kiểu khác; kiểm tra Variable View → Type của sex_code.",
+        "Bảng quá dài vì lỡ đưa biến số vào → chạy lại, chỉ đưa biến nhóm.",
+        "Output hiện thứ tự giá trị khác → SPSS sắp xếp theo giá trị — 'F' có thể đứng cuối; nội dung quan trọng là có 4 nhãn giá trị."
+      ]
+    },
+
+    "d03-descriptives": {
+      "step": "Bước 4",
+      "title": "Chạy Descriptives — săn giá trị bất khả thi trong biến số",
+      "purpose": "Xem Minimum/Maximum của các biến đo để phát hiện số liệu vô lý (tuổi 250, HA âm, BMI 152, điểm > thang).",
+      "where": "Analyze → Descriptive Statistics → Descriptives…",
+      "menuPath": ["Analyze", "Descriptive Statistics", "Descriptives…"],
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Descriptives",
+          "dim": true,
+          "dialog": {
+            "title": "Descriptives",
+            "rows": [
+              {"type": "lists", "left": ["patient_id", "sex_code", "treatment_group", "diabetes_flag"], "right": ["age_years", "bmi", "sbp_baseline", "sbp_followup", "adherence_score"], "hot": 1, "rightLabel": "Variable(s):"},
+              {"type": "note", "text": "Ngược với Frequencies: Descriptives dành cho biến SỐ. Bấm Options… nếu muốn thêm thống kê (mặc định đủ: N, Min, Max, Mean, Std. Deviation)."}
+            ],
+            "buttons": [{"label": "Continue"}, {"label": "Options…"}, {"label": "OK", "primary": true, "advance": true, "hot": 2}, {"label": "Cancel"}]
+          },
+          "caption": "Đưa các biến số vào ô Variable(s) → OK.",
+          "callouts": [
+            {"n": 1, "label": "Các biến đo lường — age, bmi, sbp, adherence"},
+            {"n": 2, "label": "OK"}
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output1 — IBM SPSS Statistics Viewer",
+          "dim": true,
+          "outline": [{"t": "Descriptives"}, {"t": "Descriptive Statistics", "ind": true}],
+          "tables": [
+            {
+              "title": "Descriptive Statistics",
+              "cols": ["", "N", "Minimum", "Maximum", "Mean", "Std. Deviation"],
+              "rows": [
+                ["age_years", "161", "19", "250", "46.9", "18.32"],
+                ["bmi", "161", "18.3", "152.4", "26.84", "9.115"],
+                ["sbp_baseline", "161", "-30", "178", "141.2", "16.44"],
+                ["sbp_followup", "143", "98", "168", "131.8", "13.02"],
+                ["adherence_score", "161", "42", "118", "78.9", "12.55"],
+                ["Valid N (listwise)", "143", "", "", "", ""]
+              ]
+            }
+          ],
+          "caption": "Đọc cột Min/Max: tuổi tối đa 250?!, HA tâm thu tối thiểu −30?!, BMI 152.4?!, adherence 118 > thang 100. Ghi từng nghi vấn vào sổ làm sạch.",
+          "callouts": [
+            {"n": 3, "label": "Max 250 — bất khả thi"},
+            {"n": 4, "label": "Min −30 — HA không thể âm"},
+            {"n": 5, "label": "Max 152.4 BMI / 118 adherence — vượt ngưỡng sinh lý/thang đo"},
+            {"n": 6, "label": "N=143 < 161 ở sbp_followup — có missing (không phải lỗi)"}
+          ]
+        }
+      ],
+      "expected": "Bảng Descriptive Statistics lộ rõ: age max 250, sbp_baseline min −30, bmi max 152.4, adherence_score max 118 — 4 giá trị nghi lỗi để ghi vào log.",
+      "ifWrong": [
+        "Số liệu Min/Max khác hình → kiểm tra đang chạy trên đúng clinic_bp_work.sav (161 dòng) chưa.",
+        "Không thấy cột Minimum/Maximum → hộp Descriptives có nút Options…, tick lại Minimum và Maximum rồi Continue → OK."
+      ]
+    },
+
+    "d03-duplicates": {
+      "step": "Bước 5",
+      "title": "Tìm dòng trùng lặp bằng Identify Duplicate Cases",
+      "purpose": "Frequencies cho thấy 161 dòng thay vì 160 — kiểm tra xem có mã bệnh nhân bị nhập hai lần không.",
+      "where": "Data → Identify Duplicate Cases…",
+      "menuPath": ["Data", "Identify Duplicate Cases…"],
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp_work.sav — Data Editor",
+          "openMenu": "Data",
+          "items": [
+            {"label": "Define Variable Properties…"},
+            {"label": "Sort Cases…"},
+            {"label": "Identify Duplicate Cases…", "hot": 1, "advance": true},
+            {"label": "Select Cases…"},
+            {"label": "Split File"}
+          ],
+          "grid": {"cols": ["patient_id", "age_years", "…"], "rows": [[{"label": "P001"}, {"label": "36"}, {"label": "…"}]]},
+          "caption": "Data → Identify Duplicate Cases…",
+          "callouts": [{"n": 1, "label": "Công cụ tìm bản ghi trùng của SPSS"}]
+        },
+        {
+          "kind": "dialog",
+          "title": "Identify Duplicate Cases",
+          "dim": true,
+          "dialog": {
+            "title": "Identify Duplicate Cases",
+            "rows": [
+              {"type": "lists", "left": ["age_years", "sex_code", "bmi", "sbp_baseline"], "right": ["patient_id"], "hot": 2, "rightLabel": "Define matching cases by:", "leftLabel": "Variables:"},
+              {"type": "check", "label": "Indicator of primary cases", "checked": true},
+              {"type": "radio", "label": "Primary case:", "options": [{"label": "Last case in each group", "checked": false}, {"label": "First case in each group", "checked": true}]},
+              {"type": "note", "text": "Đưa patient_id vào ô 'Define matching cases by' — hai dòng trùng là hai dòng có cùng mã BN. Giữ 'First case' để giữ bản ghi đầu tiên."}
+            ],
+            "buttons": [{"label": "OK", "primary": true, "advance": true, "hot": 3}, {"label": "Reset"}, {"label": "Cancel"}]
+          },
+          "caption": "patient_id → ô 'Define matching cases by'; giữ 'First case in each group' → OK.",
+          "callouts": [
+            {"n": 2, "label": "patient_id = khóa xác định trùng"},
+            {"n": 3, "label": "OK"}
+          ]
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp_work.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "data",
+          "grid": {
+            "cols": ["patient_id", "age_years", "sex_code", "…", "PrimaryLast → indicator"],
+            "rows": [
+              [{"label": "P087"}, {"label": "52"}, {"label": "2"}, {"label": "…"}, {"label": "0"}],
+              [{"label": "P088", "hot": 4}, {"label": "31"}, {"label": "1"}, {"label": "…"}, {"label": "0", "hot": 4}],
+              [{"label": "…"}, {"label": "…"}, {"label": "…"}, {"label": "…"}, {"label": "…"}],
+              [{"label": "P088", "hot": 5}, {"label": "31"}, {"label": "1"}, {"label": "…"}, {"label": "1", "hot": 5}],
+              [{"label": "P089"}, {"label": "44"}, {"label": "2"}, {"label": "…"}, {"label": "1"}]
+            ]
+          },
+          "caption": "SPSS thêm cột đánh dấu: dòng P088 thứ hai có đánh dấu trùng. Kiểm tra 2 dòng giống hệt → xóa bản trùng (click số dòng xám → Delete), giữ bản đầu.",
+          "callouts": [
+            {"n": 4, "label": "Bản ghi trùng — sẽ xóa"},
+            {"n": 5, "label": "Bản ghi gốc — giữ lại"}
+          ]
+        }
+      ],
+      "expected": "Cột indicator mới xuất hiện; tìm ra P088 xuất hiện 2 lần giống hệt nhau → xóa dòng trùng, còn lại 160 dòng.",
+      "ifWrong": [
+        "Không chắc xóa đúng dòng → trước khi xóa, sort theo patient_id (Data → Sort Cases) để hai bản P088 nằm cạnh nhau và so sánh từng ô.",
+        "Lỡ xóa nhầm dòng gốc → Ctrl+Z / ⌘Z ngay; hoặc mở lại clinic_bp_work.sav (chưa Save) để lấy lại.",
+        "Xóa dòng: click vào SỐ DÒNG xám bên trái để chọn cả dòng → phím Delete / chuột phải → Clear — Mac: Control+click nếu không có chuột phải."
+      ]
+    },
+
+    "d03-sexcode": {
+      "step": "Bước 6",
+      "title": "Sửa sex_code: chữ 'F', chuyển String→Numeric, khai báo missing 9 — THAO TÁC CẦN CẨN THẬN",
+      "purpose": "Cột sex_code bị SPSS đọc thành String vì chứa chữ 'F'. Phải xử lý 'F' TRƯỚC khi đổi kiểu, rồi mới khai báo 9 là missing — sai thứ tự có thể mất dữ liệu.",
+      "where": "Data View (sửa ô F) → Variable View (đổi Type, Missing)",
+      "osNote": {"mac": "Hoàn tác: ⌘Z", "win": "Hoàn tác: Ctrl+Z"},
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp_work.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "data",
+          "grid": {
+            "cols": ["patient_id", "age_years", "sex_code", "bmi", "…"],
+            "rows": [
+              [{"label": "P021"}, {"label": "39"}, {"label": "1"}, {"label": "25.2"}, {"label": "…"}],
+              [{"label": "P022", "hot": 1}, {"label": "48"}, {"label": "F", "sel": true, "hot": 1}, {"label": "26.3"}, {"label": "…"}],
+              [{"label": "P023"}, {"label": "57"}, {"label": "2"}, {"label": "29.1"}, {"label": "…"}]
+            ]
+          },
+          "caption": "Bước A — sửa ô 'F' (P022): double-click ô → gõ '1' (F = Female = Nữ = mã 1, đã đối chiếu codebook) → Enter.",
+          "callouts": [{"n": 1, "label": "Ô F ở P022 → gõ 1"}]
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp_work.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "variable",
+          "grid": {
+            "kind": "var",
+            "cols": ["Name", "Type", "Width", "Label", "Values", "Missing", "Measure"],
+            "rows": [
+              [{"label": "sex_code"}, {"label": "String", "sel": true, "hot": 2}, {"label": "8"}, {"label": ""}, {"label": "None"}, {"label": "None", "hot": 4}, {"label": "Nominal"}],
+              [{"label": "bmi"}, {"label": "Numeric"}, {"label": "8"}, {"label": ""}, {"label": "None"}, {"label": "None"}, {"label": "Scale"}]
+            ]
+          },
+          "caption": "Bước B — sang Variable View, bấm ô Type của sex_code (đang 'String') → nút '…' → chọn Numeric → OK. Cảnh báo: chỉ đổi SAU KHI đã hết chữ trong cột.",
+          "callouts": [
+            {"n": 2, "label": "Type đang 'String' → đổi sang Numeric"},
+            {"n": 3, "label": "Nếu còn ký tự chữ nào khi đổi kiểu → ô đó thành missing — đây là lý do phải sửa 'F' trước"},
+            {"n": 4, "label": "Bước C — bấm ô Missing → nút '…'"}
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Missing Values — sex_code",
+          "dim": true,
+          "dialog": {
+            "title": "Missing Values",
+            "rows": [
+              {"type": "radio", "label": "", "options": [
+                {"label": "No missing values", "checked": false},
+                {"label": "Discrete missing values", "checked": true, "hot": 5},
+                {"label": "Range plus one optional discrete missing value", "checked": false}
+              ]},
+              {"type": "missing", "values": ["9", "", ""], "hot": 6},
+              {"type": "note", "text": "Chọn 'Discrete missing values' → gõ 9 vào ô đầu. Kể từ đây SPSS xem 9 = missing, loại khỏi mọi phân tích."}
+            ],
+            "buttons": [{"label": "OK", "primary": true, "advance": true, "hot": 7}, {"label": "Cancel"}]
+          },
+          "caption": "Bước C — Discrete missing values → gõ 9 → OK.",
+          "callouts": [
+            {"n": 5, "label": "Chọn Discrete missing values"},
+            {"n": 6, "label": "Gõ 9 — mã lỗi cần loại khỏi phân tích"},
+            {"n": 7, "label": "OK"}
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Frequencies chạy lại sau khi sửa",
+          "dim": true,
+          "outline": [{"t": "Frequencies"}, {"t": "sex_code", "ind": true}],
+          "tables": [
+            {
+              "title": "sex_code",
+              "cols": ["", "Frequency", "Percent", "Valid Percent", "Cumulative Percent"],
+              "rows": [
+                ["Valid  1", "77", "48.1", "48.4", "48.4"],
+                ["2", "82", "51.3", "51.6", "100.0"],
+                ["Total", "159", "99.4", "100.0", ""],
+                ["Missing  9", "1", "0.6", "", ""],
+                ["Total", "160", "100.0", "", ""]
+              ]
+            }
+          ],
+          "caption": "Chạy lại Frequencies kiểm chứng: chỉ còn 1 và 2; '9' đã nằm ở nhóm Missing; 'F' biến mất (đã thành 1).",
+          "callouts": [
+            {"n": 8, "label": "Chỉ còn 1/2 ở phần Valid"},
+            {"n": 9, "label": "9 xuống hàng Missing — đúng mong muốn"}
+          ]
+        }
+      ],
+      "expected": "Frequencies chạy lại: phần Valid chỉ có 1 và 2; '9' nằm ở mục Missing; 'F' không còn. Dữ liệu 160 dòng.",
+      "ifWrong": [
+        "Sau khi đổi sang Numeric, một ô nào đó thành '.' → ô đó còn chữ sót lại. ⌘Z/Ctrl+Z quay lại, sửa ô chữ đó trước, rồi đổi kiểu lại.",
+        "Đã lỡ Save sau khi mất dữ liệu → vẫn còn CSV gốc: đóng file KHÔNG lưu, import lại, làm lại từ đầu.",
+        "ĐỪNG dùng Transform → Automatic Recode cho thao tác này — nó tạo biến mới với mã khác (F, 1, 2, 9 → 1,2,3,4) và phá quy ước mã. CHƯA XÁC MINH TRÊN PHẦN MỀM THẬT nếu bạn thấy đường dẫn khác.",
+        "Frequencies không nhận sex_code sau đổi kiểu → đóng hộp thoại mở lại để danh sách biến refresh."
+      ]
+    },
+
+    "d03-finish": {
+      "step": "Bước 7–8",
+      "title": "Gắn lại nhãn, xử lý giá trị bất khả thi, lưu clinic_bp_my_clean.sav",
+      "purpose": "Hoàn thiện bản sạch: đưa 4 giá trị vô lý (tuổi 250, HA −30, BMI 152.4, adherence 118) về missing, gắn lại nhãn biến/mã (vì file raw không có), rồi lưu clinic_bp_my_clean.sav — file chính cho Ngày 04 trở đi.",
+      "where": "Data View (sửa ô) → Variable View (gắn nhãn) → File → Save As…",
+      "menuPath": ["File", "Save As…"],
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp_work.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "data",
+          "grid": {
+            "cols": ["patient_id", "age_years", "bmi", "sbp_baseline", "adherence_score", "…"],
+            "rows": [
+              [{"label": "P007"}, {"label": "41"}, {"label": "24.8"}, {"label": "135"}, {"label": "118", "hot": 1}, {"label": "…"}],
+              [{"label": "P037"}, {"label": "250", "sel": true, "hot": 1}, {"label": "28.0"}, {"label": "150"}, {"label": "76"}, {"label": "…"}],
+              [{"label": "P074"}, {"label": "50"}, {"label": "25.5"}, {"label": "-30", "hot": 1}, {"label": "82"}, {"label": "…"}],
+              [{"label": "P103"}, {"label": "47"}, {"label": "152.4", "hot": 1}, {"label": "142"}, {"label": "90"}, {"label": "…"}]
+            ]
+          },
+          "caption": "Sửa từng ô lỗi: double-click → xóa nội dung → Enter (ô trống = missing '.'). Ghi lại quyết định vào sổ làm sạch cho MỖI ô.",
+          "callouts": [{"n": 1, "label": "Xóa nội dung → ô thành '.' — không đoán số thay thế"}]
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp_work.sav — Data Editor",
+          "openMenu": "File",
+          "items": [
+            {"label": "New"}, {"label": "Open"}, {"label": "Import Data"},
+            {"label": "Save"},
+            {"label": "Save As…", "hot": 2, "advance": true},
+            {"label": "Exit"}
+          ],
+          "grid": {
+            "kind": "var",
+            "cols": ["Name", "Type", "Label", "Values", "Missing", "Measure"],
+            "rows": [
+              [{"label": "sex_code"}, {"label": "Numeric"}, {"label": "Giới tính", "hot": 3}, {"label": "{1, Nữ}…"}, {"label": "9"}, {"label": "Nominal"}],
+              [{"label": "treatment_group"}, {"label": "Numeric"}, {"label": "Nhóm điều trị"}, {"label": "{A, Amlodipine}…"}, {"label": "None"}, {"label": "Nominal"}]
+            ]
+          },
+          "tabs": false,
+          "caption": "Sau khi gắn lại nhãn/nhãn mã cho các biến (lặp lại kỹ thuật Ngày 02): File → Save As…",
+          "callouts": [
+            {"n": 3, "label": "Nhãn gắn lại — file raw không mang theo nhãn từ Ngày 02"},
+            {"n": 2, "label": "Save As…"}
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Save Data As",
+          "dim": true,
+          "dialog": {
+            "title": "Save Data As",
+            "rows": [
+              {"type": "field", "label": "File name:", "value": "clinic_bp_my_clean.sav", "hot": 4},
+              {"type": "select", "label": "Save as type:", "value": "SPSS Statistics (*.sav)"},
+              {"type": "note", "text": "Đây là FILE CHÍNH từ Ngày 04 trở đi. Ba file: clinic_bp.sav (tham chiếu, không sửa) — clinic_bp_work.sav (bản thô đã backup) — clinic_bp_my_clean.sav (bản sạch của bạn)."}
+            ],
+            "buttons": [{"label": "Save", "primary": true, "advance": true, "hot": 5}, {"label": "Cancel"}]
+          },
+          "caption": "Đặt tên clinic_bp_my_clean.sav → Save.",
+          "callouts": [
+            {"n": 4, "label": "Tên file chính — nhớ kỹ, Ngày 04 mở file này"},
+            {"n": 5, "label": "Save"}
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — kiểm chứng cuối",
+          "dim": true,
+          "outline": [{"t": "Frequencies"}, {"t": "Descriptives"}],
+          "tables": [
+            {
+              "title": "Descriptive Statistics",
+              "cols": ["", "N", "Minimum", "Maximum"],
+              "rows": [
+                ["age_years", "159", "19", "78"],
+                ["bmi", "159", "18.3", "41.6"],
+                ["sbp_baseline", "159", "98", "178"],
+                ["adherence_score", "159", "42", "98"]
+              ]
+            },
+            {
+              "title": "sex_code",
+              "cols": ["", "Frequency", "Percent"],
+              "rows": [
+                ["Valid  Nữ", "77", "48.1"],
+                ["Nam", "82", "51.3"],
+                ["Missing  9", "1", "0.6"]
+              ]
+            }
+          ],
+          "caption": "Chạy lại Frequencies + Descriptives trên file mới: Max hợp lý (78 tuổi, BMI 41.6, HA 98–178, adherence ≤98), sex_code chỉ còn Nữ/Nam + 1 missing — và nhãn tiếng Việt đã hiện.",
+          "callouts": [
+            {"n": 6, "label": "Min/Max đều trong ngưỡng sinh lý"},
+            {"n": 7, "label": "Nhãn 'Nữ/Nam' hiện — metadata đã gắn lại đúng"}
+          ]
+        }
+      ],
+      "expected": "clinic_bp_my_clean.sav đã lưu: 160 dòng, giá trị bất khả thi thành '.', '9' là missing, nhãn tiếng Việt hiện trong output.",
+      "ifWrong": [
+        "Mở lại file mà nhãn biến mất → lưu khi đang ở cửa sổ khác hoặc lưu nhầm file. Mở clinic_bp_my_clean.sav, kiểm tra Variable View, gắn lại nếu cần rồi ⌘S/Ctrl+S.",
+        "Vẫn còn giá trị lạ trong Descriptives → sót ô — quay lại Data View, tìm theo danh sách trong sổ làm sạch.",
+        "Không nhớ file nào là file nào → mở từng file và nhìn thanh tiêu đề + Variable View: file sạch có nhãn + Missing 9 khai báo."
+      ]
+    }
+  }
+}

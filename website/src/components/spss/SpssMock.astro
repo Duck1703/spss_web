@@ -1,0 +1,299 @@
+---
+/**
+ * SpssMock.astro — render một cửa sổ SPSS *mô phỏng* bằng DOM/CSS (không phải screenshot).
+ * props.scenes: array các scene descriptor (xem public/visual-guides/dayNN/scenes.json).
+ * Mỗi scene là một "khung hình" — nút Tiếp/Lùi và các mục menu data-advance điều khiển.
+ * Tương tác xử lý bởi /js/spss-guides.js. KHÔNG bịa control không có trong SPSS thật.
+ */
+interface Props { scenes: any[]; guideId: string; }
+const { scenes, guideId } = Astro.props;
+
+const MENUS = ['File','Edit','View','Data','Transform','Analyze','Graphs','Utilities','Extensions','Window','Help'];
+
+const badge = (n) => n ? `<span class="sm-badge" aria-hidden="true">${n}</span>` : '';
+const hot = (n) => n ? ` sm-hot` : '';
+---
+
+<div class="spss-mock" data-guide={guideId}>
+  {scenes.map((s, i) => (
+    <div class="spss-scene" data-scene={i} hidden={i !== 0} {...(s.os ? { 'data-os': s.os } : {})}>
+      <div class={`smw ${s.kind === 'finder' ? 'smw-finder' : ''}`}>
+        {/* thanh tiêu đề — chrome đổi theo OS */}
+        <div class="smw-title">
+          <span class="smw-lights"><i></i><i></i><i></i></span>
+          <span class="smw-t">{s.title || 'Untitled — IBM SPSS Statistics Data Editor'}</span>
+          <span class="smw-winbtns"><i>−</i><i>▢</i><i>✕</i></span>
+        </div>
+
+        {/* menu bar — trên Mac thật menu nằm ở thanh hệ thống trên cùng; đặt trong cửa sổ cho dễ nhìn */}
+        {s.menubar !== false && (
+          <div class="smw-menu" role="menubar">
+            {MENUS.map((m) => (
+              <button type="button" class={`sm-menu-btn${s.openMenu === m ? ' is-open' : ''}`} data-menu={m}
+                {...(s.advanceMenu === m ? { 'data-advance': true } : {})}>{m}</button>
+            ))}
+          </div>
+        )}
+
+        {/* dropdown đang mở (scene menudrop) */}
+        {s.openMenu && s.items && (
+          <div class={`sm-drop sm-drop-${s.openMenu.toLowerCase()}`} role="menu">
+            {s.items.map((it) => (
+              <button type="button" class={`sm-item${hot(it.hot)}${it.advance ? ' sm-advance' : ''}${it.sub ? ' sm-has-sub' : ''}`}
+                {...(it.advance ? { 'data-advance': true } : {})} {...(it.disabled ? { disabled: true } : {})}>
+                <span class="sm-item-l" set:html={badge(it.hot) + it.label}></span>
+                {it.sub && <span class="sm-item-sub">▸</span>}
+                {it.sub && (
+                  <span class="sm-submenu">
+                    {it.sub.map((sub) => (
+                      <span class={`sm-item${hot(sub.hot)}${sub.advance ? ' sm-advance' : ''}`}
+                        {...(sub.advance ? { 'data-advance': true } : {})}>
+                        <span class="sm-item-l" set:html={badge(sub.hot) + sub.label}></span>
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* toolbar trang trí */}
+        {s.toolbar && (
+          <div class="smw-toolbar" aria-hidden="true">
+            <span class="sm-tb">📄</span><span class="sm-tb">📂</span><span class="sm-tb">💾</span>
+            <span class="sm-tb-sep"></span><span class="sm-tb">⎘</span><span class="sm-tb">⏪</span>
+            <span class="sm-tb-sep"></span><span class="sm-tb">🔍</span><span class="sm-tb">≡</span>
+          </div>
+        )}
+
+        {/* ===== thân cửa sổ ===== */}
+        <div class="smw-body">
+          {/* dialog nổi phủ lên editor */}
+          {s.dim && <div class="smw-dim" aria-hidden="true"></div>}
+
+          {s.kind === 'dialog' && (
+            <div class="sm-dialog">
+              <div class="sm-dialog-title">{s.dialog.title}</div>
+              <div class="sm-dialog-body">
+                {s.dialog.rows.map((r) => (
+                  <div class={`sm-row sm-row-${r.type || 'row'}`}>
+                    {r.type === 'check' && (
+                      <label class={`sm-ctl${hot(r.hot)}`}>
+                        <input type="checkbox" checked={!!r.checked} disabled tabindex="-1" /> {r.label} {badge(r.hot)}
+                      </label>
+                    )}
+                    {r.type === 'radio' && (
+                      <div class="sm-radios">
+                        {r.label && <span class="sm-lbl">{r.label}</span>}
+                        {r.options.map((o) => (
+                          <label class={`sm-ctl${hot(o.hot)}`}>
+                            <input type="radio" checked={!!o.checked} disabled tabindex="-1" /> {o.label} {badge(o.hot)}
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                    {r.type === 'field' && (
+                      <>
+                        <span class="sm-lbl">{r.label}</span>
+                        <span class={`sm-field${hot(r.hot)}`}>{r.value}{badge(r.hot)}</span>
+                      </>
+                    )}
+                    {r.type === 'ellipsis' && (
+                      <>
+                        <span class="sm-lbl">{r.label}</span>
+                        <button type="button" class={`sm-ellipsis${hot(r.hot)}`} {...(r.advance ? { 'data-advance': true } : {})}>…</button>
+                        {badge(r.hot)}
+                      </>
+                    )}
+                    {r.type === 'select' && (
+                      <>
+                        <span class="sm-lbl">{r.label}</span>
+                        <span class={`sm-field sm-select${hot(r.hot)}`}>{r.value} ▾{badge(r.hot)}</span>
+                      </>
+                    )}
+                    {r.type === 'listmove' && (
+                      <div class="sm-listmove">
+                        <div class="sm-listbox">
+                          <div class="sm-listbox-h">{r.left.label}</div>
+                          {r.left.items.map((it) => (
+                            <div class={`sm-listitem${it.sel ? ' is-sel' : ''}${hot(it.hot)}`}>{badge(it.hot)}{it.label}</div>
+                          ))}
+                        </div>
+                        <button type="button" class={`sm-arrow${hot(r.arrowHot)}`} {...(r.advance ? { 'data-advance': true } : {})}>►</button>
+                        <div class="sm-listbox">
+                          <div class="sm-listbox-h">{r.right.label}</div>
+                          {r.right.items.map((it) => (
+                            <div class="sm-listitem">{it.label}</div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {r.type === 'lists' && (
+                      <div class="sm-listmove">
+                        <div class="sm-listbox">
+                          <div class="sm-listbox-h">{r.leftLabel || 'Biến có sẵn:'}</div>
+                          {(r.left || []).map((it) => <div class="sm-listitem">{it}</div>)}
+                        </div>
+                        <button type="button" class={`sm-arrow${hot(r.hot)}`}>►{badge(r.hot)}</button>
+                        <div class={`sm-listbox${hot(r.hot)}`}>
+                          <div class="sm-listbox-h">{r.rightLabel || 'Variable(s):'}</div>
+                          {(r.right || []).map((it) => <div class="sm-listitem is-sel">{it}</div>)}
+                        </div>
+                      </div>
+                    )}
+                    {r.type === 'list' && (
+                      <div class={`sm-listbox${hot(r.hot)}`}>
+                        {r.label && <div class="sm-listbox-h">{r.label}</div>}
+                        {r.rows.map((it, i) => (
+                          <div class={`sm-listitem${r.hotRow === i + 1 ? ' is-sel sm-hotcell' : ''}`}>
+                            {it}{r.hotRow === i + 1 ? badge(r.hotRow) : ''}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {r.type === 'listbox' && (
+                      <div class={`sm-listbox${hot(r.hot)}`}>
+                        {r.label && <div class="sm-listbox-h">{r.label}</div>}
+                        {r.items.map((it) => <div class="sm-listitem">{it.label}</div>)}
+                        {badge(r.hot)}
+                      </div>
+                    )}
+                    {r.type === 'missing' && (
+                      <div class="sm-missing">
+                        {r.label && <span class="sm-lbl">{r.label}</span>}
+                        {r.values.map((v) => <span class={`sm-field sm-mf${hot(r.hot)}`}>{v}</span>)}
+                        {badge(r.hot)}
+                      </div>
+                    )}
+                    {r.type === 'table' && (
+                      <table class="sm-table">
+                        {r.cols && <thead><tr>{r.cols.map((c) => <th>{c}</th>)}</tr></thead>}
+                        <tbody>
+                          {r.rows.map((row) => (
+                            <tr>{row.map((cell) => (
+                              <td class={cell && cell.hot ? 'sm-hotcell' : ''}>{cell && cell.label !== undefined ? cell.label : cell}</td>
+                            ))}</tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                    {r.type === 'note' && <div class="sm-note">{r.text}</div>}
+                    {(!r.type || r.type === 'row') && <div class="sm-text" set:html={r.html || r.text}></div>}
+                  </div>
+                ))}
+              </div>
+              {s.dialog.buttons && (
+                <div class="sm-dialog-btns">
+                  {s.dialog.buttons.map((b) => (
+                    <button type="button" class={`sm-btn${b.primary ? ' is-primary' : ''}${hot(b.hot)}${b.advance ? ' sm-advance' : ''}`}
+                      {...(b.advance ? { 'data-advance': true } : {})}>{b.label}{badge(b.hot)}</button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* data grid (Data View / Variable View) */}
+          {s.grid && (
+            <div class="sm-gridwrap">
+              <table class={`sm-grid${s.grid.kind === 'var' ? ' sm-grid-var' : ''}`}>
+                <thead>
+                  <tr>
+                    <th class="sm-corner"></th>
+                    {s.grid.cols.map((c) => <th>{c}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.grid.rows.map((row, ri) => (
+                    <tr class={(s.grid.hotRow === ri) ? 'is-hotrow' : ''}>
+                      <th class="sm-rownum">{s.grid.rowNums === false ? '' : ri + 1}</th>
+                      {row.map((cell) => (
+                        <td class={`${cell && cell.m ? 'sm-missingcell' : ''}${cell && cell.hot ? ' sm-hotcell' : ''}${cell && cell.sel ? ' is-selcell' : ''}`}>
+                          {cell && cell.label !== undefined ? cell.label : cell}{cell && cell.hot ? <span class="sm-badge">{cell.hot}</span> : ''}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* output viewer */}
+          {s.kind === 'output' && (
+            <div class="sm-output">
+              <div class="sm-outline">
+                <div class="sm-ol-h">Outline</div>
+                {(s.outline || []).map((o) => (
+                  <div class={`sm-ol-item${o.ind ? ' sm-ol-ind' : ''}`}>{o.t || o}</div>
+                ))}
+              </div>
+              <div class="sm-opane">
+                {(s.tables || []).map((p) => (
+                  <div class="sm-otable">
+                    <div class="sm-otitle">{p.title}</div>
+                    <table class="sm-table">
+                      <thead><tr>{p.cols.map((c) => <th>{c}</th>)}</tr></thead>
+                      <tbody>
+                        {p.rows.map((row) => (
+                          <tr>{row.map((cell) => (
+                            <td class={cell && cell.hot ? 'sm-hotcell' : ''}>{cell && cell.label !== undefined ? cell.label : cell}{cell && cell.hot ? <span class="sm-badge">{cell.hot}</span> : ''}</td>
+                          ))}</tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* finder / file browser */}
+          {s.kind === 'finder' && (
+            <div class="sm-finder">
+              <div class="sm-finder-path">{s.path}</div>
+              {s.files.map((f) => (
+                <div class={`sm-file${f.sel ? ' is-sel' : ''}${hot(f.hot)}`}>
+                  <span class="sm-file-ic">{f.dir ? '📁' : '📄'}</span>{f.name}{badge(f.hot)}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* log / text editor */}
+          {s.kind === 'log' && (
+            <pre class="sm-log">{s.text}</pre>
+          )}
+
+          {s.note && <div class="smw-note">{s.note}</div>}
+        </div>
+
+        {/* view tabs ở đáy Data Editor */}
+        {s.tabs && (
+          <div class="smw-tabs">
+            <button type="button" class={`smw-tab${s.activeTab === 'variable' ? '' : ' is-active'}`} data-tab="data"
+              {...(s.advanceTab === 'data' ? { 'data-advance': true } : {})}>Data View</button>
+            <button type="button" class={`smw-tab${s.activeTab === 'variable' ? ' is-active' : ''}`} data-tab="variable"
+              {...(s.advanceTab === 'variable' ? { 'data-advance': true } : {})}>Variable View</button>
+            {s.tabHot ? badge(s.tabHot) : ''}
+          </div>
+        )}
+      </div>
+
+      {/* caption của scene */}
+      {(s.caption || s.callouts) && (
+        <div class="smw-caption">
+          {s.caption && <p class="smw-cap-text">{s.caption}</p>}
+          {s.callouts && (
+            <ol class="sm-legend">
+              {s.callouts.map((c) => (
+                <li><button type="button" class="sm-legend-btn" data-callout={c.n}><b>{c.n}</b> — {c.label}</button></li>
+              ))}
+            </ol>
+          )}
+        </div>
+      )}
+    </div>
+  ))}
+</div>

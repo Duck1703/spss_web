@@ -58,6 +58,8 @@ Trước khi phân tích bất cứ điều gì, việc đầu tiên của ngư�
   **Syntax Editor** — chúng là cửa sổ khác. Mở lại SPSS hoặc vào menu **File → New → Data**.
   Không tìm thấy SPSS trong Applications → mở **Spotlight** (⌘Space) gõ `SPSS` → Enter.
 
+{{guide:d01-open}}
+
 ### Bước 2 — Nhận diện Data View và Variable View
 
 - **Làm:** bấm tab **Variable View** → nhìn → bấm lại **Data View**.
@@ -67,6 +69,8 @@ Trước khi phân tích bất cứ điều gì, việc đầu tiên của ngư�
     vì chưa có dữ liệu.
 - **Ghi nhớ một câu:** *Data View = nhìn số liệu; Variable View = nhìn định nghĩa biến.*
   Ngày 02 sẽ sống trong Variable View.
+
+{{guide:d01-two-views}}
 
 ### Bước 3 — Mở wizard import CSV
 
@@ -78,6 +82,8 @@ Trước khi phân tích bất cứ điều gì, việc đầu tiên của ngư�
   → **Open**.
 - **Màn hình mong đợi:** một **wizard** (hộp thoại nhiều bước) hiện ra, hỏi cách đọc file.
   `[SHOT-2]`
+
+{{guide:d01-import}}
 
 ### Bước 4 — Trả lời wizard import (3 câu quan trọng)
 
@@ -108,6 +114,8 @@ Wizard hỏi nhiều câu — **chỉ 3 câu cần chỉnh**, còn lại để m
     "variable names from first row". Import lại với **Yes**.
   - Số `25,9` bị tách thành 2 cột → bạn chọn decimal = Comma thay vì Period. Import lại.
 
+{{guide:d01-wizard}}
+
 ### Bước 5 — Đọc bảng như người làm thống kê
 
 Nhìn 5 dòng đầu, trả lời miệng (hoặc ghi vào sổ):
@@ -118,6 +126,8 @@ Nhìn 5 dòng đầu, trả lời miệng (hoặc ghi vào sổ):
   139 mmHg lúc nhập chương trình."*
 - Ô trống `.` ở `sbp_followup` → bệnh nhân đó không có đo tái khám (thiếu thật — hiểu kỹ ở Ngày 03).
 
+{{guide:d01-verify}}
+
 ### Bước 6 — Lưu thành `.sav` và mở lại
 
 - **Làm:** **File → Save As…** → vào thư mục khóa học → đặt tên **`clinic_bp.sav`**,
@@ -126,6 +136,8 @@ Nhìn 5 dòng đầu, trả lời miệng (hoặc ghi vào sổ):
 - **Màn hình mong đợi:** dữ liệu hiện lại đầy đủ — 160 dòng × 12 cột. `[SHOT-4]`
 - **Nếu sai:** file mở ra trống → có thể lưu nhầm chỗ khác; tìm `clinic_bp.sav` trong
   thư mục khóa học bằng Finder trước rồi mở lại từ đó.
+
+{{guide:d01-save}}
 
 ## E. Minh họa & danh sách ảnh cần chụp
 

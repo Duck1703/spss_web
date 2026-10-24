@@ -57,6 +57,8 @@ Trong nghiên cứu thật, thông tin này ghi trong **codebook** — và `.sav
 - **Nếu sai:** chỉ thấy 3–4 cột → kéo thanh cuộn ngang dưới bảng, hoặc kéo rộng cửa sổ —
   Variable View có 11 cột.
 
+{{guide:d02-varview}}
+
 ### Bước 2 — Điền Variable Label cho 12 biến
 
 Với mỗi dòng: **bấm vào ô `Label` → gõ nhãn tiếng Việt** (được dấu bình thường) → Enter
@@ -79,6 +81,8 @@ hoặc bấm ô khác để ghi. Tra codebook, không tự bịa:
 
 - **Nếu sai:** gõ nhầm → bấm lại ô đó sửa — Label chỉ là chữ hiển thị, sửa bao nhiêu lần
   cũng được, không ảnh hưởng dữ liệu.
+
+{{guide:d02-label}}
 
 ### Bước 3 — Gắn Value Labels (làm kỹ từng click ở `sex_code`)
 
@@ -119,12 +123,16 @@ hoặc bấm ô khác để ghi. Tra codebook, không tự bịa:
     sửa ô Label → **Change** (không phải Add — Add sẽ báo trùng mã).
   - Muốn xóa hẳn một dòng → chọn dòng đó → **Remove**.
 
+{{guide:d02-values}}
+
 ### Bước 4 — Xem nhãn hoạt động trong Data View
 
 - **Làm:** về **Data View** → menu **View → Value Labels** (bấm để bật/tắt — có dấu ✓ khi bật).
 - **Màn hình mong đợi:** khi bật, ô `sex_code` hiển thị **"Nữ"/"Nam"** thay vì 1/2.
   Bật/tắt vài lần cho quen — dữ liệu bên dưới không đổi, chỉ *cách hiển thị* đổi. `[SHOT-7]`
 - **Nếu sai:** bật rồi vẫn thấy số → bạn chưa Add nhãn thành công — quay lại Bước 3.
+
+{{guide:d02-toggle}}
 
 ### Bước 5 — Chọn Measure đúng
 
@@ -138,6 +146,8 @@ hoặc bấm ô khác để ghi. Tra codebook, không tự bịa:
 
 **Tự hỏi để chọn:** "trung bình của biến này có nghĩa không?" → có = Scale; không nhưng
 có thứ tự = Ordinal; còn lại = Nominal.
+
+{{guide:d02-measure}}
 
 ### Bước 6 — Nhìn cột Missing (chỉ nhìn, chưa sửa)
 
@@ -155,6 +165,8 @@ không cần khai báo gì. *(Ngày 03 sẽ gặp trường hợp phải khai b�
   đếm — dấu hiệu Value Labels hoạt động. `[SHOT-8]`
 - **Nếu sai:** bảng hiện 1/2 thay vì nhãn → Value Labels chưa được Add — quay lại Bước 3.
   Đây là cửa sổ sẽ chứa *mọi* kết quả phân tích từ giờ — Ngày 11 học quản lý nó.
+
+{{guide:d02-save}}
 
 ## E. Minh họa & danh sách ảnh cần chụp
 
