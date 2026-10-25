@@ -129,7 +129,6 @@ McNemar) sang ngày 09–10.
 - Mọi con số kỳ vọng trong bài học & đáp án được tái tính trực tiếp từ file `.sav` bằng Python
   (`pyreadstat`/`pandas`/`scipy`) — ghi trong `curriculum/exercise-verified-stats.md`, nhãn `NOT_RUN`.
 - Menu SPSS viết theo tài liệu IBM SPSS; chưa chạy pilot thật → `MAC_SPSS_VERIFICATION_PENDING`.
-- Ngày 01–06: xây dựng đầy đủ (lesson + workbook + đáp án + mô phỏng SPSS) —
-  `CONTENT_READY_PENDING_HUMAN_PILOT` (chưa có học viên thật chạy thử).
-- Ngày 07–14: **DRAFT** — đã ánh xạ đầy đủ bài tập nguồn + số liệu kiểm chứng; hoàn thiện
-  hướng dẫn & mô phỏng theo mẫu ngày 01–06.
+- Ngày 01–14: xây dựng đầy đủ (lesson + workbook + đáp án + mô phỏng SPSS) —
+  `CONTENT_READY_PENDING_HUMAN_PILOT` (chưa có học viên thật chạy thử; hoàn thiện
+  Ngày 07–10 ở Task 15, Ngày 11–14 ở Task 16).

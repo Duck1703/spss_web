@@ -1031,7 +1031,8 @@
       "artifact": "Bảng 5 chỉ số × 2 biến",
       "mapping": "VERIFIED",
       "role": "assessment",
-      "day": "d14"
+      "day": "d14",
+      "tier": "essential"
     },
     {
       "id": "P1-Q25",
@@ -1094,7 +1095,8 @@
       "artifact": "Bảng mean/median/SD/var theo nhóm học vấn",
       "mapping": "VERIFIED",
       "role": "assessment",
-      "day": "d14"
+      "day": "d14",
+      "tier": "essential"
     },
     {
       "id": "P1-Q27",
@@ -1158,7 +1160,8 @@
       "artifact": "Bảng n/mean/SD/range × 2 biến × 2 nhóm",
       "mapping": "VERIFIED",
       "role": "assessment",
-      "day": "d14"
+      "day": "d14",
+      "tier": "optional"
     },
     {
       "id": "P1-Q29",
@@ -1261,7 +1264,8 @@
       "artifact": "Bảng học vấn × độ HA + p",
       "mapping": "VERIFIED",
       "role": "assessment",
-      "day": "d14"
+      "day": "d14",
+      "tier": "essential"
     },
     {
       "id": "P1-Q32",
@@ -1320,7 +1324,8 @@
       "artifact": "Bảng chéo + nhận xét",
       "mapping": "VERIFIED",
       "role": "assessment",
-      "day": "d14"
+      "day": "d14",
+      "tier": "essential"
     },
     {
       "id": "P1-Q34",
@@ -1642,7 +1647,8 @@
       "artifact": "Bảng N/min/max/mean/SD × giới",
       "mapping": "VERIFIED",
       "role": "assessment",
-      "day": "d14"
+      "day": "d14",
+      "tier": "essential"
     },
     {
       "id": "P2-Q01",
@@ -1924,7 +1930,7 @@
       "artifact": "Bảng ANOVA",
       "mapping": "VERIFIED",
       "role": "assessment",
-      "day": "d14",
+      "day": "d10+d14",
       "tier": "reinforcement",
       "dualRole": "dạy kỹ năng ANOVA ở d10 (reinforcement), đánh giá lại ở d14"
     },
@@ -2006,7 +2012,8 @@
           "key": "r",
           "label": "r cho csa~ytruo"
         }
-      ]
+      ],
+      "tier": "essential"
     },
     {
       "id": "P2-Q11",
@@ -2045,7 +2052,8 @@
           "key": "r2",
           "label": "R² cho csa~ytruo"
         }
-      ]
+      ],
+      "tier": "essential"
     },
     {
       "id": "P2-Q12",
@@ -2075,7 +2083,8 @@
       "artifact": "Mô hình đa biến + bảng hệ số",
       "mapping": "VERIFIED",
       "role": "optional",
-      "day": "d11"
+      "day": "d11",
+      "tier": "advanced"
     },
     {
       "id": "P2-Q13",
@@ -2206,7 +2215,8 @@
       "artifact": "Báo cáo ngắn có bảng mô tả + ≥2 phân tích + diễn giải",
       "mapping": "VERIFIED",
       "role": "core",
-      "day": "d12"
+      "day": "d12",
+      "tier": "essential"
     },
     {
       "id": "P1-BONUS-SLNC",

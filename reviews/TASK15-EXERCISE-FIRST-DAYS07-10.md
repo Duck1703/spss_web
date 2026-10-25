@@ -126,4 +126,7 @@ Misc: `.gitignore` (+`.workspace/*.py`), `reviews/TASK15-*`, `report/` refresh.
 ## 11. Next (khi được duyệt)
 
 - Pilot Ngày 01–10 trên SPSS thật (Win + macOS) → gỡ pending labels.
-- Ngày 11–14: ROC (P1-Q15/16), nâng cao File3/4/5, P2-Q14/15 — **chưa triển khai** theo đúng stop condition.
+- Ngày 11–14 theo **roadmap đã duyệt** (không phải ROC): Ngày 11 tương quan/hồi quy
+  (P2-Q10/11, File1); Ngày 12–13 capstone Bài TH3 (File5); Ngày 14 đánh giá cuối
+  khóa (P1-Q24/26/31/33/43 + P2-Q08). ROC P1-Q15/16, P2-Q14/15, P2-Q12 đa biến
+  **vẫn hoãn** (roadmap mục 6).

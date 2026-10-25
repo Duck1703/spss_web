@@ -79,13 +79,13 @@ const DAYS = [
     files: [{ savLocal: 'exercises/bai_2/File1.sav', note: 'dataset chính Phần 2 — 50×18' }] },
   { dir: 'day-10-ttest-ghep-cap-anova', slug: 'd10', num: '10', title: 'Ngày 10 — T-test ghép cặp & ANOVA', ready: true,
     files: [{ savLocal: 'exercises/bai_2/File1.sav' }, { savLocal: 'exercises/bai_2/File2_Phan2.sav', note: 'cho P2-Q13' }] },
-  { dir: 'day-11-tuong-quan-hoi-quy', slug: 'd11', num: '11', title: 'Ngày 11 — Tương quan & hồi quy',
+  { dir: 'day-11-tuong-quan-hoi-quy', slug: 'd11', num: '11', title: 'Ngày 11 — Tương quan & hồi quy', ready: true,
     files: [{ savLocal: 'exercises/bai_2/File1.sav' }] },
-  { dir: 'day-12-capstone-a-chuan-bi', slug: 'd12', num: '12', title: 'Ngày 12 — Capstone A: chuẩn bị File5',
+  { dir: 'day-12-capstone-a-chuan-bi', slug: 'd12', num: '12', title: 'Ngày 12 — Capstone A: chuẩn bị File5', ready: true,
     files: [{ savLocal: 'exercises/bai_2/File5_Phan2.sav', note: '296×7 — sinh thiết tuyến tiền liệt' }] },
-  { dir: 'day-13-capstone-b-phan-tich', slug: 'd13', num: '13', title: 'Ngày 13 — Capstone B: phân tích & báo cáo',
+  { dir: 'day-13-capstone-b-phan-tich', slug: 'd13', num: '13', title: 'Ngày 13 — Capstone B: phân tích & báo cáo', ready: true,
     files: [{ savLocal: 'exercises/bai_2/File5_Phan2.sav' }] },
-  { dir: 'day-14-danh-gia-cuoi-khoa', slug: 'd14', num: '14', title: 'Ngày 14 — Đánh giá cuối khóa',
+  { dir: 'day-14-danh-gia-cuoi-khoa', slug: 'd14', num: '14', title: 'Ngày 14 — Đánh giá cuối khóa', ready: true,
     files: [P1SAV, { savLocal: 'exercises/bai_2/File1.sav' }] },
 ];
 
@@ -255,7 +255,7 @@ function syncTrackRoadmap() {
   // Gắn link bài học vào cột Ngày trong bảng lịch.
   md = md.replace(/^\| (\d{2}) \|/gm, (_, n) => `| [${n} →](/d${n}/bai-hoc/) |`);
   const status = `> 🚀 **Đây là lộ trình mặc định hiện tại** — bài tập nguồn thật (P1-Q01…P2-Q15) quyết định nội dung.\n`
-    + `> Ngày 01–06 READY (CONTENT_READY_PENDING_HUMAN_PILOT); Ngày 07–14 DRAFT (đã ánh xạ bài tập, đang hoàn thiện). `
+    + `> Ngày 01–14 READY (CONTENT_READY_PENDING_HUMAN_PILOT). `
     + `Số liệu cross-check Python (NOT_RUN); menu SPSS/macOS chờ verify thủ công.\n`
     + `> Lộ trình cũ quanh dataset giả lập đã lưu ở \`archive/\`; chương trình 16 tuần ở mục [Tham khảo](/lo-trinh/).\n\n`;
   write('lo-trinh-14-ngay.md', `---\ntitle: Lộ trình 14 ngày — Exercise-first\ndescription: Học SPSS qua bài tập thật — mỗi ngày mở bằng bài tập nguồn (P1-Q01…P2-Q15), lý thuyết vừa đủ để giải.\n---\n\n${BANNER}${status}${md}`);

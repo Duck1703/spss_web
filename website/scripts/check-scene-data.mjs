@@ -124,7 +124,8 @@ const FORBIDDEN = [/Amlodipine/i, /Valsartan/i, /Losartan/i];
 /* Task 13: visual-guides/dayNN mới dùng dataset .sav nguồn (exercises/) thay vì clinic_bp CSV.
  * File có "audit": "external-sav" → chỉ kiểm tra cấu trúc + callout + forbidden tokens;
  * số liệu kiểm chứng riêng bằng Python (curriculum/exercise-verified-stats.md). */
-['day01', 'day02', 'day03', 'day04', 'day05', 'day06', 'day07', 'day08', 'day09', 'day10'].forEach((day) => {
+['day01', 'day02', 'day03', 'day04', 'day05', 'day06', 'day07', 'day08', 'day09', 'day10',
+  'day11', 'day12', 'day13', 'day14'].forEach((day) => {
   const file = path.join(VG, day, 'scenes.json');
   const meta = JSON.parse(fs.readFileSync(file, 'utf8'));
   const guides = meta.guides;

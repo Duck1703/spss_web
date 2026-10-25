@@ -3,6 +3,9 @@
 > Làm lần lượt, **không nhìn `answer-key.md`** cho tới khi xong.
 > Ba file hôm nay: `p1_B01_HA (1).sav` → `bai_2/File1.sav` → (luyện thêm) `P1_B02 CrossTab (2).sav`.
 > Nhớ **tắt Weight Cases** khi đổi file.
+> **Ngân sách ~120':** BT1–BT3 là bắt buộc (essential). BT4–BT6 là luyện thêm —
+> nếu hết giờ, **bỏ toàn bộ BT4–BT6** sang ngày khác không sao; mục tiêu ngày
+> chỉ cần GOF + binomial.
 
 ---
 

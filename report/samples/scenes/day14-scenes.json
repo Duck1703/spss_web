@@ -1,0 +1,143 @@
+{
+  "dataset": "bai_1/p1_B01_HA (1).sav — file nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Mô phỏng thao tác Compute (kỹ năng Ngày 06). Không hiển thị đáp số thống kê — đó là nội dung đánh giá.",
+  "guides": {
+    "d14-compute": {
+      "step": "Hỗ trợ Câu 1",
+      "title": "Compute — biến trung bình 2 lần đo",
+      "purpose": "Tạo biến mới = trung bình của hai lần đo HA — chỉ nhắc cơ chế, không cho đáp số.",
+      "where": "p1_work.sav (bản sao của p1_B01_HA (1).sav) đang mở",
+      "menuPath": [
+        "Transform",
+        "Compute Variable…",
+        "Target Variable: HA.TD_tb",
+        "Numeric Expression: (HA.TD_L1 + HA.TD_L2) / 2",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Compute trên bản work — đừng bao giờ lưu đè file gốc."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Compute Variable",
+          "dialog": {
+            "title": "Compute Variable",
+            "rows": [
+              {
+                "type": "field",
+                "label": "Target Variable:",
+                "value": "HA.TD_tb",
+                "hot": 1
+              },
+              {
+                "type": "field",
+                "label": "Numeric Expression:",
+                "value": "( HA.TD_L1 + HA.TD_L2 ) / 2",
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "Lặp cho HA.TT_tb = ( HA.TT_L1 + HA.TT_L2 ) / 2. Ngoặc bắt buộc — thiếu ngoặc thành L1 + L2/2."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 3
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Target = tên biến mới; Expression = công thức. Sau OK, cột mới xuất hiện cuối Data View.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Target Variable: tên biến mới"
+            },
+            {
+              "n": 2,
+              "label": "Công thức có NGOẶC quanh tổng"
+            },
+            {
+              "n": 3,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "editor",
+          "title": "Data View — cột mới xuất hiện",
+          "grid": {
+            "cols": [
+              "…",
+              "HA.TT_L2",
+              "HA.TD_tb",
+              "HA.TT_tb"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "…"
+                },
+                {
+                  "label": "80"
+                },
+                {
+                  "label": "130,0"
+                },
+                {
+                  "label": "80,0"
+                }
+              ],
+              [
+                {
+                  "label": "…"
+                },
+                {
+                  "label": "90"
+                },
+                {
+                  "label": "160,0"
+                },
+                {
+                  "label": "90,0"
+                }
+              ],
+              [
+                {
+                  "label": "…"
+                },
+                {
+                  "label": "75"
+                },
+                {
+                  "label": "125,0"
+                },
+                {
+                  "label": "72,5"
+                }
+              ]
+            ]
+          },
+          "caption": "Hai cột *_tb xuất hiện cuối bảng — kiểm vài dòng bằng tay (130+…) trước khi chạy thống kê.",
+          "callouts": []
+        }
+      ],
+      "expected": "Hai biến HA.TD_tb / HA.TT_tb xuất hiện trong file work; giá trị = trung bình 2 lần đo từng dòng.",
+      "ifWrong": [
+        "Cột toàn giá trị gấp đôi mong đợi → thiếu ngoặc: viết L1+L2/2 thay vì (L1+L2)/2.",
+        "Không thấy cột mới → chạy Compute trên file gốc (đóng không lưu) hoặc chưa bấm OK.",
+        "Missing ở cột mới → một trong hai lần đo bị missing — đó là hành vi đúng."
+      ]
+    }
+  }
+}

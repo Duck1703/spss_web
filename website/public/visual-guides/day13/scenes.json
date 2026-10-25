@@ -1,0 +1,127 @@
+{
+ "dataset": "bai_2/File5_Phan2.sav (bản work File5_work.sav) — local-only",
+ "audit": "external-sav",
+ "note": "Output = số liệu thật tái tính từ File5 bằng Python (NOT_RUN).",
+ "guides": {
+  "d13-crosstab": {
+   "step": "Bước 2",
+   "title": "Crosstabs — Siêu_âmTT × Sinhthiet",
+   "purpose": "So sánh tỷ lệ dương giữa hai nhóm outcome — kỹ năng Ngày 05 tái dùng.",
+   "where": "File5_work.sav đang mở; không filter",
+   "menuPath": ["Analyze", "Descriptive Statistics", "Crosstabs…", "Rows: Siêu_âmTT · Cols: Sinhthiet", "Statistics→Chi-square · Cells→Column %", "OK"],
+   "osNote": {"both": "Column % cho % dương tính theo cột outcome — dễ đọc hơn Row % cho câu hỏi này."},
+   "scenes": [
+    {
+     "kind": "output",
+     "title": "Output — Crosstab + Chi-Square",
+     "outline": [{"t": "Crosstabs"}, {"t": "Siêu_âmTT * Sinhthiet Crosstabulation", "ind": true}, {"t": "Chi-Square Tests", "ind": true}],
+     "tables": [
+      {
+       "title": "Siêu_âmTT * Sinhthiet Crosstabulation (% theo cột)",
+       "cols": ["", "Âm (0)", "Dương (1)"],
+       "rows": [
+        [{"label": "0 (âm tính)"}, {"label": "120 — 59,7%", "hot": 1}, {"label": "34 — 35,8%", "hot": 1}],
+        [{"label": "1 (dương tính)"}, {"label": "81 — 40,3%", "hot": 2}, {"label": "61 — 64,2%", "hot": 2}],
+        [{"label": "Total"}, {"label": "201"}, {"label": "95"}]
+       ]
+      },
+      {
+       "title": "Chi-Square Tests",
+       "cols": ["", "Value", "df", "Asymp. Sig. (2-sided)"],
+       "rows": [
+        [{"label": "Pearson Chi-Square"}, {"label": "14,779", "hot": 3}, {"label": "1"}, {"label": ",000", "hot": 4}],
+        [{"label": "Continuity Correction"}, {"label": "13,753"}, {"label": "1"}, {"label": ",000"}],
+        [{"label": "N of Valid Cases"}, {"label": "296"}, {"label": ""}, {"label": ""}]
+       ]
+      }
+     ],
+     "note": "Expected min ~45 → χ² hợp lệ. Dòng Pearson = không hiệu chỉnh. Output = số liệu thật (NOT_RUN).",
+     "caption": "% dương siêu âm: 40,3% (nhóm âm) vs 64,2% (nhóm dương). Pearson χ²=14,779, p<0,001.",
+     "callouts": [
+      {"n": 1, "label": "% theo cột (Column %)"},
+      {"n": 2, "label": "64,2% dương khi sinh thiết +"},
+      {"n": 3, "label": "Pearson χ² = 14,779"},
+      {"n": 4, "label": "p ',000' đọc <0,001"}
+     ]
+    }
+   ],
+   "expected": "Khám_TT χ²=4,920 p=0,027 (27/201 vs 68/95); Siêu_âmTT χ²=14,779 p<0,001 (34/201 vs 61/95).",
+   "ifWrong": [
+    "% đọc ngược → dùng Row % thay vì Column % (hàng/cột đảo).",
+    "N≠296 → còn filter.",
+    "p đọc ',000' thành 'bằng 0' → đọc là <0,001."
+   ]
+  },
+  "d13-ttest": {
+   "step": "Bước 3",
+   "title": "Independent T — Levene quyết định dòng đọc",
+   "purpose": "So sánh Tuoi/PSA/Thetich giữa âm–dương; chọn dòng pooled hay Welch theo Levene.",
+   "where": "File5_work.sav; không filter",
+   "menuPath": ["Analyze", "Compare Means", "Independent-Samples T Test…", "Test: Tuoi, PSA, Thetich · Grouping: Sinhthiet(0,1)", "OK"],
+   "osNote": {"both": "Nhớ Define Groups → 0 và 1 (giá trị mã, không phải nhãn)."},
+   "scenes": [
+    {
+     "kind": "dialog",
+     "title": "Independent-Samples T Test",
+     "dialog": {
+      "title": "Independent-Samples T Test",
+      "rows": [
+       {"type": "lists", "left": ["STT", "Khám_TT", "Siêu_âmTT", "Sinhthiet"], "right": ["Tuoi", "PSA", "Thetich"], "rightLabel": "Test Variable(s):", "hot": 1},
+       {"type": "lists", "left": [], "right": ["Sinhthiet"], "rightLabel": "Grouping Variable:", "hot": 2},
+       {"type": "field", "label": "Define Groups →", "value": "Group 1: 0   Group 2: 1", "hot": 3}
+      ],
+      "buttons": [{"label": "OK", "primary": true, "advance": true, "hot": 4}, {"label": "Reset"}, {"label": "Cancel"}]
+     },
+     "caption": "3 biến liên tục vào Test; Sinhthiet(0,1) vào Grouping → Define Groups 0/1 → OK.",
+     "callouts": [
+      {"n": 1, "label": "Tuoi, PSA, Thetich → Test"},
+      {"n": 2, "label": "Sinhthiet → Grouping"},
+      {"n": 3, "label": "Define Groups: 0 / 1"},
+      {"n": 4, "label": "OK"}
+     ]
+    },
+    {
+     "kind": "output",
+     "title": "Output — Group Statistics + Independent Samples Test",
+     "outline": [{"t": "T-Test"}, {"t": "Group Statistics", "ind": true}, {"t": "Independent Samples Test", "ind": true}],
+     "tables": [
+      {
+       "title": "Group Statistics",
+       "cols": ["", "N", "Mean", "Std. Deviation"],
+       "rows": [
+        [{"label": "Tuoi âm"}, {"label": "201"}, {"label": "66,64"}, {"label": "8,27"}],
+        [{"label": "Tuoi dương"}, {"label": "95"}, {"label": "67,14"}, {"label": "7,88"}],
+        [{"label": "PSA âm"}, {"label": "201"}, {"label": "5,63"}, {"label": "5,44"}],
+        [{"label": "PSA dương"}, {"label": "95"}, {"label": "15,55", "hot": 5}, {"label": "27,96"}],
+        [{"label": "Thetich âm"}, {"label": "201"}, {"label": "37,44"}, {"label": "18,93"}],
+        [{"label": "Thetich dương"}, {"label": "95"}, {"label": "32,51"}, {"label": "13,68"}]
+       ]
+      },
+      {
+       "title": "Independent Samples Test",
+       "cols": ["", "Levene Sig.", "t", "df", "Sig. (2-tailed)"],
+       "rows": [
+        [{"label": "Tuoi — Equal variances assumed"}, {"label": ",217", "hot": 6}, {"label": "-,488"}, {"label": "294"}, {"label": ",626", "hot": 6}],
+        [{"label": "PSA — Equal variances not assumed"}, {"label": "<,001", "hot": 7}, {"label": "-3,426"}, {"label": "~100"}, {"label": ",001", "hot": 7}],
+        [{"label": "Thetich — Equal variances not assumed"}, {"label": ",033"}, {"label": "2,542"}, {"label": "~190"}, {"label": ",012"}]
+       ]
+      }
+     ],
+     "note": "PSA/Thetich: Levene <0,05 → đọc dòng 'not assumed' (Welch). df Welch xấp xỉ. Output = số liệu thật (NOT_RUN).",
+     "caption": "Tuoi đọc pooled (p=0,626); PSA & Thetich đọc Welch (p=0,001 và 0,012).",
+     "callouts": [
+      {"n": 5, "label": "PSA dương 15,55 vs 5,63"},
+      {"n": 6, "label": "Tuoi: Levene ,217 → pooled"},
+      {"n": 7, "label": "PSA: Levene <,001 → Welch"}
+     ]
+    }
+   ],
+   "expected": "Tuoi pooled t=−0,488 p=0,626; PSA Welch t=−3,426 p≈0,001; Thetich Welch t=2,542 p=0,012.",
+   "ifWrong": [
+    "Đọc nhầm dòng pooled của PSA → Levene <0,05 bắt buộc dòng dưới.",
+    "df lẻ (~100) là bình thường cho Welch — không phải lỗi nhập.",
+    "Kết luận 'PSA cao gấp 3 lần' chỉ theo mean — nhớ ghi median vì lệch phải."
+   ]
+  }
+ }
+}

@@ -228,3 +228,27 @@ DEATH
   t=**2,767**, df=11, p=**0,018**; CI 0,29..2,57
 - Q06 ANOVA ytruo ~ otin: F=**0,938**, df(2,47), p=**0,399** (means 78,67/74,30/72,00)
 - Q08 ANOVA htuo ~ otin: F=**0,090**, df(2,47), p=**0,914** (means 35,06/36,90/37,42)
+
+## Task 16 — Ngày 11–14 (kiểm chứng lại 2026-10, scipy NOT_RUN)
+
+### Ngày 11 (File1.sav, n=50)
+- Pearson: r(csa,htuo)=**−0,351** p=0,012 · r(csa,ytruo)=**0,768** p<0,001 · r(ytruo,htuo)=**−0,349** p=0,013
+- Spearman: −0,287 (p=0,043) / 0,919 (p<0,001) / −0,369 (p=0,008) — cùng dấu & ý nghĩa
+- Hồi quy đơn: csa=85,795−0,362·htuo (R²=0,123, p=0,012) · csa=1,821+0,940·ytruo (R²=0,589, p<0,001) · ytruo=85,978−0,293·htuo (R²=0,121, p=0,013)
+- Q12 đa biến (mở rộng): csa~htuo+nsonga+ytruo → R²=0,623, adjR²=0,598, F=25,314 p<0,001; chỉ ytruo ý nghĩa (B=0,850, t=6,996, p<0,001; htuo p=0,225; nsonga p=0,085)
+
+### Ngày 12–13 (File5_Phan2.sav, n=296, missing=0)
+- Codebook: STT(id), Tuoi 47–91, Khám_TT 0/1 (dương 185), Siêu_âmTT 0/1 (dương 142), PSA 0,3–221, Thetich 3,3–114, Sinhthiet 0/1 (dương 95 = 32,1%)
+- Mô tả: Tuoi 66,80±8,14; PSA 8,81±17,05 (median 5,80 — lệch phải); Thetich 35,86±17,54
+- Khám_TT×Sinhthiet: 27/201 vs 68/95 → χ²=4,920 p=0,027 · Siêu_âmTT: 34/201 vs 61/95 → χ²=14,779 p<0,001
+- t-test theo Sinhthiet: Tuoi pooled t=−0,488 p=0,626 (Levene 0,217) · PSA Welch t=−3,426 p=0,0009 (Levene<0,001; pooled −4,846) · Thetich Welch t=2,542 p=0,012 (Levene 0,033; pooled 2,270)
+- PSA nhóm (<4/4–10/10–20/>20) × Sinhthiet: dương 14,4%/34,8%/41,4%/78,9%; χ²=33,684 df=3 p<0,001
+- r(PSA,Tuoi)=0,067 p=0,249; r(PSA,Thetich)=0,102 p=0,080; PSA median âm/dương 4,7 vs 7,3 (Mann-Whitney p<0,001)
+
+### Ngày 14 (p1_B01_HA + File1)
+- Q24 (TB 2 lần đo, n=620): HA.TD_tb 136,28±19,07 SEM 0,77 mode 110 P30 120 med 140 · HA.TT_tb 78,17±7,47 SEM 0,30 mode 80 P30 75 med 80
+- Q26 (HVan 6→3 nhóm: {1,2,3} Dưới THPT n=371: 136,62; {4,5} THPT+ n=223: 135,01; {6} ĐH+ n=26: 142,38) — HA.TD_tb mean theo nhóm
+- Q31 "mới phát hiện" = TSu.HA=0 ∧ CD.HA≥3 → n=141; HVan3×CD.HA: χ²=25,140 df=4 p<0,001 NHƯNG 5/9 ô expected<5 (min 0,06) → χ² không hợp lệ, chỉ mô tả
+- Q33 % THA độ1–3 trong nhóm có bệnh: ĐTĐ n=196 (58,2/17,9/0) χ²=87,60 p<0,001 · Tim n=92 (58,7/28,3/0) χ²=61,13 p<0,001 · Than n=16, Gan n=11, Gút n=9 → expected<5 nhiều ô → chỉ mô tả
+- Q43 Tuoi×GTinh: Nữ(1) n=376 67,16±11,06 (41–97); Nam(2) n=244 66,51±10,74 (41–94); Tổng 66,90±10,93
+- P2-Q08 ANOVA htuo~otin: F=0,090 df(2,47) p=0,914

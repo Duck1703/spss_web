@@ -1,0 +1,441 @@
+{
+  "dataset": "bai_2/File1.sav — file bài tập nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Bảng output = số liệu thật tái tính từ File1 bằng Python (NOT_RUN — đối chiếu khi chạy SPSS thật). Grid/dialog chỉ minh họa.",
+  "guides": {
+    "d11-correlate": {
+      "step": "Bước 2",
+      "title": "Bivariate Correlations — Câu 10",
+      "purpose": "Đo sức mạnh & chiều liên hệ giữa các cặp biến định lượng: r + Sig.",
+      "where": "File1.sav đang mở; không filter",
+      "menuPath": [
+        "Analyze",
+        "Correlate",
+        "Bivariate…",
+        "csa, ytruo, htuo → Variables",
+        "Pearson · Two-tailed",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Có thể tick thêm Spearman để đối chiếu khi nghi lệch phân phối — cùng một dialog."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Bivariate Correlations",
+          "dialog": {
+            "title": "Bivariate Correlations",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "omah",
+                  "otin",
+                  "igioitin",
+                  "hnoicutr",
+                  "cchanthuon",
+                  "gnamvie",
+                  "nsonga",
+                  "htuo",
+                  "ytruo",
+                  "csa"
+                ],
+                "right": [
+                  "csa",
+                  "ytruo",
+                  "htuo"
+                ],
+                "rightLabel": "Variables:",
+                "hot": 1
+              },
+              {
+                "type": "check",
+                "label": "Pearson",
+                "checked": true,
+                "hot": 2
+              },
+              {
+                "type": "check",
+                "label": "Spearman",
+                "checked": false
+              },
+              {
+                "type": "radio",
+                "label": "Test of Significance",
+                "options": [
+                  {
+                    "label": "Two-tailed",
+                    "checked": true
+                  },
+                  {
+                    "label": "One-tailed"
+                  }
+                ]
+              },
+              {
+                "type": "check",
+                "label": "Flag significant correlations",
+                "checked": true,
+                "hot": 3
+              }
+            ],
+            "buttons": [
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 4
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              },
+              {
+                "label": "Options…"
+              }
+            ]
+          },
+          "caption": "3 biến vào Variables; Pearson + Two-tailed; tick Flag để SPSS đánh * ô ý nghĩa.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "csa, ytruo, htuo → Variables"
+            },
+            {
+              "n": 2,
+              "label": "Pearson (mặc định)"
+            },
+            {
+              "n": 3,
+              "label": "Flag significant correlations"
+            },
+            {
+              "n": 4,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Correlations",
+          "outline": [
+            {
+              "t": "Correlations"
+            },
+            {
+              "t": "Correlations",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "Correlations",
+              "cols": [
+                "",
+                "csa",
+                "ytruo",
+                "htuo"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "csa"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": ",768**",
+                    "hot": 5
+                  },
+                  {
+                    "label": "-,351*",
+                    "hot": 6
+                  }
+                ],
+                [
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "Sig. ,001 đọc <0,001"
+                  },
+                  {
+                    "label": "p<,001"
+                  },
+                  {
+                    "label": "p=,012"
+                  }
+                ],
+                [
+                  {
+                    "label": "ytruo"
+                  },
+                  {
+                    "label": ",768**"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "-,349*"
+                  }
+                ],
+                [
+                  {
+                    "label": "htuo"
+                  },
+                  {
+                    "label": "-,351*"
+                  },
+                  {
+                    "label": "-,349*"
+                  },
+                  {
+                    "label": "1"
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "** = p<0,01 · * = p<0,05. N=50 mọi ô. Output = số liệu thật (NOT_RUN).",
+          "caption": "Đọc ô ở giao hàng–cột: r trên cùng, Sig. dưới. csa~ytruo mạnh nhất (0,768).",
+          "callouts": [
+            {
+              "n": 5,
+              "label": "r = ,768** (p<,001, dương mạnh)"
+            },
+            {
+              "n": 6,
+              "label": "r = −,351* (p=,012, âm vừa)"
+            }
+          ]
+        }
+      ],
+      "expected": "r(csa,htuo)=−0,351 p=0,012; r(csa,ytruo)=0,768 p<0,001; r(ytruo,htuo)=−0,349 p=0,013.",
+      "ifWrong": [
+        "N < 50 → đang còn filter từ ngày trước: Data → Select Cases → All cases.",
+        "Thấy 2 bảng → tick cả Spearman — bảng sau là Spearman (không phải lỗi).",
+        "Không có dấu * → chưa tick 'Flag significant correlations' (không ảnh hưởng số)."
+      ]
+    },
+    "d11-regression": {
+      "step": "Bước 3",
+      "title": "Linear Regression đơn — Câu 11",
+      "purpose": "Ước lượng đường thẳng Y = B0 + B1·X; đọc R² và B.",
+      "where": "File1.sav; không filter",
+      "menuPath": [
+        "Analyze",
+        "Regression",
+        "Linear…",
+        "Dependent: csa · Independent: htuo",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Một Independent = hồi quy đơn; nhiều Independent = đa biến (Q12 mở rộng)."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Linear Regression",
+          "dialog": {
+            "title": "Linear Regression",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "omah",
+                  "otin",
+                  "igioitin",
+                  "nsonga",
+                  "htuo",
+                  "ytruo"
+                ],
+                "right": [
+                  "csa"
+                ],
+                "rightLabel": "Dependent:",
+                "hot": 1
+              },
+              {
+                "type": "lists",
+                "left": [],
+                "right": [
+                  "htuo"
+                ],
+                "rightLabel": "Independent(s):",
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "csa~htuo trước; sau đó đổi Independent sang ytruo; cuối cùng Dependent=ytruo, Independent=htuo."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 3
+              },
+              {
+                "label": "Statistics…"
+              },
+              {
+                "label": "Reset"
+              }
+            ]
+          },
+          "caption": "Dependent = biến kết quả (csa); Independent = biến giải thích (htuo).",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "csa → Dependent"
+            },
+            {
+              "n": 2,
+              "label": "htuo → Independent"
+            },
+            {
+              "n": 3,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Model Summary & Coefficients (csa ~ htuo)",
+          "outline": [
+            {
+              "t": "Regression"
+            },
+            {
+              "t": "Model Summary",
+              "ind": true
+            },
+            {
+              "t": "ANOVA",
+              "ind": true
+            },
+            {
+              "t": "Coefficients",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "Model Summary",
+              "cols": [
+                "Model",
+                "R",
+                "R Square",
+                "Adjusted R Square",
+                "Std. Error"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": ",351"
+                  },
+                  {
+                    "label": ",123",
+                    "hot": 4
+                  },
+                  {
+                    "label": ",106"
+                  },
+                  {
+                    "label": "15,90"
+                  }
+                ]
+              ]
+            },
+            {
+              "title": "Coefficients",
+              "cols": [
+                "",
+                "B (Unstd.)",
+                "Std. Error",
+                "Beta",
+                "t",
+                "Sig."
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "(Constant)"
+                  },
+                  {
+                    "label": "85,795",
+                    "hot": 5
+                  },
+                  {
+                    "label": "5,323"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "16,119"
+                  },
+                  {
+                    "label": ",000"
+                  }
+                ],
+                [
+                  {
+                    "label": "htuo"
+                  },
+                  {
+                    "label": "-,362",
+                    "hot": 5
+                  },
+                  {
+                    "label": ",141"
+                  },
+                  {
+                    "label": "-,351"
+                  },
+                  {
+                    "label": "-2,562"
+                  },
+                  {
+                    "label": ",012",
+                    "hot": 6
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "R²=0,123; phương trình csa = 85,795 − 0,362·htuo. Output = số liệu thật (NOT_RUN).",
+          "caption": "Model Summary → R Square; Coefficients → (Constant) = B0, dòng htuo = B1 + Sig.",
+          "callouts": [
+            {
+              "n": 4,
+              "label": "R Square = ,123"
+            },
+            {
+              "n": 5,
+              "label": "B0=85,795 · B1=−,362"
+            },
+            {
+              "n": 6,
+              "label": "Sig. ,012 (= p của r)"
+            }
+          ]
+        }
+      ],
+      "expected": "csa=85,795−0,362·htuo R²=0,123; csa=1,821+0,940·ytruo R²=0,589; ytruo=85,978−0,293·htuo R²=0,121.",
+      "ifWrong": [
+        "Sig. khác p của r ở BT1 → đảo Dependent/Independent hoặc thêm nhầm biến.",
+        "Hai dòng biến trong Coefficients → có 2 Independents (đang làm hồi quy đa biến).",
+        "R Square đọc thành r: lấy căn rồi gắn dấu của B1 mới đúng."
+      ]
+    }
+  }
+}

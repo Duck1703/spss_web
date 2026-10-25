@@ -3,6 +3,8 @@
 > Làm lần lượt, **không nhìn `answer-key.md`** cho tới khi xong.
 > Hai file: `bai_2/File1.sav` (Q09, Q06, Q08) và `File2_Phan2.sav` (Q13).
 > Nhớ **trả All cases** sau mỗi lần lọc mẫu con.
+> **Ngân sách ~115':** BT1–BT3 bắt buộc; ý 9c (mẫu con thành thị) và BT4 là
+> luyện thêm — hết giờ thì bỏ 9c trước.
 
 ---
 

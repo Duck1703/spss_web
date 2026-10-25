@@ -1,0 +1,79 @@
+{
+ "dataset": "bai_2/File5_Phan2.sav — file bài tập nguồn, local-only",
+ "audit": "external-sav",
+ "note": "Giá trị trong bảng = số liệu thật tái tính từ File5 bằng Python (NOT_RUN).",
+ "guides": {
+  "d12-explore": {
+   "step": "Bước 2–4",
+   "title": "Đọc codebook & Frequencies — Bài TH3",
+   "purpose": "Hiểu 7 biến, kiểm tra missing và phân bố trước khi lập kế hoạch.",
+   "where": "File5_work.sav (bản sao của File5_Phan2.sav) đang mở",
+   "menuPath": ["Variable View (đọc)", "Analyze", "Descriptive Statistics", "Frequencies…", "cả 7 biến → Variables", "OK"],
+   "osNote": {"both": "Variable View ở tab góc dưới-trái Data Editor — giống nhau trên Win/macOS."},
+   "scenes": [
+    {
+     "kind": "editor",
+     "title": "File5_work.sav — Variable View (7 biến)",
+     "openMenu": "Analyze",
+     "items": [
+      {"label": "Descriptive Statistics"},
+      {"label": "Frequencies…", "hot": 1, "advance": true}
+     ],
+     "grid": {
+      "cols": ["Name", "Type", "Label", "Values"],
+      "rows": [
+       [{"label": "STT"}, {"label": "Numeric"}, {"label": "STT BỆNH NHÂN"}, {"label": "None"}],
+       [{"label": "Tuoi"}, {"label": "Numeric"}, {"label": "TUỔI"}, {"label": "None"}],
+       [{"label": "Khám_TT"}, {"label": "Numeric"}, {"label": "KHÁM TRỰC TRÀNG"}, {"label": "{0,1}"}],
+       [{"label": "Siêu_âmTT"}, {"label": "Numeric"}, {"label": "SIÊU ÂM QUA TRỰC TRÀNG"}, {"label": "{0,1}"}],
+       [{"label": "PSA"}, {"label": "Numeric"}, {"label": "NỒNG ĐỘ PSA"}, {"label": "None"}],
+       [{"label": "Thetich"}, {"label": "Numeric"}, {"label": "THỂ TÍCH TUYẾN TIỀN LIỆT"}, {"label": "None"}],
+       [{"label": "Sinhthiet"}, {"label": "Numeric"}, {"label": "SINH THIẾT"}, {"label": "{0,1}"}]
+      ]
+     },
+     "caption": "Đọc hết 7 dòng Variable View trước: STT là định danh — loại khỏi phân tích. Sau đó Frequencies cả 7 biến.",
+     "callouts": [{"n": 1, "label": "Frequencies…"}]
+    },
+    {
+     "kind": "output",
+     "title": "Output — Frequencies (Statistics + nhị phân)",
+     "outline": [{"t": "Frequencies"}, {"t": "Statistics", "ind": true}, {"t": "Frequency Table", "ind": true}],
+     "tables": [
+      {
+       "title": "Statistics",
+       "cols": ["", "N Valid", "Missing", "Mean", "Median", "Std. Deviation", "Minimum", "Maximum"],
+       "rows": [
+        [{"label": "Tuoi"}, {"label": "296"}, {"label": "0", "hot": 2}, {"label": "66,80"}, {"label": "67,00"}, {"label": "8,139"}, {"label": "47"}, {"label": "91"}],
+        [{"label": "PSA"}, {"label": "296"}, {"label": "0", "hot": 2}, {"label": "8,81"}, {"label": "5,80", "hot": 3}, {"label": "17,047"}, {"label": "0,3"}, {"label": "221,0", "hot": 4}],
+        [{"label": "Thetich"}, {"label": "296"}, {"label": "0", "hot": 2}, {"label": "35,86"}, {"label": "32,30"}, {"label": "17,544"}, {"label": "3,3"}, {"label": "114,0"}]
+       ]
+      },
+      {
+       "title": "SINH THIẾT",
+       "cols": ["", "Frequency", "Percent", "Valid Percent"],
+       "rows": [
+        [{"label": "0 (âm)"}, {"label": "201"}, {"label": "67,9"}, {"label": "67,9"}],
+        [{"label": "1 (dương)"}, {"label": "95", "hot": 5}, {"label": "32,1"}, {"label": "32,1"}],
+        [{"label": "Total"}, {"label": "296"}, {"label": "100,0"}, {"label": "100,0"}]
+       ]
+      }
+     ],
+     "note": "Missing=0 mọi biến. PSA: mean 8,81 >> median 5,80, max 221 -> lệch phải. Output = số liệu thật (NOT_RUN).",
+     "caption": "Phiếu khám: Missing=0; outcome dương 32,1%; PSA lệch phải (mean>>median, max 221).",
+     "callouts": [
+      {"n": 2, "label": "Missing = 0 — sạch khuyết"},
+      {"n": 3, "label": "median 5,80"},
+      {"n": 4, "label": "max 221 — ngoại lai lâm sàng"},
+      {"n": 5, "label": "95 dương = 32,1% — outcome"}
+     ]
+    }
+   ],
+   "expected": "Missing=0; Sinhthiet 201/95 (32,1%); Tuoi 66,80±8,14; PSA 8,81±17,05 (med 5,80, max 221); Thetich 35,86±17,54.",
+   "ifWrong": [
+    "Missing > 0 → mở nhầm file khác hoặc file đã bị sửa — kiểm tra lại tên File5_work.sav.",
+    "Không thấy nhãn tiếng Việt → đang ở Data View; chuyển sang tab Variable View.",
+    "Số dòng ≠ 296 → đang có filter: Select Cases → All cases."
+   ]
+  }
+ }
+}
