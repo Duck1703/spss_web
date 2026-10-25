@@ -189,3 +189,42 @@ File4:
 DEATH                     
 0      42.2           0.42
 1      64.0           0.95```
+
+## Task 15 — Ngày 07–10 (kiểm chứng lại 2026-10, scipy NOT_RUN)
+
+### Ngày 07 (p1_B01_HA (1).sav)
+- Q13 ĐTĐ (Tieuduong=1) & Tuoi 50–70: n=**96**; & GTinh=2 (nam): **52**
+- Q14 NNghiep: hợp lệ 1–6 = {1:132, 2:6, 3:323, 4:67, 5:67, 6:18};
+  lỗi: 0×3, 8×2, missing×2 → **7 phiếu**, IDs = **5, 184, 243, 285, 305, 318, 375** → còn **613**
+- Q07 multi-response (dichotomies, đếm giá trị 1): Timmach=92, Tieuduong=196, Than=16, Gan=11, Gut=9
+  (tổng lượt 324 / 294 người có ≥1 bệnh); categories Benh.MT_1+_2 cho cùng 5 số — khớp chéo.
+
+### Ngày 08 (p1_B01_HA · P1_B02 · File1)
+- Q22 GOF GTinh (đề nói Nam:Nữ; mã1=Nữ 376, mã2=Nam 244 — Expected nhập theo mã 1→2):
+  - Nam55:Nữ45 → expected 279/341 → χ²=**61,316**, df=1, p<0,001 (không phù hợp)
+  - Nam40:Nữ60 → expected 372/248 → χ²=**0,108**, df=1, p=**0,743** (PHÙ HỢP)
+  - Nam50:Nữ50 → 310/310 → χ²=**28,103**, p<0,001 (không phù hợp)
+- P2-Q02 GOF igioitin (28/22), expected equal: χ²=**0,720**, df=1, p=**0,396**
+- P2-Q03 Binomial: nam n=28, nằm viện 15/28=0,536; Test Prop 0,60 → exact 2-sided p=**0,564**
+- Q40 McNemar rượu: trước 288 (46,5%) → hiện tại 213 (34,4%); bất đồng 4 vs 79;
+  χ²=**67,771** p<0,001; exact binomial p≈4e-19
+- Q20 McNemar hút thuốc: bất đồng 8 vs 2; χ²=3,600 p=0,058; exact p≈0,109
+- Q39 GOF đồng đều: TSu.HA χ²=72,642 p<0,001; HA.GDinh χ²=25,606 p<0,001 (cả hai không đồng đều)
+
+### Ngày 09 (File1.sav) — otin: 1=QB(18), 2=QT(20), 3=Huế(12); hnoicutr: 1=Thành phố(29), 2=Nông thôn(21)
+- Q04 one-sample t, ytruo vs 75: n=50, mean=75,32, SD=13,73; t=**0,165**, df=49, p=**0,870**;
+  diff=0,32, 95%CI −3,58..4,22 (CI mean: 71,42–79,22)
+- Q05 indep t ytruo QB vs Huế: 78,67±15,68 vs 72,00±12,42; Levene p=0,481;
+  pooled t=**1,234**, df=28, p=**0,227**; Welch t=1,294, df=27,04, p=0,207; diff=6,67 CI −3,88..17,22
+- Q07 indep t htuo QB vs QT: 35,06±16,58 vs 36,90±18,91; Levene p=0,170;
+  pooled t=**−0,318**, df=36, p=**0,752**; Welch −0,320 p=0,751
+
+### Ngày 10 (File1 + File2_Phan2)
+- Q09 paired ytruo−csa:
+  - a) all n=50: trước 75,32±13,73, sau 72,64±16,82; diff=**2,68±10,81**; t=**1,754**, df=49, p=**0,086**; CI −0,39..5,75
+  - b) QT n=20: 74,30±12,57 vs 67,85±19,34; diff=6,45±16,58; t=**1,739**, df=19, p=**0,098**; CI −1,31..14,21
+  - c) QT & hnoicutr=1 n=11: 72,18±10,19 vs 68,73±8,36; diff=3,45±6,02; t=**1,902**, df=10, p=**0,086**; CI −0,59..7,50
+- Q13 paired (File2): thuốc 6,92±0,89 vs giả dược 5,49±1,26; diff=**1,43±1,79**;
+  t=**2,767**, df=11, p=**0,018**; CI 0,29..2,57
+- Q06 ANOVA ytruo ~ otin: F=**0,938**, df(2,47), p=**0,399** (means 78,67/74,30/72,00)
+- Q08 ANOVA htuo ~ otin: F=**0,090**, df(2,47), p=**0,914** (means 35,06/36,90/37,42)

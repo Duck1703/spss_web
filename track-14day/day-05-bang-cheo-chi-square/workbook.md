@@ -1,13 +1,11 @@
 # Ngày 05 — Workbook: Bảng chéo & Chi-square
 
 > Làm lần lượt, **không nhìn `answer-key.md`** cho tới khi xong.
-> Chú ý mở đúng file cho từng bài và **tắt Weight Cases** khi đổi file.
+> Hôm nay chỉ dùng **một file**: `p1_B01_HA (1).sav` — không filter, không split.
 
 ---
 
 ## BT1 — Bài tập gốc: P1-Q05
-
-File: `p1_B01_HA (1).sav`.
 
 1. Crosstabs → `TTrang.KTe` hàng × `GTinh` cột → Cells: Observed + Row % + Column %.
 2. Điền bảng 2×2 đầy đủ (Count + % hàng + % cột mỗi ô).
@@ -23,8 +21,6 @@ File: `p1_B01_HA (1).sav`.
 > Nếu hai con số bạn ghi cho (b) giống hệt (a) thì bạn đã đọc trùng một chiều.
 
 ## BT2 — Bài tập gốc: P1-Q17
-
-Cùng file.
 
 1. Crosstabs `GTinh` × `Tieuduong` + Statistics → **Chi-square** (+ Row %).
    Ghi: tỷ lệ ĐTĐ của nữ và nam; χ² Pearson; df; p; kết luận.
@@ -44,40 +40,17 @@ Cùng file.
 
 > ✅ **Sản phẩm:** một kết luận đầy đủ cho Câu 18
 
-## BT4 — Bài tập gốc: P1-Q21
-
-File: **`P1_B02 CrossTab (2).sav`** (4 dòng!).
-
-1. Trước khi phân tích: file có mấy dòng? Mỗi dòng là một người hay một nhóm?
-   Phải làm gì để SPSS hiểu đúng? → **Weight Cases** bằng biến nào?
-2. Crosstabs `phoinhiem` × `benh` + Row % + Statistics: Chi-square **và Risk**.
-3. Ghi: tỷ lệ CTC+ ở nhóm HPV+ và HPV−; χ²; p; **RR**; **OR**; diễn giải RR bằng lời.
-
-{{exercise:P1-Q21}}
-
-> ✅ **Sản phẩm:** bảng 2×2 Total=88 + 4 chỉ số (χ², p, RR, OR) + một câu diễn giải
-
-> **Gợi ý:** nếu bảng chỉ có Total = 4 → quên Weight Cases. Nếu Risk Estimate trống →
-> chưa tick **Risk** trong Statistics.
-
-## BT5 — Bài tập gốc: P2-Q01
-
-File: `bai_2/File1.sav` — **tắt Weight trước** (Do not weight cases).
-
-1. Đề hỏi "vị trí chấn thương nặng" và "có nằm viện" — đó là hai biến nào trong file?
-   (Đối chiếu codebook trang 2 PDF gói 2: Câu 8 và Câu 9 của phiếu điều tra.)
-2. Crosstabs hai biến đó + Chi-square. Bảng mấy hàng mấy cột? n = ?
-3. Ghi χ², df, p và kết luận.
-
-{{exercise:P2-Q01}}
-
-> ✅ **Sản phẩm:** bảng 3×2 + kết luận kiểm định đúng cách
-
-## BT6 — Đố vui (không cần SPSS)
+## BT4 — Đố vui (không cần SPSS)
 
 1. Tại sao "% nữ trong nhóm nghèo" và "% nghèo trong nhóm nữ" là hai con số khác nhau?
    Nêu tình huống đời thực khi cần con số thứ hai.
 2. Khi nào không được tin Pearson Chi-square mà phải đọc Fisher's Exact?
-3. Con số RR bạn tính được ở BT4 nghĩa là gì — diễn giải bằng lời cho người không học
-   thống kê (không được nói "tăng X%").
-4. Một bạn chạy Crosstabs trên `P1_B02` mà không Weight — bảng ra sao, vì sao sai?
+3. Một bạn kết luận "p = 0,30 nên hai giới có tỷ lệ ĐTĐ **bằng nhau**" — câu này đúng
+   hay cần viết lại thế nào cho chặt chẽ?
+
+## Ghi chú chuyển bài
+
+**P1-Q21** (bảng HPV tổng hợp — cần Weight Cases + Risk Estimate) và **P2-Q01**
+(bảng chéo trên file `bai_2/File1.sav`) được chuyển sang **Ngày 08** — cùng cụm kiểm
+định tỷ lệ — để buổi hôm nay gọn trong ~100 phút. Hai câu đó **không bị bỏ**,
+chỉ đổi ngày học.

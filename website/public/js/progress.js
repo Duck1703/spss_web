@@ -1,6 +1,11 @@
 /* progress.js — tiến độ học tập localStorage (MVP, không backend).
  * Key: 'spss-mlp-progress-v1' = { lastPage, done: {id:true}, answers: {id:text} }
  * Schema giữ nguyên tương thích ngược — chỉ mở rộng cách hiển thị.
+ *
+ * Namespace (Task 15): lộ trình exercise-first dùng id 'ef-dNN' (done['module:ef-dNN'],
+ * card 'ef-dNN-...', step 'step:ef-dNN-...'). Id 'dNN'/'m01'/bt* cũ (lộ trình clinic_bp
+ * trong archive/) KHÔNG bị xóa — chỉ không còn được đọc bởi UI mới, để tiến độ cũ
+ * không đánh dấu nhầm bài mới là "đã học". Export/import giữ nguyên toàn bộ dữ liệu.
  */
 (function () {
   var KEY = 'spss-mlp-progress-v1';
@@ -18,7 +23,7 @@
   }
 
   var BT_TOTAL = 16; // số câu hỏi có id bt* trong workbook M01
-  var DAY_TOTAL = 14; // 14 ngày — done keys 'module:dNN'
+  var DAY_TOTAL = 14; // 14 ngày exercise-first — done keys 'module:ef-dNN' (khóa 'module:dNN' cũ giữ nguyên, không đếm)
 
   function setStatus(el, mode) {
     if (!el) return;
@@ -74,7 +79,7 @@
     });
     // progress summary (homepage panel)
     var nDone = Object.keys(state.done).filter(function (k) { return k.indexOf('bt') === 0; }).length;
-    var nDays = Object.keys(state.done).filter(function (k) { return /^module:d\d{2}$/.test(k); }).length;
+    var nDays = Object.keys(state.done).filter(function (k) { return /^module:ef-d\d{2}$/.test(k); }).length;
     var nDraft = Object.keys(state.answers).filter(function (k) {
       return k.indexOf('#') === -1 && !state.done[k] && String(state.answers[k]).trim();
     }).length;

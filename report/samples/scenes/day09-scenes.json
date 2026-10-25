@@ -1,0 +1,461 @@
+{
+  "dataset": "bai_2/File1.sav — file bài tập nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Bảng output = số liệu thật tái tính từ file nguồn bằng Python (NOT_RUN). Grid/dialog minh họa.",
+  "guides": {
+    "d09-1sample": {
+      "step": "Bước 1",
+      "title": "One-Sample T Test — CLCS trước TN vs 75 (P2-Q04)",
+      "purpose": "Trung bình mẫu so với một hằng số giả định.",
+      "where": "File1.sav đang mở; All cases",
+      "menuPath": [
+        "Analyze",
+        "Compare Means",
+        "One-Sample T Test…",
+        "ytruo → Test Variable(s)",
+        "Test Value: 75",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Test Value là con số GIẢ ĐỊNH (75), không phải mean mẫu. Đọc Sig. (2-tailed)."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "One-Sample T Test",
+          "dialog": {
+            "title": "One-Sample T Test",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "htuo",
+                  "igioitin",
+                  "otin",
+                  "gnamvie",
+                  "nsonga",
+                  "ytruo",
+                  "csa"
+                ],
+                "right": [
+                  "ytruo"
+                ],
+                "rightLabel": "Test Variable(s):",
+                "hot": 1
+              },
+              {
+                "type": "field",
+                "label": "Test Value:",
+                "value": "75",
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "Câu 4 hỏi \"có thể xem là 75 không\" → Test Value = 75. Đừng nhầm ô này với mean đo được."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Options…"
+              },
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 3
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "ytruo → Test Variable; Test Value 75 → OK.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "ytruo → Test Variable"
+            },
+            {
+              "n": 2,
+              "label": "Test Value = 75"
+            },
+            {
+              "n": 3,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — One-Sample Test",
+          "outline": [
+            {
+              "t": "One-Sample T Test"
+            },
+            {
+              "t": "One-Sample Statistics",
+              "ind": true
+            },
+            {
+              "t": "One-Sample Test",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "One-Sample Statistics",
+              "cols": [
+                "",
+                "N",
+                "Mean",
+                "Std. Deviation",
+                "Std. Error Mean"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "ytruo [CLCS trước TN]"
+                  },
+                  {
+                    "label": "50"
+                  },
+                  {
+                    "label": "75,32"
+                  },
+                  {
+                    "label": "13,73"
+                  },
+                  {
+                    "label": "1,94"
+                  }
+                ]
+              ]
+            },
+            {
+              "title": "One-Sample Test (Test Value = 75)",
+              "cols": [
+                "",
+                "t",
+                "df",
+                "Sig. (2-tailed)",
+                "Mean Difference",
+                "95% CI Lower",
+                "95% CI Upper"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "ytruo"
+                  },
+                  {
+                    "label": "0,165",
+                    "hot": 4
+                  },
+                  {
+                    "label": "49"
+                  },
+                  {
+                    "label": "0,870",
+                    "hot": 5
+                  },
+                  {
+                    "label": "0,32"
+                  },
+                  {
+                    "label": "-3,58",
+                    "hot": 6
+                  },
+                  {
+                    "label": "4,22"
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). t=0,165, p=0,870, CI chứa 0 → không khác 75.",
+          "caption": "Đọc Sig.(2-tailed)=p và CI của chênh lệch — CI chứa 0 ⇔ p ≥ 0,05.",
+          "callouts": [
+            {
+              "n": 4,
+              "label": "t = 0,165, df=49"
+            },
+            {
+              "n": 5,
+              "label": "p = 0,870 → có thể xem là 75"
+            },
+            {
+              "n": 6,
+              "label": "CI chứa 0"
+            }
+          ]
+        }
+      ],
+      "expected": "n=50, mean=75,32, SD=13,73; t=0,165, df=49, p=0,870; diff=0,32, CI −3,58..4,22 → xem là 75 được.",
+      "ifWrong": [
+        "mean ≠ 75,32 → kiểm tra đúng biến ytruo (ý trước), không phải csa (ý sau).",
+        "df=49 luôn = n−1 — nếu df=11 thì đang chạy trên file 12 dòng (File2) nhầm dataset.",
+        "Không thấy CI → Options… đặt Confidence Interval = 95%."
+      ]
+    },
+    "d09-independent": {
+      "step": "Bước 2",
+      "title": "Independent-Samples T — QB vs Huế (P2-Q05)",
+      "purpose": "So sánh trung bình hai nhóm NGƯỜI KHÁC NHAU; đọc Levene để chọn dòng t.",
+      "where": "File1.sav; All cases",
+      "menuPath": [
+        "Analyze",
+        "Compare Means",
+        "Independent-Samples T Test…",
+        "ytruo → Test Variable",
+        "otin → Grouping",
+        "Define Groups: 1 và 3",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Define Groups nhập MÃ SỐ (1 và 3), không phải tên tỉnh. Levene p≥0,05 → đọc dòng \"Equal variances assumed\"."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Independent-Samples T Test",
+          "dialog": {
+            "title": "Independent-Samples T Test",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "htuo",
+                  "igioitin",
+                  "otin",
+                  "gnamvie",
+                  "nsonga",
+                  "csa"
+                ],
+                "right": [
+                  "ytruo"
+                ],
+                "rightLabel": "Test Variable(s):",
+                "hot": 1
+              },
+              {
+                "type": "lists",
+                "left": [],
+                "right": [
+                  "otin"
+                ],
+                "rightLabel": "Grouping Variable:",
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "Grouping Variable = biến phân nhóm 2 mã. Define Groups… → Group 1: 1 (Quảng Bình), Group 2: 3 (Thừa Thiên Huế) — nhập MÃ, không nhập chữ."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Define Groups…",
+                "hot": 3
+              },
+              {
+                "label": "Options…"
+              },
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 4
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "ytruo → Test; otin → Grouping → Define Groups 1 và 3 → OK.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "ytruo → Test Variable"
+            },
+            {
+              "n": 2,
+              "label": "otin → Grouping Variable"
+            },
+            {
+              "n": 3,
+              "label": "Define Groups: 1 vs 3"
+            },
+            {
+              "n": 4,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Independent Samples Test",
+          "outline": [
+            {
+              "t": "T-Test"
+            },
+            {
+              "t": "Group Statistics",
+              "ind": true
+            },
+            {
+              "t": "Independent Samples Test",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "Group Statistics",
+              "cols": [
+                "",
+                "otin",
+                "N",
+                "Mean",
+                "Std. Deviation"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "ytruo"
+                  },
+                  {
+                    "label": "Quảng Bình (1)"
+                  },
+                  {
+                    "label": "18"
+                  },
+                  {
+                    "label": "78,67"
+                  },
+                  {
+                    "label": "15,68"
+                  }
+                ],
+                [
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "Thừa Thiên Huế (3)"
+                  },
+                  {
+                    "label": "12"
+                  },
+                  {
+                    "label": "72,00"
+                  },
+                  {
+                    "label": "12,42"
+                  }
+                ]
+              ]
+            },
+            {
+              "title": "Independent Samples Test",
+              "cols": [
+                "",
+                "Levene F",
+                "Levene Sig.",
+                "t",
+                "df",
+                "Sig. (2-tailed)",
+                "Mean Diff.",
+                "95% CI"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Equal variances assumed",
+                    "hot": 5
+                  },
+                  {
+                    "label": "0,509"
+                  },
+                  {
+                    "label": "0,481",
+                    "hot": 6
+                  },
+                  {
+                    "label": "1,234",
+                    "hot": 7
+                  },
+                  {
+                    "label": "28"
+                  },
+                  {
+                    "label": "0,227",
+                    "hot": 8
+                  },
+                  {
+                    "label": "6,67"
+                  },
+                  {
+                    "label": "-3,88 … 17,22"
+                  }
+                ],
+                [
+                  {
+                    "label": "Equal variances not assumed"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "1,294"
+                  },
+                  {
+                    "label": "27,04"
+                  },
+                  {
+                    "label": "0,207"
+                  },
+                  {
+                    "label": "6,67"
+                  },
+                  {
+                    "label": "-4,15 … 17,48"
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Levene p=0,481 → dòng trên: t=1,234, df=28, p=0,227.",
+          "caption": "Đọc TRÌNH TỰ: Levene p → chọn dòng → t → Sig.(2-tailed).",
+          "callouts": [
+            {
+              "n": 5,
+              "label": "Dòng assumed (Levene không ý nghĩa)"
+            },
+            {
+              "n": 6,
+              "label": "Levene p = 0,481"
+            },
+            {
+              "n": 7,
+              "label": "t = 1,234"
+            },
+            {
+              "n": 8,
+              "label": "p = 0,227 → chưa ý nghĩa"
+            }
+          ]
+        }
+      ],
+      "expected": "QB 78,67±15,68 (n=18) vs Huế 72,00±12,42 (n=12); Levene p=0,481; assumed t=1,234 df=28 p=0,227; Welch 1,294 p=0,207.",
+      "ifWrong": [
+        "Define Groups báo lỗi → nhập mã số (1, 3), không nhập tên tỉnh.",
+        "Chỉ thấy 1 nhóm trong Group Statistics → định nghĩa group trùng mã hai lần.",
+        "Đọc dòng Welch khi Levene không ý nghĩa → kết quả lệch nhẹ (0,207 vs 0,227)."
+      ]
+    }
+  }
+}

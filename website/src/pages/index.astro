@@ -360,7 +360,7 @@ const howTo = [
           <div class="card">
             <div class="card__top">
               <span class="card__code">{d.code}</span>
-              <span class="pill" data-module-badge={d.slug}></span>
+              <span class="pill" data-module-badge={`ef-${d.slug}`}></span>
             </div>
             <span class="card__title"><a href={`/${d.slug}/bai-hoc/`}>{d.title}</a></span>
             <span class={`pill${d.ready ? ' pill--ready' : ''}`}>{d.ready ? 'Đã có bài học' : 'DRAFT — đang xây dựng'}</span>

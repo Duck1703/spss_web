@@ -3,6 +3,7 @@
 > Đọc **sau khi** đã làm xong `workbook.md`. Số liệu tái tính trực tiếp từ các file
 > `.sav` nguồn bằng Python (cross-check, nhãn `NOT_RUN`). p-value Fisher lấy từ
 > `scipy.fisher_exact` (2-sided) — SPSS in "Exact Sig. (2-sided)" tương đương.
+> *(Đáp án P1-Q21 và P2-Q01 nằm ở Ngày 08 — `/d08/dap-an/`.)*
 
 ---
 
@@ -64,44 +65,7 @@ Yates continuity 0,900/p=0,343; Fisher 0,331 — cùng kết luận.)
 Pearson χ² = **320,77**, df = 1, p **< 0,001** → nam có tiền sử rượu bia nhiều hơn
 nữ **rất có ý nghĩa thống kê**. Đây là khác biệt lớn nhất trong bộ câu 17–18.
 
-## BT4 — P1-Q21
-
-File `P1_B02 CrossTab (2).sav` (4 dòng) + **Weight by `soluong`** → n = 88.
-
-| phoinhiem ↓ / benh → | CTC+ (1) | CTC− (2) | Tỷ lệ CTC+ |
-|---|---|---|---|
-| **HPV+** (1) | 20 | 8 | 20/28 = **71,4%** |
-| **HPV−** (2) | 10 | 50 | 10/60 = **16,7%** |
-
-- Pearson χ² = **25,480**, df = 1, p < 0,001 (Yates continuity ≈ 23,101; expected
-  min ≈ 9,5 → Pearson hợp lệ).
-- **Risk Estimate:** RR (cho CTC+ ở HPV+ vs HPV−) ≈ **4,29** ; Odds Ratio ≈ **12,50**.
-- Diễn giải: phụ nữ nhiễm HPV có nguy cơ ung thư cổ tử cung **cao gấp khoảng 4,3 lần**
-  nhóm không nhiễm; liên quan rất có ý nghĩa.
-
-*Lỗi hay gặp:* quên Weight → bảng Total=4 vô nghĩa; đọc nhầm hướng mã (1=HPV+);
-báo OR nhầm thành RR. Nhớ tắt Weight khi sang file khác.
-
-## BT5 — P2-Q01
-
-File `bai_2/File1.sav`: `cchanthuon` (Câu 8 — vị trí chấn thương nặng:
-1=Đầu/cột sống, 2=Thân mình, 3=Tay/chân) × `gnamvie` (Câu 9 — có nằm viện: 0=Không, 1=Có).
-
-| cchanthuon | Không nằm viện | Có nằm viện | % nằm viện |
-|---|---|---|---|
-| Đầu/cột sống | 7 | 10 | 58,8% |
-| Thân mình | 8 | 10 | 55,6% |
-| Tay/chân | 8 | 7 | 46,7% |
-| **Total** | 23 | 27 | 54,0% (n=50) |
-
-Pearson χ² = **0,502**, df = **2**, p = **0,778** → chưa có bằng chứng cho thấy vị trí
-chấn thương nặng liên quan tới việc phải nằm viện (bảng 3×2 nên df=2, không phải 1).
-
-*Lỗi hay gặp:* chọn nhầm biến (dùng `npt_ot`/`opt_xema` thay `cchanthuon`); nhầm df;
-nói "hoàn toàn không liên quan" thay vì "chưa đủ bằng chứng ý nghĩa thống kê" —
-mẫu chỉ 50 nên sức mạnh kiểm định thấp.
-
-## BT6 — Đố vui
+## BT4 — Đố vui
 
 1. Hai mẫu số khác nhau: "% nữ trong nhóm nghèo" chia cho tổng nhóm nghèo (229);
    "% nghèo trong nhóm nữ" chia cho tổng nhóm nữ (376). Khi cần trả lời "phụ nữ có
@@ -109,7 +73,7 @@ mẫu chỉ 50 nên sức mạnh kiểm định thấp.
    nghèo, giới nào chiếm đa số" → % hàng.
 2. Khi có ô expected < 1, hoặc >20% số ô có expected < 5 (SPSS in footnote cảnh báo) —
    điển hình biến bệnh hiếm như `Gan`.
-3. "Người nhiễm HPV có khả năng mắc ung thư cổ tử cung cao gấp khoảng 4,3 lần người
-   không nhiễm" — so tỷ lệ mắc bệnh (71,4% vs 16,7%), không phải "tăng 4,29%".
-4. Không Weight → SPSS coi mỗi dòng là 1 người: bảng chỉ Total=4, mọi % và kiểm định
-   sai vì mỗi ô đáng lẽ đại diện 8–50 người.
+3. **Cần viết lại.** p = 0,30 chỉ nói *"chưa đủ bằng chứng kết luận có khác biệt"* —
+   không chứng minh được hai tỷ lệ bằng nhau (muốn chứng minh tương đương cần phân
+   tích tương đương/equivalence — khác hẳn). Cách viết đúng: "tỷ lệ ĐTĐ ở nữ (30,1%)
+   và nam (34,0%) không khác nhau có ý nghĩa thống kê (χ²=1,075, p=0,300)".

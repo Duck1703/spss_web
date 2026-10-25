@@ -42,10 +42,10 @@ mô phỏng thao tác → làm mẫu có hướng dẫn → tự giải bài g�
 | 02 | Tần số và phần trăm | **P1-Q02** (không biết chữ) · **P1-Q38** (tỷ lệ cao HA) | `p1_B01_HA (1).sav` |
 | 03 | Đại lượng thống kê mô tả | **P1-Q03**, **P1-Q04** (Tuổi) · P1-Q42 luyện thêm | `p1_B01_HA (1).sav` |
 | 04 | Tóm tắt theo nhóm: Select Cases & Split File | **P1-Q08**, **P1-Q09**, **P1-Q06**, **P1-Q41** (+ pool luyện Q23–Q28, Q30) | `p1_B01_HA (1).sav` |
-| 05 | Bảng chéo và Chi-square | **P1-Q05**, **P1-Q17**, **P1-Q18**, **P1-Q21** (Weight Cases + Risk) · **P2-Q01** | `p1_B01_HA` · `P1_B02 CrossTab` · `File1.sav` |
+| 05 | Bảng chéo và Chi-square | **P1-Q05**, **P1-Q17** · P1-Q18 luyện thêm | `p1_B01_HA` |
 | 06 | Biến đổi dữ liệu: Compute · Recode · Count | **P1-Q10** (BMI), **P1-Q11** (độ tuổi), **P1-Q12** (đếm bệnh) | `p1_B01_HA (1).sav` |
 | 07 | Kiểm tra & xử lý dữ liệu sai | **P1-Q14** (nghề nghiệp sai), **P1-Q13** (ĐTĐ 50–70) · P1-Q07 tùy chọn | `p1_B01_HA (1).sav` |
-| 08 | Kiểm định tỷ lệ | **P1-Q22** (GOF 3 tỷ lệ), **P2-Q02**, **P2-Q03** (binomial), **P1-Q40** (+Q20 McNemar) | `p1_B01_HA` · `File1.sav` |
+| 08 | Kiểm định tỷ lệ + bảng 2×2 nâng cao | **P1-Q22** (GOF 3 tỷ lệ), **P2-Q02**, **P2-Q03** (binomial) · luyện thêm **P1-Q21** (Weight Cases+Risk), **P2-Q01**, **P1-Q40**/Q20 (McNemar) | `p1_B01_HA` · `P1_B02 CrossTab` · `File1.sav` |
 | 09 | So sánh trung bình: 1 mẫu & 2 nhóm độc lập | **P2-Q04** (one-sample), **P2-Q05**, **P2-Q07** | `File1.sav` |
 | 10 | T-test ghép cặp & ANOVA | **P2-Q09** (paired 3 mức), **P2-Q13** (thuốc ngủ), **P2-Q06**, **P2-Q08** | `File1.sav` · `File2_Phan2.sav` |
 | 11 | Tương quan & hồi quy tuyến tính | **P2-Q10**, **P2-Q11** · P2-Q12 tùy chọn nâng cao | `File1.sav` |
@@ -69,10 +69,10 @@ tiêu), phần còn lại là **REINFORCEMENT** (luyện thêm cùng kỹ năng)
 | 02 | P1-Q02, P1-Q38 | đọc % tích lũy, Valid vs Percent | 2 (Frequencies, Statistics→Percentiles) | 80–95 | Dễ |
 | 03 | P1-Q03, P1-Q04 | P1-Q42 (min–max nhóm biến) | 2 (Descriptives, Options) | 80–95 | Dễ |
 | 04 | P1-Q08, P1-Q09, P1-Q06 | P1-Q41; pool Q23/Q25/Q27/Q30 | 3 (If-kép, Split File, Means) | 95–110 | TB (3 khái niệm "chia nhóm") |
-| 05 | P1-Q05, P1-Q17, P1-Q21, P2-Q01 | P1-Q18; pool Q19/Q29/Q32/Q34–37 | 4 (Crosstabs, Cells%, Chi-square, Weight+Risk) | 100–120 | TB–Khó (bảng chiều %, 3 file) |
+| 05 | P1-Q05, P1-Q17 | P1-Q18; pool Q19/Q29/Q32/Q34–37 | 3 (Crosstabs, Cells%, Chi-square) | 90–105 | TB (bảng chiều %) |
 | 06 | P1-Q10, P1-Q11, P1-Q12 | BT4 kiểm chứng chéo Benh.MT | 3 (Compute, Recode-Diff, Count) | 95–110 | TB (lần đầu biến đổi + Save As) |
 | 07 | P1-Q14, P1-Q13 | P1-Q07 (Multiple Response) | 3 (tần số soi lỗi, recode missing, xử lý phiếu) | 90–110 | TB |
-| 08 | P1-Q22, P2-Q02, P2-Q03 | P1-Q40; Q20 McNemar | 3 (GOF chi-square, binomial, McNemar) | 95–115 | TB–Khó |
+| 08 | P1-Q22, P2-Q02, P2-Q03 | P1-Q21 (Weight+Risk — chuyển từ ngày 05), P2-Q01, P1-Q40/Q20 (McNemar) | 3 (GOF chi-square, binomial; +Weight Cases, McNemar nếu làm reinforcement) | 95–120 | TB–Khó |
 | 09 | P2-Q04, P2-Q05, P2-Q07 | — | 2 (one-sample t, independent t) | 90–110 | TB |
 | 10 | P2-Q09, P2-Q13, P2-Q06 | P2-Q08 | 2 (paired t, one-way ANOVA) | 95–115 | TB–Khó |
 | 11 | P2-Q10, P2-Q11 | P2-Q12 (ADVANCED — chỉ giới thiệu) | 2 (correlate, regression đơn) | 90–110 | TB–Khó |
@@ -86,16 +86,18 @@ ngân sách bắt buộc. Nếu trễ nhịp: bỏ REINFORCEMENT, giữ nguyên 
 
 **Nguyên tắc phân tầng:** ESSENTIAL = bài bắt buộc để hình thành kỹ năng mục tiêu của ngày;
 REINFORCEMENT = cùng công cụ, thêm cặp biến mới (chuyển sang ngày hôm sau không sao);
-ADVANCED = defer có lý do (mục 6). Ngày 05 là ngày nặng nhất — nếu vượt 120 phút, chuyển
-P1-Q18 xuống pool và bắt đầu Ngày 06 sau.
+ADVANCED = defer có lý do (mục 6). Ngày 05 đã được nhẹ hóa (Task 15): P1-Q21
+(Weight Cases/Risk) và P2-Q01 chuyển sang Ngày 08 cùng cụm kiểm định tỷ lệ — giờ nặng
+nhất là Ngày 08; nếu vượt 120 phút, bỏ toàn bộ phần REINFORCEMENT (P1-Q21/P2-Q01/
+McNemar) sang ngày 09–10.
 
 ## 4. Dataset theo ngày
 
 | Dataset (trong `exercises/`) | Dùng ngày | Nội dung |
 |---|---|---|
 | `bai_1/p1_B01_HA (1).sav` | 01–08, 14 | 620×40 — khảo sát tăng huyết áp & yếu tố nguy cơ |
-| `bai_1/P1_B02 CrossTab (2).sav` | 05 | Bảng 2×2 HPV–ung thư CTC (dạng tần số tổng hợp) |
-| `bai_2/File1.sav` | 05, 08–11, 14 | 50×18 — chấn thương giao thông 3 tỉnh (điều tra 2022) |
+| `bai_1/P1_B02 CrossTab (2).sav` | 08 | Bảng 2×2 HPV–ung thư CTC (dạng tần số tổng hợp) |
+| `bai_2/File1.sav` | 08–11, 14 | 50×18 — chấn thương giao thông 3 tỉnh (điều tra 2022) |
 | `bai_2/File2_Phan2.sav` | 10 | 12 bệnh nhân — giờ ngủ thuốc vs giả dược |
 | `bai_2/File5_Phan2.sav` | 12–13 | 296×7 — sinh thiết tuyến tiền liệt |
 | `bai_1/P1_B03 ROC.sav` | extension | 30×5 — WBC/CRP/PCT & viêm phổi |

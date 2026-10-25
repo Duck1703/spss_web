@@ -1,2224 +1,2243 @@
 {
- "$schema": "spss-mlp-exercise-inventory/v1",
- "generated": "2026-10-25 (Task 13 — kiểm chứng bằng pyreadstat/pandas/scipy; nhãn UNVERIFIED cho output SPSS thật)",
- "sources": {
-  "P1": {
-   "pdf": "exercises/bai_1/Bai thuc hanh SDH P1.pdf",
-   "title": "BÀI THỰC HÀNH (PHẦN 1) — 43 câu",
-   "datasets": {
-    "p1_B01_HA (1).sav": {
-     "n": 620,
-     "role": "dataset chính Q01–Q14, Q17–Q20, Q22–Q43",
-     "note": "40 biến; GTinh: 1=Nữ, 2=Nam (mã NGƯỢC thường gặp — cảnh báo học viên)"
+  "$schema": "spss-mlp-exercise-inventory/v1",
+  "generated": "2026-10-25 (Task 13 — kiểm chứng bằng pyreadstat/pandas/scipy; nhãn UNVERIFIED cho output SPSS thật)",
+  "sources": {
+    "P1": {
+      "pdf": "exercises/bai_1/Bai thuc hanh SDH P1.pdf",
+      "title": "BÀI THỰC HÀNH (PHẦN 1) — 43 câu",
+      "datasets": {
+        "p1_B01_HA (1).sav": {
+          "n": 620,
+          "role": "dataset chính Q01–Q14, Q17–Q20, Q22–Q43",
+          "note": "40 biến; GTinh: 1=Nữ, 2=Nam (mã NGƯỢC thường gặp — cảnh báo học viên)"
+        },
+        "P1_B02 CrossTab (2).sav": {
+          "n": 4,
+          "role": "Q21 — bảng 2x2 dạng tổng hợp (cần Weight Cases)",
+          "vars": [
+            "benh",
+            "phoinhiem",
+            "soluong"
+          ]
+        },
+        "P1_B03 ROC.sav": {
+          "n": 30,
+          "role": "Q15–Q16 — ROC WBC/CRP/PCT phân biệt viêm phổi vi trùng/virus"
+        },
+        "So_Lieu_NC.sav": {
+          "n": 360,
+          "role": "không câu nào tham chiếu trực tiếp — dataset phụ (khảo sát STEPS-like), dùng luyện tập tự do",
+          "note": "38 biến; thiếu NNghiep/TTrang.KTe/bệnh mạn tính nên KHÔNG thay được p1_B01_HA"
+        }
+      }
     },
-    "P1_B02 CrossTab (2).sav": {
-     "n": 4,
-     "role": "Q21 — bảng 2x2 dạng tổng hợp (cần Weight Cases)",
-     "vars": [
-      "benh",
-      "phoinhiem",
-      "soluong"
-     ]
-    },
-    "P1_B03 ROC.sav": {
-     "n": 30,
-     "role": "Q15–Q16 — ROC WBC/CRP/PCT phân biệt viêm phổi vi trùng/virus"
-    },
-    "So_Lieu_NC.sav": {
-     "n": 360,
-     "role": "không câu nào tham chiếu trực tiếp — dataset phụ (khảo sát STEPS-like), dùng luyện tập tự do",
-     "note": "38 biến; thiếu NNghiep/TTrang.KTe/bệnh mạn tính nên KHÔNG thay được p1_B01_HA"
+    "P2": {
+      "pdf": "exercises/bai_2/BSNT_Bài TH_Phần 2_Cô Hiền.pdf",
+      "title": "BÀI TẬP THỰC HÀNH PHẦN 2 — 15 câu + bảng hỏi chấn thương giao thông + hướng dẫn mã hóa",
+      "datasets": {
+        "File1.sav": {
+          "n": 50,
+          "role": "Q01–Q12 (PDF gọi 'File1_Phan 2.sav' — cùng file, xác minh theo biến khớp bảng mã hóa)",
+          "note": "tên biến lệch codebook (omah/htuo/igioitin…) nhưng thứ tự khớp 1:1 phiếu điều tra"
+        },
+        "File2_Phan2.sav": {
+          "n": 12,
+          "role": "Q13 — thuốc ngủ vs giả dược (paired)"
+        },
+        "File3_Phan2.sav": {
+          "n": 20,
+          "role": "Q14 — PCT & tử vong",
+          "note": "NDEAT có giá trị rác 'H0' ở dòng 1 — cần làm sạch trước khi phân tích"
+        },
+        "File4_Phan2.sav": {
+          "n": 30,
+          "role": "Q15 — PCT + hạ HA + tuổi → tử vong (đa biến)",
+          "note": "HYPOTENSION/DEATH là biến CHUỖI '0'/'1'"
+        },
+        "File5_Phan2.sav": {
+          "n": 296,
+          "role": "Bài TH 3 — xử lý, phân tích, viết báo cáo (không đánh số)",
+          "note": "nghiên cứu sinh thiết tuyến tiền liệt: Tuoi, Khám_TT, Siêu_âmTT, PSA, Thetich, Sinhthiet"
+        }
+      }
     }
-   }
   },
-  "P2": {
-   "pdf": "exercises/bai_2/BSNT_Bài TH_Phần 2_Cô Hiền.pdf",
-   "title": "BÀI TẬP THỰC HÀNH PHẦN 2 — 15 câu + bảng hỏi chấn thương giao thông + hướng dẫn mã hóa",
-   "datasets": {
-    "File1.sav": {
-     "n": 50,
-     "role": "Q01–Q12 (PDF gọi 'File1_Phan 2.sav' — cùng file, xác minh theo biến khớp bảng mã hóa)",
-     "note": "tên biến lệch codebook (omah/htuo/igioitin…) nhưng thứ tự khớp 1:1 phiếu điều tra"
-    },
-    "File2_Phan2.sav": {
-     "n": 12,
-     "role": "Q13 — thuốc ngủ vs giả dược (paired)"
-    },
-    "File3_Phan2.sav": {
-     "n": 20,
-     "role": "Q14 — PCT & tử vong",
-     "note": "NDEAT có giá trị rác 'H0' ở dòng 1 — cần làm sạch trước khi phân tích"
-    },
-    "File4_Phan2.sav": {
-     "n": 30,
-     "role": "Q15 — PCT + hạ HA + tuổi → tử vong (đa biến)",
-     "note": "HYPOTENSION/DEATH là biến CHUỖI '0'/'1'"
-    },
-    "File5_Phan2.sav": {
-     "n": 296,
-     "role": "Bài TH 3 — xử lý, phân tích, viết báo cáo (không đánh số)",
-     "note": "nghiên cứu sinh thiết tuyến tiền liệt: Tuoi, Khám_TT, Siêu_âmTT, PSA, Thetich, Sinhthiet"
-    }
-   }
-  }
- },
- "exercises": [
-  {
-   "id": "P1-Q01",
-   "src": "P1",
-   "page": 1,
-   "ref": "Câu 1",
-   "summary": "Tìm mã số những người cân nặng nhỏ nhất, giới tính Nam (kèm tuổi)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "ID",
-    "GTinh",
-    "Cannang",
-    "Tuoi"
-   ],
-   "skills": [
-    "Mở file .sav",
-    "Data View/Variable View",
-    "đọc nhãn giá trị",
-    "Sort Cases",
-    "Select Cases"
-   ],
-   "ops": [
-    "File→Open→Data",
-    "View→Value Labels",
-    "Data→Sort Cases",
-    "Data→Select Cases"
-   ],
-   "prereq": [],
-   "difficulty": "Beginner",
-   "time": 25,
-   "artifact": "Danh sách ID + cân nặng + tuổi ghi vào workbook",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d01",
-   "hint": [
-    "Lọc trước những người GTinh = Nam (chú ý mã: 2 = Nam, 1 = Nữ — ngược thường gặp)",
-    "Data → Select Cases → If condition is satisfied: GTinh = 2",
-    "Data → Sort Cases → Cannang tăng dần — dòng đầu tiên là nhỏ nhất"
-   ],
-   "answerSpec": [
+  "exercises": [
     {
-     "key": "ids",
-     "label": "Mã số (cách nhau bởi dấu phẩy)"
-    },
-    {
-     "key": "min",
-     "label": "Cân nặng nhỏ nhất (kg)"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q02",
-   "src": "P1",
-   "page": 1,
-   "ref": "Câu 2",
-   "summary": "Số lượng và tỷ lệ % người không biết chữ",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "HVan"
-   ],
-   "skills": [
-    "Frequencies",
-    "đọc Frequency/Percent/Valid Percent"
-   ],
-   "ops": [
-    "Analyze→Descriptive Statistics→Frequencies"
-   ],
-   "prereq": [
-    "mở file",
-    "nhận diện biến"
-   ],
-   "difficulty": "Beginner",
-   "time": 20,
-   "artifact": "Số lượng + % điền bảng; ảnh/bảng output",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d02",
-   "hint": [
-    "'Không biết chữ' là nhãn giá trị của biến HVan — mở Variable View xem Values trước",
-    "Analyze → Descriptive Statistics → Frequencies → đưa HVan vào Variable(s)",
-    "Đọc đúng cột: Frequency = số lượng; Valid Percent = % trên người có dữ liệu"
-   ],
-   "answerSpec": [
-    {
-     "key": "n",
-     "label": "Số lượng không biết chữ"
+      "id": "P1-Q01",
+      "src": "P1",
+      "page": 1,
+      "ref": "Câu 1",
+      "summary": "Tìm mã số những người cân nặng nhỏ nhất, giới tính Nam (kèm tuổi)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "ID",
+        "GTinh",
+        "Cannang",
+        "Tuoi"
+      ],
+      "skills": [
+        "Mở file .sav",
+        "Data View/Variable View",
+        "đọc nhãn giá trị",
+        "Sort Cases",
+        "Select Cases"
+      ],
+      "ops": [
+        "File→Open→Data",
+        "View→Value Labels",
+        "Data→Sort Cases",
+        "Data→Select Cases"
+      ],
+      "prereq": [],
+      "difficulty": "Beginner",
+      "time": 25,
+      "artifact": "Danh sách ID + cân nặng + tuổi ghi vào workbook",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d01",
+      "hint": [
+        "Lọc trước những người GTinh = Nam (chú ý mã: 2 = Nam, 1 = Nữ — ngược thường gặp)",
+        "Data → Select Cases → If condition is satisfied: GTinh = 2",
+        "Data → Sort Cases → Cannang tăng dần — dòng đầu tiên là nhỏ nhất"
+      ],
+      "answerSpec": [
+        {
+          "key": "ids",
+          "label": "Mã số (cách nhau bởi dấu phẩy)"
+        },
+        {
+          "key": "min",
+          "label": "Cân nặng nhỏ nhất (kg)"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "pct",
-     "label": "Tỷ lệ %"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q03",
-   "src": "P1",
-   "page": 1,
-   "ref": "Câu 3",
-   "summary": "Đại lượng TKMT cho Tuổi: mean, median, SD, phương sai, khoảng biến thiên, tứ vị 1, BPV 70",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tuoi"
-   ],
-   "skills": [
-    "Descriptives",
-    "Frequencies→Statistics (quartiles/percentiles)"
-   ],
-   "ops": [
-    "Analyze→Descriptive Statistics→Descriptives",
-    "Analyze→Descriptive Statistics→Frequencies→Statistics"
-   ],
-   "prereq": [
-    "Frequencies"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "Bảng 6 chỉ số điền đủ",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d03",
-   "hint": [
-    "Descriptives cho mean/SD/min/max — phương sai = bình phương SD, khoảng biến thiên = max − min",
-    "Median, tứ vị (quartiles) và bách phân vị 70 lấy ở Frequencies → Statistics → tick Median, Quartiles, Percentile(s) nhập 70"
-   ],
-   "answerSpec": [
-    {
-     "key": "mean",
-     "label": "Trung bình"
+      "id": "P1-Q02",
+      "src": "P1",
+      "page": 1,
+      "ref": "Câu 2",
+      "summary": "Số lượng và tỷ lệ % người không biết chữ",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "HVan"
+      ],
+      "skills": [
+        "Frequencies",
+        "đọc Frequency/Percent/Valid Percent"
+      ],
+      "ops": [
+        "Analyze→Descriptive Statistics→Frequencies"
+      ],
+      "prereq": [
+        "mở file",
+        "nhận diện biến"
+      ],
+      "difficulty": "Beginner",
+      "time": 20,
+      "artifact": "Số lượng + % điền bảng; ảnh/bảng output",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d02",
+      "hint": [
+        "'Không biết chữ' là nhãn giá trị của biến HVan — mở Variable View xem Values trước",
+        "Analyze → Descriptive Statistics → Frequencies → đưa HVan vào Variable(s)",
+        "Đọc đúng cột: Frequency = số lượng; Valid Percent = % trên người có dữ liệu"
+      ],
+      "answerSpec": [
+        {
+          "key": "n",
+          "label": "Số lượng không biết chữ"
+        },
+        {
+          "key": "pct",
+          "label": "Tỷ lệ %"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "median",
-     "label": "Trung vị"
+      "id": "P1-Q03",
+      "src": "P1",
+      "page": 1,
+      "ref": "Câu 3",
+      "summary": "Đại lượng TKMT cho Tuổi: mean, median, SD, phương sai, khoảng biến thiên, tứ vị 1, BPV 70",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tuoi"
+      ],
+      "skills": [
+        "Descriptives",
+        "Frequencies→Statistics (quartiles/percentiles)"
+      ],
+      "ops": [
+        "Analyze→Descriptive Statistics→Descriptives",
+        "Analyze→Descriptive Statistics→Frequencies→Statistics"
+      ],
+      "prereq": [
+        "Frequencies"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "Bảng 6 chỉ số điền đủ",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d03",
+      "hint": [
+        "Descriptives cho mean/SD/min/max — phương sai = bình phương SD, khoảng biến thiên = max − min",
+        "Median, tứ vị (quartiles) và bách phân vị 70 lấy ở Frequencies → Statistics → tick Median, Quartiles, Percentile(s) nhập 70"
+      ],
+      "answerSpec": [
+        {
+          "key": "mean",
+          "label": "Trung bình"
+        },
+        {
+          "key": "median",
+          "label": "Trung vị"
+        },
+        {
+          "key": "sd",
+          "label": "Độ lệch chuẩn"
+        },
+        {
+          "key": "p70",
+          "label": "Bách phân vị 70"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "sd",
-     "label": "Độ lệch chuẩn"
+      "id": "P1-Q04",
+      "src": "P1",
+      "page": 1,
+      "ref": "Câu 4",
+      "summary": "Mean, SD, min, max, khoảng biến thiên, hệ số tập trung (CV) của Tuổi",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tuoi"
+      ],
+      "skills": [
+        "Descriptives",
+        "tính CV = SD/mean×100"
+      ],
+      "ops": [
+        "Analyze→Descriptives",
+        "Transform→Compute (nếu muốn SPSS tính CV)"
+      ],
+      "prereq": [
+        "P1-Q03"
+      ],
+      "difficulty": "Beginner",
+      "time": 20,
+      "artifact": "Bảng 5 chỉ số + CV (%)",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d03",
+      "hint": [
+        "Hệ số tập trung (hệ số biến thiên, CV) = Độ lệch chuẩn / Trung bình × 100% — SPSS không in sẵn, tự tính từ output"
+      ],
+      "answerSpec": [
+        {
+          "key": "cv",
+          "label": "Hệ số tập trung (%)"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "p70",
-     "label": "Bách phân vị 70"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q04",
-   "src": "P1",
-   "page": 1,
-   "ref": "Câu 4",
-   "summary": "Mean, SD, min, max, khoảng biến thiên, hệ số tập trung (CV) của Tuổi",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tuoi"
-   ],
-   "skills": [
-    "Descriptives",
-    "tính CV = SD/mean×100"
-   ],
-   "ops": [
-    "Analyze→Descriptives",
-    "Transform→Compute (nếu muốn SPSS tính CV)"
-   ],
-   "prereq": [
-    "P1-Q03"
-   ],
-   "difficulty": "Beginner",
-   "time": 20,
-   "artifact": "Bảng 5 chỉ số + CV (%)",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d03",
-   "hint": [
-    "Hệ số tập trung (hệ số biến thiên, CV) = Độ lệch chuẩn / Trung bình × 100% — SPSS không in sẵn, tự tính từ output"
-   ],
-   "answerSpec": [
-    {
-     "key": "cv",
-     "label": "Hệ số tập trung (%)"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q05",
-   "src": "P1",
-   "page": 1,
-   "ref": "Câu 5",
-   "summary": "Số lượng & % hộ Nghèo/Cận nghèo theo giới tính (% theo TTKT và % theo giới tính)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "TTrang.KTe",
-    "GTinh"
-   ],
-   "skills": [
-    "Crosstabs",
-    "% theo hàng vs % theo cột"
-   ],
-   "ops": [
-    "Analyze→Descriptive Statistics→Crosstabs→Cells"
-   ],
-   "prereq": [
-    "Frequencies"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "Bảng 2×2 có % hàng + % cột",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d05",
-   "hint": [
-    "Crosstabs: TTrang.KTe vào Row(s), GTinh vào Column(s)",
-    "Cells → tick Observed, Row, Column — '% theo TTKT' = % trong hàng; '% theo giới tính' = % trong cột"
-   ],
-   "answerSpec": [
-    {
-     "key": "nam_n",
-     "label": "Số nam hộ nghèo/cận nghèo"
+      "id": "P1-Q05",
+      "src": "P1",
+      "page": 1,
+      "ref": "Câu 5",
+      "summary": "Số lượng & % hộ Nghèo/Cận nghèo theo giới tính (% theo TTKT và % theo giới tính)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "TTrang.KTe",
+        "GTinh"
+      ],
+      "skills": [
+        "Crosstabs",
+        "% theo hàng vs % theo cột"
+      ],
+      "ops": [
+        "Analyze→Descriptive Statistics→Crosstabs→Cells"
+      ],
+      "prereq": [
+        "Frequencies"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "Bảng 2×2 có % hàng + % cột",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d05",
+      "hint": [
+        "Crosstabs: TTrang.KTe vào Row(s), GTinh vào Column(s)",
+        "Cells → tick Observed, Row, Column — '% theo TTKT' = % trong hàng; '% theo giới tính' = % trong cột"
+      ],
+      "answerSpec": [
+        {
+          "key": "nam_n",
+          "label": "Số nam hộ nghèo/cận nghèo"
+        },
+        {
+          "key": "nu_n",
+          "label": "Số nữ hộ nghèo/cận nghèo"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "nu_n",
-     "label": "Số nữ hộ nghèo/cận nghèo"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q06",
-   "src": "P1",
-   "page": 1,
-   "ref": "Câu 6",
-   "summary": "Mean, SD, khoảng biến thiên của Tuổi theo giới tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tuoi",
-    "GTinh"
-   ],
-   "skills": [
-    "Split File hoặc Means"
-   ],
-   "ops": [
-    "Data→Split File→Compare groups",
-    "Analyze→Compare Means→Means"
-   ],
-   "prereq": [
-    "Descriptives"
-   ],
-   "difficulty": "Beginner",
-   "time": 25,
-   "artifact": "Bảng mean/SD/range theo giới",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d04",
-   "hint": [
-    "Data → Split File → Compare groups → GTinh → chạy lại Descriptives cho Tuoi",
-    "Nhớ tắt Split File (Analyze all cases) sau khi xong!"
-   ],
-   "answerSpec": [
-    {
-     "key": "nam_mean",
-     "label": "Tuổi TB nam"
+      "id": "P1-Q06",
+      "src": "P1",
+      "page": 1,
+      "ref": "Câu 6",
+      "summary": "Mean, SD, khoảng biến thiên của Tuổi theo giới tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tuoi",
+        "GTinh"
+      ],
+      "skills": [
+        "Split File hoặc Means"
+      ],
+      "ops": [
+        "Data→Split File→Compare groups",
+        "Analyze→Compare Means→Means"
+      ],
+      "prereq": [
+        "Descriptives"
+      ],
+      "difficulty": "Beginner",
+      "time": 25,
+      "artifact": "Bảng mean/SD/range theo giới",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d04",
+      "hint": [
+        "Data → Split File → Compare groups → GTinh → chạy lại Descriptives cho Tuoi",
+        "Nhớ tắt Split File (Analyze all cases) sau khi xong!"
+      ],
+      "answerSpec": [
+        {
+          "key": "nam_mean",
+          "label": "Tuổi TB nam"
+        },
+        {
+          "key": "nu_mean",
+          "label": "Tuổi TB nữ"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "nu_mean",
-     "label": "Tuổi TB nữ"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q07",
-   "src": "P1",
-   "page": 1,
-   "ref": "Câu 7",
-   "summary": "Bảng bệnh mạn tính theo 2 cách lưu: biến nhị phân nhiều cột vs biến danh mục; × giới tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Timmach",
-    "Tieuduong",
-    "Than",
-    "Gan",
-    "Gut",
-    "Benh.MT_1",
-    "Benh.MT_2",
-    "GTinh"
-   ],
-   "skills": [
-    "Multiple Response Sets",
-    "hiểu 2 cách lưu câu nhiều trả lời"
-   ],
-   "ops": [
-    "Analyze→Multiple Response→Define Variable Sets→Frequencies/Crosstabs"
-   ],
-   "prereq": [
-    "Frequencies",
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 45,
-   "artifact": "2 bảng tần số bệnh mạn tính (+ theo giới tính)",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d07",
-   "hint": [
-    "Dạng nhị phân: 5 cột Timmach…Gut, mỗi cột 0/1 → định nghĩa set 'dichotomies', đếm giá trị 1",
-    "Dạng danh mục: Benh.MT_1/Benh.MT_2 chứa mã 1–5 → định nghĩa set 'categories' khoảng 1–5"
-   ],
-   "answerSpec": [
-    {
-     "key": "n",
-     "label": "Số lượt chọn mỗi bệnh (ghi dạng: tim mạch=…, ĐTĐ=…)"
-    }
-   ]
-  },
-  {
-   "id": "P1-Q08",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 8",
-   "summary": "Chọn mẫu Nam → bảng tần số Học vấn; rồi chọn tuổi 50–70 → làm lại",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "GTinh",
-    "HVan",
-    "Tuoi"
-   ],
-   "skills": [
-    "Select Cases (điều kiện If)",
-    "Frequencies trên mẫu con"
-   ],
-   "ops": [
-    "Data→Select Cases→If condition is satisfied"
-   ],
-   "prereq": [
-    "Frequencies"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "2 bảng tần số HVan (mẫu Nam; mẫu 50–70)",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d04",
-   "hint": [
-    "GTinh = 2 là Nam; điều kiện tuổi: Tuoi >= 50 & Tuoi <= 70",
-    "Mỗi lần đổi điều kiện phải quay lại Data → Select Cases — dòng bị loại hiện gạch chéo"
-   ],
-   "answerSpec": [
-    {
-     "key": "nam_n",
-     "label": "Tổng số nam trong mẫu"
+      "id": "P1-Q07",
+      "src": "P1",
+      "page": 1,
+      "ref": "Câu 7",
+      "summary": "Bảng bệnh mạn tính theo 2 cách lưu: biến nhị phân nhiều cột vs biến danh mục; × giới tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Timmach",
+        "Tieuduong",
+        "Than",
+        "Gan",
+        "Gut",
+        "Benh.MT_1",
+        "Benh.MT_2",
+        "GTinh"
+      ],
+      "skills": [
+        "Multiple Response Sets",
+        "hiểu 2 cách lưu câu nhiều trả lời"
+      ],
+      "ops": [
+        "Analyze→Multiple Response→Define Variable Sets→Frequencies/Crosstabs"
+      ],
+      "prereq": [
+        "Frequencies",
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 45,
+      "artifact": "2 bảng tần số bệnh mạn tính (+ theo giới tính)",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d07",
+      "hint": [
+        "Dạng nhị phân: 5 cột Timmach…Gut, mỗi cột 0/1 → định nghĩa set 'dichotomies', đếm giá trị 1",
+        "Dạng danh mục: Benh.MT_1/Benh.MT_2 chứa mã 1–5 → định nghĩa set 'categories' khoảng 1–5"
+      ],
+      "answerSpec": [
+        {
+          "key": "n",
+          "label": "Số lượt chọn mỗi bệnh (ghi dạng: tim mạch=…, ĐTĐ=…)"
+        }
+      ],
+      "tier": "reinforcement"
     },
     {
-     "key": "n5070",
-     "label": "Số người tuổi 50–70"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q09",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 9",
-   "summary": "Tách file theo giới tính, lập tần số Học vấn và nhận xét",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "GTinh",
-    "HVan"
-   ],
-   "skills": [
-    "Split File",
-    "so sánh phân phối giữa nhóm"
-   ],
-   "ops": [
-    "Data→Split File→Organize output by groups"
-   ],
-   "prereq": [
-    "P1-Q08"
-   ],
-   "difficulty": "Beginner",
-   "time": 25,
-   "artifact": "Bảng HVan tách theo Nam/Nữ + 1 câu nhận xét",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d04",
-   "hint": [
-    "Split File khác Select Cases: Split KHÔNG loại dòng, chỉ tách output thành 2 bảng song song",
-    "Nhận xét: so sánh % không biết chữ và % ĐH/SĐH giữa hai giới"
-   ],
-   "answerSpec": [
-    {
-     "key": "note",
-     "label": "Nhận xét 1–2 câu"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q10",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 10",
-   "summary": "Tạo biến BMI = Cannang/Chieucao²; thống kê mean, SD, min, max",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Cannang",
-    "Chieucao"
-   ],
-   "skills": [
-    "Compute Variable",
-    "đơn vị (cm→m)"
-   ],
-   "ops": [
-    "Transform→Compute Variable",
-    "Analyze→Descriptives"
-   ],
-   "prereq": [
-    "Descriptives"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "Biến BMI mới + bảng 4 chỉ số",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d06",
-   "hint": [
-    "Chieucao đo bằng cm — BMI cần mét: Cannang / ((Chieucao/100)**2)",
-    "Kiểm tra BMI tạo ra nằm khoảng 15–45 — nếu thấy nghìn thì quên chia 100"
-   ],
-   "answerSpec": [
-    {
-     "key": "bmi_mean",
-     "label": "BMI trung bình"
+      "id": "P1-Q08",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 8",
+      "summary": "Chọn mẫu Nam → bảng tần số Học vấn; rồi chọn tuổi 50–70 → làm lại",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "GTinh",
+        "HVan",
+        "Tuoi"
+      ],
+      "skills": [
+        "Select Cases (điều kiện If)",
+        "Frequencies trên mẫu con"
+      ],
+      "ops": [
+        "Data→Select Cases→If condition is satisfied"
+      ],
+      "prereq": [
+        "Frequencies"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "2 bảng tần số HVan (mẫu Nam; mẫu 50–70)",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d04",
+      "hint": [
+        "GTinh = 2 là Nam; điều kiện tuổi: Tuoi >= 50 & Tuoi <= 70",
+        "Mỗi lần đổi điều kiện phải quay lại Data → Select Cases — dòng bị loại hiện gạch chéo"
+      ],
+      "answerSpec": [
+        {
+          "key": "nam_n",
+          "label": "Tổng số nam trong mẫu"
+        },
+        {
+          "key": "n5070",
+          "label": "Số người tuổi 50–70"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "bmi_sd",
-     "label": "BMI độ lệch chuẩn"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q11",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 11",
-   "summary": "Recode Tuổi → Độ tuổi (40–49→1, 50–59→2, 60–69→3, ≥70→4); tần số & số người ≥70",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tuoi"
-   ],
-   "skills": [
-    "Recode Into Different Variables",
-    "gắn nhãn giá trị mới"
-   ],
-   "ops": [
-    "Transform→Recode into Different Variables"
-   ],
-   "prereq": [
-    "Compute",
-    "Frequencies"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "Biến Dotuoi + bảng tần số + số người ≥70",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d06",
-   "hint": [
-    "Dùng 'Recode into DIFFERENT Variables' — không ghi đè Tuổi gốc",
-    "Khoảng tròn: '40 thru 49'→1 … '70 thru highest'→4; dữ liệu thật min=41 nên khoảng 40–49 vẫn đủ"
-   ],
-   "answerSpec": [
-    {
-     "key": "n70",
-     "label": "Số người ≥ 70 tuổi"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q12",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 12",
-   "summary": "Đếm số bệnh mạn tính mỗi người; bao nhiêu người có ≥2 bệnh",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Timmach",
-    "Tieuduong",
-    "Than",
-    "Gan",
-    "Gut",
-    "Benh.MT_1",
-    "Benh.MT_2"
-   ],
-   "skills": [
-    "Count Values within Cases"
-   ],
-   "ops": [
-    "Transform→Count Values within Cases"
-   ],
-   "prereq": [
-    "Compute",
-    "Frequencies"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "Biến đếm + bảng tần số + số người ≥2 bệnh",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d06",
-   "hint": [
-    "Transform → Count Values within Cases → 5 biến nhị phân, đếm giá trị 1",
-    "Dạng danh mục: đếm ô KHÔNG trống trong Benh.MT_1, Benh.MT_2 (mục Value: 'non-missing' — hoặc cộng tay =NOTMISSING)"
-   ],
-   "answerSpec": [
-    {
-     "key": "n2",
-     "label": "Số người có ≥ 2 bệnh mạn tính"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q13",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 13",
-   "summary": "Số người đái tháo đường tuổi 50–70; số nam đái tháo đường tuổi 50–70",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tieuduong",
-    "Tuoi",
-    "GTinh",
-    "Benh.MT_1",
-    "Benh.MT_2"
-   ],
-   "skills": [
-    "Select Cases điều kiện kép",
-    "đếm trên mẫu con"
-   ],
-   "ops": [
-    "Data→Select Cases→If",
-    "Frequencies"
-   ],
-   "prereq": [
-    "Select Cases"
-   ],
-   "difficulty": "Beginner",
-   "time": 20,
-   "artifact": "2 con số (ĐTĐ 50–70; nam ĐTĐ 50–70)",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d07",
-   "hint": [
-    "Điều kiện: Tieuduong = 1 & Tuoi >= 50 & Tuoi <= 70 — xem số dòng còn lại ở status bar/bảng tần số",
-    "Thêm điều kiện GTinh = 2 cho câu hỏi nam"
-   ],
-   "answerSpec": [
-    {
-     "key": "n_dtd",
-     "label": "Số người ĐTĐ tuổi 50–70"
+      "id": "P1-Q09",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 9",
+      "summary": "Tách file theo giới tính, lập tần số Học vấn và nhận xét",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "GTinh",
+        "HVan"
+      ],
+      "skills": [
+        "Split File",
+        "so sánh phân phối giữa nhóm"
+      ],
+      "ops": [
+        "Data→Split File→Organize output by groups"
+      ],
+      "prereq": [
+        "P1-Q08"
+      ],
+      "difficulty": "Beginner",
+      "time": 25,
+      "artifact": "Bảng HVan tách theo Nam/Nữ + 1 câu nhận xét",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d04",
+      "hint": [
+        "Split File khác Select Cases: Split KHÔNG loại dòng, chỉ tách output thành 2 bảng song song",
+        "Nhận xét: so sánh % không biết chữ và % ĐH/SĐH giữa hai giới"
+      ],
+      "answerSpec": [
+        {
+          "key": "note",
+          "label": "Nhận xét 1–2 câu"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "n_dtd_nam",
-     "label": "Trong đó là nam"
-    }
-   ]
-  },
-  {
-   "id": "P1-Q14",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 14",
-   "summary": "Kiểm tra biến Nghề nghiệp nhập sai; liệt kê mã số phiếu sai; loại khỏi dữ liệu",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "NNghiep",
-    "ID"
-   ],
-   "skills": [
-    "Frequencies săn lỗi",
-    "Sort/If để liệt kê",
-    "Select Cases loại bỏ",
-    "Save As bản mới"
-   ],
-   "ops": [
-    "Frequencies",
-    "Data→Sort Cases",
-    "Data→Select Cases",
-    "File→Save As"
-   ],
-   "prereq": [
-    "Frequencies",
-    "Select Cases"
-   ],
-   "difficulty": "Beginner",
-   "time": 35,
-   "artifact": "Danh sách ID sai + file dữ liệu đã loại",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d07",
-   "hint": [
-    "Nghề nghiệp chỉ có mã 1–6 trong codebook — giá trị khác là sai",
-    "Frequencies NNghiep cho thấy các giá trị lạ; dùng Select Cases 'if NNghiep = 0 | NNghiep = 8 | MISSING(NNghiep)' để soi, rồi đảo điều kiện để loại",
-    "ĐỪNG lưu đè file gốc — Save As bản mới"
-   ],
-   "answerSpec": [
-    {
-     "key": "ids",
-     "label": "Các mã số nhập sai (cách nhau dấu phẩy)"
+      "id": "P1-Q10",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 10",
+      "summary": "Tạo biến BMI = Cannang/Chieucao²; thống kê mean, SD, min, max",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Cannang",
+        "Chieucao"
+      ],
+      "skills": [
+        "Compute Variable",
+        "đơn vị (cm→m)"
+      ],
+      "ops": [
+        "Transform→Compute Variable",
+        "Analyze→Descriptives"
+      ],
+      "prereq": [
+        "Descriptives"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "Biến BMI mới + bảng 4 chỉ số",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d06",
+      "hint": [
+        "Chieucao đo bằng cm — BMI cần mét: Cannang / ((Chieucao/100)**2)",
+        "Kiểm tra BMI tạo ra nằm khoảng 15–45 — nếu thấy nghìn thì quên chia 100"
+      ],
+      "answerSpec": [
+        {
+          "key": "bmi_mean",
+          "label": "BMI trung bình"
+        },
+        {
+          "key": "bmi_sd",
+          "label": "BMI độ lệch chuẩn"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "n_left",
-     "label": "Số dòng còn lại sau khi loại"
-    }
-   ]
-  },
-  {
-   "id": "P1-Q15",
-   "src": "P1",
-   "page": 2,
-   "ref": "Câu 15",
-   "summary": "ROC cho CRP — điểm cắt Se/Sp tối ưu phân biệt viêm phổi vi trùng/virus; Se, Sp, PPV, NPV, FPR, FNR",
-   "dataset": "P1_B03 ROC.sav",
-   "vars": [
-    "CRP",
-    "viemphoi"
-   ],
-   "skills": [
-    "ROC Curve",
-    "diagnostic accuracy"
-   ],
-   "ops": [
-    "Analyze→ROC Curve"
-   ],
-   "prereq": [
-    "thống kê suy luận cơ bản",
-    "bảng 2×2"
-   ],
-   "difficulty": "Advanced",
-   "time": 60,
-   "artifact": "Đường ROC, AUC, điểm cắt + bảng Se/Sp/PPV/NPV",
-   "mapping": "VERIFIED",
-   "role": "deferred",
-   "day": null,
-   "deferredReason": "Cần khái niệm chẩn đoán/độ nhạy chưa thể dạy có trách nhiệm trong 14 ngày nhập môn — chuyển extension E01"
-  },
-  {
-   "id": "P1-Q16",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 16",
-   "summary": "So sánh giá trị chẩn đoán của Bạch cầu, CRP, PCT (ROC nhiều test)",
-   "dataset": "P1_B03 ROC.sav",
-   "vars": [
-    "WBC",
-    "CRP",
-    "PCT",
-    "viemphoi"
-   ],
-   "skills": [
-    "ROC nhiều biến",
-    "so sánh AUC"
-   ],
-   "ops": [
-    "Analyze→ROC Curve (nhiều Test Variables)"
-   ],
-   "prereq": [
-    "P1-Q15"
-   ],
-   "difficulty": "Advanced",
-   "time": 45,
-   "artifact": "ROC 3 đường + bảng AUC so sánh",
-   "mapping": "VERIFIED",
-   "role": "deferred",
-   "day": null,
-   "deferredReason": "Cùng cụm ROC với Q15 — extension E01"
-  },
-  {
-   "id": "P1-Q17",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 17",
-   "summary": "Nhận xét tỷ lệ đái tháo đường theo giới tính; bệnh gan mạn theo giới tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tieuduong",
-    "Gan",
-    "GTinh"
-   ],
-   "skills": [
-    "Crosstabs + Chi-square",
-    "diễn giải tỷ lệ"
-   ],
-   "ops": [
-    "Crosstabs→Statistics→Chi-square→Cells→Column %"
-   ],
-   "prereq": [
-    "Crosstabs"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "2 bảng chéo + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d05",
-   "hint": [
-    "% cần đọc là % trong giới tính (Column %) — 'tỷ lệ ĐTĐ theo giới tính'",
-    "Chi-square chỉ báo có/không liên quan — nhận xét hướng khác biệt phải nhìn %"
-   ],
-   "answerSpec": [
-    {
-     "key": "p_dtd",
-     "label": "p cho ĐTĐ × giới tính"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q18",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 18",
-   "summary": "Nhận xét tỷ lệ tiền sử rượu bia theo giới tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "TSu.RBia",
-    "GTinh"
-   ],
-   "skills": [
-    "Crosstabs + Chi-square"
-   ],
-   "ops": [
-    "Crosstabs→Chi-square→Column %"
-   ],
-   "prereq": [
-    "P1-Q17"
-   ],
-   "difficulty": "Beginner",
-   "time": 20,
-   "artifact": "Bảng chéo + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d05",
-   "hint": [
-    "Cùng thao tác Q17 — đổi biến thành TSu.RBia"
-   ],
-   "answerSpec": [
-    {
-     "key": "p_rb",
-     "label": "p cho TSu.RBia × giới tính"
-    }
-   ],
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q19",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 19",
-   "summary": "Tỷ lệ mức độ dùng rượu bia theo TDTT; stress theo mức độ công việc",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "MDoSD.RB",
-    "TDTT",
-    "Stress",
-    "CV.Mucdo"
-   ],
-   "skills": [
-    "Crosstabs nhiều mức",
-    "Chi-square"
-   ],
-   "ops": [
-    "Crosstabs→Chi-square"
-   ],
-   "prereq": [
-    "P1-Q17"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "2 bảng chéo + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d05",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q20",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 20",
-   "summary": "Tình trạng hút thuốc trước đây và hiện tại khác nhau thế nào",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tsu.Hthuoc",
-    "Htai.Hthuoc"
-   ],
-   "skills": [
-    "McNemar (tỷ lệ ghép cặp)"
-   ],
-   "ops": [
-    "Crosstabs→Statistics→McNemar"
-   ],
-   "prereq": [
-    "Crosstabs",
-    "khái niệm thiết kế ghép cặp"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng 2×2 ghép cặp + p McNemar + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d08"
-  },
-  {
-   "id": "P1-Q21",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 21",
-   "summary": "Bệnh chứng HPV–ung thư CTC: nguy cơ mắc bệnh 2 nhóm phơi nhiễm (bảng 2×2 tổng hợp)",
-   "dataset": "P1_B02 CrossTab (2).sav",
-   "vars": [
-    "benh",
-    "phoinhiem",
-    "soluong"
-   ],
-   "skills": [
-    "Weight Cases",
-    "Crosstabs 2×2",
-    "đọc RR/OR"
-   ],
-   "ops": [
-    "Data→Weight Cases",
-    "Crosstabs→Statistics→Risk"
-   ],
-   "prereq": [
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 40,
-   "artifact": "Bảng 2×2 + OR/RR + nhận xét nguy cơ",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d05",
-   "hint": [
-    "File này mỗi dòng = 1 Ô của bảng, cột soluong là số người — phải Data → Weight Cases → soluong trước khi Crosstabs",
-    "Crosstabs → Statistics → tick Risk để có Odds Ratio"
-   ],
-   "answerSpec": [
-    {
-     "key": "or",
-     "label": "Odds Ratio"
+      "id": "P1-Q11",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 11",
+      "summary": "Recode Tuổi → Độ tuổi (40–49→1, 50–59→2, 60–69→3, ≥70→4); tần số & số người ≥70",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tuoi"
+      ],
+      "skills": [
+        "Recode Into Different Variables",
+        "gắn nhãn giá trị mới"
+      ],
+      "ops": [
+        "Transform→Recode into Different Variables"
+      ],
+      "prereq": [
+        "Compute",
+        "Frequencies"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "Biến Dotuoi + bảng tần số + số người ≥70",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d06",
+      "hint": [
+        "Dùng 'Recode into DIFFERENT Variables' — không ghi đè Tuổi gốc",
+        "Khoảng tròn: '40 thru 49'→1 … '70 thru highest'→4; dữ liệu thật min=41 nên khoảng 40–49 vẫn đủ"
+      ],
+      "answerSpec": [
+        {
+          "key": "n70",
+          "label": "Số người ≥ 70 tuổi"
+        }
+      ],
+      "tier": "essential"
     },
     {
-     "key": "risk_exp",
-     "label": "Nguy cơ mắc bệnh nhóm HPV+ (%)"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q22",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 22",
-   "summary": "Kiểm định tỷ lệ giới tính có cùng phân phối tỷ lệ sinh sản (55:45; 40:60; 50:50)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "GTinh"
-   ],
-   "skills": [
-    "Chi-square goodness-of-fit"
-   ],
-   "ops": [
-    "Analyze→Nonparametric Tests→One Sample→Chi-square (hoặc Legacy Dialogs→Chi-square)"
-   ],
-   "prereq": [
-    "Chi-square cơ bản"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "3 kết quả chi-square tương ứng 3 tỷ lệ kỳ vọng",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d08",
-   "hint": [
-    "Nonparametric Tests → Legacy Dialogs → Chi-square → Expected Values: nhập tỷ lệ kỳ vọng cho từng giá trị mã",
-    "Chú ý thứ tự mã GTinh: 1 = Nữ (376 người), 2 = Nam (244) — nhập kỳ vọng đúng hàng"
-   ],
-   "answerSpec": [
+      "id": "P1-Q12",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 12",
+      "summary": "Đếm số bệnh mạn tính mỗi người; bao nhiêu người có ≥2 bệnh",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Timmach",
+        "Tieuduong",
+        "Than",
+        "Gan",
+        "Gut",
+        "Benh.MT_1",
+        "Benh.MT_2"
+      ],
+      "skills": [
+        "Count Values within Cases"
+      ],
+      "ops": [
+        "Transform→Count Values within Cases"
+      ],
+      "prereq": [
+        "Compute",
+        "Frequencies"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "Biến đếm + bảng tần số + số người ≥2 bệnh",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d06",
+      "hint": [
+        "Transform → Count Values within Cases → 5 biến nhị phân, đếm giá trị 1",
+        "Dạng danh mục: đếm ô KHÔNG trống trong Benh.MT_1, Benh.MT_2 (mục Value: 'non-missing' — hoặc cộng tay =NOTMISSING)"
+      ],
+      "answerSpec": [
+        {
+          "key": "n2",
+          "label": "Số người có ≥ 2 bệnh mạn tính"
+        }
+      ],
+      "tier": "essential"
+    },
     {
-     "key": "p5050",
-     "label": "p với tỷ lệ 50:50"
-    }
-   ]
-  },
-  {
-   "id": "P1-Q23",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 23",
-   "summary": "Đại lượng BMI ở nhóm huyết áp bình thường (mean, SEM, mode, skewness, median)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "Cannang",
-    "Chieucao"
-   ],
-   "skills": [
-    "Select Cases + Descriptives/Explore",
-    "Compute BMI"
-   ],
-   "ops": [
-    "Select Cases (CD.HA=1)",
-    "Compute",
-    "Explore→Statistics"
-   ],
-   "prereq": [
-    "Select Cases",
-    "Compute",
-    "Descriptives"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng 5 chỉ số BMI nhóm HA bình thường",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d04",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q24",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 24",
-   "summary": "Đại lượng cho HA tối đa & tối thiểu (trung bình 2 lần đo): mean, SEM, mode, P30, median",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "HA.TD_L1",
-    "HA.TT_L1",
-    "HA.TD_L2",
-    "HA.TT_L2"
-   ],
-   "skills": [
-    "Compute trung bình 2 lần đo",
-    "percentiles"
-   ],
-   "ops": [
-    "Compute (mean(L1,L2))",
-    "Explore/Descriptives"
-   ],
-   "prereq": [
-    "Compute",
-    "Descriptives"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng 5 chỉ số × 2 biến",
-   "mapping": "VERIFIED",
-   "role": "assessment",
-   "day": "d14"
-  },
-  {
-   "id": "P1-Q25",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 25",
-   "summary": "Đại lượng BMI theo nhóm tuổi 40–60 và 61–80",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tuoi",
-    "Cannang",
-    "Chieucao"
-   ],
-   "skills": [
-    "Select/Visual Binning hoặc Split File",
-    "SEM"
-   ],
-   "ops": [
-    "Compute BMI",
-    "Select Cases / Recode nhóm tuổi",
-    "Descriptives"
-   ],
-   "prereq": [
-    "Compute",
-    "Select Cases"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng n/var/SD/mean/SEM × 2 nhóm",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d04",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q26",
-   "src": "P1",
-   "page": 3,
-   "ref": "Câu 26",
-   "summary": "Đại lượng HA tối đa trung bình theo trình độ học vấn (3 nhóm)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "HVan",
-    "HA.TD_L1"
-   ],
-   "skills": [
-    "Recode nhóm",
-    "Means"
-   ],
-   "ops": [
-    "Recode HVan thành 3 nhóm",
-    "Compare Means→Means / Split File"
-   ],
-   "prereq": [
-    "Recode",
-    "Split File"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng mean/median/SD/var theo nhóm học vấn",
-   "mapping": "VERIFIED",
-   "role": "assessment",
-   "day": "d14"
-  },
-  {
-   "id": "P1-Q27",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 27",
-   "summary": "Đại lượng Cân nặng theo tiền sử bệnh THA (Có/Không)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "TSu.HA",
-    "Cannang"
-   ],
-   "skills": [
-    "Recode nhị phân",
-    "Split File + Descriptives"
-   ],
-   "ops": [
-    "Recode TSu.HA → có/không",
-    "Split File",
-    "Descriptives"
-   ],
-   "prereq": [
-    "Recode",
-    "Split File"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Bảng n/Q1/mode/P60 theo nhóm",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d04",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q28",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 28",
-   "summary": "Đại lượng HA tối đa/tối thiểu lần 1 theo chẩn đoán HA (bình thường vs độ 1,2,3)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "HA.TD_L1",
-    "HA.TT_L1"
-   ],
-   "skills": [
-    "Recode nhóm chẩn đoán",
-    "Descriptives theo nhóm"
-   ],
-   "ops": [
-    "Recode CD.HA",
-    "Split File",
-    "Descriptives"
-   ],
-   "prereq": [
-    "Recode",
-    "Split File"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng n/mean/SD/range × 2 biến × 2 nhóm",
-   "mapping": "VERIFIED",
-   "role": "assessment",
-   "day": "d14"
-  },
-  {
-   "id": "P1-Q29",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 29",
-   "summary": "Thống kê số lượng 1 vs 2 bệnh mạn tính ở đối tượng tăng HA độ 1,2,3 (+p)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "Timmach",
-    "Tieuduong",
-    "Than",
-    "Gan",
-    "Gut"
-   ],
-   "skills": [
-    "Count + Select Cases + Crosstabs+Chi-square"
-   ],
-   "ops": [
-    "Count",
-    "Select Cases",
-    "Crosstabs→Chi-square"
-   ],
-   "prereq": [
-    "Count",
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 35,
-   "artifact": "Bảng 1 bệnh/2 bệnh × nhóm HA + p",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d05",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q30",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 30",
-   "summary": "Đại lượng BMI ở người có 2 bệnh mạn tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Cannang",
-    "Chieucao",
-    "Timmach",
-    "Tieuduong",
-    "Than",
-    "Gan",
-    "Gut"
-   ],
-   "skills": [
-    "Count + Select + Descriptives"
-   ],
-   "ops": [
-    "Count",
-    "Compute BMI",
-    "Select Cases",
-    "Descriptives"
-   ],
-   "prereq": [
-    "Count",
-    "Select Cases"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Bảng mean/range/SD/median",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d04",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q31",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 31",
-   "summary": "Người mới phát hiện bệnh HA: học vấn × mức độ HA (+p)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "TSu.HA",
-    "CD.HA",
-    "HVan"
-   ],
-   "skills": [
-    "Select Cases phối hợp",
-    "Crosstabs + Chi-square"
-   ],
-   "ops": [
-    "Select Cases",
-    "Crosstabs→Chi-square"
-   ],
-   "prereq": [
-    "Select Cases",
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng học vấn × độ HA + p",
-   "mapping": "VERIFIED",
-   "role": "assessment",
-   "day": "d14"
-  },
-  {
-   "id": "P1-Q32",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 32",
-   "summary": "Tỷ lệ các mức chẩn đoán cao HA theo giới tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "GTinh"
-   ],
-   "skills": [
-    "Crosstabs + Chi-square"
-   ],
-   "ops": [
-    "Crosstabs"
-   ],
-   "prereq": [
-    "Crosstabs"
-   ],
-   "difficulty": "Beginner",
-   "time": 20,
-   "artifact": "Bảng chéo + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d05",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q33",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 33",
-   "summary": "Tỷ lệ các mức chẩn đoán cao HA theo bệnh mạn tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "Tieuduong",
-    "Timmach",
-    "Than",
-    "Gan",
-    "Gut"
-   ],
-   "skills": [
-    "Crosstabs + Chi-square"
-   ],
-   "ops": [
-    "Crosstabs"
-   ],
-   "prereq": [
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng chéo + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "assessment",
-   "day": "d14"
-  },
-  {
-   "id": "P1-Q34",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 34",
-   "summary": "Tỷ lệ chẩn đoán cao HA theo chế độ dùng muối",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "M.LucNau",
-    "M.LucAn",
-    "M.TPham"
-   ],
-   "skills": [
-    "Crosstabs + Chi-square"
-   ],
-   "ops": [
-    "Crosstabs"
-   ],
-   "prereq": [
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng chéo + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d05",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q35",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 35",
-   "summary": "Tỷ lệ cao HA theo stress ở người không tiền sử HA",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "Stress",
-    "TSu.HA"
-   ],
-   "skills": [
-    "Select Cases + Crosstabs"
-   ],
-   "ops": [
-    "Select Cases (TSu.HA=0)",
-    "Crosstabs"
-   ],
-   "prereq": [
-    "Select Cases",
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Bảng chéo trên mẫu con + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d05",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q36",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 36",
-   "summary": "Tỷ lệ cao HA (bình thường vs cao) theo ăn đủ rau",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "RauCu"
-   ],
-   "skills": [
-    "Recode nhị phân + Crosstabs"
-   ],
-   "ops": [
-    "Recode CD.HA",
-    "Crosstabs"
-   ],
-   "prereq": [
-    "Recode",
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Bảng 2×2 + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d05",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q37",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 37",
-   "summary": "Tỷ lệ cao HA (bình thường vs cao) theo mức độ công việc",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA",
-    "CV.Mucdo"
-   ],
-   "skills": [
-    "Recode + Crosstabs"
-   ],
-   "ops": [
-    "Recode CD.HA",
-    "Crosstabs"
-   ],
-   "prereq": [
-    "Recode",
-    "Crosstabs"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Bảng chéo + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d05",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q38",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 38",
-   "summary": "Tỷ lệ chẩn đoán tình trạng cao HA (bình thường vs cao HA)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "CD.HA"
-   ],
-   "skills": [
-    "Frequencies",
-    "Recode nhị phân"
-   ],
-   "ops": [
-    "Frequencies",
-    "Recode (tùy chọn)"
-   ],
-   "prereq": [
-    "Frequencies"
-   ],
-   "difficulty": "Beginner",
-   "time": 15,
-   "artifact": "Bảng tần số + % cao HA",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d02",
-   "hint": [
-    "Frequencies CD.HA — 'cao huyết áp' gồm mã 3,4,5 (THA độ 1,2,3)",
-    "Muốn 1 con số 'cao HA' duy nhất → Recode CD.HA thành 2 nhóm"
-   ],
-   "answerSpec": [
+      "id": "P1-Q13",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 13",
+      "summary": "Số người đái tháo đường tuổi 50–70; số nam đái tháo đường tuổi 50–70",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tieuduong",
+        "Tuoi",
+        "GTinh",
+        "Benh.MT_1",
+        "Benh.MT_2"
+      ],
+      "skills": [
+        "Select Cases điều kiện kép",
+        "đếm trên mẫu con"
+      ],
+      "ops": [
+        "Data→Select Cases→If",
+        "Frequencies"
+      ],
+      "prereq": [
+        "Select Cases"
+      ],
+      "difficulty": "Beginner",
+      "time": 20,
+      "artifact": "2 con số (ĐTĐ 50–70; nam ĐTĐ 50–70)",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d07",
+      "hint": [
+        "Điều kiện: Tieuduong = 1 & Tuoi >= 50 & Tuoi <= 70 — xem số dòng còn lại ở status bar/bảng tần số",
+        "Thêm điều kiện GTinh = 2 cho câu hỏi nam"
+      ],
+      "answerSpec": [
+        {
+          "key": "n_dtd",
+          "label": "Số người ĐTĐ tuổi 50–70"
+        },
+        {
+          "key": "n_dtd_nam",
+          "label": "Trong đó là nam"
+        }
+      ],
+      "tier": "essential"
+    },
     {
-     "key": "pct_tha",
-     "label": "% đối tượng có tăng huyết áp (độ 1–3)"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P1-Q39",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 39",
-   "summary": "Phân bố tiền sử bản thân & gia đình mắc HA có đồng đều không",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "TSu.HA",
-    "HA.GDinh"
-   ],
-   "skills": [
-    "Chi-square GOF",
-    "đọc phân bố"
-   ],
-   "ops": [
-    "Nonparametric→Chi-square"
-   ],
-   "prereq": [
-    "P1-Q22"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "2 kết quả GOF + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d08"
-  },
-  {
-   "id": "P1-Q40",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 40",
-   "summary": "Khác biệt tỷ lệ uống rượu trước đây và hiện tại",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "TSu.RBia",
-    "MDoSD.RB"
-   ],
-   "skills": [
-    "McNemar",
-    "định nghĩa 'hiện tại' từ biến mức độ"
-   ],
-   "ops": [
-    "Recode MDoSD.RB→có/không",
-    "Crosstabs→McNemar"
-   ],
-   "prereq": [
-    "McNemar (Q20)"
-   ],
-   "difficulty": "Intermediate",
-   "time": 30,
-   "artifact": "Bảng 2×2 ghép cặp + p + nhận xét",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d08",
-   "hint": [
-    "'Uống hiện tại' chưa có sẵn — Recode MDoSD.RB: 0=không bao giờ → 0; 1–4 → 1",
-    "Crosstabs TSu.RBia × hiện tại → Statistics → McNemar"
-   ],
-   "answerSpec": [
+      "id": "P1-Q14",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 14",
+      "summary": "Kiểm tra biến Nghề nghiệp nhập sai; liệt kê mã số phiếu sai; loại khỏi dữ liệu",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "NNghiep",
+        "ID"
+      ],
+      "skills": [
+        "Frequencies săn lỗi",
+        "Sort/If để liệt kê",
+        "Select Cases loại bỏ",
+        "Save As bản mới"
+      ],
+      "ops": [
+        "Frequencies",
+        "Data→Sort Cases",
+        "Data→Select Cases",
+        "File→Save As"
+      ],
+      "prereq": [
+        "Frequencies",
+        "Select Cases"
+      ],
+      "difficulty": "Beginner",
+      "time": 35,
+      "artifact": "Danh sách ID sai + file dữ liệu đã loại",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d07",
+      "hint": [
+        "Nghề nghiệp chỉ có mã 1–6 trong codebook — giá trị khác là sai",
+        "Frequencies NNghiep cho thấy các giá trị lạ; dùng Select Cases 'if NNghiep = 0 | NNghiep = 8 | MISSING(NNghiep)' để soi, rồi đảo điều kiện để loại",
+        "ĐỪNG lưu đè file gốc — Save As bản mới"
+      ],
+      "answerSpec": [
+        {
+          "key": "ids",
+          "label": "Các mã số nhập sai (cách nhau dấu phẩy)"
+        },
+        {
+          "key": "n_left",
+          "label": "Số dòng còn lại sau khi loại"
+        }
+      ],
+      "tier": "essential"
+    },
     {
-     "key": "p_mc",
-     "label": "p McNemar"
-    }
-   ]
-  },
-  {
-   "id": "P1-Q41",
-   "src": "P1",
-   "page": 4,
-   "ref": "Câu 41",
-   "summary": "Tuổi trung bình theo tiền sử HA gia đình và giới tính (bảng 2 chiều)",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tuoi",
-    "GTinh",
-    "HA.GDinh"
-   ],
-   "skills": [
-    "Means với 2 biến phân nhóm"
-   ],
-   "ops": [
-    "Analyze→Compare Means→Means (Layered)"
-   ],
-   "prereq": [
-    "Split File"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Bảng n + mean theo giới × tiền sử GĐ",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d04",
-   "hint": [
-    "Means → Dependent: Tuoi; Independent Layer 1: GTinh → Next → Layer 2: HA.GDinh"
-   ],
-   "answerSpec": [
+      "id": "P1-Q15",
+      "src": "P1",
+      "page": 2,
+      "ref": "Câu 15",
+      "summary": "ROC cho CRP — điểm cắt Se/Sp tối ưu phân biệt viêm phổi vi trùng/virus; Se, Sp, PPV, NPV, FPR, FNR",
+      "dataset": "P1_B03 ROC.sav",
+      "vars": [
+        "CRP",
+        "viemphoi"
+      ],
+      "skills": [
+        "ROC Curve",
+        "diagnostic accuracy"
+      ],
+      "ops": [
+        "Analyze→ROC Curve"
+      ],
+      "prereq": [
+        "thống kê suy luận cơ bản",
+        "bảng 2×2"
+      ],
+      "difficulty": "Advanced",
+      "time": 60,
+      "artifact": "Đường ROC, AUC, điểm cắt + bảng Se/Sp/PPV/NPV",
+      "mapping": "VERIFIED",
+      "role": "deferred",
+      "day": null,
+      "deferredReason": "Cần khái niệm chẩn đoán/độ nhạy chưa thể dạy có trách nhiệm trong 14 ngày nhập môn — chuyển extension E01"
+    },
     {
-     "key": "m",
-     "label": "Tuổi TB nữ có TS gia đình HA"
-    }
-   ],
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q42",
-   "src": "P1",
-   "page": 5,
-   "ref": "Câu 42",
-   "summary": "Bảng đại lượng thống kê của huyết áp tối đa / tối thiểu",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "HA.TD_L1",
-    "HA.TT_L1"
-   ],
-   "skills": [
-    "Descriptives nhiều biến"
-   ],
-   "ops": [
-    "Descriptives"
-   ],
-   "prereq": [
-    "Descriptives"
-   ],
-   "difficulty": "Beginner",
-   "time": 15,
-   "artifact": "Bảng N/min/max/mean/SD × 2 biến",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d03",
-   "tier": "reinforcement"
-  },
-  {
-   "id": "P1-Q43",
-   "src": "P1",
-   "page": 5,
-   "ref": "Câu 43",
-   "summary": "Bảng đại lượng Tuổi theo giới tính",
-   "dataset": "p1_B01_HA (1).sav",
-   "vars": [
-    "Tuoi",
-    "GTinh"
-   ],
-   "skills": [
-    "Descriptives theo nhóm"
-   ],
-   "ops": [
-    "Split File / Means"
-   ],
-   "prereq": [
-    "Split File"
-   ],
-   "difficulty": "Beginner",
-   "time": 15,
-   "artifact": "Bảng N/min/max/mean/SD × giới",
-   "mapping": "VERIFIED",
-   "role": "assessment",
-   "day": "d14"
-  },
-  {
-   "id": "P2-Q01",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 1",
-   "summary": "Mối liên quan giữa vị trí chấn thương nặng và có nằm viện",
-   "dataset": "File1.sav",
-   "vars": [
-    "cchanthuon",
-    "gnamvie"
-   ],
-   "skills": [
-    "Crosstabs + Chi-square"
-   ],
-   "ops": [
-    "Crosstabs→Chi-square→Expected"
-   ],
-   "prereq": [
-    "Crosstabs"
-   ],
-   "difficulty": "Beginner",
-   "time": 25,
-   "artifact": "Bảng 3×2 + chi-square + kết luận",
-   "mapping": "VERIFIED (PDF gọi File1_Phan 2.sav)",
-   "role": "core",
-   "day": "d05",
-   "hint": [
-    "cchanthuon: 1=Đầu/cột sống, 2=Thân mình, 3=Tay/chân — cột row; gnamvie cột column",
-    "Statistics → Chi-square; đọc dòng Pearson Chi-Square"
-   ],
-   "answerSpec": [
+      "id": "P1-Q16",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 16",
+      "summary": "So sánh giá trị chẩn đoán của Bạch cầu, CRP, PCT (ROC nhiều test)",
+      "dataset": "P1_B03 ROC.sav",
+      "vars": [
+        "WBC",
+        "CRP",
+        "PCT",
+        "viemphoi"
+      ],
+      "skills": [
+        "ROC nhiều biến",
+        "so sánh AUC"
+      ],
+      "ops": [
+        "Analyze→ROC Curve (nhiều Test Variables)"
+      ],
+      "prereq": [
+        "P1-Q15"
+      ],
+      "difficulty": "Advanced",
+      "time": 45,
+      "artifact": "ROC 3 đường + bảng AUC so sánh",
+      "mapping": "VERIFIED",
+      "role": "deferred",
+      "day": null,
+      "deferredReason": "Cùng cụm ROC với Q15 — extension E01"
+    },
     {
-     "key": "p",
-     "label": "p chi-square"
-    }
-   ],
-   "tier": "essential"
-  },
-  {
-   "id": "P2-Q02",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 2",
-   "summary": "Tỷ lệ nam:nữ có phù hợp 0,5:0,5 không",
-   "dataset": "File1.sav",
-   "vars": [
-    "igioitin"
-   ],
-   "skills": [
-    "Chi-square GOF"
-   ],
-   "ops": [
-    "Nonparametric→Chi-square (expected equal)"
-   ],
-   "prereq": [
-    "Chi-square GOF (P1-Q22)"
-   ],
-   "difficulty": "Beginner",
-   "time": 15,
-   "artifact": "Kết quả GOF + kết luận",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d08",
-   "hint": [
-    "GOF với tỷ lệ đều — Expected Values = equal hoặc nhập 0.5/0.5 theo mã 1,2"
-   ],
-   "answerSpec": [
+      "id": "P1-Q17",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 17",
+      "summary": "Nhận xét tỷ lệ đái tháo đường theo giới tính; bệnh gan mạn theo giới tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tieuduong",
+        "Gan",
+        "GTinh"
+      ],
+      "skills": [
+        "Crosstabs + Chi-square",
+        "diễn giải tỷ lệ"
+      ],
+      "ops": [
+        "Crosstabs→Statistics→Chi-square→Cells→Column %"
+      ],
+      "prereq": [
+        "Crosstabs"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "2 bảng chéo + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d05",
+      "hint": [
+        "% cần đọc là % trong giới tính (Column %) — 'tỷ lệ ĐTĐ theo giới tính'",
+        "Chi-square chỉ báo có/không liên quan — nhận xét hướng khác biệt phải nhìn %"
+      ],
+      "answerSpec": [
+        {
+          "key": "p_dtd",
+          "label": "p cho ĐTĐ × giới tính"
+        }
+      ],
+      "tier": "essential"
+    },
     {
-     "key": "p",
-     "label": "p"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q03",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 3",
-   "summary": "Tỷ lệ nằm viện trong bệnh nhân nam có thể xem là 60% không",
-   "dataset": "File1.sav",
-   "vars": [
-    "igioitin",
-    "gnamvie"
-   ],
-   "skills": [
-    "Binomial test trên mẫu con"
-   ],
-   "ops": [
-    "Select Cases (nam)",
-    "Analyze→Nonparametric Tests→One Sample / Binomial"
-   ],
-   "prereq": [
-    "Select Cases",
-    "GOF"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Tỷ lệ quan sát + p binomial",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d08",
-   "hint": [
-    "Select igioitin = 1 (nam) trước; sau đó Nonparametric → Binomial trên gnamvie, test proportion = 0.6"
-   ],
-   "answerSpec": [
+      "id": "P1-Q18",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 18",
+      "summary": "Nhận xét tỷ lệ tiền sử rượu bia theo giới tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "TSu.RBia",
+        "GTinh"
+      ],
+      "skills": [
+        "Crosstabs + Chi-square"
+      ],
+      "ops": [
+        "Crosstabs→Chi-square→Column %"
+      ],
+      "prereq": [
+        "P1-Q17"
+      ],
+      "difficulty": "Beginner",
+      "time": 20,
+      "artifact": "Bảng chéo + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d05",
+      "hint": [
+        "Cùng thao tác Q17 — đổi biến thành TSu.RBia"
+      ],
+      "answerSpec": [
+        {
+          "key": "p_rb",
+          "label": "p cho TSu.RBia × giới tính"
+        }
+      ],
+      "tier": "reinforcement"
+    },
     {
-     "key": "p",
-     "label": "p binomial"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q04",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 4",
-   "summary": "CLCS trung bình trước tai nạn có thể xem là 75 không",
-   "dataset": "File1.sav",
-   "vars": [
-    "ytruo"
-   ],
-   "skills": [
-    "One-sample t-test"
-   ],
-   "ops": [
-    "Analyze→Compare Means→One-Sample T Test"
-   ],
-   "prereq": [
-    "Descriptives"
-   ],
-   "difficulty": "Beginner",
-   "time": 25,
-   "artifact": "t, df, p + kết luận",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d09",
-   "hint": [
-    "One-Sample T Test → Test Value = 75 → đọc Sig. (2-tailed)"
-   ],
-   "answerSpec": [
+      "id": "P1-Q19",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 19",
+      "summary": "Tỷ lệ mức độ dùng rượu bia theo TDTT; stress theo mức độ công việc",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "MDoSD.RB",
+        "TDTT",
+        "Stress",
+        "CV.Mucdo"
+      ],
+      "skills": [
+        "Crosstabs nhiều mức",
+        "Chi-square"
+      ],
+      "ops": [
+        "Crosstabs→Chi-square"
+      ],
+      "prereq": [
+        "P1-Q17"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "2 bảng chéo + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d05",
+      "tier": "reinforcement"
+    },
     {
-     "key": "p",
-     "label": "p"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q05",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 5",
-   "summary": "So sánh CLCS TB trước tai nạn ở Quảng Bình và Thừa Thiên Huế",
-   "dataset": "File1.sav",
-   "vars": [
-    "otin",
-    "ytruo"
-   ],
-   "skills": [
-    "Independent t-test trên 2 nhóm con (Select Cases)"
-   ],
-   "ops": [
-    "Select Cases (otin=1|3)",
-    "Analyze→Compare Means→Independent-Samples T Test"
-   ],
-   "prereq": [
-    "Select Cases"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "mean±SD 2 tỉnh + t + p",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d09",
-   "hint": [
-    "otin: 1=Quảng Bình, 3=Thừa Thiên Huế — Select Cases otin=1 | otin=3 để loại Quảng Trị",
-    "Grouping Variable = otin, Define Groups 1 vs 3; đọc dòng Equal variances"
-   ],
-   "answerSpec": [
+      "id": "P1-Q20",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 20",
+      "summary": "Tình trạng hút thuốc trước đây và hiện tại khác nhau thế nào",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tsu.Hthuoc",
+        "Htai.Hthuoc"
+      ],
+      "skills": [
+        "McNemar (tỷ lệ ghép cặp)"
+      ],
+      "ops": [
+        "Crosstabs→Statistics→McNemar"
+      ],
+      "prereq": [
+        "Crosstabs",
+        "khái niệm thiết kế ghép cặp"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng 2×2 ghép cặp + p McNemar + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d08",
+      "tier": "reinforcement"
+    },
     {
-     "key": "p",
-     "label": "p"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q06",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 6",
-   "summary": "So sánh CLCS TB trước tai nạn ở 3 tỉnh",
-   "dataset": "File1.sav",
-   "vars": [
-    "otin",
-    "ytruo"
-   ],
-   "skills": [
-    "One-way ANOVA"
-   ],
-   "ops": [
-    "Analyze→Compare Means→One-Way ANOVA"
-   ],
-   "prereq": [
-    "t-test độc lập"
-   ],
-   "difficulty": "Intermediate",
-   "time": 35,
-   "artifact": "Bảng ANOVA + F + p",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d10",
-   "hint": [
-    "One-Way ANOVA → Dependent: ytruo; Factor: otin → đọc Sig."
-   ],
-   "answerSpec": [
+      "id": "P1-Q21",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 21",
+      "summary": "Bệnh chứng HPV–ung thư CTC: nguy cơ mắc bệnh 2 nhóm phơi nhiễm (bảng 2×2 tổng hợp)",
+      "dataset": "P1_B02 CrossTab (2).sav",
+      "vars": [
+        "benh",
+        "phoinhiem",
+        "soluong"
+      ],
+      "skills": [
+        "Weight Cases",
+        "Crosstabs 2×2",
+        "đọc RR/OR"
+      ],
+      "ops": [
+        "Data→Weight Cases",
+        "Crosstabs→Statistics→Risk"
+      ],
+      "prereq": [
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 40,
+      "artifact": "Bảng 2×2 + OR/RR + nhận xét nguy cơ",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d08",
+      "hint": [
+        "File này mỗi dòng = 1 Ô của bảng, cột soluong là số người — phải Data → Weight Cases → soluong trước khi Crosstabs",
+        "Crosstabs → Statistics → tick Risk để có Odds Ratio"
+      ],
+      "answerSpec": [
+        {
+          "key": "or",
+          "label": "Odds Ratio"
+        },
+        {
+          "key": "risk_exp",
+          "label": "Nguy cơ mắc bệnh nhóm HPV+ (%)"
+        }
+      ],
+      "tier": "reinforcement",
+      "movedNote": "Task 15: chuyển từ d05 → d08 (nhẹ hóa ngày 05); Weight Cases + Risk dạy cùng cụm kiểm định tỷ lệ."
+    },
     {
-     "key": "p",
-     "label": "p"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q07",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 7",
-   "summary": "So sánh tuổi TB bệnh nhân ở Quảng Bình và Quảng Trị",
-   "dataset": "File1.sav",
-   "vars": [
-    "otin",
-    "htuo"
-   ],
-   "skills": [
-    "Independent t-test"
-   ],
-   "ops": [
-    "Select Cases (otin=1|2)",
-    "Independent-Samples T Test"
-   ],
-   "prereq": [
-    "P2-Q05"
-   ],
-   "difficulty": "Beginner",
-   "time": 20,
-   "artifact": "mean±SD + t + p",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d09"
-  },
-  {
-   "id": "P2-Q08",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 8",
-   "summary": "So sánh tuổi TB bệnh nhân ở 3 tỉnh",
-   "dataset": "File1.sav",
-   "vars": [
-    "otin",
-    "htuo"
-   ],
-   "skills": [
-    "One-way ANOVA"
-   ],
-   "ops": [
-    "One-Way ANOVA"
-   ],
-   "prereq": [
-    "P2-Q06"
-   ],
-   "difficulty": "Intermediate",
-   "time": 25,
-   "artifact": "Bảng ANOVA",
-   "mapping": "VERIFIED",
-   "role": "assessment",
-   "day": "d14"
-  },
-  {
-   "id": "P2-Q09",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 9",
-   "summary": "So sánh CLCS TB trước–sau tai nạn: toàn mẫu, riêng Quảng Trị, riêng thành thị Quảng Trị",
-   "dataset": "File1.sav",
-   "vars": [
-    "ytruo",
-    "csa",
-    "otin",
-    "hnoicutr"
-   ],
-   "skills": [
-    "Paired-samples t-test",
-    "Select Cases cho b/c"
-   ],
-   "ops": [
-    "Analyze→Compare Means→Paired-Samples T Test"
-   ],
-   "prereq": [
-    "t-test"
-   ],
-   "difficulty": "Intermediate",
-   "time": 40,
-   "artifact": "3 kết quả paired t-test",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d10",
-   "hint": [
-    "Paired = 2 lần đo trên CÙNG người — đưa cặp ytruo–csa vào cùng dòng",
-    "b) Select otin=2; c) Select otin=2 & hnoicutr=1"
-   ],
-   "answerSpec": [
+      "id": "P1-Q22",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 22",
+      "summary": "Kiểm định tỷ lệ giới tính có cùng phân phối tỷ lệ sinh sản (55:45; 40:60; 50:50)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "GTinh"
+      ],
+      "skills": [
+        "Chi-square goodness-of-fit"
+      ],
+      "ops": [
+        "Analyze→Nonparametric Tests→One Sample→Chi-square (hoặc Legacy Dialogs→Chi-square)"
+      ],
+      "prereq": [
+        "Chi-square cơ bản"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "3 kết quả chi-square tương ứng 3 tỷ lệ kỳ vọng",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d08",
+      "hint": [
+        "Nonparametric Tests → Legacy Dialogs → Chi-square → Expected Values: nhập tỷ lệ kỳ vọng cho từng giá trị mã",
+        "Chú ý thứ tự mã GTinh: 1 = Nữ (376 người), 2 = Nam (244) — nhập kỳ vọng đúng hàng"
+      ],
+      "answerSpec": [
+        {
+          "key": "p5050",
+          "label": "p với tỷ lệ 50:50"
+        }
+      ],
+      "tier": "essential"
+    },
     {
-     "key": "p_a",
-     "label": "p (a) toàn mẫu"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q10",
-   "src": "P2",
-   "page": 3,
-   "ref": "Câu 10",
-   "summary": "Tương quan: CLCS sau~tuổi; CLCS sau~CLCS trước; CLCS trước~tuổi",
-   "dataset": "File1.sav",
-   "vars": [
-    "csa",
-    "ytruo",
-    "htuo"
-   ],
-   "skills": [
-    "Bivariate correlation",
-    "scatterplot"
-   ],
-   "ops": [
-    "Graphs→Scatter",
-    "Analyze→Correlate→Bivariate"
-   ],
-   "prereq": [
-    "Descriptives"
-   ],
-   "difficulty": "Beginner",
-   "time": 30,
-   "artifact": "3 hệ số r + p + nhận xét hướng/độ mạnh",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d11",
-   "hint": [
-    "Bivariate → đưa 3 biến → Pearson → đọc Pearson Correlation và Sig. (2-tailed)"
-   ],
-   "answerSpec": [
+      "id": "P1-Q23",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 23",
+      "summary": "Đại lượng BMI ở nhóm huyết áp bình thường (mean, SEM, mode, skewness, median)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "Cannang",
+        "Chieucao"
+      ],
+      "skills": [
+        "Select Cases + Descriptives/Explore",
+        "Compute BMI"
+      ],
+      "ops": [
+        "Select Cases (CD.HA=1)",
+        "Compute",
+        "Explore→Statistics"
+      ],
+      "prereq": [
+        "Select Cases",
+        "Compute",
+        "Descriptives"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng 5 chỉ số BMI nhóm HA bình thường",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d04",
+      "tier": "reinforcement"
+    },
     {
-     "key": "r",
-     "label": "r cho csa~ytruo"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q11",
-   "src": "P2",
-   "page": 4,
-   "ref": "Câu 11",
-   "summary": "Hồi quy tuyến tính đơn: csa~tuổi; csa~ytruo; ytruo~tuổi",
-   "dataset": "File1.sav",
-   "vars": [
-    "csa",
-    "ytruo",
-    "htuo"
-   ],
-   "skills": [
-    "Linear regression đơn biến",
-    "đọc R², hệ số"
-   ],
-   "ops": [
-    "Analyze→Regression→Linear"
-   ],
-   "prereq": [
-    "P2-Q10"
-   ],
-   "difficulty": "Intermediate",
-   "time": 40,
-   "artifact": "3 mô hình + phương trình + R²",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d11",
-   "hint": [
-    "Dependent = biến kết quả (csa hoặc ytruo); Independent = biến giải thích",
-    "Đọc bảng Coefficients: hằng số + hệ số góc; Model Summary: R Square"
-   ],
-   "answerSpec": [
+      "id": "P1-Q24",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 24",
+      "summary": "Đại lượng cho HA tối đa & tối thiểu (trung bình 2 lần đo): mean, SEM, mode, P30, median",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "HA.TD_L1",
+        "HA.TT_L1",
+        "HA.TD_L2",
+        "HA.TT_L2"
+      ],
+      "skills": [
+        "Compute trung bình 2 lần đo",
+        "percentiles"
+      ],
+      "ops": [
+        "Compute (mean(L1,L2))",
+        "Explore/Descriptives"
+      ],
+      "prereq": [
+        "Compute",
+        "Descriptives"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng 5 chỉ số × 2 biến",
+      "mapping": "VERIFIED",
+      "role": "assessment",
+      "day": "d14"
+    },
     {
-     "key": "r2",
-     "label": "R² cho csa~ytruo"
-    }
-   ]
-  },
-  {
-   "id": "P2-Q12",
-   "src": "P2",
-   "page": 4,
-   "ref": "Câu 12",
-   "summary": "Hồi quy đa biến: csa ~ tuổi + số ngày nằm viện + CLCS trước",
-   "dataset": "File1.sav",
-   "vars": [
-    "csa",
-    "htuo",
-    "nsonga",
-    "ytruo"
-   ],
-   "skills": [
-    "Multiple linear regression"
-   ],
-   "ops": [
-    "Linear (nhiều Independents)"
-   ],
-   "prereq": [
-    "P2-Q11",
-    "tư duy đa biến"
-   ],
-   "difficulty": "Advanced",
-   "time": 45,
-   "artifact": "Mô hình đa biến + bảng hệ số",
-   "mapping": "VERIFIED",
-   "role": "optional",
-   "day": "d11"
-  },
-  {
-   "id": "P2-Q13",
-   "src": "P2",
-   "page": 4,
-   "ref": "Câu 13",
-   "summary": "Hiệu quả thuốc ngủ: số giờ ngủ khi uống thuốc vs giả dược",
-   "dataset": "File2_Phan2.sav",
-   "vars": [
-    "Sogio_cothuoc",
-    "Sogio_placebo"
-   ],
-   "skills": [
-    "Paired t-test"
-   ],
-   "ops": [
-    "Paired-Samples T Test"
-   ],
-   "prereq": [
-    "P2-Q09"
-   ],
-   "difficulty": "Beginner",
-   "time": 20,
-   "artifact": "mean diff + t + p + kết luận thuốc",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d10",
-   "hint": [
-    "12 bệnh nhân, mỗi người đo 2 lần — thiết kế ghép cặp kinh điển"
-   ],
-   "answerSpec": [
+      "id": "P1-Q25",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 25",
+      "summary": "Đại lượng BMI theo nhóm tuổi 40–60 và 61–80",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tuoi",
+        "Cannang",
+        "Chieucao"
+      ],
+      "skills": [
+        "Select/Visual Binning hoặc Split File",
+        "SEM"
+      ],
+      "ops": [
+        "Compute BMI",
+        "Select Cases / Recode nhóm tuổi",
+        "Descriptives"
+      ],
+      "prereq": [
+        "Compute",
+        "Select Cases"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng n/var/SD/mean/SEM × 2 nhóm",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d04",
+      "tier": "reinforcement"
+    },
     {
-     "key": "p",
-     "label": "p"
+      "id": "P1-Q26",
+      "src": "P1",
+      "page": 3,
+      "ref": "Câu 26",
+      "summary": "Đại lượng HA tối đa trung bình theo trình độ học vấn (3 nhóm)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "HVan",
+        "HA.TD_L1"
+      ],
+      "skills": [
+        "Recode nhóm",
+        "Means"
+      ],
+      "ops": [
+        "Recode HVan thành 3 nhóm",
+        "Compare Means→Means / Split File"
+      ],
+      "prereq": [
+        "Recode",
+        "Split File"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng mean/median/SD/var theo nhóm học vấn",
+      "mapping": "VERIFIED",
+      "role": "assessment",
+      "day": "d14"
+    },
+    {
+      "id": "P1-Q27",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 27",
+      "summary": "Đại lượng Cân nặng theo tiền sử bệnh THA (Có/Không)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "TSu.HA",
+        "Cannang"
+      ],
+      "skills": [
+        "Recode nhị phân",
+        "Split File + Descriptives"
+      ],
+      "ops": [
+        "Recode TSu.HA → có/không",
+        "Split File",
+        "Descriptives"
+      ],
+      "prereq": [
+        "Recode",
+        "Split File"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Bảng n/Q1/mode/P60 theo nhóm",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d04",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q28",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 28",
+      "summary": "Đại lượng HA tối đa/tối thiểu lần 1 theo chẩn đoán HA (bình thường vs độ 1,2,3)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "HA.TD_L1",
+        "HA.TT_L1"
+      ],
+      "skills": [
+        "Recode nhóm chẩn đoán",
+        "Descriptives theo nhóm"
+      ],
+      "ops": [
+        "Recode CD.HA",
+        "Split File",
+        "Descriptives"
+      ],
+      "prereq": [
+        "Recode",
+        "Split File"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng n/mean/SD/range × 2 biến × 2 nhóm",
+      "mapping": "VERIFIED",
+      "role": "assessment",
+      "day": "d14"
+    },
+    {
+      "id": "P1-Q29",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 29",
+      "summary": "Thống kê số lượng 1 vs 2 bệnh mạn tính ở đối tượng tăng HA độ 1,2,3 (+p)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "Timmach",
+        "Tieuduong",
+        "Than",
+        "Gan",
+        "Gut"
+      ],
+      "skills": [
+        "Count + Select Cases + Crosstabs+Chi-square"
+      ],
+      "ops": [
+        "Count",
+        "Select Cases",
+        "Crosstabs→Chi-square"
+      ],
+      "prereq": [
+        "Count",
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 35,
+      "artifact": "Bảng 1 bệnh/2 bệnh × nhóm HA + p",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d05",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q30",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 30",
+      "summary": "Đại lượng BMI ở người có 2 bệnh mạn tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Cannang",
+        "Chieucao",
+        "Timmach",
+        "Tieuduong",
+        "Than",
+        "Gan",
+        "Gut"
+      ],
+      "skills": [
+        "Count + Select + Descriptives"
+      ],
+      "ops": [
+        "Count",
+        "Compute BMI",
+        "Select Cases",
+        "Descriptives"
+      ],
+      "prereq": [
+        "Count",
+        "Select Cases"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Bảng mean/range/SD/median",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d04",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q31",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 31",
+      "summary": "Người mới phát hiện bệnh HA: học vấn × mức độ HA (+p)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "TSu.HA",
+        "CD.HA",
+        "HVan"
+      ],
+      "skills": [
+        "Select Cases phối hợp",
+        "Crosstabs + Chi-square"
+      ],
+      "ops": [
+        "Select Cases",
+        "Crosstabs→Chi-square"
+      ],
+      "prereq": [
+        "Select Cases",
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng học vấn × độ HA + p",
+      "mapping": "VERIFIED",
+      "role": "assessment",
+      "day": "d14"
+    },
+    {
+      "id": "P1-Q32",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 32",
+      "summary": "Tỷ lệ các mức chẩn đoán cao HA theo giới tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "GTinh"
+      ],
+      "skills": [
+        "Crosstabs + Chi-square"
+      ],
+      "ops": [
+        "Crosstabs"
+      ],
+      "prereq": [
+        "Crosstabs"
+      ],
+      "difficulty": "Beginner",
+      "time": 20,
+      "artifact": "Bảng chéo + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d05",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q33",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 33",
+      "summary": "Tỷ lệ các mức chẩn đoán cao HA theo bệnh mạn tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "Tieuduong",
+        "Timmach",
+        "Than",
+        "Gan",
+        "Gut"
+      ],
+      "skills": [
+        "Crosstabs + Chi-square"
+      ],
+      "ops": [
+        "Crosstabs"
+      ],
+      "prereq": [
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng chéo + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "assessment",
+      "day": "d14"
+    },
+    {
+      "id": "P1-Q34",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 34",
+      "summary": "Tỷ lệ chẩn đoán cao HA theo chế độ dùng muối",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "M.LucNau",
+        "M.LucAn",
+        "M.TPham"
+      ],
+      "skills": [
+        "Crosstabs + Chi-square"
+      ],
+      "ops": [
+        "Crosstabs"
+      ],
+      "prereq": [
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng chéo + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d05",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q35",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 35",
+      "summary": "Tỷ lệ cao HA theo stress ở người không tiền sử HA",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "Stress",
+        "TSu.HA"
+      ],
+      "skills": [
+        "Select Cases + Crosstabs"
+      ],
+      "ops": [
+        "Select Cases (TSu.HA=0)",
+        "Crosstabs"
+      ],
+      "prereq": [
+        "Select Cases",
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Bảng chéo trên mẫu con + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d05",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q36",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 36",
+      "summary": "Tỷ lệ cao HA (bình thường vs cao) theo ăn đủ rau",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "RauCu"
+      ],
+      "skills": [
+        "Recode nhị phân + Crosstabs"
+      ],
+      "ops": [
+        "Recode CD.HA",
+        "Crosstabs"
+      ],
+      "prereq": [
+        "Recode",
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Bảng 2×2 + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d05",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q37",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 37",
+      "summary": "Tỷ lệ cao HA (bình thường vs cao) theo mức độ công việc",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA",
+        "CV.Mucdo"
+      ],
+      "skills": [
+        "Recode + Crosstabs"
+      ],
+      "ops": [
+        "Recode CD.HA",
+        "Crosstabs"
+      ],
+      "prereq": [
+        "Recode",
+        "Crosstabs"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Bảng chéo + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d05",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q38",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 38",
+      "summary": "Tỷ lệ chẩn đoán tình trạng cao HA (bình thường vs cao HA)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "CD.HA"
+      ],
+      "skills": [
+        "Frequencies",
+        "Recode nhị phân"
+      ],
+      "ops": [
+        "Frequencies",
+        "Recode (tùy chọn)"
+      ],
+      "prereq": [
+        "Frequencies"
+      ],
+      "difficulty": "Beginner",
+      "time": 15,
+      "artifact": "Bảng tần số + % cao HA",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d02",
+      "hint": [
+        "Frequencies CD.HA — 'cao huyết áp' gồm mã 3,4,5 (THA độ 1,2,3)",
+        "Muốn 1 con số 'cao HA' duy nhất → Recode CD.HA thành 2 nhóm"
+      ],
+      "answerSpec": [
+        {
+          "key": "pct_tha",
+          "label": "% đối tượng có tăng huyết áp (độ 1–3)"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P1-Q39",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 39",
+      "summary": "Phân bố tiền sử bản thân & gia đình mắc HA có đồng đều không",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "TSu.HA",
+        "HA.GDinh"
+      ],
+      "skills": [
+        "Chi-square GOF",
+        "đọc phân bố"
+      ],
+      "ops": [
+        "Nonparametric→Chi-square"
+      ],
+      "prereq": [
+        "P1-Q22"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "2 kết quả GOF + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d08",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q40",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 40",
+      "summary": "Khác biệt tỷ lệ uống rượu trước đây và hiện tại",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "TSu.RBia",
+        "MDoSD.RB"
+      ],
+      "skills": [
+        "McNemar",
+        "định nghĩa 'hiện tại' từ biến mức độ"
+      ],
+      "ops": [
+        "Recode MDoSD.RB→có/không",
+        "Crosstabs→McNemar"
+      ],
+      "prereq": [
+        "McNemar (Q20)"
+      ],
+      "difficulty": "Intermediate",
+      "time": 30,
+      "artifact": "Bảng 2×2 ghép cặp + p + nhận xét",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d08",
+      "hint": [
+        "'Uống hiện tại' chưa có sẵn — Recode MDoSD.RB: 0=không bao giờ → 0; 1–4 → 1",
+        "Crosstabs TSu.RBia × hiện tại → Statistics → McNemar"
+      ],
+      "answerSpec": [
+        {
+          "key": "p_mc",
+          "label": "p McNemar"
+        }
+      ],
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q41",
+      "src": "P1",
+      "page": 4,
+      "ref": "Câu 41",
+      "summary": "Tuổi trung bình theo tiền sử HA gia đình và giới tính (bảng 2 chiều)",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tuoi",
+        "GTinh",
+        "HA.GDinh"
+      ],
+      "skills": [
+        "Means với 2 biến phân nhóm"
+      ],
+      "ops": [
+        "Analyze→Compare Means→Means (Layered)"
+      ],
+      "prereq": [
+        "Split File"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Bảng n + mean theo giới × tiền sử GĐ",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d04",
+      "hint": [
+        "Means → Dependent: Tuoi; Independent Layer 1: GTinh → Next → Layer 2: HA.GDinh"
+      ],
+      "answerSpec": [
+        {
+          "key": "m",
+          "label": "Tuổi TB nữ có TS gia đình HA"
+        }
+      ],
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q42",
+      "src": "P1",
+      "page": 5,
+      "ref": "Câu 42",
+      "summary": "Bảng đại lượng thống kê của huyết áp tối đa / tối thiểu",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "HA.TD_L1",
+        "HA.TT_L1"
+      ],
+      "skills": [
+        "Descriptives nhiều biến"
+      ],
+      "ops": [
+        "Descriptives"
+      ],
+      "prereq": [
+        "Descriptives"
+      ],
+      "difficulty": "Beginner",
+      "time": 15,
+      "artifact": "Bảng N/min/max/mean/SD × 2 biến",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d03",
+      "tier": "reinforcement"
+    },
+    {
+      "id": "P1-Q43",
+      "src": "P1",
+      "page": 5,
+      "ref": "Câu 43",
+      "summary": "Bảng đại lượng Tuổi theo giới tính",
+      "dataset": "p1_B01_HA (1).sav",
+      "vars": [
+        "Tuoi",
+        "GTinh"
+      ],
+      "skills": [
+        "Descriptives theo nhóm"
+      ],
+      "ops": [
+        "Split File / Means"
+      ],
+      "prereq": [
+        "Split File"
+      ],
+      "difficulty": "Beginner",
+      "time": 15,
+      "artifact": "Bảng N/min/max/mean/SD × giới",
+      "mapping": "VERIFIED",
+      "role": "assessment",
+      "day": "d14"
+    },
+    {
+      "id": "P2-Q01",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 1",
+      "summary": "Mối liên quan giữa vị trí chấn thương nặng và có nằm viện",
+      "dataset": "File1.sav",
+      "vars": [
+        "cchanthuon",
+        "gnamvie"
+      ],
+      "skills": [
+        "Crosstabs + Chi-square"
+      ],
+      "ops": [
+        "Crosstabs→Chi-square→Expected"
+      ],
+      "prereq": [
+        "Crosstabs"
+      ],
+      "difficulty": "Beginner",
+      "time": 25,
+      "artifact": "Bảng 3×2 + chi-square + kết luận",
+      "mapping": "VERIFIED (PDF gọi File1_Phan 2.sav)",
+      "role": "core",
+      "day": "d08",
+      "hint": [
+        "cchanthuon: 1=Đầu/cột sống, 2=Thân mình, 3=Tay/chân — cột row; gnamvie cột column",
+        "Statistics → Chi-square; đọc dòng Pearson Chi-Square"
+      ],
+      "answerSpec": [
+        {
+          "key": "p",
+          "label": "p chi-square"
+        }
+      ],
+      "tier": "reinforcement",
+      "movedNote": "Task 15: chuyển từ d05 → d08 (nhẹ hóa ngày 05); crosstabs trên File1, làm cùng ngày mở File1."
+    },
+    {
+      "id": "P2-Q02",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 2",
+      "summary": "Tỷ lệ nam:nữ có phù hợp 0,5:0,5 không",
+      "dataset": "File1.sav",
+      "vars": [
+        "igioitin"
+      ],
+      "skills": [
+        "Chi-square GOF"
+      ],
+      "ops": [
+        "Nonparametric→Chi-square (expected equal)"
+      ],
+      "prereq": [
+        "Chi-square GOF (P1-Q22)"
+      ],
+      "difficulty": "Beginner",
+      "time": 15,
+      "artifact": "Kết quả GOF + kết luận",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d08",
+      "hint": [
+        "GOF với tỷ lệ đều — Expected Values = equal hoặc nhập 0.5/0.5 theo mã 1,2"
+      ],
+      "answerSpec": [
+        {
+          "key": "p",
+          "label": "p"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q03",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 3",
+      "summary": "Tỷ lệ nằm viện trong bệnh nhân nam có thể xem là 60% không",
+      "dataset": "File1.sav",
+      "vars": [
+        "igioitin",
+        "gnamvie"
+      ],
+      "skills": [
+        "Binomial test trên mẫu con"
+      ],
+      "ops": [
+        "Select Cases (nam)",
+        "Analyze→Nonparametric Tests→One Sample / Binomial"
+      ],
+      "prereq": [
+        "Select Cases",
+        "GOF"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Tỷ lệ quan sát + p binomial",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d08",
+      "hint": [
+        "Select igioitin = 1 (nam) trước; sau đó Nonparametric → Binomial trên gnamvie, test proportion = 0.6"
+      ],
+      "answerSpec": [
+        {
+          "key": "p",
+          "label": "p binomial"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q04",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 4",
+      "summary": "CLCS trung bình trước tai nạn có thể xem là 75 không",
+      "dataset": "File1.sav",
+      "vars": [
+        "ytruo"
+      ],
+      "skills": [
+        "One-sample t-test"
+      ],
+      "ops": [
+        "Analyze→Compare Means→One-Sample T Test"
+      ],
+      "prereq": [
+        "Descriptives"
+      ],
+      "difficulty": "Beginner",
+      "time": 25,
+      "artifact": "t, df, p + kết luận",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d09",
+      "hint": [
+        "One-Sample T Test → Test Value = 75 → đọc Sig. (2-tailed)"
+      ],
+      "answerSpec": [
+        {
+          "key": "p",
+          "label": "p"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q05",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 5",
+      "summary": "So sánh CLCS TB trước tai nạn ở Quảng Bình và Thừa Thiên Huế",
+      "dataset": "File1.sav",
+      "vars": [
+        "otin",
+        "ytruo"
+      ],
+      "skills": [
+        "Independent t-test trên 2 nhóm con (Select Cases)"
+      ],
+      "ops": [
+        "Select Cases (otin=1|3)",
+        "Analyze→Compare Means→Independent-Samples T Test"
+      ],
+      "prereq": [
+        "Select Cases"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "mean±SD 2 tỉnh + t + p",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d09",
+      "hint": [
+        "otin: 1=Quảng Bình, 3=Thừa Thiên Huế — Select Cases otin=1 | otin=3 để loại Quảng Trị",
+        "Grouping Variable = otin, Define Groups 1 vs 3; đọc dòng Equal variances"
+      ],
+      "answerSpec": [
+        {
+          "key": "p",
+          "label": "p"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q06",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 6",
+      "summary": "So sánh CLCS TB trước tai nạn ở 3 tỉnh",
+      "dataset": "File1.sav",
+      "vars": [
+        "otin",
+        "ytruo"
+      ],
+      "skills": [
+        "One-way ANOVA"
+      ],
+      "ops": [
+        "Analyze→Compare Means→One-Way ANOVA"
+      ],
+      "prereq": [
+        "t-test độc lập"
+      ],
+      "difficulty": "Intermediate",
+      "time": 35,
+      "artifact": "Bảng ANOVA + F + p",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d10",
+      "hint": [
+        "One-Way ANOVA → Dependent: ytruo; Factor: otin → đọc Sig."
+      ],
+      "answerSpec": [
+        {
+          "key": "p",
+          "label": "p"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q07",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 7",
+      "summary": "So sánh tuổi TB bệnh nhân ở Quảng Bình và Quảng Trị",
+      "dataset": "File1.sav",
+      "vars": [
+        "otin",
+        "htuo"
+      ],
+      "skills": [
+        "Independent t-test"
+      ],
+      "ops": [
+        "Select Cases (otin=1|2)",
+        "Independent-Samples T Test"
+      ],
+      "prereq": [
+        "P2-Q05"
+      ],
+      "difficulty": "Beginner",
+      "time": 20,
+      "artifact": "mean±SD + t + p",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d09",
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q08",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 8",
+      "summary": "So sánh tuổi TB bệnh nhân ở 3 tỉnh",
+      "dataset": "File1.sav",
+      "vars": [
+        "otin",
+        "htuo"
+      ],
+      "skills": [
+        "One-way ANOVA"
+      ],
+      "ops": [
+        "One-Way ANOVA"
+      ],
+      "prereq": [
+        "P2-Q06"
+      ],
+      "difficulty": "Intermediate",
+      "time": 25,
+      "artifact": "Bảng ANOVA",
+      "mapping": "VERIFIED",
+      "role": "assessment",
+      "day": "d14",
+      "tier": "reinforcement",
+      "dualRole": "dạy kỹ năng ANOVA ở d10 (reinforcement), đánh giá lại ở d14"
+    },
+    {
+      "id": "P2-Q09",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 9",
+      "summary": "So sánh CLCS TB trước–sau tai nạn: toàn mẫu, riêng Quảng Trị, riêng thành thị Quảng Trị",
+      "dataset": "File1.sav",
+      "vars": [
+        "ytruo",
+        "csa",
+        "otin",
+        "hnoicutr"
+      ],
+      "skills": [
+        "Paired-samples t-test",
+        "Select Cases cho b/c"
+      ],
+      "ops": [
+        "Analyze→Compare Means→Paired-Samples T Test"
+      ],
+      "prereq": [
+        "t-test"
+      ],
+      "difficulty": "Intermediate",
+      "time": 40,
+      "artifact": "3 kết quả paired t-test",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d10",
+      "hint": [
+        "Paired = 2 lần đo trên CÙNG người — đưa cặp ytruo–csa vào cùng dòng",
+        "b) Select otin=2; c) Select otin=2 & hnoicutr=1"
+      ],
+      "answerSpec": [
+        {
+          "key": "p_a",
+          "label": "p (a) toàn mẫu"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q10",
+      "src": "P2",
+      "page": 3,
+      "ref": "Câu 10",
+      "summary": "Tương quan: CLCS sau~tuổi; CLCS sau~CLCS trước; CLCS trước~tuổi",
+      "dataset": "File1.sav",
+      "vars": [
+        "csa",
+        "ytruo",
+        "htuo"
+      ],
+      "skills": [
+        "Bivariate correlation",
+        "scatterplot"
+      ],
+      "ops": [
+        "Graphs→Scatter",
+        "Analyze→Correlate→Bivariate"
+      ],
+      "prereq": [
+        "Descriptives"
+      ],
+      "difficulty": "Beginner",
+      "time": 30,
+      "artifact": "3 hệ số r + p + nhận xét hướng/độ mạnh",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d11",
+      "hint": [
+        "Bivariate → đưa 3 biến → Pearson → đọc Pearson Correlation và Sig. (2-tailed)"
+      ],
+      "answerSpec": [
+        {
+          "key": "r",
+          "label": "r cho csa~ytruo"
+        }
+      ]
+    },
+    {
+      "id": "P2-Q11",
+      "src": "P2",
+      "page": 4,
+      "ref": "Câu 11",
+      "summary": "Hồi quy tuyến tính đơn: csa~tuổi; csa~ytruo; ytruo~tuổi",
+      "dataset": "File1.sav",
+      "vars": [
+        "csa",
+        "ytruo",
+        "htuo"
+      ],
+      "skills": [
+        "Linear regression đơn biến",
+        "đọc R², hệ số"
+      ],
+      "ops": [
+        "Analyze→Regression→Linear"
+      ],
+      "prereq": [
+        "P2-Q10"
+      ],
+      "difficulty": "Intermediate",
+      "time": 40,
+      "artifact": "3 mô hình + phương trình + R²",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d11",
+      "hint": [
+        "Dependent = biến kết quả (csa hoặc ytruo); Independent = biến giải thích",
+        "Đọc bảng Coefficients: hằng số + hệ số góc; Model Summary: R Square"
+      ],
+      "answerSpec": [
+        {
+          "key": "r2",
+          "label": "R² cho csa~ytruo"
+        }
+      ]
+    },
+    {
+      "id": "P2-Q12",
+      "src": "P2",
+      "page": 4,
+      "ref": "Câu 12",
+      "summary": "Hồi quy đa biến: csa ~ tuổi + số ngày nằm viện + CLCS trước",
+      "dataset": "File1.sav",
+      "vars": [
+        "csa",
+        "htuo",
+        "nsonga",
+        "ytruo"
+      ],
+      "skills": [
+        "Multiple linear regression"
+      ],
+      "ops": [
+        "Linear (nhiều Independents)"
+      ],
+      "prereq": [
+        "P2-Q11",
+        "tư duy đa biến"
+      ],
+      "difficulty": "Advanced",
+      "time": 45,
+      "artifact": "Mô hình đa biến + bảng hệ số",
+      "mapping": "VERIFIED",
+      "role": "optional",
+      "day": "d11"
+    },
+    {
+      "id": "P2-Q13",
+      "src": "P2",
+      "page": 4,
+      "ref": "Câu 13",
+      "summary": "Hiệu quả thuốc ngủ: số giờ ngủ khi uống thuốc vs giả dược",
+      "dataset": "File2_Phan2.sav",
+      "vars": [
+        "Sogio_cothuoc",
+        "Sogio_placebo"
+      ],
+      "skills": [
+        "Paired t-test"
+      ],
+      "ops": [
+        "Paired-Samples T Test"
+      ],
+      "prereq": [
+        "P2-Q09"
+      ],
+      "difficulty": "Beginner",
+      "time": 20,
+      "artifact": "mean diff + t + p + kết luận thuốc",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d10",
+      "hint": [
+        "12 bệnh nhân, mỗi người đo 2 lần — thiết kế ghép cặp kinh điển"
+      ],
+      "answerSpec": [
+        {
+          "key": "p",
+          "label": "p"
+        }
+      ],
+      "tier": "essential"
+    },
+    {
+      "id": "P2-Q14",
+      "src": "P2",
+      "page": 4,
+      "ref": "Câu 14",
+      "summary": "Mối liên quan PCT máu và tiên lượng tử vong trong nhiễm trùng huyết",
+      "dataset": "File3_Phan2.sav",
+      "vars": [
+        "PROCALCITONI",
+        "NDEAT"
+      ],
+      "skills": [
+        "ROC / prognostic",
+        "làm sạch dữ liệu lỗi ('H0')"
+      ],
+      "ops": [
+        "làm sạch NDEAT trước",
+        "ROC Curve / regression"
+      ],
+      "prereq": [
+        "ROC cơ bản"
+      ],
+      "difficulty": "Advanced",
+      "time": 60,
+      "artifact": "Phân tích tiên lượng + diễn giải",
+      "mapping": "VERIFIED — chú ý NDEAT dòng 1 = 'H0' rác",
+      "role": "deferred",
+      "day": null,
+      "deferredReason": "Phân tích tiên lượng/ROC — extension E01; dữ liệu còn chứa lỗi nhập 'H0' cần làm sạch"
+    },
+    {
+      "id": "P2-Q15",
+      "src": "P2",
+      "page": 4,
+      "ref": "Câu 15",
+      "summary": "PCT + hạ huyết áp + tuổi → tiên lượng tử vong (đa biến)",
+      "dataset": "File4_Phan2.sav",
+      "vars": [
+        "AGE",
+        "HYPOTENSION",
+        "PROCALCITONIN",
+        "DEATH"
+      ],
+      "skills": [
+        "Logistic regression",
+        "biến chuỗi cần recode số"
+      ],
+      "ops": [
+        "Recode chuỗi→số",
+        "Analyze→Regression→Binary Logistic"
+      ],
+      "prereq": [
+        "hồi quy đơn",
+        "khái niệm OR"
+      ],
+      "difficulty": "Advanced",
+      "time": 60,
+      "artifact": "Mô hình logistic + OR",
+      "mapping": "VERIFIED — HYPOTENSION/DEATH là chuỗi '0'/'1', phải chuyển số",
+      "role": "deferred",
+      "day": null,
+      "deferredReason": "Hồi quy logistic đa biến — extension E-track; ngoài phạm vi nhập môn 14 ngày"
+    },
+    {
+      "id": "P2-TH3",
+      "src": "P2",
+      "page": 4,
+      "ref": "Bài TH số 3",
+      "summary": "File5: xử lý, phân tích số liệu và tập viết báo cáo nghiên cứu (n=296, sinh thiết tuyến tiền liệt)",
+      "dataset": "File5_Phan2.sav",
+      "vars": [
+        "Tuoi",
+        "Khám_TT",
+        "Siêu_âmTT",
+        "PSA",
+        "Thetich",
+        "Sinhthiet"
+      ],
+      "skills": [
+        "toàn bộ pipeline: khám phá → mô tả → bảng chéo → so sánh → tương quan → báo cáo"
+      ],
+      "ops": [
+        "tổng hợp"
+      ],
+      "prereq": [
+        "Days 02–11"
+      ],
+      "difficulty": "Intermediate",
+      "time": 180,
+      "artifact": "Báo cáo ngắn có bảng mô tả + ≥2 phân tích + diễn giải",
+      "mapping": "VERIFIED",
+      "role": "core",
+      "day": "d12"
+    },
+    {
+      "id": "P1-BONUS-SLNC",
+      "src": "P1",
+      "page": null,
+      "ref": "—",
+      "summary": "So_Lieu_NC.sav — dataset phụ không câu hỏi gắn sẵn (khảo sát ~STEPS: HA, ĐTĐ, hút thuốc, số đo)",
+      "dataset": "So_Lieu_NC.sav",
+      "vars": [
+        "ID",
+        "B7",
+        "B8",
+        "B11",
+        "C13",
+        "E25",
+        "E26",
+        "E29",
+        "E30",
+        "F31"
+      ],
+      "skills": [
+        "luyện tập tự do"
+      ],
+      "ops": [],
+      "prereq": [],
+      "difficulty": "Beginner",
+      "time": 0,
+      "artifact": "—",
+      "mapping": "VERIFIED — không câu nào trong PDF dùng file này",
+      "role": "bonus",
+      "day": null
     }
-   ]
-  },
-  {
-   "id": "P2-Q14",
-   "src": "P2",
-   "page": 4,
-   "ref": "Câu 14",
-   "summary": "Mối liên quan PCT máu và tiên lượng tử vong trong nhiễm trùng huyết",
-   "dataset": "File3_Phan2.sav",
-   "vars": [
-    "PROCALCITONI",
-    "NDEAT"
-   ],
-   "skills": [
-    "ROC / prognostic",
-    "làm sạch dữ liệu lỗi ('H0')"
-   ],
-   "ops": [
-    "làm sạch NDEAT trước",
-    "ROC Curve / regression"
-   ],
-   "prereq": [
-    "ROC cơ bản"
-   ],
-   "difficulty": "Advanced",
-   "time": 60,
-   "artifact": "Phân tích tiên lượng + diễn giải",
-   "mapping": "VERIFIED — chú ý NDEAT dòng 1 = 'H0' rác",
-   "role": "deferred",
-   "day": null,
-   "deferredReason": "Phân tích tiên lượng/ROC — extension E01; dữ liệu còn chứa lỗi nhập 'H0' cần làm sạch"
-  },
-  {
-   "id": "P2-Q15",
-   "src": "P2",
-   "page": 4,
-   "ref": "Câu 15",
-   "summary": "PCT + hạ huyết áp + tuổi → tiên lượng tử vong (đa biến)",
-   "dataset": "File4_Phan2.sav",
-   "vars": [
-    "AGE",
-    "HYPOTENSION",
-    "PROCALCITONIN",
-    "DEATH"
-   ],
-   "skills": [
-    "Logistic regression",
-    "biến chuỗi cần recode số"
-   ],
-   "ops": [
-    "Recode chuỗi→số",
-    "Analyze→Regression→Binary Logistic"
-   ],
-   "prereq": [
-    "hồi quy đơn",
-    "khái niệm OR"
-   ],
-   "difficulty": "Advanced",
-   "time": 60,
-   "artifact": "Mô hình logistic + OR",
-   "mapping": "VERIFIED — HYPOTENSION/DEATH là chuỗi '0'/'1', phải chuyển số",
-   "role": "deferred",
-   "day": null,
-   "deferredReason": "Hồi quy logistic đa biến — extension E-track; ngoài phạm vi nhập môn 14 ngày"
-  },
-  {
-   "id": "P2-TH3",
-   "src": "P2",
-   "page": 4,
-   "ref": "Bài TH số 3",
-   "summary": "File5: xử lý, phân tích số liệu và tập viết báo cáo nghiên cứu (n=296, sinh thiết tuyến tiền liệt)",
-   "dataset": "File5_Phan2.sav",
-   "vars": [
-    "Tuoi",
-    "Khám_TT",
-    "Siêu_âmTT",
-    "PSA",
-    "Thetich",
-    "Sinhthiet"
-   ],
-   "skills": [
-    "toàn bộ pipeline: khám phá → mô tả → bảng chéo → so sánh → tương quan → báo cáo"
-   ],
-   "ops": [
-    "tổng hợp"
-   ],
-   "prereq": [
-    "Days 02–11"
-   ],
-   "difficulty": "Intermediate",
-   "time": 180,
-   "artifact": "Báo cáo ngắn có bảng mô tả + ≥2 phân tích + diễn giải",
-   "mapping": "VERIFIED",
-   "role": "core",
-   "day": "d12"
-  },
-  {
-   "id": "P1-BONUS-SLNC",
-   "src": "P1",
-   "page": null,
-   "ref": "—",
-   "summary": "So_Lieu_NC.sav — dataset phụ không câu hỏi gắn sẵn (khảo sát ~STEPS: HA, ĐTĐ, hút thuốc, số đo)",
-   "dataset": "So_Lieu_NC.sav",
-   "vars": [
-    "ID",
-    "B7",
-    "B8",
-    "B11",
-    "C13",
-    "E25",
-    "E26",
-    "E29",
-    "E30",
-    "F31"
-   ],
-   "skills": [
-    "luyện tập tự do"
-   ],
-   "ops": [],
-   "prereq": [],
-   "difficulty": "Beginner",
-   "time": 0,
-   "artifact": "—",
-   "mapping": "VERIFIED — không câu nào trong PDF dùng file này",
-   "role": "bonus",
-   "day": null
-  }
- ]
+  ]
 }

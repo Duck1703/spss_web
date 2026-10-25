@@ -1,0 +1,732 @@
+{
+  "dataset": "p1_B01_HA (1).sav (exercises/bai_1) — file bài tập nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Bảng output = số liệu thật tái tính từ file nguồn bằng Python (NOT_RUN — đối chiếu khi chạy SPSS thật). Grid Data View chỉ minh họa.",
+  "guides": {
+    "d07-freq-errors": {
+      "step": "Bước 1",
+      "title": "Frequencies soi lỗi nhập liệu (Câu 14a)",
+      "purpose": "Bảng tần số của biến mã phải chỉ chứa mã trong codebook — mọi giá trị lạ là lỗi nhập liệu.",
+      "where": "p1_B01_HA (1).sav đang mở; không filter, không split",
+      "menuPath": [
+        "Analyze",
+        "Descriptive Statistics",
+        "Frequencies…",
+        "NNghiep → Variable(s)",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Cột Missing nằm dưới cùng bảng — dễ bỏ qua. Cuộn hết bảng trước khi kết luận dữ liệu sạch."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Frequencies",
+          "dialog": {
+            "title": "Frequencies",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "ID",
+                  "Tuoi",
+                  "GTinh",
+                  "HVan",
+                  "NNghiep",
+                  "Tieuduong"
+                ],
+                "right": [
+                  "NNghiep"
+                ],
+                "rightLabel": "Variable(s):",
+                "hot": 1
+              },
+              {
+                "type": "note",
+                "text": "Mỗi biến mã nên được 'soi' bằng Frequencies ít nhất một lần trước khi phân tích — đây là bước kiểm tra dữ liệu rẻ nhất."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Statistics…"
+              },
+              {
+                "label": "Charts…"
+              },
+              {
+                "label": "Format…"
+              },
+              {
+                "label": "OK",
+                "primary": true,
+                "hot": 2
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Đưa NNghiep vào Variable(s) → OK.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "NNghiep → Variable(s)"
+            },
+            {
+              "n": 2,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — NNghiep [Nghề nghiệp]",
+          "outline": [
+            {
+              "t": "Frequencies"
+            },
+            {
+              "t": "Statistics"
+            },
+            {
+              "t": "NNghiep [Nghề nghiệp]",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "NNghiep [Nghề nghiệp]",
+              "cols": [
+                "",
+                "Frequency",
+                "Percent",
+                "Valid Percent",
+                "Cumulative Percent"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Làm thuê/đồng áng"
+                  },
+                  {
+                    "label": "132"
+                  },
+                  {
+                    "label": "21,3"
+                  },
+                  {
+                    "label": "21,5"
+                  },
+                  {
+                    "label": "21,5"
+                  }
+                ],
+                [
+                  {
+                    "label": "Buôn bán"
+                  },
+                  {
+                    "label": "6"
+                  },
+                  {
+                    "label": "1,0"
+                  },
+                  {
+                    "label": "1,0"
+                  },
+                  {
+                    "label": "22,5"
+                  }
+                ],
+                [
+                  {
+                    "label": "Nội trợ"
+                  },
+                  {
+                    "label": "323"
+                  },
+                  {
+                    "label": "52,1"
+                  },
+                  {
+                    "label": "52,7"
+                  },
+                  {
+                    "label": "75,2"
+                  }
+                ],
+                [
+                  {
+                    "label": "Cán bộ/công chức"
+                  },
+                  {
+                    "label": "67"
+                  },
+                  {
+                    "label": "10,8"
+                  },
+                  {
+                    "label": "10,9"
+                  },
+                  {
+                    "label": "86,1"
+                  }
+                ],
+                [
+                  {
+                    "label": "Hưu trí"
+                  },
+                  {
+                    "label": "67"
+                  },
+                  {
+                    "label": "10,8"
+                  },
+                  {
+                    "label": "10,9"
+                  },
+                  {
+                    "label": "97,1"
+                  }
+                ],
+                [
+                  {
+                    "label": "Khác"
+                  },
+                  {
+                    "label": "18"
+                  },
+                  {
+                    "label": "2,9"
+                  },
+                  {
+                    "label": "2,9"
+                  },
+                  {
+                    "label": "100,0"
+                  }
+                ],
+                [
+                  {
+                    "label": "0",
+                    "hot": 3
+                  },
+                  {
+                    "label": "3",
+                    "hot": 3
+                  },
+                  {
+                    "label": "0,5"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ],
+                [
+                  {
+                    "label": "8",
+                    "hot": 3
+                  },
+                  {
+                    "label": "2",
+                    "hot": 3
+                  },
+                  {
+                    "label": "0,3"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ],
+                [
+                  {
+                    "label": "Missing",
+                    "hot": 4
+                  },
+                  {
+                    "label": "2",
+                    "hot": 4
+                  },
+                  {
+                    "label": "0,3"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ],
+                [
+                  {
+                    "label": "Total"
+                  },
+                  {
+                    "label": "620"
+                  },
+                  {
+                    "label": "100,0"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Mã hợp lệ 1–6; mã 0 (×3), 8 (×2) và 2 ô trống = 7 phiếu lỗi.",
+          "caption": "Phát hiện 7 phiếu lỗi: 0×3, 8×2, Missing×2 — codebook chỉ cho phép 1–6.",
+          "callouts": [
+            {
+              "n": 3,
+              "label": "Mã 0 và 8 — không có trong codebook"
+            },
+            {
+              "n": 4,
+              "label": "Missing ×2 — ô bỏ trống"
+            }
+          ]
+        }
+      ],
+      "expected": "Bảng tần số NNghiep: mã 1–6 hợp lệ (132/6/323/67/67/18) + lỗi 0×3, 8×2, Missing×2, Total 620.",
+      "ifWrong": [
+        "Bảng không có dòng Missing → cuộn xuống cuối; SPSS đặt Missing riêng dưới Total.",
+        "Cộng lại không ra 620 → đang filter từ bài trước: Select Cases → All cases.",
+        "Không thấy mã 0/8 → xem lại biến đã chọn (phải NNghiep, không phải CV.Mucdo)."
+      ]
+    },
+    "d07-select-bad": {
+      "step": "Bước 2",
+      "title": "Select Cases liệt kê phiếu sai (Câu 14b)",
+      "purpose": "Hiện chỉ các dòng vi phạm để đọc cột ID — điều kiện phải bắt cả ô trống bằng MISSING().",
+      "where": "Đã thấy 7 phiếu lỗi từ Bước 1",
+      "menuPath": [
+        "Data",
+        "Select Cases…",
+        "If condition is satisfied",
+        "If…",
+        "NNghiep = 0 | NNghiep = 8 | MISSING(NNghiep)",
+        "OK"
+      ],
+      "osNote": {
+        "both": "| = OR, & = AND. Ô trống (system-missing) không khớp bất kỳ so sánh nào — chỉ MISSING() bắt được."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Select Cases: If",
+          "dialog": {
+            "title": "Select Cases: If",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "ID",
+                  "Tuoi",
+                  "GTinh",
+                  "NNghiep",
+                  "MISSING (function)"
+                ],
+                "right": [],
+                "rightLabel": ""
+              },
+              {
+                "type": "field",
+                "label": "",
+                "value": "NNghiep = 0 | NNghiep = 8 | MISSING(NNghiep)",
+                "hot": 1
+              },
+              {
+                "type": "note",
+                "text": "3 vế nối bằng | (hoặc). Nếu thiếu MISSING(NNghiep) chỉ bắt được 5 phiếu — 2 phiếu trống sẽ lọt."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Continue",
+                "primary": true,
+                "advance": true,
+                "hot": 2
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Gõ điều kiện liệt kê → Continue → OK → Data View chỉ còn 7 dòng.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Điều kiện: =0 | =8 | MISSING()"
+            },
+            {
+              "n": 2,
+              "label": "Continue"
+            }
+          ]
+        },
+        {
+          "kind": "editor",
+          "title": "Data View — chỉ còn 7 dòng sai",
+          "grid": {
+            "cols": [
+              "ID",
+              "NNghiep",
+              "Tuoi",
+              "GTinh"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "5",
+                  "hot": 3
+                },
+                {
+                  "label": "0"
+                },
+                {
+                  "label": "71"
+                },
+                {
+                  "label": "Nam"
+                }
+              ],
+              [
+                {
+                  "label": "184",
+                  "hot": 3
+                },
+                {
+                  "label": "0"
+                },
+                {
+                  "label": "66"
+                },
+                {
+                  "label": "Nữ"
+                }
+              ],
+              [
+                {
+                  "label": "243",
+                  "hot": 3
+                },
+                {
+                  "label": ".",
+                  "hot": 4
+                },
+                {
+                  "label": "63"
+                },
+                {
+                  "label": "Nữ"
+                }
+              ],
+              [
+                {
+                  "label": "285",
+                  "hot": 3
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "70"
+                },
+                {
+                  "label": "Nam"
+                }
+              ],
+              [
+                {
+                  "label": "305",
+                  "hot": 3
+                },
+                {
+                  "label": ".",
+                  "hot": 4
+                },
+                {
+                  "label": "65"
+                },
+                {
+                  "label": "Nữ"
+                }
+              ],
+              [
+                {
+                  "label": "318",
+                  "hot": 3
+                },
+                {
+                  "label": "0"
+                },
+                {
+                  "label": "55"
+                },
+                {
+                  "label": "Nữ"
+                }
+              ],
+              [
+                {
+                  "label": "375",
+                  "hot": 3
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "58"
+                },
+                {
+                  "label": "Nữ"
+                }
+              ]
+            ]
+          },
+          "caption": "Đọc cột ID của 7 dòng còn lại: 5, 184, 243, 285, 305, 318, 375 → ghi vào bảng trả lời đề.",
+          "callouts": [
+            {
+              "n": 3,
+              "label": "Cột ID = mã phiếu cần liệt kê"
+            },
+            {
+              "n": 4,
+              "label": "Dấu '.' = ô trống (missing)"
+            }
+          ]
+        }
+      ],
+      "expected": "7 dòng hiện lại với ID: 5, 184, 243, 285, 305, 318, 375; 613 dòng bị gạch chéo.",
+      "ifWrong": [
+        "Chỉ thấy 5 dòng → thiếu MISSING(NNghiep) trong điều kiện.",
+        "Thấy 613 dòng → điều kiện bị đảo (đang giữ phiếu ĐÚNG) — đó là Bước 3, không phải Bước 2.",
+        "Không thấy cột ID → kéo thanh cuộn trái hoặc dùng Edit → Find trên cột NNghiep."
+      ]
+    },
+    "d07-keep-clean": {
+      "step": "Bước 3",
+      "title": "Giữ phiếu hợp lệ + lưu file làm việc (Câu 14c)",
+      "purpose": "Đảo điều kiện sang 'giữ' → Save As file mới — không bao giờ sửa file gốc.",
+      "where": "Đã ghi xong 7 ID; Select Cases vẫn đang lọc phiếu sai",
+      "menuPath": [
+        "Data",
+        "Select Cases…",
+        "All cases (trả lại 620)",
+        "If…",
+        "NNghiep >= 1 & NNghiep <= 6",
+        "File → Save As → p1_B01_HA_work.sav"
+      ],
+      "osNote": {
+        "both": "Mac: File → Save As… tương đương. Nhớ chọn thư mục workspace/ của bạn, không phải exercises/."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Select Cases: If",
+          "dialog": {
+            "title": "Select Cases: If",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "ID",
+                  "Tuoi",
+                  "GTinh",
+                  "NNghiep"
+                ],
+                "right": [],
+                "rightLabel": ""
+              },
+              {
+                "type": "field",
+                "label": "",
+                "value": "NNghiep >= 1 & NNghiep <= 6",
+                "hot": 1
+              },
+              {
+                "type": "note",
+                "text": "Điều kiện GIỮ: chỉ mã 1–6 được giữ. Ô trống tự bị loại vì missing không thỏa '>=1' — không cần viết thêm."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Continue",
+                "primary": true,
+                "advance": true,
+                "hot": 2
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Đảo điều kiện: giữ 1–6 → OK → 7 dòng lỗi bị gạch chéo.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Điều kiện giữ: >= 1 & <= 6"
+            },
+            {
+              "n": 2,
+              "label": "Continue"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Frequencies NNghiep (file work, đã loại)",
+          "outline": [
+            {
+              "t": "Frequencies"
+            },
+            {
+              "t": "NNghiep [Nghề nghiệp]",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "NNghiep [Nghề nghiệp] — sau khi loại",
+              "cols": [
+                "",
+                "Frequency",
+                "Percent",
+                "Valid Percent"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Làm thuê/đồng áng"
+                  },
+                  {
+                    "label": "132"
+                  },
+                  {
+                    "label": "21,5"
+                  },
+                  {
+                    "label": "21,5"
+                  }
+                ],
+                [
+                  {
+                    "label": "Buôn bán"
+                  },
+                  {
+                    "label": "6"
+                  },
+                  {
+                    "label": "1,0"
+                  },
+                  {
+                    "label": "1,0"
+                  }
+                ],
+                [
+                  {
+                    "label": "Nội trợ"
+                  },
+                  {
+                    "label": "323"
+                  },
+                  {
+                    "label": "52,7"
+                  },
+                  {
+                    "label": "52,7"
+                  }
+                ],
+                [
+                  {
+                    "label": "Cán bộ/công chức"
+                  },
+                  {
+                    "label": "67"
+                  },
+                  {
+                    "label": "10,9"
+                  },
+                  {
+                    "label": "10,9"
+                  }
+                ],
+                [
+                  {
+                    "label": "Hưu trí"
+                  },
+                  {
+                    "label": "67"
+                  },
+                  {
+                    "label": "10,9"
+                  },
+                  {
+                    "label": "10,9"
+                  }
+                ],
+                [
+                  {
+                    "label": "Khác"
+                  },
+                  {
+                    "label": "18"
+                  },
+                  {
+                    "label": "2,9"
+                  },
+                  {
+                    "label": "2,9"
+                  }
+                ],
+                [
+                  {
+                    "label": "Total",
+                    "hot": 3
+                  },
+                  {
+                    "label": "613",
+                    "hot": 3
+                  },
+                  {
+                    "label": "100,0"
+                  },
+                  {
+                    "label": "100,0"
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật trên mẫu đã loại (NOT_RUN). Total=613, chỉ còn mã 1–6.",
+          "caption": "Kiểm chứng: file work không còn mã 0/8/missing; Total = 613.",
+          "callouts": [
+            {
+              "n": 3,
+              "label": "Total = 613 = 620 − 7 phiếu lỗi"
+            }
+          ]
+        }
+      ],
+      "expected": "File *_work.sav: Frequencies NNghiep Total=613, không còn 0/8/missing. File gốc vẫn 620.",
+      "ifWrong": [
+        "File work vẫn 620 → lưu khi chưa bật filter, hoặc không tick Delete unselected cases — lọc lại rồi Save As lần nữa.",
+        "Mở file gốc thấy 613 → đã lưu đè! Khôi phục từ bản sao sources/ — bài học: luôn Save As tên khác.",
+        "Frequencies vẫn có 0/8 → đang mở file gốc chứ không phải file work."
+      ]
+    }
+  }
+}

@@ -55,3 +55,4 @@ exercises/bai_2/
 .workspace/p1_text.txt
 .workspace/p2_text.txt
 .workspace/stats/
+.workspace/*.py

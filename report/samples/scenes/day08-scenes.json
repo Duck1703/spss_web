@@ -1,0 +1,772 @@
+{
+  "dataset": "p1_B01_HA (1).sav + P1_B02 CrossTab (2).sav (bai_1) + File1.sav (bai_2) — file bài tập nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Bảng output = số liệu thật tái tính từ file nguồn bằng Python (NOT_RUN). Grid Data View chỉ minh họa.",
+  "guides": {
+    "d08-weight": {
+      "step": "Bước 5",
+      "title": "Weight Cases + Risk — file tổng hợp 4 dòng (Câu 21)",
+      "purpose": "Dãn file tần số tổng hợp ra 88 người, lấy RR/OR so sánh nguy cơ HPV+/−.",
+      "where": "Mở file MỚI: exercises/bai_1/P1_B02 CrossTab (2).sav (chỉ 4 dòng tổng hợp)",
+      "menuPath": [
+        "Data",
+        "Weight Cases…",
+        "Weight cases by",
+        "soluong",
+        "OK",
+        "Crosstabs: phoinhiem × benh + Chi-square + Risk"
+      ],
+      "osNote": {
+        "both": "Mở file khác = Weight OFF theo file đó? Không — Weight bám THEO TỪNG dataset. Nhớ tắt khi quay lại file cũ (Do not weight cases)."
+      },
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "P1_B02 CrossTab (2).sav — Data Editor (4 dòng tổng hợp!)",
+          "openMenu": "Data",
+          "items": [
+            {
+              "label": "Sort Cases…"
+            },
+            {
+              "label": "Select Cases…"
+            },
+            {
+              "label": "Weight Cases…",
+              "hot": 1,
+              "advance": true
+            }
+          ],
+          "grid": {
+            "cols": [
+              "benh",
+              "phoinhiem",
+              "soluong"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "Ung thư CTC +"
+                },
+                {
+                  "label": "HPV+"
+                },
+                {
+                  "label": "20"
+                }
+              ],
+              [
+                {
+                  "label": "Ung thư CTC +"
+                },
+                {
+                  "label": "HPV-"
+                },
+                {
+                  "label": "10"
+                }
+              ],
+              [
+                {
+                  "label": "Ung thư CTC-"
+                },
+                {
+                  "label": "HPV+"
+                },
+                {
+                  "label": "8"
+                }
+              ],
+              [
+                {
+                  "label": "Ung thư CTC-"
+                },
+                {
+                  "label": "HPV-"
+                },
+                {
+                  "label": "50"
+                }
+              ]
+            ]
+          },
+          "caption": "Chỉ 4 dòng — mỗi dòng là MỘT NHÓM người. `soluong` = số người mỗi nhóm. Data → Weight Cases…",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Weight Cases…"
+            }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Weight Cases",
+          "dim": true,
+          "dialog": {
+            "title": "Weight Cases",
+            "rows": [
+              {
+                "type": "radio",
+                "label": "",
+                "options": [
+                  {
+                    "label": "Do not weight cases"
+                  },
+                  {
+                    "label": "Weight cases by",
+                    "checked": true,
+                    "hot": 2
+                  }
+                ]
+              },
+              {
+                "type": "lists",
+                "left": [
+                  "benh",
+                  "phoinhiem"
+                ],
+                "right": [
+                  "soluong"
+                ],
+                "rightLabel": "Frequency Variable:",
+                "hot": 3
+              },
+              {
+                "type": "note",
+                "text": "Báo SPSS: 'mỗi dòng đại diện soluong người'. Sau OK, mọi phân tích dùng n=88 thay vì n=4."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 4
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Weight cases by → `soluong` → OK. Status bar: 'Weight On'.",
+          "callouts": [
+            {
+              "n": 2,
+              "label": "Weight cases by"
+            },
+            {
+              "n": 3,
+              "label": "soluong → Frequency Variable"
+            },
+            {
+              "n": 4,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Crosstab + Chi-Square + Risk (HPV × CTC)",
+          "outline": [
+            {
+              "t": "Crosstabs"
+            },
+            {
+              "t": "phoinhiem * benh Crosstabulation",
+              "ind": true
+            },
+            {
+              "t": "Chi-Square Tests",
+              "ind": true
+            },
+            {
+              "t": "Risk Estimate",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "phoinhiem * benh Crosstabulation",
+              "cols": [
+                "",
+                "",
+                "CTC+",
+                "CTC-",
+                "Total"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "HPV+"
+                  },
+                  {
+                    "label": "Count / % hàng"
+                  },
+                  {
+                    "label": "20 / 71,4%",
+                    "hot": 5
+                  },
+                  {
+                    "label": "8 / 28,6%"
+                  },
+                  {
+                    "label": "28 / 100,0%"
+                  }
+                ],
+                [
+                  {
+                    "label": "HPV-"
+                  },
+                  {
+                    "label": "Count / % hàng"
+                  },
+                  {
+                    "label": "10 / 16,7%",
+                    "hot": 6
+                  },
+                  {
+                    "label": "50 / 83,3%"
+                  },
+                  {
+                    "label": "60 / 100,0%"
+                  }
+                ],
+                [
+                  {
+                    "label": "Total"
+                  },
+                  {
+                    "label": "Count"
+                  },
+                  {
+                    "label": "30"
+                  },
+                  {
+                    "label": "58"
+                  },
+                  {
+                    "label": "88",
+                    "hot": 7
+                  }
+                ]
+              ]
+            },
+            {
+              "title": "Chi-Square Tests",
+              "cols": [
+                "",
+                "Value",
+                "df",
+                "Sig. (2-sided)"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Pearson Chi-Square"
+                  },
+                  {
+                    "label": "25,480"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "<,001",
+                    "hot": 8
+                  }
+                ],
+                [
+                  {
+                    "label": "Continuity Correction"
+                  },
+                  {
+                    "label": "23,101"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "<,001"
+                  }
+                ]
+              ],
+              "footnote": "a. 0 cells have expected count less than 5. Minimum expected count is 9,55."
+            },
+            {
+              "title": "Risk Estimate",
+              "cols": [
+                "",
+                "Value"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Odds Ratio for benh (CTC+ / CTC-)"
+                  },
+                  {
+                    "label": "12,500",
+                    "hot": 9
+                  }
+                ],
+                [
+                  {
+                    "label": "For cohort benh = CTC+"
+                  },
+                  {
+                    "label": "4,286",
+                    "hot": 9
+                  }
+                ],
+                [
+                  {
+                    "label": "For cohort benh = CTC-"
+                  },
+                  {
+                    "label": "0,343"
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). 'For cohort benh = CTC+' = RR. Tỷ lệ CTC+ : HPV+ 71,4% vs HPV− 16,7%.",
+          "caption": "Ba bảng: tỷ lệ bệnh hai nhóm → chi-square → Risk (RR=4,29, OR=12,50).",
+          "callouts": [
+            {
+              "n": 5,
+              "label": "HPV+: 71,4% mắc CTC"
+            },
+            {
+              "n": 6,
+              "label": "HPV−: chỉ 16,7%"
+            },
+            {
+              "n": 7,
+              "label": "Total = 88 — đúng sau Weight"
+            },
+            {
+              "n": 8,
+              "label": "p < 0,001"
+            },
+            {
+              "n": 9,
+              "label": "OR = 12,5 · RR = 4,29"
+            }
+          ]
+        }
+      ],
+      "expected": "Total=88; CTC+: HPV+ 71,4% vs HPV− 16,7%; χ²=25,48 p<0,001; RR≈4,29; OR≈12,50.",
+      "ifWrong": [
+        "Total = 4 → quên Weight Cases (hoặc đang weight nhầm biến).",
+        "Mọi output ở file HA bỗng sai n → Weight vẫn bật ở file này? Weight gắn từng dataset — tắt bằng Do not weight cases.",
+        "Bảng Risk trống → chưa tick Risk trong Statistics (và bảng phải là 2×2).",
+        "Nhầm 0,343 là RR → đó là RR phía 'không bệnh'; RR mắc bệnh là dòng 'For cohort benh = CTC+'."
+      ]
+    },
+    "d08-binomial": {
+      "step": "Bước 3",
+      "title": "Binomial — tỷ lệ nằm viện 60% trong nam (P2-Q03)",
+      "purpose": "Kiểm định một tỷ lệ nhị phân so với p₀ cho sẵn — trên MẪU CON (chỉ nam).",
+      "where": "File1.sav; ĐÃ Select Cases igioitin = 1 (còn 28 nam)",
+      "menuPath": [
+        "Data → Select Cases → igioitin = 1",
+        "Analyze",
+        "Nonparametric Tests",
+        "Legacy Dialogs",
+        "Binomial…",
+        "gnamvie",
+        "Test Proportion 0,60",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Test Proportion nhập dạng thập phân 0–1 (0,60 không phải 60). Nhớ trả All cases sau khi xong."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Binomial Test",
+          "dialog": {
+            "title": "Binomial Test",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "htuo",
+                  "igioitin",
+                  "cchanthuon",
+                  "gnamvie",
+                  "nsonga",
+                  "ytruo"
+                ],
+                "right": [
+                  "gnamvie"
+                ],
+                "rightLabel": "Test Variable List:",
+                "hot": 1
+              },
+              {
+                "type": "field",
+                "label": "Test Proportion:",
+                "value": "0,60",
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "gnamvie là biến 0/1 (0=Không nằm viện, 1=Có) — Binomial kiểm định tỷ lệ của nhóm ĐẦU TIÊN theo mã. Kiểm tra trong output tỷ lệ quan sát nào đang được kiểm."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Options…"
+              },
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 3
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "gnamvie → Test Variable; Test Proportion 0,60 → OK.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "gnamvie → Test Variable"
+            },
+            {
+              "n": 2,
+              "label": "Test Proportion = 0,60"
+            },
+            {
+              "n": 3,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Binomial Test (mẫu nam, n=28)",
+          "outline": [
+            {
+              "t": "NPar Tests"
+            },
+            {
+              "t": "Binomial Test"
+            },
+            {
+              "t": "gnamvie",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "Binomial Test",
+              "cols": [
+                "",
+                "Category",
+                "N",
+                "Observed Prop.",
+                "Test Prop.",
+                "Exact Sig. (2-sided)"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Group 1"
+                  },
+                  {
+                    "label": "Không"
+                  },
+                  {
+                    "label": "13"
+                  },
+                  {
+                    "label": ",46"
+                  },
+                  {
+                    "label": ",60"
+                  },
+                  {
+                    "label": ",564",
+                    "hot": 4
+                  }
+                ],
+                [
+                  {
+                    "label": "Group 2"
+                  },
+                  {
+                    "label": "Có"
+                  },
+                  {
+                    "label": "15"
+                  },
+                  {
+                    "label": ",54"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ],
+                [
+                  {
+                    "label": "Total"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "28"
+                  },
+                  {
+                    "label": "1,00"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Tỷ lệ nằm viện quan sát 0,54 (15/28); p=0,564 → không bác bỏ 60%.",
+          "caption": "Đọc cột Exact Sig. (2-sided) — nhỏ mẫu nên dùng exact, không phải tiệm cận.",
+          "callouts": [
+            {
+              "n": 4,
+              "label": "p = 0,564 ≥ 0,05 → có thể xem là 60%"
+            }
+          ]
+        }
+      ],
+      "expected": "Nam n=28; nằm viện 15/28=0,54; Binomial exact 2-sided p≈0,564 → không bác bỏ tỷ lệ 60%.",
+      "ifWrong": [
+        "N=50 thay vì 28 → quên Select Cases igioitin=1.",
+        "Group 1 hiện 'Có' và Prop 0,54 → SPSS sắp nhóm theo mã tăng dần; kiểm tra hướng mã gnamvie trước khi kết luận.",
+        "Nhập Test Proportion = 60 → lỗi ngay (phải 0–1)."
+      ]
+    },
+    "d08-gof": {
+      "step": "Bước 1",
+      "title": "Chi-square phù hợp — tỷ lệ giới tính (Câu 22)",
+      "purpose": "So tần số quan sát với tần số kỳ vọng theo giả thuyết — Expected Values nhập theo THỨ TỰ MÃ.",
+      "where": "p1_B01_HA (1).sav đang mở; không filter",
+      "menuPath": [
+        "Analyze",
+        "Nonparametric Tests",
+        "Legacy Dialogs",
+        "Chi-square…",
+        "GTinh → Test Variable",
+        "Expected Values → nhập từng số",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Legacy Dialogs cho output \"sách giáo khoa\" nhất. Expected Values nhập THEO THỨ TỰ MÃ TĂNG DẦN (mã 1 = Nữ nhập trước!)."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Chi-square Test",
+          "dialog": {
+            "title": "Chi-square Test",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "ID",
+                  "Tuoi",
+                  "GTinh",
+                  "HVan",
+                  "NNghiep"
+                ],
+                "right": [
+                  "GTinh"
+                ],
+                "rightLabel": "Test Variable List:",
+                "hot": 1
+              },
+              {
+                "type": "field",
+                "label": "Expected Values → Values:",
+                "value": "279 → Add · 341 → Add   (Nữ=0,45×620=279; Nam=0,55×620=341)",
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "BẪY: đề viết \"Nam: 55%, Nữ: 45%\" nhưng mã 1 là NỮ — phải nhập 279 (Nữ) rồi 341 (Nam). Nhập ngược vẫn ra chi-square nhưng sai cặp kỳ vọng."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 3
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "GTinh → Test Variable; Expected Values: nhập 279 rồi 341 (trường hợp Nam55:Nữ45) → OK.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "GTinh → Test Variable"
+            },
+            {
+              "n": 2,
+              "label": "Expected Values theo thứ tự mã 1→2"
+            },
+            {
+              "n": 3,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Test Statistics (GTinh, kỳ vọng 45:55)",
+          "outline": [
+            {
+              "t": "NPar Tests"
+            },
+            {
+              "t": "Chi-Square Test"
+            },
+            {
+              "t": "GTinh",
+              "ind": true
+            },
+            {
+              "t": "Test Statistics",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "GTinh [Giới tính]",
+              "cols": [
+                "",
+                "Observed N",
+                "Expected N",
+                "Residual"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Nữ"
+                  },
+                  {
+                    "label": "376"
+                  },
+                  {
+                    "label": "279,0",
+                    "hot": 4
+                  },
+                  {
+                    "label": "97,0"
+                  }
+                ],
+                [
+                  {
+                    "label": "Nam"
+                  },
+                  {
+                    "label": "244"
+                  },
+                  {
+                    "label": "341,0",
+                    "hot": 4
+                  },
+                  {
+                    "label": "-97,0"
+                  }
+                ],
+                [
+                  {
+                    "label": "Total"
+                  },
+                  {
+                    "label": "620"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ]
+              ]
+            },
+            {
+              "title": "Test Statistics",
+              "cols": [
+                "",
+                "Chi-Square",
+                "df",
+                "Asymp. Sig."
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "GTinh"
+                  },
+                  {
+                    "label": "61,316",
+                    "hot": 5
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": ",000",
+                    "hot": 6
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). χ²=61,316, p<0,001 → tỷ lệ KHÔNG phù hợp 55:45.",
+          "caption": "Bảng 1: quan sát vs kỳ vọng từng nhóm. Bảng 2: χ² và p.",
+          "callouts": [
+            {
+              "n": 4,
+              "label": "So sánh Observed vs Expected từng dòng"
+            },
+            {
+              "n": 5,
+              "label": "χ² = 61,316"
+            },
+            {
+              "n": 6,
+              "label": "p \",000\" đọc là <0,001 → không phù hợp"
+            }
+          ]
+        }
+      ],
+      "expected": "55:45 → χ²=61,316 p<0,001 (không phù hợp); 40:60 → χ²=0,108 p=0,743 (PHÙ HỢP); 50:50 → χ²=28,103 p<0,001 (không phù hợp).",
+      "ifWrong": [
+        "40:60 ra χ²≈110 thay vì 0,108 → nhập kỳ vọng ngược thứ tự mã (đã nhập 248 cho Nữ).",
+        "Observed không phải 376/244 → đang còn filter: Select Cases → All cases.",
+        "df ≠ 1 → vô tình đưa biến khác vào Test List."
+      ]
+    }
+  }
+}

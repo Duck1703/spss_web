@@ -68,16 +68,16 @@ const DAYS = [
   { dir: 'day-04-tom-tat-theo-nhom', slug: 'd04', num: '04', title: 'Ngày 04 — Tóm tắt theo nhóm', ready: true,
     files: [P1SAV] },
   { dir: 'day-05-bang-cheo-chi-square', slug: 'd05', num: '05', title: 'Ngày 05 — Bảng chéo và Chi-square', ready: true,
-    files: [P1SAV, { savLocal: 'exercises/bai_1/P1_B02 CrossTab (2).sav', note: 'cho P1-Q21' }, { savLocal: 'exercises/bai_2/File1.sav', note: 'cho P2-Q01' }] },
+    files: [P1SAV] },
   { dir: 'day-06-bien-doi-du-lieu', slug: 'd06', num: '06', title: 'Ngày 06 — Biến đổi dữ liệu', ready: true,
     files: [P1SAV] },
-  { dir: 'day-07-kiem-tra-du-lieu-sai', slug: 'd07', num: '07', title: 'Ngày 07 — Soi & xử lý dữ liệu sai',
+  { dir: 'day-07-kiem-tra-du-lieu-sai', slug: 'd07', num: '07', title: 'Ngày 07 — Soi & xử lý dữ liệu sai', ready: true,
     files: [P1SAV] },
-  { dir: 'day-08-kiem-dinh-ty-le', slug: 'd08', num: '08', title: 'Ngày 08 — Kiểm định về tỷ lệ',
-    files: [P1SAV, { savLocal: 'exercises/bai_2/File1.sav', note: 'cho P2-Q02, P2-Q03' }] },
-  { dir: 'day-09-so-sanh-trung-binh', slug: 'd09', num: '09', title: 'Ngày 09 — So sánh trung bình',
+  { dir: 'day-08-kiem-dinh-ty-le', slug: 'd08', num: '08', title: 'Ngày 08 — Kiểm định về tỷ lệ', ready: true,
+    files: [P1SAV, { savLocal: 'exercises/bai_1/P1_B02 CrossTab (2).sav', note: 'cho P1-Q21' }, { savLocal: 'exercises/bai_2/File1.sav', note: 'cho P2-Q01–Q03' }] },
+  { dir: 'day-09-so-sanh-trung-binh', slug: 'd09', num: '09', title: 'Ngày 09 — So sánh trung bình', ready: true,
     files: [{ savLocal: 'exercises/bai_2/File1.sav', note: 'dataset chính Phần 2 — 50×18' }] },
-  { dir: 'day-10-ttest-ghep-cap-anova', slug: 'd10', num: '10', title: 'Ngày 10 — T-test ghép cặp & ANOVA',
+  { dir: 'day-10-ttest-ghep-cap-anova', slug: 'd10', num: '10', title: 'Ngày 10 — T-test ghép cặp & ANOVA', ready: true,
     files: [{ savLocal: 'exercises/bai_2/File1.sav' }, { savLocal: 'exercises/bai_2/File2_Phan2.sav', note: 'cho P2-Q13' }] },
   { dir: 'day-11-tuong-quan-hoi-quy', slug: 'd11', num: '11', title: 'Ngày 11 — Tương quan & hồi quy',
     files: [{ savLocal: 'exercises/bai_2/File1.sav' }] },
@@ -164,13 +164,13 @@ function injectTrackCards(md, slug) {
     const mArt = section && l.match(/^>\s*✅\s*\*\*Sản phẩm:\*\*\s*(.+)$/);
     if (mArt) {
       const items = mArt[1].split('·').map(s => s.trim().replace(/`/g, '')).filter(Boolean);
-      out.push('', `<ExerciseCard id="${slug}-${section}-sanpham" label="Sản phẩm ${section.toUpperCase()}" checklist={${JSON.stringify(items)}} answerHref="/${slug}/dap-an/" />`);
+      out.push('', `<ExerciseCard id="ef-${slug}-${section}-sanpham" label="Sản phẩm ${section.toUpperCase()}" checklist={${JSON.stringify(items)}} answerHref="/${slug}/dap-an/" />`);
       continue;
     }
     out.push(l);
     const mNum = l.match(/^(\d+)\.\s/);
     if (section && mNum) {
-      out.push('', `<ExerciseCard id="${slug}-${section}-${mNum[1]}" label="Nháp ${section.toUpperCase()}.${mNum[1]}" answerHref="/${slug}/dap-an/" />`);
+      out.push('', `<ExerciseCard id="ef-${slug}-${section}-${mNum[1]}" label="Nháp ${section.toUpperCase()}.${mNum[1]}" answerHref="/${slug}/dap-an/" />`);
     }
   }
   return out.join('\n');
@@ -199,7 +199,7 @@ function syncTrack() {
     }
     md = mdxEscapeBraces(md);
     md = mdxEscapeLt(md);
-    md += `\n\n---\n\n<CompleteModuleButton id="${d.slug}" label="Đánh dấu đã học xong Ngày ${d.num}" />\n`;
+    md += `\n\n---\n\n<CompleteModuleButton id="ef-${d.slug}" label="Đánh dấu đã học xong Ngày ${d.num}" />\n`;
     const lessonPrev = prevDay
       ? `prev:\n  link: /${prevDay.slug}/dap-an/\n  label: Ngày ${prevDay.num} — đáp án`
       : `prev:\n  link: /lo-trinh-14-ngay/\n  label: Lộ trình 14 ngày`;
@@ -217,7 +217,7 @@ function syncTrack() {
     wb = mdxEscapeBraces(wb);
     wb = mdxEscapeLt(injectTrackCards(wb, d.slug));
     if (d.slug === 'd14') {
-      wb += `\n\n<ExerciseCard id="d14-tu-cham" label="Tổng điểm tự chấm & ghi chú" answerHref="/d14/dap-an/" />\n`;
+      wb += `\n\n<ExerciseCard id="ef-d14-tu-cham" label="Tổng điểm tự chấm & ghi chú" answerHref="/d14/dap-an/" />\n`;
     }
     write(`${d.slug}/bai-tap.mdx`, `---\ntitle: "${d.title} — Bài tập"\ndescription: "Workbook ${d.title} — gõ nháp ngay tại đây, tự lưu trong trình duyệt."\nprev:\n  link: /${d.slug}/bai-hoc/\n  label: Quay lại bài học\nnext:\n  link: /${d.slug}/dap-an/\n  label: Xem đáp án (sau khi đã làm)\n---\n\nimport ExerciseCard from '../../../components/ExerciseCard.astro';\n\n${BANNER}${wb}`);
 
