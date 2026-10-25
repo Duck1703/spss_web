@@ -53,6 +53,9 @@
         if (show) n++;
       });
       if (countEl) countEl.textContent = n + '/' + cards.length + ' bài';
+      // empty state + reset
+      var emptyEl = document.querySelector('[data-exb-empty]');
+      if (emptyEl) emptyEl.hidden = n !== 0;
       // ẩn group header nếu không còn card nào trong group
       document.querySelectorAll('.exb-list').forEach(function (list) {
         var any = Array.prototype.some.call(list.children, function (c) { return !c.hidden; });
@@ -63,6 +66,12 @@
     }
     search.addEventListener('input', apply);
     selects.forEach(function (s) { s.addEventListener('change', apply); });
+    var resetBtn = document.querySelector('[data-exb-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', function () {
+      search.value = '';
+      selects.forEach(function (s) { s.value = ''; });
+      apply();
+    });
     apply();
   }
 

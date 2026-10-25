@@ -327,12 +327,16 @@ function syncExerciseBank() {
     const ver = exVerified(q);
     const dayLinks = (q.day || '').split('+').map(s => s.trim()).filter(d => /^d\d{2}$/.test(d))
       .map(n => `Ngày ${n.slice(1)}`).join('+');
+    const tier = q.tier || (q.role === 'deferred' ? 'advanced' : 'none');
     return `<a class="exb-card" href="${exHref(q.id)}" data-exid="${q.id}" `
-      + `data-cat="${cat}" data-tier="${q.tier || (q.role === 'deferred' ? 'advanced' : 'none')}" data-src="${q.src}" `
+      + `data-cat="${cat}" data-tier="${tier}" data-src="${q.src}" `
       + `data-search="${esc((q.id + ' ' + q.summary + ' ' + (q.dataset || '') + ' ' + (q.vars || []).join(' ')).toLowerCase())}">`
-      + `<span class="exb-card__head"><b>${q.id}</b><span class="exb-card__status" data-exstatus="${q.id}">Chưa làm</span></span>`
+      + `<span class="exb-card__head"><b class="exb-card__id">${q.id}</b>`
+      + `<span class="exb-card__tier exb-card__tier--${tier}">${EX_TIER_LABEL[tier] || tier}</span>`
+      + `<span class="exb-card__status" data-exstatus="${q.id}">Chưa làm</span></span>`
       + `<span class="exb-card__sum">${esc(q.summary)}</span>`
-      + `<span class="exb-card__meta">${esc(q.ref)} tr.${q.page} · ${esc(q.difficulty)} · ~${q.time}′ · ${EX_CAT_LABEL[cat]}${dayLinks ? ` · ${dayLinks}` : ''}${ver ? ' · ✓ đáp án' : ''}</span>`
+      + `<span class="exb-card__meta">${esc(q.ref)} tr.${q.page} · ${esc(q.difficulty)} · ~${q.time}′ · <span class="exb-card__skill">${EX_CAT_LABEL[cat]}</span>${dayLinks ? ` · ${dayLinks}` : ''}${ver ? ' · ✓ đáp án' : ''}</span>`
+      + `<span class="exb-card__cta">Bắt đầu làm bài →</span>`
       + `</a>`;
   };
   const filters = `<div class="exb-filters">
@@ -349,6 +353,7 @@ function syncExerciseBank() {
   write('kho-bai-tap.md', `---
 title: "Kho bài tập — 58 câu nguồn"
 description: "Toàn bộ 58 câu hỏi nguồn từ 2 đề thực hành của chủ khóa học: Bài 1 (43 câu) và Bài 2 (15 câu), kèm 2 mục phụ. Lọc theo kỹ năng, mức độ, trạng thái."
+tableOfContents: false
 ---
 
 ${BANNER}> 📚 **Kho bài tập = toàn bộ bài tập nguồn.** Lộ trình 14 ngày là *con đường dẫn* chọn lọc;
@@ -356,6 +361,7 @@ ${BANNER}> 📚 **Kho bài tập = toàn bộ bài tập nguồn.** Lộ trình 
 > File \`.sav\`/PDF nguồn nằm trong thư mục \`exercises/\` trên máy bạn (không tải từ web).
 
 ${filters}
+<div class="exb-empty" data-exb-empty hidden>Không có bài tập nào khớp bộ lọc hiện tại. <button type="button" data-exb-reset>Xóa bộ lọc</button></div>
 ${grp('Bài 1 — Bài thực hành SDH Phần 1', p1)}
 ${grp('Bài 2 — Bài TH Phần 2', p2)}
 ${grp('Phụ — không tính trong 58 câu', supp)}
@@ -366,7 +372,7 @@ ${grp('Phụ — không tính trong 58 câu', supp)}
     const cat = exCategory(q);
     const ver = exVerified(q);
     const days = (q.day || '').split('+').map(s => s.trim()).filter(d => /^d\d{2}$/.test(d));
-    const lessonLinks = days.map(n => `[Ngày ${n.slice(1)} — bài học](/${n}/bai-hoc/)`).join(' · ');
+    const lessonLinks = days.map(n => `<a href="/${n}/bai-hoc/">Ngày ${n.slice(1)} — bài học</a>`).join(' · ');
     const answerLink = ver && days.length
       ? `[Đáp án chi tiết — Ngày ${days[0].slice(1)}](/${days[0]}/dap-an/) *(mở sau khi đã tự làm)*`
       : null;
@@ -375,46 +381,50 @@ ${grp('Phụ — không tính trong 58 câu', supp)}
     const steps = (q.ops || []);
     const ansFields = q.answerSpec || null;
 
+    const box = (t, inner, cls = '') => `<div class="exd-box${cls}"><span class="exd-box__t">${t}</span>${inner}</div>`;
     const body = `
 <div class="exd-head">
-  <span class="exd-id">${q.id}</span>
-  <span class="exd-meta">${esc(PDF_NAME[q.src] || q.src)} · ${esc(q.ref)} · trang ${q.page}</span>
+  <span class="exd-eyebrow">BÀI TẬP NGUỒN · ${q.src}</span>
   <span class="exd-status" data-exstatus="${q.id}">Chưa làm</span>
 </div>
+<h2 class="exd-title"><span class="exd-id">${q.id}</span> — ${esc(q.summary)}</h2>
+<p class="exd-meta">${esc(PDF_NAME[q.src] || q.src)} · ${esc(q.ref)} · trang ${q.page} · ${esc(q.difficulty)} · ~${q.time} phút</p>
 
-<div class="exd-grid">
-<div class="exd-box"><b>Yêu cầu</b><br />${esc(q.summary)}</div>
-<div class="exd-box"><b>Sản phẩm</b><br />${esc(q.artifact || 'Ghi kết quả vào workbook')}</div>
-<div class="exd-box"><b>Dataset (local)</b><br /><code>${esc(q.dataset || '—')}</code><br /><small>Mở trực tiếp trong SPSS từ thư mục <code>exercises/</code> — không tải từ web.</small></div>
-<div class="exd-box"><b>Độ khó · Thời gian</b><br />${esc(q.difficulty)} · ~${q.time} phút · vai trò: ${EX_ROLE_LABEL[q.role] || q.role}${q.tier ? ` · ${EX_TIER_LABEL[q.tier] || q.tier}` : ''}</div>
+<div class="exd-layout">
+<div class="exd-side">
+${box('Yêu cầu', `<p>${esc(q.summary)}</p>`)}
+${box('Sản phẩm', `<p>${esc(q.artifact || 'Ghi kết quả vào workbook')}</p>`)}
+${box('Dataset (local)', `<p><code>${esc(q.dataset || '—')}</code></p><p class="exd-note">Mở trực tiếp trong SPSS từ thư mục <code>exercises/</code> — không tải từ web.</p>`)}
+${(q.vars && q.vars.length) ? box('Biến cần dùng', `<div class="exd-vars">${q.vars.map(v => `<code>${esc(v)}</code>`).join('')}</div>`) : ''}
+${(q.skills && q.skills.length) ? box('Kỹ năng', `<p>${q.skills.map(s => esc(s)).join(' · ')}</p>`) : ''}
+${(q.prereq && q.prereq.length) ? box('Yêu cầu trước', `<p>${q.prereq.map(s => esc(s)).join(' · ')}</p>`, ' exd-box--warn') : ''}
+${box('Độ khó · Thời gian', `<p>${esc(q.difficulty)} · ~${q.time} phút</p><p class="exd-note">${EX_ROLE_LABEL[q.role] || q.role}${q.tier ? ` · ${EX_TIER_LABEL[q.tier] || q.tier}` : ''}</p>`)}
 </div>
-
-${(q.vars && q.vars.length) ? `**Biến cần dùng:** ${q.vars.map(v => `\`${v}\``).join(' · ')}\n` : ''}
-${(q.skills && q.skills.length) ? `**Kỹ năng:** ${q.skills.map(s => esc(s)).join(' · ')}\n` : ''}
-${(q.prereq && q.prereq.length) ? `> ⚠️ **Yêu cầu trước:** ${q.prereq.map(s => esc(s)).join(' · ')}\n` : ''}
-
-${steps.length ? `## Thao tác SPSS\n\n${steps.map((s, i) => `${i + 1}. \`${esc(s)}\``).join('\n')}\n` : ''}
-${hints.length ? `## Gợi ý (mở từng cái một)\n\n` + hints.map((h, i) => `<details><summary>💡 Gợi ý ${i + 1}</summary>\n\n${esc(h)}\n\n</details>`).join('\n\n') + '\n' : ''}
-## Nhập kết quả của bạn
-
+<div class="exd-brief">
+${steps.length ? `<h2 class="exd-h">Thao tác SPSS</h2>\n<ol class="exd-steps">${steps.map(s => `<li><code>${esc(s)}</code></li>`).join('')}</ol>\n` : ''}
+<h2 class="exd-h">Nhập kết quả của bạn</h2>
 ${ansFields
   ? ansFields.map(f => `<div class="exd-ans"><label>${esc(f.label)}<input type="text" data-answer="exercise:${q.id}:${f.key}" placeholder="Gõ kết quả…" /></label></div>`).join('\n')
   : `<textarea class="exercise-card__input" rows="4" placeholder="Ghi kết quả / tính toán của bạn — tự lưu trong trình duyệt…" data-answer="exercise:${q.id}"></textarea>`}
-
 <div class="exd-actions">
   <button type="button" class="exercise-card__done" data-done="exercise:${q.id}">Đánh dấu đã làm xong</button>
   ${answerLink ? `<a class="exd-alink" href="/${days[0]}/dap-an/">Xem đáp án (${days[0].toUpperCase()}) →</a>` : `<span class="exd-nover">⚠️ ANSWER_NOT_VERIFIED — chưa có đáp án kiểm chứng; đối chiếu kết quả khi chạy thật trên SPSS.</span>`}
 </div>
-
-${ver ? '' : `> Trạng thái đáp án: **ANSWER_NOT_VERIFIED**${q.role === 'deferred' ? ' (bài nâng cao — ngoài lộ trình beginner)' : ''}.\n`}
-## Liên quan
-
-${lessonLinks ? `- Bài học hướng dẫn: ${lessonLinks}\n` : '- Ngoài lộ trình 14 ngày — bài tập tự do / nâng cao.\n'}- Cùng nhóm kỹ năng: ${siblings.length ? siblings.map(o => `[${o.id}](${exHref(o.id)})`).join(' · ') : '—'}
+${ver ? '' : `<p class="exd-nover">Trạng thái đáp án: <b>ANSWER_NOT_VERIFIED</b>${q.role === 'deferred' ? ' (bài nâng cao — ngoài lộ trình beginner)' : ''}.</p>`}
+</div>
+<aside class="exd-rail">
+${hints.length ? `<h2 class="exd-h">Gợi ý (mở từng cái một)</h2>\n` + hints.map((h, i) => `<details class="exd-hint"><summary>💡 Gợi ý ${i + 1}</summary>\n\n${esc(h)}\n\n</details>`).join('\n\n') + '\n' : ''}
+<h2 class="exd-h">Liên quan</h2>
+${lessonLinks ? `<p>Bài học hướng dẫn: ${lessonLinks}</p>\n` : '<p>Ngoài lộ trình 14 ngày — bài tập tự do / nâng cao.</p>\n'}<p>Cùng nhóm kỹ năng: ${siblings.length ? siblings.map(o => `<a href="${exHref(o.id)}">${o.id}</a>`).join(' · ') : '—'}</p>
+<p><a href="/kho-bai-tap/">← Quay lại Kho bài tập</a></p>
+</aside>
+</div>
 `;
 
     write(`kho-bai-tap/${exSlug(q.id)}.md`, `---
 title: "${q.id} — ${esc(q.summary).slice(0, 70)}"
 description: "Bài tập ${q.id} (${q.ref}, trang ${q.page}) — ${esc(q.dataset)}. Kho bài tập SPSS nguồn."
+tableOfContents: false
 prev:
   link: /kho-bai-tap/
   label: Kho bài tập
