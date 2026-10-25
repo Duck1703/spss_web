@@ -32,6 +32,17 @@
   });
 
   // ---- scene navigation ----
+  // Đặt dropdown ngay dưới nút menu mở — không phụ thuộc font size/px cứng.
+  function positionDrops(guide) {
+    guide.querySelectorAll('.spss-scene:not([hidden])').forEach(function (sc) {
+      var drop = sc.querySelector('.sm-drop');
+      if (!drop) return;
+      var menu = sc.querySelector('.smw-menu');
+      var open = sc.querySelector('.sm-menu-btn.is-open');
+      if (menu) drop.style.top = (menu.offsetTop + menu.offsetHeight) + 'px';
+      if (menu && open) drop.style.left = Math.max(4, open.offsetLeft) + 'px';
+    });
+  }
   function show(guide, idx) {
     var scenes = guide.querySelectorAll('.spss-scene');
     var n = scenes.length;
@@ -40,11 +51,16 @@
     guide.dataset.pos = String(idx);
     var pos = guide.querySelector('[data-pos]');
     if (pos) pos.textContent = (idx + 1) + '/' + n;
+    positionDrops(guide);
   }
   function step(guide, dir) {
     var cur = parseInt(guide.dataset.pos || '0', 10);
     show(guide, cur + dir);
   }
+  document.querySelectorAll('.sguide').forEach(positionDrops);
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.sguide').forEach(positionDrops);
+  });
   document.addEventListener('click', function (e) {
     var nav = e.target.closest && e.target.closest('[data-nav]');
     if (nav) {

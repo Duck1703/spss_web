@@ -1,0 +1,6 @@
+---
+/* SmBadge.astro — huy hiệu số "điểm cần bấm" trong mô phỏng SPSS. */
+interface Props { n?: any }
+const { n } = Astro.props;
+---
+{n ? <span class="sm-badge" aria-hidden="true">{n}</span> : null}

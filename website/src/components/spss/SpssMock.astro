@@ -5,12 +5,13 @@
  * Mỗi scene là một "khung hình" — nút Tiếp/Lùi và các mục menu data-advance điều khiển.
  * Tương tác xử lý bởi /js/spss-guides.js. KHÔNG bịa control không có trong SPSS thật.
  */
+import SmBadge from './SmBadge.astro';
+
 interface Props { scenes: any[]; guideId: string; }
 const { scenes, guideId } = Astro.props;
 
 const MENUS = ['File','Edit','View','Data','Transform','Analyze','Graphs','Utilities','Extensions','Window','Help'];
 
-const badge = (n) => n ? `<span class="sm-badge" aria-hidden="true">${n}</span>` : '';
 const hot = (n) => n ? ` sm-hot` : '';
 ---
 
@@ -28,10 +29,10 @@ const hot = (n) => n ? ` sm-hot` : '';
         {/* menu bar — trên Mac thật menu nằm ở thanh hệ thống trên cùng; đặt trong cửa sổ cho dễ nhìn */}
         {s.menubar !== false && (
           <div class={`smw-menu${s.menubarHot ? ' sm-hot' : ''}`} role="menubar">
-            {s.menubarHot ? badge(s.menubarHot) : ''}
+            <SmBadge n={s.menubarHot} />
             {MENUS.map((m) => (
               <button type="button" class={`sm-menu-btn${s.openMenu === m ? ' is-open' : ''}`} data-menu={m}
-                {...(s.advanceMenu === m ? { 'data-advance': true } : {})}>{m}{s.menuHot === m ? badge(s.menuHotN) : ''}</button>
+                {...(s.advanceMenu === m ? { 'data-advance': true } : {})}>{m}<SmBadge n={s.menuHot === m ? s.menuHotN : null} /></button>
             ))}
           </div>
         )}
@@ -42,14 +43,14 @@ const hot = (n) => n ? ` sm-hot` : '';
             {s.items.map((it) => (
               <button type="button" class={`sm-item${hot(it.hot)}${it.advance ? ' sm-advance' : ''}${it.sub ? ' sm-has-sub' : ''}`}
                 {...(it.advance ? { 'data-advance': true } : {})} {...(it.disabled ? { disabled: true } : {})}>
-                <span class="sm-item-l" set:html={badge(it.hot) + it.label}></span>
+                <span class="sm-item-l"><SmBadge n={it.hot} />{it.label}</span>
                 {it.sub && <span class="sm-item-sub">▸</span>}
                 {it.sub && (
                   <span class="sm-submenu">
                     {it.sub.map((sub) => (
                       <span class={`sm-item${hot(sub.hot)}${sub.advance ? ' sm-advance' : ''}`}
                         {...(sub.advance ? { 'data-advance': true } : {})}>
-                        <span class="sm-item-l" set:html={badge(sub.hot) + sub.label}></span>
+                        <span class="sm-item-l"><SmBadge n={sub.hot} />{sub.label}</span>
                       </span>
                     ))}
                   </span>
@@ -81,7 +82,7 @@ const hot = (n) => n ? ` sm-hot` : '';
                   <div class={`sm-row sm-row-${r.type || 'row'}`}>
                     {r.type === 'check' && (
                       <label class={`sm-ctl${hot(r.hot)}`}>
-                        <input type="checkbox" checked={!!r.checked} disabled tabindex="-1" /> {r.label} {badge(r.hot)}
+                        <input type="checkbox" checked={!!r.checked} disabled tabindex="-1" /> {r.label} <SmBadge n={r.hot} />
                       </label>
                     )}
                     {r.type === 'radio' && (
@@ -89,7 +90,7 @@ const hot = (n) => n ? ` sm-hot` : '';
                         {r.label && <span class="sm-lbl">{r.label}</span>}
                         {r.options.map((o) => (
                           <label class={`sm-ctl${hot(o.hot)}`}>
-                            <input type="radio" checked={!!o.checked} disabled tabindex="-1" /> {o.label} {badge(o.hot)}
+                            <input type="radio" checked={!!o.checked} disabled tabindex="-1" /> {o.label} <SmBadge n={o.hot} />
                           </label>
                         ))}
                       </div>
@@ -97,20 +98,20 @@ const hot = (n) => n ? ` sm-hot` : '';
                     {r.type === 'field' && (
                       <>
                         <span class="sm-lbl">{r.label}</span>
-                        <span class={`sm-field${hot(r.hot)}`}>{r.value}{badge(r.hot)}</span>
+                        <span class={`sm-field${hot(r.hot)}`}>{r.value}<SmBadge n={r.hot} /></span>
                       </>
                     )}
                     {r.type === 'ellipsis' && (
                       <>
                         <span class="sm-lbl">{r.label}</span>
                         <button type="button" class={`sm-ellipsis${hot(r.hot)}`} {...(r.advance ? { 'data-advance': true } : {})}>…</button>
-                        {badge(r.hot)}
+                        <SmBadge n={r.hot} />
                       </>
                     )}
                     {r.type === 'select' && (
                       <>
                         <span class="sm-lbl">{r.label}</span>
-                        <span class={`sm-field sm-select${hot(r.hot)}`}>{r.value} ▾{badge(r.hot)}</span>
+                        <span class={`sm-field sm-select${hot(r.hot)}`}>{r.value} ▾<SmBadge n={r.hot} /></span>
                       </>
                     )}
                     {r.type === 'listmove' && (
@@ -118,7 +119,7 @@ const hot = (n) => n ? ` sm-hot` : '';
                         <div class="sm-listbox">
                           <div class="sm-listbox-h">{r.left.label}</div>
                           {r.left.items.map((it) => (
-                            <div class={`sm-listitem${it.sel ? ' is-sel' : ''}${hot(it.hot)}`}>{badge(it.hot)}{it.label}</div>
+                            <div class={`sm-listitem${it.sel ? ' is-sel' : ''}${hot(it.hot)}`}><SmBadge n={it.hot} />{it.label}</div>
                           ))}
                         </div>
                         <button type="button" class={`sm-arrow${hot(r.arrowHot)}`} {...(r.advance ? { 'data-advance': true } : {})}>►</button>
@@ -136,7 +137,7 @@ const hot = (n) => n ? ` sm-hot` : '';
                           <div class="sm-listbox-h">{r.leftLabel || 'Biến có sẵn:'}</div>
                           {(r.left || []).map((it) => <div class="sm-listitem">{it}</div>)}
                         </div>
-                        <button type="button" class={`sm-arrow${hot(r.hot)}`}>►{badge(r.hot)}</button>
+                        <button type="button" class={`sm-arrow${hot(r.hot)}`} {...(r.advance ? { 'data-advance': true } : {})}>►</button>
                         <div class={`sm-listbox${hot(r.hot)}`}>
                           <div class="sm-listbox-h">{r.rightLabel || 'Variable(s):'}</div>
                           {(r.right || []).map((it) => <div class="sm-listitem is-sel">{it}</div>)}
@@ -149,21 +150,21 @@ const hot = (n) => n ? ` sm-hot` : '';
                         {r.rows.map((it, i) => (
                           <div class={`sm-listitem${r.hotRow === i + 1 ? ' is-sel sm-hotcell' : ''}`}>{it}</div>
                         ))}
-                        {badge(r.hot)}
+                        <SmBadge n={r.hot} />
                       </div>
                     )}
                     {r.type === 'listbox' && (
                       <div class={`sm-listbox${hot(r.hot)}`}>
                         {r.label && <div class="sm-listbox-h">{r.label}</div>}
                         {r.items.map((it) => <div class="sm-listitem">{it.label}</div>)}
-                        {badge(r.hot)}
+                        <SmBadge n={r.hot} />
                       </div>
                     )}
                     {r.type === 'missing' && (
                       <div class="sm-missing">
                         {r.label && <span class="sm-lbl">{r.label}</span>}
                         {r.values.map((v) => <span class={`sm-field sm-mf${hot(r.hot)}`}>{v}</span>)}
-                        {badge(r.hot)}
+                        <SmBadge n={r.hot} />
                       </div>
                     )}
                     {r.type === 'table' && (
@@ -187,7 +188,7 @@ const hot = (n) => n ? ` sm-hot` : '';
                 <div class="sm-dialog-btns">
                   {s.dialog.buttons.map((b) => (
                     <button type="button" class={`sm-btn${b.primary ? ' is-primary' : ''}${hot(b.hot)}${b.advance ? ' sm-advance' : ''}`}
-                      {...(b.advance ? { 'data-advance': true } : {})}>{b.label}{badge(b.hot)}</button>
+                      {...(b.advance ? { 'data-advance': true } : {})}>{b.label}<SmBadge n={b.hot} /></button>
                   ))}
                 </div>
               )}
@@ -201,7 +202,7 @@ const hot = (n) => n ? ` sm-hot` : '';
                 <thead>
                   <tr>
                     <th class="sm-corner"></th>
-                    {s.grid.cols.map((c) => <th>{c.label || c}{c.hot ? badge(c.hot) : ''}</th>)}
+                    {s.grid.cols.map((c) => <th>{c.label || c}<SmBadge n={c.hot} /></th>)}
                   </tr>
                 </thead>
                 <tbody>
@@ -226,7 +227,7 @@ const hot = (n) => n ? ` sm-hot` : '';
               <div class="sm-outline">
                 <div class="sm-ol-h">Outline</div>
                 {(s.outline || []).map((o) => (
-                  <div class={`sm-ol-item${o.ind ? ' sm-ol-ind' : ''}`}>{o.t || o}{o.hot ? badge(o.hot) : ''}</div>
+                  <div class={`sm-ol-item${o.ind ? ' sm-ol-ind' : ''}`}>{o.t || o}<SmBadge n={o.hot} /></div>
                 ))}
               </div>
               <div class="sm-opane">
@@ -255,7 +256,7 @@ const hot = (n) => n ? ` sm-hot` : '';
               <div class="sm-finder-path">{s.path}</div>
               {s.files.map((f) => (
                 <div class={`sm-file${f.sel ? ' is-sel' : ''}${hot(f.hot)}`}>
-                  <span class="sm-file-ic">{f.dir ? '📁' : '📄'}</span>{f.name}{badge(f.hot)}
+                  <span class="sm-file-ic">{f.dir ? '📁' : '📄'}</span>{f.name}<SmBadge n={f.hot} />
                 </div>
               ))}
             </div>
@@ -276,7 +277,7 @@ const hot = (n) => n ? ` sm-hot` : '';
               {...(s.advanceTab === 'data' ? { 'data-advance': true } : {})}>Data View</button>
             <button type="button" class={`smw-tab${s.activeTab === 'variable' ? ' is-active' : ''}`} data-tab="variable"
               {...(s.advanceTab === 'variable' ? { 'data-advance': true } : {})}>Variable View</button>
-            {s.tabHot ? badge(s.tabHot) : ''}
+            <SmBadge n={s.tabHot} />
           </div>
         )}
       </div>
