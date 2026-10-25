@@ -1,0 +1,294 @@
+{
+  "dataset": "p1_B01_HA (1).sav (exercises/bai_1) — file bài tập nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Bảng output = số liệu thật tái tính từ file nguồn bằng Python (NOT_RUN — đối chiếu khi chạy SPSS thật). Grid Data View chỉ minh họa.",
+  "guides": {
+    "d04-select-age": {
+      "step": "Bước 1–2",
+      "title": "Select Cases với điều kiện kép (tuổi 50–70)",
+      "purpose": "Lọc nhóm tuổi 50–70 bằng điều kiện kép `&` — phần khó nhất của Câu 8.",
+      "where": "Select Cases → All cases đã chạy (để trả về mẫu đầy đủ sau lần lọc Nam)",
+      "menuPath": ["Data", "Select Cases…", "If condition is satisfied", "If…", "Tuoi >= 50 & Tuoi <= 70"],
+      "osNote": { "both": "Toán tử điều kiện: >= <= = & (và) | (hoặc). Đề 'tuổi 50–70' = khoảng đóng, gồm cả 50 lẫn 70." },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Select Cases",
+          "dialog": {
+            "title": "Select Cases",
+            "rows": [
+              { "type": "radio", "label": "Select", "options": [
+                { "label": "All cases", "hot": 1 },
+                { "label": "If condition is satisfied", "checked": true, "hot": 2 },
+                { "label": "Random sample of cases" },
+                { "label": "Based on time or case range" },
+                { "label": "Use filter variable" }
+              ]},
+              { "type": "radio", "label": "Output", "options": [
+                { "label": "Filter out unselected cases", "checked": true },
+                { "label": "Copy selected cases to a new dataset" },
+                { "label": "Delete unselected cases" }
+              ]},
+              { "type": "note", "text": "Quan trọng: trước khi lọc mẫu mới, phải chạy All cases một lần để bỏ lọc cũ — nếu không bạn sẽ lọc CHỒNG lên mẫu Nam." }
+            ],
+            "buttons": [
+              { "label": "If…", "hot": 3, "advance": true },
+              { "label": "OK", "primary": true, "hot": 6 },
+              { "label": "Reset" }, { "label": "Cancel" }
+            ]
+          },
+          "caption": "Chọn 'If condition is satisfied' → If… để gõ điều kiện kép.",
+          "callouts": [
+            { "n": 1, "label": "Nhớ All cases khi đổi mẫu" },
+            { "n": 2, "label": "If condition is satisfied" },
+            { "n": 3, "label": "If…" },
+            { "n": 6, "label": "OK" }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Select Cases: If",
+          "dim": true,
+          "dialog": {
+            "title": "Select Cases: If",
+            "rows": [
+              { "type": "lists", "left": ["ID", "Tuoi", "GTinh", "DToc", "HVan", "NNghiep"], "right": [], "rightLabel": "" },
+              { "type": "field", "label": "", "value": "Tuoi >= 50 & Tuoi <= 70", "hot": 4 },
+              { "type": "note", "text": "Điều kiện KÉP: hai vế nối bằng & (và). Viết 'Tuoi>=50 & Tuoi<=70' hoặc dùng RANGE(Tuoi,50,70). Sai phổ biến: dùng > và < thuần sẽ loại người đúng 50 và 70." }
+            ],
+            "buttons": [
+              { "label": "Continue", "primary": true, "advance": true, "hot": 5 },
+              { "label": "Cancel" }
+            ]
+          },
+          "caption": "Gõ `Tuoi >= 50 & Tuoi <= 70` → Continue → OK.",
+          "callouts": [
+            { "n": 4, "label": "Điều kiện: Tuoi >= 50 & Tuoi <= 70" },
+            { "n": 5, "label": "Continue" }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Frequencies HVan (mẫu tuổi 50–70)",
+          "outline": [
+            { "t": "Frequencies" },
+            { "t": "Statistics" },
+            { "t": "HVan [Trình độ học vấn]", "ind": true }
+          ],
+          "tables": [
+            {
+              "title": "HVan [Trình độ học vấn]",
+              "cols": ["", "Frequency", "Percent", "Valid Percent", "Cumulative Percent"],
+              "rows": [
+                [{ "label": "Không biết chữ" }, { "label": "44" }, { "label": "12,0" }, { "label": "12,0" }, { "label": "12,0" }],
+                [{ "label": "Tiểu học" }, { "label": "75" }, { "label": "20,4" }, { "label": "20,4" }, { "label": "32,3" }],
+                [{ "label": "THCS" }, { "label": "84" }, { "label": "22,8" }, { "label": "22,8" }, { "label": "55,2" }],
+                [{ "label": "THPT" }, { "label": "120" }, { "label": "32,6" }, { "label": "32,6" }, { "label": "87,8" }],
+                [{ "label": "Trung cấp, cao đẳng" }, { "label": "28" }, { "label": "7,6" }, { "label": "7,6" }, { "label": "95,4" }],
+                [{ "label": "Đại học, sau đại học" }, { "label": "17" }, { "label": "4,6" }, { "label": "4,6" }, { "label": "100,0" }],
+                [{ "label": "Total" }, { "label": "368", "hot": 6 }, { "label": "100,0" }, { "label": "100,0" }, { "label": "" }]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Total = 368 người tuổi 50–70 — mẫu số mới của bảng này.",
+          "caption": "Kiểm tra Total: 368 = số người độ tuổi 50–70 trong file.",
+          "callouts": [{ "n": 6, "label": "Total = 368 — chỉ người 50–70" }]
+        }
+      ],
+      "expected": "Bảng HVan trên mẫu tuổi 50–70: Total 368; THPT nhiều nhất (120, 32,6%).",
+      "ifWrong": [
+        "Total nhỏ hơn 368 nhiều → đã lọc chồng lên mẫu Nam trước đó: chạy All cases rồi lọc lại.",
+        "Total = 620 → điều kiện chưa được áp (chưa OK ở hộp chính).",
+        "Thiếu người 50/70 tuổi → đã dùng > và < thay vì >= và <=.",
+        "Nếu muốn lọc giới tính thay vì tuổi → điều kiện là GTinh = 2 (Nam) như Ngày 01."
+      ]
+    },
+
+    "d04-split": {
+      "step": "Bước 3",
+      "title": "Split File theo giới tính — hai bảng tần số",
+      "purpose": "Tách output theo nhóm để so sánh Nữ vs Nam trên cùng phân tích (Câu 9).",
+      "where": "Select Cases → All cases (mẫu đầy đủ, không filter)",
+      "menuPath": ["Data", "Split File…", "Compare groups", "GTinh → Groups Based on", "OK"],
+      "osNote": { "both": "Split File KHÔNG xóa/che dòng nào — chỉ bảo SPSS lặp phân tích cho từng nhóm." },
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "p1_B01_HA (1).sav — Data Editor",
+          "openMenu": "Data",
+          "items": [
+            { "label": "Define Variable Properties…" },
+            { "label": "Sort Cases…" },
+            { "label": "Select Cases…" },
+            { "label": "Weight Cases…" },
+            { "label": "Split File…", "hot": 1, "advance": true }
+          ],
+          "grid": {
+            "cols": ["ID", "Tuoi", "GTinh", "HVan", "…"],
+            "rows": [
+              [{ "label": "1" }, { "label": "72" }, { "label": "Nam" }, { "label": "THCS" }, { "label": "…" }],
+              [{ "label": "2" }, { "label": "65" }, { "label": "Nữ" }, { "label": "THPT" }, { "label": "…" }]
+            ]
+          },
+          "caption": "Data → Split File…",
+          "callouts": [{ "n": 1, "label": "Split File…" }]
+        },
+        {
+          "kind": "dialog",
+          "title": "Split File",
+          "dim": true,
+          "dialog": {
+            "title": "Split File",
+            "rows": [
+              { "type": "radio", "label": "", "options": [
+                { "label": "Analyze all cases, do not create groups" },
+                { "label": "Compare groups", "checked": true, "hot": 2 },
+                { "label": "Organize output by groups" }
+              ]},
+              { "type": "lists", "left": ["ID", "Tuoi", "DToc", "HVan", "NNghiep", "Cannang"], "right": ["GTinh"], "rightLabel": "Groups Based on:", "hot": 3 },
+              { "type": "note", "text": "Compare groups: mỗi nhóm giá trị của GTinh được phân tích RIÊNG — output ra hai bảng (Nữ rồi Nam). 'Organize output by groups' gộp vào một bảng chung." }
+            ],
+            "buttons": [
+              { "label": "OK", "primary": true, "advance": true, "hot": 4 },
+              { "label": "Reset" }, { "label": "Cancel" }
+            ]
+          },
+          "caption": "Compare groups → đưa `GTinh` vào Groups Based on → OK. Thanh trạng thái sẽ ghi 'Split File On'.",
+          "callouts": [
+            { "n": 2, "label": "Compare groups" },
+            { "n": 3, "label": "GTinh → Groups Based on" },
+            { "n": 4, "label": "OK" }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Frequencies HVan (Split theo GTinh)",
+          "outline": [
+            { "t": "Frequencies" },
+            { "t": "GTinh = Nữ", "ind": true, "hot": 5 },
+            { "t": "GTinh = Nam", "ind": true, "hot": 6 }
+          ],
+          "tables": [
+            {
+              "title": "HVan — GTinh = Nữ",
+              "cols": ["", "Frequency", "Valid Percent"],
+              "rows": [
+                [{ "label": "Không biết chữ" }, { "label": "53" }, { "label": "14,1" }],
+                [{ "label": "Tiểu học" }, { "label": "93" }, { "label": "24,7" }],
+                [{ "label": "THCS" }, { "label": "90" }, { "label": "23,9" }],
+                [{ "label": "THPT" }, { "label": "114" }, { "label": "30,3" }],
+                [{ "label": "Trung cấp, cao đẳng" }, { "label": "23" }, { "label": "6,1" }],
+                [{ "label": "Đại học, sau đại học" }, { "label": "3", "hot": 7 }, { "label": "0,8", "hot": 7 }],
+                [{ "label": "Total" }, { "label": "376" }, { "label": "100,0" }]
+              ]
+            },
+            {
+              "title": "HVan — GTinh = Nam",
+              "cols": ["", "Frequency", "Valid Percent"],
+              "rows": [
+                [{ "label": "Không biết chữ" }, { "label": "48" }, { "label": "19,7" }],
+                [{ "label": "Tiểu học" }, { "label": "36" }, { "label": "14,8" }],
+                [{ "label": "THCS" }, { "label": "51" }, { "label": "20,9" }],
+                [{ "label": "THPT" }, { "label": "67" }, { "label": "27,5" }],
+                [{ "label": "Trung cấp, cao đẳng" }, { "label": "19" }, { "label": "7,8" }],
+                [{ "label": "Đại học, sau đại học" }, { "label": "23", "hot": 7 }, { "label": "9,4", "hot": 7 }],
+                [{ "label": "Total" }, { "label": "244" }, { "label": "100,0" }]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Cột Nam khớp hệt kết quả Select Cases ở Câu 8a — cách tự kiểm tra.",
+          "caption": "Hai bảng: Nữ (376) và Nam (244) — so sánh CÙNG một mức học vấn giữa hai bảng bằng cột %.",
+          "callouts": [
+            { "n": 5, "label": "Bảng 1: nhóm Nữ (376)" },
+            { "n": 6, "label": "Bảng 2: nhóm Nam (244)" },
+            { "n": 7, "label": "ĐH/SĐH: nữ 0,8% vs nam 9,4% — so % chứ không so số lượng" }
+          ]
+        }
+      ],
+      "expected": "Hai bảng HVan liền nhau — Nữ Total 376, Nam Total 244; status bar 'Split File On'.",
+      "ifWrong": [
+        "Chỉ có một bảng → chưa bật Split (hoặc đang filter nên chỉ còn một nhóm — kiểm tra Select Cases).",
+        "Mọi output sau này cứ tách đôi → Split còn bật: Data → Split File → Analyze all cases → OK.",
+        "Bảng gộp chung một bảng lớn thay vì hai bảng → đã chọn 'Organize output by groups' — cũng đúng nhưng khác trình bày; đổi lại Compare groups nếu muốn giống bài."
+      ]
+    },
+
+    "d04-means": {
+      "step": "Bước 4–5",
+      "title": "Means — bảng chỉ số theo nhóm (và 2 tầng nhóm)",
+      "purpose": "Lấy Mean/SD của Tuoi theo giới (Câu 6) và theo giới × tiền sử HA gia đình (Câu 41) trong một bảng.",
+      "where": "Split File → Analyze all cases đã tắt",
+      "menuPath": ["Analyze", "Compare Means", "Means…", "Tuoi → Dependent", "GTinh → Independent", "OK"],
+      "osNote": { "both": "Means không in Min/Max/Range — cần Min/Max thì tick trong Options… hoặc tính Range = Max−Min từ Descriptives." },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Means",
+          "dialog": {
+            "title": "Means",
+            "rows": [
+              { "type": "lists", "left": ["ID", "GTinh", "DToc", "HVan", "HA.GDinh", "Chieucao", "Cannang"], "right": ["Tuoi"], "rightLabel": "Dependent List:", "hot": 1 },
+              { "type": "lists", "left": [], "right": ["GTinh"], "rightLabel": "Independent List:", "hot": 2, "leftLabel": "Layer 1 of 1" },
+              { "type": "note", "text": "Dependent = biến SỐ cần mô tả (Tuoi). Independent = biến NHÓM (GTinh). Nút Next thêm tầng nhóm thứ hai (HA.GDinh) cho bảng 2 chiều." }
+            ],
+            "buttons": [
+              { "label": "Previous" }, { "label": "Next", "hot": 3 },
+              { "label": "Options…" },
+              { "label": "OK", "primary": true, "advance": true, "hot": 4 },
+              { "label": "Reset" }, { "label": "Cancel" }
+            ]
+          },
+          "caption": "Tuoi → Dependent · GTinh → Independent → OK. (Next → HA.GDinh cho Câu 41.)",
+          "callouts": [
+            { "n": 1, "label": "Tuoi → Dependent List" },
+            { "n": 2, "label": "GTinh → Independent List" },
+            { "n": 3, "label": "Next — thêm tầng HA.GDinh (Câu 41)" },
+            { "n": 4, "label": "OK" }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Report (Means)",
+          "outline": [
+            { "t": "Means" },
+            { "t": "Report", "ind": true }
+          ],
+          "tables": [
+            {
+              "title": "Report — Tuoi (theo GTinh, Câu 6)",
+              "cols": ["GTinh", "Mean", "N", "Std. Deviation"],
+              "rows": [
+                [{ "label": "Nữ", "hot": 5 }, { "label": "67,16" }, { "label": "376" }, { "label": "11,060" }],
+                [{ "label": "Nam", "hot": 6 }, { "label": "66,51" }, { "label": "244" }, { "label": "10,738" }],
+                [{ "label": "Total" }, { "label": "66,90" }, { "label": "620" }, { "label": "10,927" }]
+              ]
+            },
+            {
+              "title": "Report — Tuoi (GTinh × HA.GDinh, Câu 41)",
+              "cols": ["GTinh", "HA.GDinh", "Mean", "N"],
+              "rows": [
+                [{ "label": "Nữ" }, { "label": "Có" }, { "label": "69,02" }, { "label": "185" }],
+                [{ "label": "Nữ" }, { "label": "Không" }, { "label": "65,36" }, { "label": "191" }],
+                [{ "label": "Nam" }, { "label": "Có" }, { "label": "67,15" }, { "label": "188" }],
+                [{ "label": "Nam" }, { "label": "Không" }, { "label": "64,38" }, { "label": "56" }]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Đọc hướng mã cẩn thận: GTinh=1 là Nữ (376), GTinh=2 là Nam (244).",
+          "caption": "Một bảng gọn: Mean/N/SD theo từng nhóm — và bảng 4 ô khi thêm tầng thứ hai.",
+          "callouts": [
+            { "n": 5, "label": "Dòng Nữ: n=376, mean 67,16" },
+            { "n": 6, "label": "Dòng Nam: n=244, mean 66,51" }
+          ]
+        }
+      ],
+      "expected": "Bảng Report: Nữ 376/67,16/11,06 · Nam 244/66,51/10,74; bảng 2 tầng cho Câu 41.",
+      "ifWrong": [
+        "Bảng bị tách đôi theo nhóm → Split File còn bật: tắt bằng Analyze all cases.",
+        "Không thấy Min/Max → Means không in; tick trong Options… hoặc tính Range=Max−Min.",
+        "Đảo nghĩa nhóm (nữ=2) → đọc nhầm hướng mã GTinh; nhớ 1=Nữ, 2=Nam.",
+        "Đưa nhầm biến vào sai ô → Tuoi phải vào Dependent (được mô tả), GTinh vào Independent (nhóm)."
+      ]
+    }
+  }
+}

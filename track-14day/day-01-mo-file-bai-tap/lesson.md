@@ -31,6 +31,10 @@
 
 > ⚠️ **Quy tắc vàng của khóa học:** không bao giờ sửa/lưu đè file gốc trong `exercises/`.
 > Hôm nay chỉ MỞ và NHÌN — chưa lưu gì. Từ ngày mai mọi biến đổi sẽ lưu ra file `*_work.sav` mới.
+>
+> 📁 **Chưa sắp xếp file?** Xem [Chuẩn bị dữ liệu thực hành](/tai-lieu/chuan-bi-du-lieu/) —
+> cấu trúc `SPSS_Practice/sources|workspace|outputs` và cách chuyển file sang MacBook nếu
+> bạn học web trên Windows mà làm SPSS trên máy khác.
 
 ## D. Kiến thức cần biết (vừa đủ)
 

@@ -56,6 +56,39 @@ mô phỏng thao tác → làm mẫu có hướng dẫn → tự giải bài g�
 Pool luyện thêm (optional, cùng chủ đề — không dạy trước): P1-Q07, Q19, Q20, Q23, Q25, Q27,
 Q29, Q30, Q32, Q34–Q37, Q39, Q42.
 
+## 3a. Khối lượng học — phân tầng bài tập (rà soát Task 14)
+
+Nhịp mục tiêu: **90–120 phút/ngày** cho người mới hoàn toàn. Không phải ~45 bản ghi "core"
+đều là bắt buộc — mỗi ngày chỉ có một tập nhỏ **ESSENTIAL** (phải xong để đạt kỹ năng mục
+tiêu), phần còn lại là **REINFORCEMENT** (luyện thêm cùng kỹ năng) hoặc **ADVANCED**
+(hoãn/tùy chọn khi thiếu nền). Mọi mã bài gốc vẫn được tham chiếu đầy đủ.
+
+| Ngày | ESSENTIAL (bắt buộc) | REINFORCEMENT | Thao tác mới | Ước lượng phút* | Độ khó người mới |
+|---|---|---|---|---|---|
+| 01 | P1-Q01 | BT tìm nữ nhẹ nhất, người già nhất | 5 (mở file, 2 view, Values, Select, Sort) | 80–100 | Dễ–TB (mới mọi thứ) |
+| 02 | P1-Q02, P1-Q38 | đọc % tích lũy, Valid vs Percent | 2 (Frequencies, Statistics→Percentiles) | 80–95 | Dễ |
+| 03 | P1-Q03, P1-Q04 | P1-Q42 (min–max nhóm biến) | 2 (Descriptives, Options) | 80–95 | Dễ |
+| 04 | P1-Q08, P1-Q09, P1-Q06 | P1-Q41; pool Q23/Q25/Q27/Q30 | 3 (If-kép, Split File, Means) | 95–110 | TB (3 khái niệm "chia nhóm") |
+| 05 | P1-Q05, P1-Q17, P1-Q21, P2-Q01 | P1-Q18; pool Q19/Q29/Q32/Q34–37 | 4 (Crosstabs, Cells%, Chi-square, Weight+Risk) | 100–120 | TB–Khó (bảng chiều %, 3 file) |
+| 06 | P1-Q10, P1-Q11, P1-Q12 | BT4 kiểm chứng chéo Benh.MT | 3 (Compute, Recode-Diff, Count) | 95–110 | TB (lần đầu biến đổi + Save As) |
+| 07 | P1-Q14, P1-Q13 | P1-Q07 (Multiple Response) | 3 (tần số soi lỗi, recode missing, xử lý phiếu) | 90–110 | TB |
+| 08 | P1-Q22, P2-Q02, P2-Q03 | P1-Q40; Q20 McNemar | 3 (GOF chi-square, binomial, McNemar) | 95–115 | TB–Khó |
+| 09 | P2-Q04, P2-Q05, P2-Q07 | — | 2 (one-sample t, independent t) | 90–110 | TB |
+| 10 | P2-Q09, P2-Q13, P2-Q06 | P2-Q08 | 2 (paired t, one-way ANOVA) | 95–115 | TB–Khó |
+| 11 | P2-Q10, P2-Q11 | P2-Q12 (ADVANCED — chỉ giới thiệu) | 2 (correlate, regression đơn) | 90–110 | TB–Khó |
+| 12 | Bài TH3: codebook + khám phá File5 | — | 1 (chu trình phân tích tự chọn) | 90–110 | TB |
+| 13 | Bài TH3: phân tích + báo cáo ngắn | — | 0 (tổng hợp) | 100–120 | TB–Khó |
+| 14 | P1-Q24, Q26, Q31, Q33, Q43, P2-Q08 | — | 0 (ôn tập có chọn lọc) | 100–120 | TB |
+
+*Ước lượng = hướng dẫn + tự làm + kiểm chứng/giải thích, cho người lần đầu dùng SPSS.
+Bài REINFORCEMENT làm được trong 10–20 phút/bài nhờ kỹ năng đã demo — không tính vào
+ngân sách bắt buộc. Nếu trễ nhịp: bỏ REINFORCEMENT, giữ nguyên ESSENTIAL.
+
+**Nguyên tắc phân tầng:** ESSENTIAL = bài bắt buộc để hình thành kỹ năng mục tiêu của ngày;
+REINFORCEMENT = cùng công cụ, thêm cặp biến mới (chuyển sang ngày hôm sau không sao);
+ADVANCED = defer có lý do (mục 6). Ngày 05 là ngày nặng nhất — nếu vượt 120 phút, chuyển
+P1-Q18 xuống pool và bắt đầu Ngày 06 sau.
+
 ## 4. Dataset theo ngày
 
 | Dataset (trong `exercises/`) | Dùng ngày | Nội dung |
@@ -94,6 +127,7 @@ Q29, Q30, Q32, Q34–Q37, Q39, Q42.
 - Mọi con số kỳ vọng trong bài học & đáp án được tái tính trực tiếp từ file `.sav` bằng Python
   (`pyreadstat`/`pandas`/`scipy`) — ghi trong `curriculum/exercise-verified-stats.md`, nhãn `NOT_RUN`.
 - Menu SPSS viết theo tài liệu IBM SPSS; chưa chạy pilot thật → `MAC_SPSS_VERIFICATION_PENDING`.
-- Ngày 01–03: xây dựng đầy đủ (lesson + workbook + đáp án + mô phỏng SPSS).
-- Ngày 04–14: **DRAFT** — đã ánh xạ đầy đủ bài tập nguồn + số liệu kiểm chứng; hoàn thiện
-  hướng dẫn & mô phỏng theo mẫu ngày 01–03.
+- Ngày 01–06: xây dựng đầy đủ (lesson + workbook + đáp án + mô phỏng SPSS) —
+  `CONTENT_READY_PENDING_HUMAN_PILOT` (chưa có học viên thật chạy thử).
+- Ngày 07–14: **DRAFT** — đã ánh xạ đầy đủ bài tập nguồn + số liệu kiểm chứng; hoàn thiện
+  hướng dẫn & mô phỏng theo mẫu ngày 01–06.

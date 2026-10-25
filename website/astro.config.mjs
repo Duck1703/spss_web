@@ -34,6 +34,7 @@ export default defineConfig({
           { label: 'Lộ trình 14 ngày', slug: 'lo-trinh-14-ngay' },
           { label: 'Dữ liệu thực hành', slug: 'du-lieu' },
           { label: 'Chuẩn bị SPSS trên Mac', slug: 'tai-lieu/bat-dau-mac' },
+          { label: 'Chuẩn bị dữ liệu thực hành', slug: 'tai-lieu/chuan-bi-du-lieu' },
         ]},
         { label: 'Lộ trình 14 ngày — Exercise-first', items: [
           { label: 'Ngày 01 · Mở file bài tập & đọc dữ liệu', slug: 'd01/bai-hoc' },

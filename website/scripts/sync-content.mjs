@@ -25,7 +25,7 @@ function write(rel, content) {
   changed++;
   console.log('  +', rel);
 }
-function read(rel) { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
+function read(rel) { return fs.readFileSync(path.join(ROOT, rel), 'utf8').replace(/\r\n?/g, '\n'); }
 
 /** Rewrite relative .md links from canonical files → website routes; strip links to internal files. */
 function fixLinks(md) {
@@ -65,11 +65,11 @@ const DAYS = [
     files: [P1SAV] },
   { dir: 'day-03-mo-ta-bien-so', slug: 'd03', num: '03', title: 'Ngày 03 — Thống kê mô tả biến số', ready: true,
     files: [P1SAV] },
-  { dir: 'day-04-tom-tat-theo-nhom', slug: 'd04', num: '04', title: 'Ngày 04 — Tóm tắt theo nhóm',
+  { dir: 'day-04-tom-tat-theo-nhom', slug: 'd04', num: '04', title: 'Ngày 04 — Tóm tắt theo nhóm', ready: true,
     files: [P1SAV] },
-  { dir: 'day-05-bang-cheo-chi-square', slug: 'd05', num: '05', title: 'Ngày 05 — Bảng chéo và Chi-square',
+  { dir: 'day-05-bang-cheo-chi-square', slug: 'd05', num: '05', title: 'Ngày 05 — Bảng chéo và Chi-square', ready: true,
     files: [P1SAV, { savLocal: 'exercises/bai_1/P1_B02 CrossTab (2).sav', note: 'cho P1-Q21' }, { savLocal: 'exercises/bai_2/File1.sav', note: 'cho P2-Q01' }] },
-  { dir: 'day-06-bien-doi-du-lieu', slug: 'd06', num: '06', title: 'Ngày 06 — Biến đổi dữ liệu',
+  { dir: 'day-06-bien-doi-du-lieu', slug: 'd06', num: '06', title: 'Ngày 06 — Biến đổi dữ liệu', ready: true,
     files: [P1SAV] },
   { dir: 'day-07-kiem-tra-du-lieu-sai', slug: 'd07', num: '07', title: 'Ngày 07 — Soi & xử lý dữ liệu sai',
     files: [P1SAV] },
@@ -102,7 +102,7 @@ function expandExercises(md) {
       '',
       `<div class="src-ex">`,
       `<div class="src-ex__head"><span class="src-ex__id">${id}</span>`,
-      `<span class="src-ex__meta">${PDF_NAME[q.src] || q.src} · ${q.ref} · trang ${q.page} · ${q.difficulty} · ~${q.time} phút · vai trò: ${q.role}</span></div>`,
+      `<span class="src-ex__meta">${PDF_NAME[q.src] || q.src} · ${q.ref} · trang ${q.page} · ${q.difficulty} · ~${q.time} phút · vai trò: ${q.role}${q.tier ? ` · tầng: ${q.tier === 'essential' ? 'BẮT BUỘC' : 'LUYỆN THÊM'}` : ''}</span></div>`,
       `<div class="src-ex__sum">${q.summary}</div>`,
       `<div class="src-ex__meta2">Dataset: <code>${q.dataset}</code>${vars ? ` · Biến: ${vars}` : ''} · Sản phẩm: ${q.artifact}</div>`,
       `</div>`,
@@ -144,7 +144,9 @@ function fixLinksTrack(md, slug) {
 /** Bỏ dòng trạng thái nội bộ ở header canonical (DRAFT / MAC_SPSS_VERIFICATION_PENDING…) —
  *  thay bằng banner learner-facing do frontmatter + notice tự quản. */
 function stripInternalStatus(md) {
-  return md.replace(/^> \*\*Trạng thái:\*\*[^\n]*\n(?:> [^\n]*\n)*/gm, '');
+  // Xóa dòng Trạng thái + các dòng > tiếp nối KHÔNG mở đầu bằng **Key:** mới
+  // (DRAFT days có status nhiều dòng; dòng "**Bài tập nguồn hôm nay:**" phải giữ lại).
+  return md.replace(/^> \*\*Trạng thái:\*\*[^\n]*\n(?:> (?!\*\*)[^\n]*\n)*/gm, '');
 }
 
 /** Inject <ExerciseCard> sau mỗi mục `N.` trong section `## BT…` / `## Phần …` của workbook 14 ngày.
@@ -253,7 +255,7 @@ function syncTrackRoadmap() {
   // Gắn link bài học vào cột Ngày trong bảng lịch.
   md = md.replace(/^\| (\d{2}) \|/gm, (_, n) => `| [${n} →](/d${n}/bai-hoc/) |`);
   const status = `> 🚀 **Đây là lộ trình mặc định hiện tại** — bài tập nguồn thật (P1-Q01…P2-Q15) quyết định nội dung.\n`
-    + `> Ngày 01–03 READY; Ngày 04–14 DRAFT (đã ánh xạ bài tập, đang hoàn thiện). `
+    + `> Ngày 01–06 READY (CONTENT_READY_PENDING_HUMAN_PILOT); Ngày 07–14 DRAFT (đã ánh xạ bài tập, đang hoàn thiện). `
     + `Số liệu cross-check Python (NOT_RUN); menu SPSS/macOS chờ verify thủ công.\n`
     + `> Lộ trình cũ quanh dataset giả lập đã lưu ở \`archive/\`; chương trình 16 tuần ở mục [Tham khảo](/lo-trinh/).\n\n`;
   write('lo-trinh-14-ngay.md', `---\ntitle: Lộ trình 14 ngày — Exercise-first\ndescription: Học SPSS qua bài tập thật — mỗi ngày mở bằng bài tập nguồn (P1-Q01…P2-Q15), lý thuyết vừa đủ để giải.\n---\n\n${BANNER}${status}${md}`);
@@ -426,6 +428,7 @@ function syncDocs() {
   write('tai-lieu/muc-tieu.md', `---\ntitle: Mục tiêu khóa học\ndescription: Kết quả học tập đo được — sau khóa này bạn làm được gì.\n---\n\n${BANNER}${fixLinks(read('curriculum/learning-outcomes.md'))}`);
   write('tai-lieu/ban-do-khai-niem.md', `---\ntitle: Bản đồ khái niệm\ndescription: Các khái niệm thống kê xuất hiện ở module nào.\n---\n\n${BANNER}${fixLinks(read('curriculum/concept-map.md'))}`);
   write('tai-lieu/bat-dau-mac.md', `---\ntitle: Chuẩn bị SPSS trên MacBook\ndescription: Checklist trước khi mở SPSS lần đầu — cần ở M02.\n---\n\n${BANNER}${fixLinks(read('START-HERE-MAC.md'))}`);
+  write('tai-lieu/chuan-bi-du-lieu.md', `---\ntitle: Chuẩn bị dữ liệu thực hành\ndescription: File .sav nguồn đi đâu, làm việc ở đâu — hai kịch bản Windows/Mac, quy tắc không ghi đè gốc.\n---\n\n${BANNER}${fixLinks(read('curriculum/spss-practice-setup.md'))}`);
 }
 
 console.log('Syncing canonical → website/src/content/docs/ ...');

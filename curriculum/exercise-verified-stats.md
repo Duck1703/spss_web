@@ -97,6 +97,35 @@ GTinh
 1.0      376  41.0  97.0  67.16  11.06
 2.0      244  41.0  94.0  66.51  10.74```
 
+## p1_B01_HA (1).sav — bổ sung Ngày 04–06 (Task 14)
+```
+Q05 TTrang.KTe x GTinh:
+GTinh          1.0  2.0
+TTrang.KTe             
+1.0 (ngheo)    131   98   -> %hang: 57.2/42.8 | %cot: 34.8/40.2
+2.0 (khong)    245  146   -> %hang: 62.7/37.3 | %cot: 65.2/59.8
+Pearson chi2=1.800 p=0.1797 | Yates=1.579 p=0.2089 | Fisher=0.2015
+
+Q08a HVan|GTinh=2 (n=244): {1:48, 2:36, 3:51, 4:67, 5:19, 6:23}
+Q08b HVan|50<=Tuoi<=70 (n=368): {1:44, 2:75, 3:84, 4:120, 5:28, 6:17}
+Q09 = crosstab HVan x GTinh (xem tren — cot GTinh=2 khop Q08a)
+Q06 Tuoi by GTinh: nu(1) n=376 mean=67.16 sd=11.06 min=41 max=97
+                   nam(2) n=244 mean=66.51 sd=10.74 min=41 max=94
+
+Q10 BMI=Cannang/(Chieucao/100)^2: n=620 mean=20.42 sd=1.91 min=15.77 max=28.91
+  (Chieucao don vi CM — can /100; sai cong thuc cho BMI~0.002)
+Q11 DoTuoi recode [40-49,50-59,60-69,>=70] -> {1:54, 2:40, 3:309, 4:217}; >=70 = 217 (35.0%)
+Q12 SoBenhMan = count(=1) cua 5 bien nhi phan {Timmach,Tieuduong,Than,Gan,Gut}:
+  {0:326, 1:264, 2:30}; >=2 benh = 30 (4.8%); >=1 benh = 294 (47.4%)
+  kiem chung cheo: dem o khong trong Benh.MT_1+MT_2 -> het {0:326,1:264,2:30}
+
+Q17 Tieuduong: Pearson=1.075 p=0.2998 | Yates=0.900 p=0.3429 | Fisher=0.3309
+Q17 Gan: Pearson=0.175 p=0.6761 | Yates=0.011 p=0.9152 | Fisher=0.7592 (expmin=4.33 <5)
+Q18 TSu.RBia: Pearson=320.768 p<0.001 | Yates=317.823
+```
+> ⚠️ Chi-square 2×2: scipy `chi2_contingency` mặc định hiệu chỉnh Yates — phải truyền
+> `correction=False` để ra dòng "Pearson Chi-Square" của SPSS. (Task 14 đã sửa lỗi hoán đổi.)
+
 ## File1.sav / File2_Phan2.sav / File3/File4
 ```
 File1 n= 50

@@ -1,0 +1,263 @@
+{
+  "dataset": "p1_B01_work.sav (bản làm việc của p1_B01_HA (1).sav) — exercises/bai_1, local-only",
+  "audit": "external-sav",
+  "note": "Bảng output = số liệu thật tái tính từ file nguồn bằng Python (NOT_RUN — đối chiếu khi chạy SPSS thật). Grid Data View chỉ minh họa.",
+  "guides": {
+    "d06-compute": {
+      "step": "Bước 1",
+      "title": "Compute Variable — tạo BMI (Câu 10)",
+      "purpose": "Tạo biến mới từ công thức toán; tránh lỗi đơn vị cm→m kinh điển.",
+      "where": "Đã Save As → p1_B01_work.sav (không đụng file gốc)",
+      "menuPath": ["Transform", "Compute Variable…", "Target: BMI", "Cannang / (Chieucao/100)**2", "OK"],
+      "osNote": { "both": "Lũy thừa viết ** (hoặc dùng hàm PWR). Toán tử: + - * / ** và ngoặc (). Gõ trực tiếp hoặc bấm bàn phím số trong hộp." },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Compute Variable",
+          "dialog": {
+            "title": "Compute Variable",
+            "rows": [
+              { "type": "field", "label": "Target Variable:", "value": "BMI", "hot": 1 },
+              { "type": "lists", "left": ["ID", "Tuoi", "GTinh", "Chieucao", "Cannang", "HVan"], "right": [], "rightLabel": "" },
+              { "type": "field", "label": "Numeric Expression:", "value": "Cannang / (Chieucao/100)**2", "hot": 2 },
+              { "type": "note", "text": "Chieucao đang là CM — phải (Chieucao/100) để ra mét trước khi bình phương. Quên chia 100 → BMI ≈ 0,002." }
+            ],
+            "buttons": [
+              { "label": "Type & Label…", "hot": 3 },
+              { "label": "OK", "primary": true, "advance": true, "hot": 4 },
+              { "label": "Reset" }, { "label": "Cancel" }
+            ]
+          },
+          "caption": "Target `BMI` · Expression `Cannang / (Chieucao/100)**2` → OK.",
+          "callouts": [
+            { "n": 1, "label": "Tên biến mới: BMI" },
+            { "n": 2, "label": "Công thức — nhớ (Chieucao/100)" },
+            { "n": 3, "label": "Type & Label… (đặt nhãn đẹp)" },
+            { "n": 4, "label": "OK" }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Descriptives BMI",
+          "outline": [
+            { "t": "Descriptives" },
+            { "t": "Descriptive Statistics", "ind": true }
+          ],
+          "tables": [
+            {
+              "title": "Descriptive Statistics",
+              "cols": ["", "N", "Minimum", "Maximum", "Mean", "Std. Deviation"],
+              "rows": [
+                [{ "label": "BMI", "hot": 5 }, { "label": "620" }, { "label": "15,77", "hot": 6 }, { "label": "28,91", "hot": 6 }, { "label": "20,42", "hot": 6 }, { "label": "1,91", "hot": 6 }],
+                [{ "label": "Valid N (listwise)" }, { "label": "620" }, { "label": "" }, { "label": "" }, { "label": "" }, { "label": "" }]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). BMI 15,77–28,91 là miền hợp lý cho người lớn; giá trị ~0,002 = sai đơn vị.",
+          "caption": "Kiểm tra miền giá trị hợp lý trước khi ghi đáp án.",
+          "callouts": [
+            { "n": 5, "label": "Biến BMI vừa tạo" },
+            { "n": 6, "label": "Min 15,77 · Max 28,91 · Mean 20,42 · SD 1,91" }
+          ]
+        }
+      ],
+      "expected": "Cột BMI cuối Data View ~15–29; Descriptives: n=620, Mean≈20,42, SD≈1,91.",
+      "ifWrong": [
+        "BMI ≈ 0,002 → thiếu (Chieucao/100): Compute lại cùng tên biến (ghi đè biến tạo — an toàn).",
+        "BMI ~2000 → chia ngược chiều (Cannang*Chieucao…): kiểm tra lại công thức.",
+        "Không thấy Min/Max → tick trong Options… của Descriptives.",
+        "Compute hỏi 'Change existing variable?' khi chạy lại → OK là đúng, đang ghi đè biến mình tạo."
+      ]
+    },
+
+    "d06-recode": {
+      "step": "Bước 2",
+      "title": "Recode into Different Variables — nhóm tuổi (Câu 11)",
+      "purpose": "Gộp biến liên tục Tuoi thành 4 nhóm mã 1–4 ở biến MỚI DoTuoi.",
+      "where": "p1_B01_work.sav",
+      "menuPath": ["Transform", "Recode into Different Variables…", "Tuoi → Numeric → Output", "Name: DoTuoi + Change", "Old and New Values…", "4 ranges", "OK"],
+      "osNote": { "both": "Nút Change sau khi gõ tên biến mới là BẮT BUỘC. 'Range' trong Old-New gồm cả hai đầu mút; 'through highest' = mọi giá trị ≥ mốc." },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Recode into Different Variables",
+          "dialog": {
+            "title": "Recode into Different Variables",
+            "rows": [
+              { "type": "lists", "left": ["ID", "GTinh", "DToc", "HVan", "Chieucao", "Cannang", "BMI"], "right": ["Tuoi -> ?"], "rightLabel": "Numeric Variable → Output Variable:", "hot": 1 },
+              { "type": "field", "label": "Output Variable — Name:", "value": "DoTuoi", "hot": 2 },
+              { "type": "field", "label": "Label:", "value": "Nhóm độ tuổi" },
+              { "type": "note", "text": "Sau khi gõ Name phải bấm Change — ô phải đổi thành 'Tuoi -> DoTuoi'. Chọn 'Same Variables' sẽ PHÁ cột Tuoi gốc." }
+            ],
+            "buttons": [
+              { "label": "Change", "hot": 3 },
+              { "label": "Old and New Values…", "hot": 4, "advance": true },
+              { "label": "If…" },
+              { "label": "OK", "primary": true, "hot": 6 },
+              { "label": "Reset" }, { "label": "Cancel" }
+            ]
+          },
+          "caption": "Tuoi → ô giữa · gõ Name `DoTuoi` → **Change** → Old and New Values…",
+          "callouts": [
+            { "n": 1, "label": "Đưa Tuoi vào" },
+            { "n": 2, "label": "Gõ tên biến mới" },
+            { "n": 3, "label": "Change — bắt buộc!" },
+            { "n": 4, "label": "Old and New Values…" }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Recode into Different Variables: Old and New Values",
+          "dim": true,
+          "dialog": {
+            "title": "Recode into Different Variables: Old and New Values",
+            "rows": [
+              { "type": "radio", "label": "Old Value", "options": [
+                { "label": "Value:" },
+                { "label": "Range: 40 through 49", "checked": true, "hot": 5 },
+                { "label": "Range: _ through _" },
+                { "label": "Range: 70 through highest" }
+              ]},
+              { "type": "field", "label": "New Value — Value:", "value": "1", "hot": 5 },
+              { "type": "lists", "left": [], "right": ["40 thru 49 -> 1", "50 thru 59 -> 2", "60 thru 69 -> 3", "70 thru highest -> 4"], "rightLabel": "Old → New:", "hot": 5 }
+            ],
+            "buttons": [
+              { "label": "Add", "hot": 5 },
+              { "label": "Continue", "primary": true, "advance": true, "hot": 6 },
+              { "label": "Cancel" }
+            ]
+          },
+          "caption": "Lặp 4 lần: nhập khoảng + mã mới → Add. Danh sách Old→New phải có đủ 4 dòng trước khi Continue.",
+          "callouts": [
+            { "n": 5, "label": "Nhập khoảng → mã → Add (×4)" },
+            { "n": 6, "label": "Continue → OK" }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Frequencies DoTuoi",
+          "outline": [
+            { "t": "Frequencies" },
+            { "t": "DoTuoi [Nhóm độ tuổi]", "ind": true }
+          ],
+          "tables": [
+            {
+              "title": "DoTuoi [Nhóm độ tuổi]",
+              "cols": ["", "Frequency", "Percent", "Cumulative Percent"],
+              "rows": [
+                [{ "label": "40–49" }, { "label": "54" }, { "label": "8,7" }, { "label": "8,7" }],
+                [{ "label": "50–59" }, { "label": "40" }, { "label": "6,5" }, { "label": "15,2" }],
+                [{ "label": "60–69" }, { "label": "309" }, { "label": "49,8" }, { "label": "65,0" }],
+                [{ "label": "≥70" }, { "label": "217", "hot": 7 }, { "label": "35,0" }, { "label": "100,0" }],
+                [{ "label": "Total" }, { "label": "620" }, { "label": "100,0" }, { "label": "" }]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Total đúng 620 = không ai bị rơi ngoài khoảng (min Tuoi=41 nằm trong 40–49).",
+          "caption": "Nhóm 4 (≥70) = 217 người — đáp số Câu 11.",
+          "callouts": [{ "n": 7, "label": "≥70 tuổi: 217 người (35,0%)" }]
+        }
+      ],
+      "expected": "Biến DoTuoi 4 nhóm; tần số 54/40/309/217; ≥70 = 217.",
+      "ifWrong": [
+        "Không có biến DoTuoi → quên bấm Change trước OK.",
+        "Có dòng 'Missing' → khoảng recode không phủ hết (vd đặt 50–60, 61–70): sửa khoảng phủ min→highest.",
+        "Tuoi gốc bị thay → đã chọn Same Variables: Ctrl+Z hoặc mở lại file gốc; luôn dùng Different.",
+        "Nhóm 4 ≠ 217 → kiểm tra 'through highest' và không chồng lấp 60–69 vs 70+."
+      ]
+    },
+
+    "d06-count": {
+      "step": "Bước 3",
+      "title": "Count Values within Cases — số bệnh mạn tính (Câu 12)",
+      "purpose": "Đếm trên MỖI DÒNG có bao nhiêu biến nhị phân = 1 (số bệnh mạn tính).",
+      "where": "p1_B01_work.sav",
+      "menuPath": ["Transform", "Count Values within Cases…", "Target: SoBenhMan", "5 biến nhị phân", "Define Values… → 1", "OK"],
+      "osNote": { "both": "Chỉ đưa 5 biến nhị phân (Timmach, Tieuduong, Than, Gan, Gut). KHÔNG đưa Benh.MT_1/MT_2 — đó là mã loại bệnh, đếm '=1' sẽ đếm nhầm người có bệnh tim." },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Count Occurrences of Values within Cases",
+          "dialog": {
+            "title": "Count Occurrences of Values within Cases",
+            "rows": [
+              { "type": "field", "label": "Target Variable:", "value": "SoBenhMan", "hot": 1 },
+              { "type": "field", "label": "Target Label:", "value": "Số bệnh mạn tính" },
+              { "type": "lists", "left": ["ID", "Tuoi", "GTinh", "Benh.MT_1", "Benh.MT_2", "HVan"], "right": ["Timmach", "Tieuduong", "Than", "Gan", "Gut"], "rightLabel": "Variables:", "hot": 2 },
+              { "type": "note", "text": "5 biến nhị phân 0/1. Benh.MT_1/MT_2 là mã LOẠI bệnh (1–5) — để ngoài danh sách." }
+            ],
+            "buttons": [
+              { "label": "Define Values…", "hot": 3, "advance": true },
+              { "label": "If…" },
+              { "label": "OK", "primary": true, "hot": 6 },
+              { "label": "Reset" }, { "label": "Cancel" }
+            ]
+          },
+          "caption": "Target `SoBenhMan` · 5 biến nhị phân → Define Values…",
+          "callouts": [
+            { "n": 1, "label": "Tên biến đếm" },
+            { "n": 2, "label": "Đúng 5 biến nhị phân — không Benh.MT_*" },
+            { "n": 3, "label": "Define Values…" }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Count Values within Cases: Values to Count",
+          "dim": true,
+          "dialog": {
+            "title": "Count Values within Cases: Values to Count",
+            "rows": [
+              { "type": "radio", "label": "", "options": [
+                { "label": "Value: 1", "checked": true, "hot": 4 },
+                { "label": "System-missing" },
+                { "label": "Range: _ through _" }
+              ]},
+              { "type": "lists", "left": [], "right": ["1"], "rightLabel": "Values to Count:", "hot": 5 }
+            ],
+            "buttons": [
+              { "label": "Add", "hot": 5 },
+              { "label": "Continue", "primary": true, "advance": true, "hot": 6 },
+              { "label": "Cancel" }
+            ]
+          },
+          "caption": "Value = 1 → Add → Continue → OK. (Đếm 'có bệnh' = đếm giá trị 1.)",
+          "callouts": [
+            { "n": 4, "label": "Đếm giá trị = 1 (có bệnh)" },
+            { "n": 5, "label": "Add → danh sách phải có '1'" },
+            { "n": 6, "label": "Continue → OK" }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Frequencies SoBenhMan",
+          "outline": [
+            { "t": "Frequencies" },
+            { "t": "SoBenhMan [Số bệnh mạn tính]", "ind": true }
+          ],
+          "tables": [
+            {
+              "title": "SoBenhMan [Số bệnh mạn tính]",
+              "cols": ["", "Frequency", "Percent", "Cumulative Percent"],
+              "rows": [
+                [{ "label": "0" }, { "label": "326" }, { "label": "52,6" }, { "label": "52,6" }],
+                [{ "label": "1" }, { "label": "264" }, { "label": "42,6" }, { "label": "95,2" }],
+                [{ "label": "2" }, { "label": "30", "hot": 7 }, { "label": "4,8", "hot": 7 }, { "label": "100,0" }],
+                [{ "label": "Total" }, { "label": "620" }, { "label": "100,0" }, { "label": "" }]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Kiểm chứng chéo: đếm ô không trống của Benh.MT_1+MT_2 cho hệt phân bố này.",
+          "caption": "≥2 bệnh mạn tính = 30 người (4,8%) — đáp số Câu 12.",
+          "callouts": [{ "n": 7, "label": "≥2 bệnh: 30 người (4,8%)" }]
+        }
+      ],
+      "expected": "Phân bố SoBenhMan: 0:326, 1:264, 2:30; ≥2 = 30 người.",
+      "ifWrong": [
+        "Có người đếm 3–5 bệnh → đã đưa nhầm Benh.MT_1/MT_2 hoặc biến khác vào Variables.",
+        "Tất cả = 0 → Define Values chưa Add giá trị 1 (danh sách Values to Count trống).",
+        "SoBenhMan max=2 — đúng! File này không ai có >2 bệnh trong 5 biến này.",
+        "Đổi ý đếm 'không bệnh' → đếm giá trị 0 thay vì 1 — khác câu hỏi của đề."
+      ]
+    }
+  }
+}

@@ -1,0 +1,919 @@
+{
+  "dataset": "p1_B01_HA (1).sav + P1_B02 CrossTab (2).sav (exercises/bai_1) — file bài tập nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Bảng output = số liệu thật tái tính từ file nguồn bằng Python (NOT_RUN — đối chiếu khi chạy SPSS thật). Grid Data View chỉ minh họa.",
+  "guides": {
+    "d05-crosstabs": {
+      "step": "Bước 1",
+      "title": "Crosstabs — bảng chéo đầu tiên (Câu 5)",
+      "purpose": "Hai biến phân loại trong một bảng; mỗi ô đọc được Count + % hàng + % cột.",
+      "where": "p1_B01_HA (1).sav đang mở; không filter, không split",
+      "menuPath": [
+        "Analyze",
+        "Descriptive Statistics",
+        "Crosstabs…",
+        "TTrang.KTe → Row(s)",
+        "GTinh → Column(s)",
+        "Cells… → Row + Column",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Nhớ tick % trong hộp Cells — mặc định chỉ in Count. Chọn chiều % theo câu hỏi của đề."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Crosstabs",
+          "dialog": {
+            "title": "Crosstabs",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "ID",
+                  "Tuoi",
+                  "DToc",
+                  "HVan",
+                  "TTrang.KTe",
+                  "Tieuduong",
+                  "Gan",
+                  "TSu.RBia"
+                ],
+                "right": [
+                  "TTrang.KTe"
+                ],
+                "rightLabel": "Row(s):",
+                "hot": 1
+              },
+              {
+                "type": "lists",
+                "left": [],
+                "right": [
+                  "GTinh"
+                ],
+                "rightLabel": "Column(s):",
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "Câu 5 hỏi 'hộ nghèo THEO giới tính' — đặt TTrang.KTe làm hàng, GTinh làm cột. (Đổi chiều vẫn đúng số liệu, chỉ khác cách trình bày.)"
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Statistics…",
+                "hot": 3
+              },
+              {
+                "label": "Cells…",
+                "hot": 4,
+                "advance": true
+              },
+              {
+                "label": "Format…"
+              },
+              {
+                "label": "OK",
+                "primary": true,
+                "hot": 6
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "TTrang.KTe → Row(s) · GTinh → Column(s) → mở Cells…",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "TTrang.KTe → Row(s)"
+            },
+            {
+              "n": 2,
+              "label": "GTinh → Column(s)"
+            },
+            {
+              "n": 3,
+              "label": "Statistics… (dùng ở Bước 2)"
+            },
+            {
+              "n": 4,
+              "label": "Cells…"
+            }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Crosstabs: Cell Display",
+          "dim": true,
+          "dialog": {
+            "title": "Crosstabs: Cell Display",
+            "rows": [
+              {
+                "type": "checklist",
+                "label": "Counts",
+                "options": [
+                  {
+                    "label": "Observed",
+                    "checked": true,
+                    "hot": 5
+                  },
+                  {
+                    "label": "Expected"
+                  }
+                ]
+              },
+              {
+                "type": "checklist",
+                "label": "Percentages",
+                "options": [
+                  {
+                    "label": "Row",
+                    "checked": true,
+                    "hot": 5
+                  },
+                  {
+                    "label": "Column",
+                    "checked": true,
+                    "hot": 5
+                  },
+                  {
+                    "label": "Total"
+                  }
+                ]
+              },
+              {
+                "type": "note",
+                "text": "Đề Câu 5 hỏi CẢ HAI: '% theo TTKT' = Row %, '% theo giới tính' = Column %. Chỉ tick Row thì thiếu một nửa câu trả lời."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Continue",
+                "primary": true,
+                "advance": true,
+                "hot": 5
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Tick Observed + Row + Column → Continue → OK.",
+          "callouts": [
+            {
+              "n": 5,
+              "label": "Observed + Row + Column"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — TTrang.KTe * GTinh Crosstabulation",
+          "outline": [
+            {
+              "t": "Crosstabs"
+            },
+            {
+              "t": "Case Processing Summary"
+            },
+            {
+              "t": "TTrang.KTe * GTinh Crosstabulation",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "TTrang.KTe * GTinh Crosstabulation",
+              "cols": [
+                "",
+                "",
+                "Nữ",
+                "Nam",
+                "Total"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Hộ nghèo/cận nghèo"
+                  },
+                  {
+                    "label": "Count"
+                  },
+                  {
+                    "label": "131"
+                  },
+                  {
+                    "label": "98"
+                  },
+                  {
+                    "label": "229"
+                  }
+                ],
+                [
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "% hàng",
+                    "hot": 6
+                  },
+                  {
+                    "label": "57,2%",
+                    "hot": 6
+                  },
+                  {
+                    "label": "42,8%",
+                    "hot": 6
+                  },
+                  {
+                    "label": "100,0%"
+                  }
+                ],
+                [
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "% cột",
+                    "hot": 7
+                  },
+                  {
+                    "label": "34,8%",
+                    "hot": 7
+                  },
+                  {
+                    "label": "40,2%",
+                    "hot": 7
+                  },
+                  {
+                    "label": "36,9%"
+                  }
+                ],
+                [
+                  {
+                    "label": "Không nghèo"
+                  },
+                  {
+                    "label": "Count"
+                  },
+                  {
+                    "label": "245"
+                  },
+                  {
+                    "label": "146"
+                  },
+                  {
+                    "label": "391"
+                  }
+                ],
+                [
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "% hàng"
+                  },
+                  {
+                    "label": "62,7%"
+                  },
+                  {
+                    "label": "37,3%"
+                  },
+                  {
+                    "label": "100,0%"
+                  }
+                ],
+                [
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "% cột"
+                  },
+                  {
+                    "label": "65,2%"
+                  },
+                  {
+                    "label": "59,8%"
+                  },
+                  {
+                    "label": "63,1%"
+                  }
+                ],
+                [
+                  {
+                    "label": "Total"
+                  },
+                  {
+                    "label": "Count"
+                  },
+                  {
+                    "label": "376"
+                  },
+                  {
+                    "label": "244"
+                  },
+                  {
+                    "label": "620"
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Mỗi ô 3 số: Count trên cùng, % hàng ở giữa, % cột dưới.",
+          "caption": "Đọc đủ hai chiều %: '% theo TTKT' lấy dòng % hàng; '% theo giới tính' lấy dòng % cột.",
+          "callouts": [
+            {
+              "n": 6,
+              "label": "% hàng: trong hộ nghèo, 57,2% là nữ"
+            },
+            {
+              "n": 7,
+              "label": "% cột: trong nữ, 34,8% là hộ nghèo"
+            }
+          ]
+        }
+      ],
+      "expected": "Bảng 2×2, mỗi ô Count+%hàng+%cột; Total 620; hàng nghèo 229, không nghèo 391.",
+      "ifWrong": [
+        "Ô chỉ có Count → quên tick Row/Column trong Cells…: mở lại Cells rồi chạy lại.",
+        "Bảng tách thành 2 bảng → Split File còn bật từ ngày trước: Analyze all cases.",
+        "Total ≠ 620 → còn filter Select Cases: All cases.",
+        "Đọc lộn hàng/cột → nhìn header dòng của nhãn % để biết đang đọc % nào."
+      ]
+    },
+    "d05-chisq": {
+      "step": "Bước 2",
+      "title": "Thêm Chi-square + đọc cảnh báo expected count (Câu 17)",
+      "purpose": "Kiểm định liên quan hai biến phân loại; biết khi nào phải đọc Fisher thay Pearson.",
+      "where": "Cùng file; Crosstabs mở lại",
+      "menuPath": [
+        "Analyze",
+        "Descriptive Statistics",
+        "Crosstabs…",
+        "Statistics…",
+        "tick Chi-square",
+        "Continue",
+        "OK"
+      ],
+      "osNote": {
+        "both": "Bảng Chi-Square Tests luôn có footnote 'a. n cells have expected count less than 5' — đọc footnote TRƯỚC khi trích p."
+      },
+      "scenes": [
+        {
+          "kind": "dialog",
+          "title": "Crosstabs: Statistics",
+          "dialog": {
+            "title": "Crosstabs: Statistics",
+            "rows": [
+              {
+                "type": "checklist",
+                "label": "",
+                "options": [
+                  {
+                    "label": "Chi-square",
+                    "checked": true,
+                    "hot": 1
+                  },
+                  {
+                    "label": "Correlations"
+                  },
+                  {
+                    "label": "Risk",
+                    "hot": 2
+                  },
+                  {
+                    "label": "McNemar"
+                  }
+                ]
+              },
+              {
+                "type": "note",
+                "text": "Chi-square: kiểm định liên quan (Câu 17/18). Risk: RR/OR cho bảng 2×2 (Câu 21). Tick đúng cái đề cần."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Continue",
+                "primary": true,
+                "advance": true,
+                "hot": 3
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Statistics… → Chi-square (thêm Risk khi làm Câu 21) → Continue → OK.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Chi-square"
+            },
+            {
+              "n": 2,
+              "label": "Risk (cho Câu 21)"
+            },
+            {
+              "n": 3,
+              "label": "Continue"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Chi-Square Tests (Tieuduong * GTinh)",
+          "outline": [
+            {
+              "t": "Crosstabs"
+            },
+            {
+              "t": "Tieuduong * GTinh Crosstabulation",
+              "ind": true
+            },
+            {
+              "t": "Chi-Square Tests",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "Chi-Square Tests",
+              "cols": [
+                "",
+                "Value",
+                "df",
+                "Asymp. Sig. (2-sided)"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Pearson Chi-Square",
+                    "hot": 4
+                  },
+                  {
+                    "label": "1,075"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "0,300",
+                    "hot": 5
+                  }
+                ],
+                [
+                  {
+                    "label": "Continuity Correction"
+                  },
+                  {
+                    "label": "0,900"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "0,343"
+                  }
+                ],
+                [
+                  {
+                    "label": "Likelihood Ratio"
+                  },
+                  {
+                    "label": "1,071"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "0,301"
+                  }
+                ],
+                [
+                  {
+                    "label": "Fisher's Exact Test",
+                    "hot": 6
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": "0,331"
+                  }
+                ],
+                [
+                  {
+                    "label": "N of Valid Cases"
+                  },
+                  {
+                    "label": "620"
+                  },
+                  {
+                    "label": ""
+                  },
+                  {
+                    "label": ""
+                  }
+                ]
+              ],
+              "footnote": "a. 0 cells (0,0%) have expected count less than 5. The minimum expected count is 77,14."
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). Với Tieuduong: 0 ô expected <5 nên đọc Pearson p=0,300 — không khác nhau ý nghĩa.",
+          "caption": "Đọc dòng Pearson → p. Nhưng TRƯỚC HẾT đọc footnote 'a.' bên dưới bảng!",
+          "callouts": [
+            {
+              "n": 4,
+              "label": "Dòng Pearson Chi-Square"
+            },
+            {
+              "n": 5,
+              "label": "p = 0,300 ≥ 0,05 → không khác nhau ý nghĩa"
+            },
+            {
+              "n": 6,
+              "label": "Fisher's Exact — cần khi expected < 5 (biến Gan)"
+            }
+          ]
+        }
+      ],
+      "expected": "Tieuduong: Pearson χ²=1,075, df=1, p=0,300 (Yates 0,900). Gan: footnote cảnh báo 1 ô expected <5 → đọc Fisher p≈0,759.",
+      "ifWrong": [
+        "Không thấy bảng Chi-Square Tests → chưa tick Chi-square trong Statistics…",
+        "Với Gan trích p=0,915 của Pearson → sai: phải đọc Fisher khi footnote cảnh báo.",
+        "df=2 thay vì 1 → đang làm bảng >2×2 (bình thường, ví dụ P2-Q01 df=2) — df = (hàng−1)(cột−1).",
+        "p hiện ',000' → đọc là '< 0,001' chứ không phải 'bằng 0'."
+      ]
+    },
+    "d05-weight": {
+      "step": "Bước 4",
+      "title": "Weight Cases + Risk — file tổng hợp 4 dòng (Câu 21)",
+      "purpose": "Dãn file tần số tổng hợp ra 88 người, lấy RR/OR so sánh nguy cơ HPV+/−.",
+      "where": "Mở file MỚI: P1_B02 CrossTab (2).sav (chỉ 4 dòng)",
+      "menuPath": [
+        "Data",
+        "Weight Cases…",
+        "Weight cases by",
+        "soluong",
+        "OK",
+        "Crosstabs: phoinhiem × benh + Chi-square + Risk"
+      ],
+      "osNote": {
+        "both": "Mở file khác = Weight OFF theo file đó? Không — Weight bám THEO TỪNG dataset. Nhớ tắt khi quay lại file cũ (Do not weight cases)."
+      },
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "P1_B02 CrossTab (2).sav — Data Editor (4 dòng tổng hợp!)",
+          "openMenu": "Data",
+          "items": [
+            {
+              "label": "Sort Cases…"
+            },
+            {
+              "label": "Select Cases…"
+            },
+            {
+              "label": "Weight Cases…",
+              "hot": 1,
+              "advance": true
+            }
+          ],
+          "grid": {
+            "cols": [
+              "benh",
+              "phoinhiem",
+              "soluong"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "Ung thư CTC +"
+                },
+                {
+                  "label": "HPV+"
+                },
+                {
+                  "label": "20"
+                }
+              ],
+              [
+                {
+                  "label": "Ung thư CTC +"
+                },
+                {
+                  "label": "HPV-"
+                },
+                {
+                  "label": "10"
+                }
+              ],
+              [
+                {
+                  "label": "Ung thư CTC-"
+                },
+                {
+                  "label": "HPV+"
+                },
+                {
+                  "label": "8"
+                }
+              ],
+              [
+                {
+                  "label": "Ung thư CTC-"
+                },
+                {
+                  "label": "HPV-"
+                },
+                {
+                  "label": "50"
+                }
+              ]
+            ]
+          },
+          "caption": "Chỉ 4 dòng — mỗi dòng là MỘT NHÓM người. `soluong` = số người mỗi nhóm. Data → Weight Cases…",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Weight Cases…"
+            }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Weight Cases",
+          "dim": true,
+          "dialog": {
+            "title": "Weight Cases",
+            "rows": [
+              {
+                "type": "radio",
+                "label": "",
+                "options": [
+                  {
+                    "label": "Do not weight cases"
+                  },
+                  {
+                    "label": "Weight cases by",
+                    "checked": true,
+                    "hot": 2
+                  }
+                ]
+              },
+              {
+                "type": "lists",
+                "left": [
+                  "benh",
+                  "phoinhiem"
+                ],
+                "right": [
+                  "soluong"
+                ],
+                "rightLabel": "Frequency Variable:",
+                "hot": 3
+              },
+              {
+                "type": "note",
+                "text": "Báo SPSS: 'mỗi dòng đại diện soluong người'. Sau OK, mọi phân tích dùng n=88 thay vì n=4."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 4
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Weight cases by → `soluong` → OK. Status bar: 'Weight On'.",
+          "callouts": [
+            {
+              "n": 2,
+              "label": "Weight cases by"
+            },
+            {
+              "n": 3,
+              "label": "soluong → Frequency Variable"
+            },
+            {
+              "n": 4,
+              "label": "OK"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output — Crosstab + Chi-Square + Risk (HPV × CTC)",
+          "outline": [
+            {
+              "t": "Crosstabs"
+            },
+            {
+              "t": "phoinhiem * benh Crosstabulation",
+              "ind": true
+            },
+            {
+              "t": "Chi-Square Tests",
+              "ind": true
+            },
+            {
+              "t": "Risk Estimate",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "phoinhiem * benh Crosstabulation",
+              "cols": [
+                "",
+                "",
+                "CTC+",
+                "CTC-",
+                "Total"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "HPV+"
+                  },
+                  {
+                    "label": "Count / % hàng"
+                  },
+                  {
+                    "label": "20 / 71,4%",
+                    "hot": 5
+                  },
+                  {
+                    "label": "8 / 28,6%"
+                  },
+                  {
+                    "label": "28 / 100,0%"
+                  }
+                ],
+                [
+                  {
+                    "label": "HPV-"
+                  },
+                  {
+                    "label": "Count / % hàng"
+                  },
+                  {
+                    "label": "10 / 16,7%",
+                    "hot": 6
+                  },
+                  {
+                    "label": "50 / 83,3%"
+                  },
+                  {
+                    "label": "60 / 100,0%"
+                  }
+                ],
+                [
+                  {
+                    "label": "Total"
+                  },
+                  {
+                    "label": "Count"
+                  },
+                  {
+                    "label": "30"
+                  },
+                  {
+                    "label": "58"
+                  },
+                  {
+                    "label": "88",
+                    "hot": 7
+                  }
+                ]
+              ]
+            },
+            {
+              "title": "Chi-Square Tests",
+              "cols": [
+                "",
+                "Value",
+                "df",
+                "Sig. (2-sided)"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Pearson Chi-Square"
+                  },
+                  {
+                    "label": "25,480"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "<,001",
+                    "hot": 8
+                  }
+                ],
+                [
+                  {
+                    "label": "Continuity Correction"
+                  },
+                  {
+                    "label": "23,101"
+                  },
+                  {
+                    "label": "1"
+                  },
+                  {
+                    "label": "<,001"
+                  }
+                ]
+              ],
+              "footnote": "a. 0 cells have expected count less than 5. Minimum expected count is 9,55."
+            },
+            {
+              "title": "Risk Estimate",
+              "cols": [
+                "",
+                "Value"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Odds Ratio for benh (CTC+ / CTC-)"
+                  },
+                  {
+                    "label": "12,500",
+                    "hot": 9
+                  }
+                ],
+                [
+                  {
+                    "label": "For cohort benh = CTC+"
+                  },
+                  {
+                    "label": "4,286",
+                    "hot": 9
+                  }
+                ],
+                [
+                  {
+                    "label": "For cohort benh = CTC-"
+                  },
+                  {
+                    "label": "0,343"
+                  }
+                ]
+              ]
+            }
+          ],
+          "note": "Output = số liệu thật (NOT_RUN). 'For cohort benh = CTC+' = RR. Tỷ lệ CTC+ : HPV+ 71,4% vs HPV− 16,7%.",
+          "caption": "Ba bảng: tỷ lệ bệnh hai nhóm → chi-square → Risk (RR=4,29, OR=12,50).",
+          "callouts": [
+            {
+              "n": 5,
+              "label": "HPV+: 71,4% mắc CTC"
+            },
+            {
+              "n": 6,
+              "label": "HPV−: chỉ 16,7%"
+            },
+            {
+              "n": 7,
+              "label": "Total = 88 — đúng sau Weight"
+            },
+            {
+              "n": 8,
+              "label": "p < 0,001"
+            },
+            {
+              "n": 9,
+              "label": "OR = 12,5 · RR = 4,29"
+            }
+          ]
+        }
+      ],
+      "expected": "Total=88; CTC+: HPV+ 71,4% vs HPV− 16,7%; χ²=25,48 p<0,001; RR≈4,29; OR≈12,50.",
+      "ifWrong": [
+        "Total = 4 → quên Weight Cases (hoặc đang weight nhầm biến).",
+        "Mọi output ở file HA bỗng sai n → Weight vẫn bật ở file này? Weight gắn từng dataset — tắt bằng Do not weight cases.",
+        "Bảng Risk trống → chưa tick Risk trong Statistics (và bảng phải là 2×2).",
+        "Nhầm 0,343 là RR → đó là RR phía 'không bệnh'; RR mắc bệnh là dòng 'For cohort benh = CTC+'."
+      ]
+    }
+  }
+}
