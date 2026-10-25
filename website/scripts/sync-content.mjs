@@ -149,6 +149,9 @@ function fixLinksTrack(md, slug) {
 
 /** Bỏ dòng trạng thái nội bộ ở header canonical (DRAFT / MAC_SPSS_VERIFICATION_PENDING…) —
  *  thay bằng banner learner-facing do frontmatter + notice tự quản. */
+/** Bỏ H1 đầu file nguồn — Starlight đã render frontmatter title; giữ lại → 2 H1. */
+const stripH1 = (md) => md.replace(/^#\s+[^\n]+\n+/, '');
+
 function stripInternalStatus(md) {
   // Xóa dòng Trạng thái + các dòng > tiếp nối KHÔNG mở đầu bằng **Key:** mới
   // (DRAFT days có status nhiều dòng; dòng "**Bài tập nguồn hôm nay:**" phải giữ lại).
@@ -197,7 +200,7 @@ function syncTrack() {
     // --- lesson ---
     let md = stripInternalStatus(read(`${base}/lesson.md`));
     // Bỏ H1 trùng lặp — tiêu đề trang đã render từ frontmatter.
-    md = md.replace(/^#\s+[^\n]+\n+/, '');
+    md = stripH1(md);
     md = fixLinksTrack(md, d.slug);
     md = expandExercises(md);
     // {{guide:id}} → <SPSSActionGuide> (phải chạy TRƯỚC mdxEscapeBraces)
@@ -221,7 +224,7 @@ function syncTrack() {
     write(`${d.slug}/bai-hoc.mdx`, `---\ntitle: "${d.title}"\ndescription: "Bài học thực hành ${d.title} — lộ trình practice-first 14 ngày."\n${lessonPrev}\nnext:\n  link: /${d.slug}/bai-tap/\n  label: Làm bài tập Ngày ${d.num}\n---\n\nimport CompleteModuleButton from '../../../components/CompleteModuleButton.astro';\n${guideImports}\n${BANNER}${notice}${fileBox(d)}${osBlock}${md}`);
 
     // --- workbook ---
-    let wb = fixLinksTrack(read(`${base}/workbook.md`), d.slug);
+    let wb = stripH1(fixLinksTrack(read(`${base}/workbook.md`), d.slug));
     wb = expandExercises(wb);
     wb = mdxEscapeBraces(wb);
     wb = mdxEscapeLt(injectTrackCards(wb, d.slug));
@@ -231,7 +234,7 @@ function syncTrack() {
     write(`${d.slug}/bai-tap.mdx`, `---\ntitle: "${d.title} — Bài tập"\ndescription: "Workbook ${d.title} — gõ nháp ngay tại đây, tự lưu trong trình duyệt."\nprev:\n  link: /${d.slug}/bai-hoc/\n  label: Quay lại bài học\nnext:\n  link: /${d.slug}/dap-an/\n  label: Xem đáp án (sau khi đã làm)\n---\n\nimport ExerciseCard from '../../../components/ExerciseCard.astro';\n\n${BANNER}${wb}`);
 
     // --- answer key ---
-    const ak = fixLinksTrack(read(`${base}/answer-key.md`), d.slug);
+    const ak = stripH1(fixLinksTrack(read(`${base}/answer-key.md`), d.slug));
     const akLines = ak.split('\n');
     const akOut = [];
     let open = false;
@@ -443,7 +446,7 @@ ${BANNER}${body}`);
 
 
 function syncTrackRoadmap() {
-  let md = read('curriculum/EXERCISE-FIRST-14-DAY-ROADMAP.md');
+  let md = stripH1(read('curriculum/EXERCISE-FIRST-14-DAY-ROADMAP.md'));
   md = md.replace(/`?project-control\/decisions\.md`?/g, '_tài liệu nội bộ_');
   md = md.replace(/`datasets\/([\w./-]+)`/g, '[`datasets/$1`](/du-lieu/)');
   md = md.replace(/`(\w+_raw\.csv|\w+_clean\.csv|exercise_\w+\.csv)`/g, '[`$1`](/du-lieu/)');
@@ -478,8 +481,7 @@ function syncDatasets() {
   const demote = (md) => md.replace(/^# /gm, '### ').replace(/^## /gm, '#### ');
   const dl = (f) => `[\`${f}\`](/datasets/${f})`;
   const cb = (f, label) => `<details><summary>${label}</summary>\n\n${demote(read(`datasets/codebooks/${f}`))}\n\n</details>`;
-  let md = `# Dữ liệu thực hành\n\n`
-    + `> ⚠️ **Từ Task 13, dataset chính của khóa học là các file \`.sav\` nguồn trong thư mục \`exercises/\` `
+  let md = `> ⚠️ **Từ Task 13, dataset chính của khóa học là các file \`.sav\` nguồn trong thư mục \`exercises/\` `
     + `trên máy bạn** (tài liệu bên thứ ba — chỉ dùng local, không tải được từ trang này và không `
     + `được phát hành kèm website). Các file CSV giả lập bên dưới là tài liệu luyện thêm tùy chọn.\n\n`
     + `## 1. Dataset nguồn — mở trực tiếp trong SPSS (local only)\n\n`
@@ -518,7 +520,7 @@ function syncDatasets() {
 }
 
 function syncLesson() {
-  let md = read('lessons/M01-research-thinking/lesson.md');
+  let md = stripH1(read('lessons/M01-research-thinking/lesson.md'));
   // Bỏ header DRAFT nội bộ của repo, thay bằng ghi chú learner-facing
   md = md.replace('> **Trạng thái:** DRAFT — chưa review độc lập, chưa HUMAN_APPROVAL.\n', '');
   md = fixLinks(md);
@@ -531,7 +533,7 @@ function syncLesson() {
 
 /* ---------- 2. M01 workbook → inject <ExerciseCard> ---------- */
 function syncWorkbook() {
-  const md = mdxEscapeLt(fixLinks(read('lessons/M01-research-thinking/workbook.md')));
+  const md = mdxEscapeLt(stripH1(fixLinks(read('lessons/M01-research-thinking/workbook.md'))));
   const lines = md.split('\n');
   const out = [];
   let inBT = null;            // 'bt1'..'bt4'
@@ -586,7 +588,7 @@ function syncWorkbook() {
 
 /* ---------- 3. M01 answer key → bọc <details> ---------- */
 function syncAnswers() {
-  const md = read('lessons/M01-research-thinking/answer-key.md');
+  const md = stripH1(read('lessons/M01-research-thinking/answer-key.md'));
   const lines = md.split('\n');
   const out = [];
   let open = false;
@@ -607,7 +609,7 @@ function syncAnswers() {
 
 /* ---------- 4. Roadmap (thêm bảng trạng thái generated) ---------- */
 function syncRoadmap() {
-  let md = fixLinks(read('curriculum/roadmap.md'));
+  let md = fixLinks(stripH1(read('curriculum/roadmap.md')));
   // Badge trạng thái sau mỗi heading ## Mxx — presentation-only, không đổi nội dung module.
   md = md.replace(/^## (M\d{2})[^\n]*$/gm, (line, code) => {
     if (code === 'M01') {
@@ -622,11 +624,11 @@ function syncRoadmap() {
 
 /* ---------- 5. Tài liệu learner-facing ---------- */
 function syncDocs() {
-  write('tai-lieu/thuat-ngu.md', `---\ntitle: Thuật ngữ Việt–Anh\ndescription: Bảng tra thuật ngữ thống kê song ngữ dùng trong toàn khóa.\n---\n\n${BANNER}${fixLinks(read('curriculum/glossary-vi-en.md'))}`);
-  write('tai-lieu/muc-tieu.md', `---\ntitle: Mục tiêu khóa học\ndescription: Kết quả học tập đo được — sau khóa này bạn làm được gì.\n---\n\n${BANNER}${fixLinks(read('curriculum/learning-outcomes.md'))}`);
-  write('tai-lieu/ban-do-khai-niem.md', `---\ntitle: Bản đồ khái niệm\ndescription: Các khái niệm thống kê xuất hiện ở module nào.\n---\n\n${BANNER}${fixLinks(read('curriculum/concept-map.md'))}`);
-  write('tai-lieu/bat-dau-mac.md', `---\ntitle: Chuẩn bị SPSS trên MacBook\ndescription: Checklist trước khi mở SPSS lần đầu — cần ở M02.\n---\n\n${BANNER}${fixLinks(read('START-HERE-MAC.md'))}`);
-  write('tai-lieu/chuan-bi-du-lieu.md', `---\ntitle: Chuẩn bị dữ liệu thực hành\ndescription: File .sav nguồn đi đâu, làm việc ở đâu — hai kịch bản Windows/Mac, quy tắc không ghi đè gốc.\n---\n\n${BANNER}${fixLinks(read('curriculum/spss-practice-setup.md'))}`);
+  write('tai-lieu/thuat-ngu.md', `---\ntitle: Thuật ngữ Việt–Anh\ndescription: Bảng tra thuật ngữ thống kê song ngữ dùng trong toàn khóa.\n---\n\n${BANNER}${fixLinks(stripH1(read('curriculum/glossary-vi-en.md')))}`);
+  write('tai-lieu/muc-tieu.md', `---\ntitle: Mục tiêu khóa học\ndescription: Kết quả học tập đo được — sau khóa này bạn làm được gì.\n---\n\n${BANNER}${fixLinks(stripH1(read('curriculum/learning-outcomes.md')))}`);
+  write('tai-lieu/ban-do-khai-niem.md', `---\ntitle: Bản đồ khái niệm\ndescription: Các khái niệm thống kê xuất hiện ở module nào.\n---\n\n${BANNER}${fixLinks(stripH1(read('curriculum/concept-map.md')))}`);
+  write('tai-lieu/bat-dau-mac.md', `---\ntitle: Chuẩn bị SPSS trên MacBook\ndescription: Checklist trước khi mở SPSS lần đầu — cần ở M02.\n---\n\n${BANNER}${fixLinks(stripH1(read('START-HERE-MAC.md')))}`);
+  write('tai-lieu/chuan-bi-du-lieu.md', `---\ntitle: Chuẩn bị dữ liệu thực hành\ndescription: File .sav nguồn đi đâu, làm việc ở đâu — hai kịch bản Windows/Mac, quy tắc không ghi đè gốc.\n---\n\n${BANNER}${fixLinks(stripH1(read('curriculum/spss-practice-setup.md')))}`);
 }
 
 console.log('Syncing canonical → website/src/content/docs/ ...');
