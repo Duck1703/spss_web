@@ -104,9 +104,10 @@ function expandExercises(md) {
       '',
       `<div class="src-ex">`,
       `<div class="src-ex__head"><span class="src-ex__id">${id}</span>`,
-      `<span class="src-ex__meta">${PDF_NAME[q.src] || q.src} · ${q.ref} · trang ${q.page} · ${q.difficulty} · ~${q.time} phút · vai trò: ${q.role}${q.tier ? ` · tầng: ${q.tier === 'essential' ? 'BẮT BUỘC' : 'LUYỆN THÊM'}` : ''}</span></div>`,
+      `<span class="src-ex__meta">${PDF_NAME[q.src] || q.src} · ${q.ref} · trang ${q.page} · ${q.difficulty} · ~${q.time} phút${q.tier ? ` · <b>${q.tier === 'essential' ? 'BẮT BUỘC' : 'LUYỆN THÊM'}</b>` : ''}</span></div>`,
       `<div class="src-ex__sum">${q.summary}</div>`,
       `<div class="src-ex__meta2">Dataset: <code>${q.dataset}</code>${vars ? ` · Biến: ${vars}` : ''} · Sản phẩm: ${q.artifact}</div>`,
+      `<a class="src-ex__link" href="${exHref(id)}">Mở trang bài tập ${id} →</a>`,
       `</div>`,
       ''
     ].join('\n');
@@ -120,8 +121,11 @@ function fileBox(d) {
     ? `[\`${f.csv}\`](/datasets/${f.csv})${f.note ? ` — ${f.note}` : ''}`
     : f.savLocal ? `\`${f.savLocal}\`${f.note ? ` — ${f.note}` : ''}`
     : `\`${f.sav}\` — file bạn đã tạo ở ${f.from}`);
-  return `> 📦 **File cần hôm nay:** ${parts.join(' · ')}\n`
-    + `> *(File \`.sav\` nguồn nằm trong thư mục \`exercises/\` trên máy bạn — mở trực tiếp trong SPSS, không tải từ web.)*\n\n`;
+  return `<div class="lesson-files">\n`
+    + `<span class="lesson-files__t">📦 File cần hôm nay</span>\n`
+    + `<div class="lesson-files__list">${parts.join('<br />')}</div>\n`
+    + `<p class="lesson-files__note">File \`.sav\` nguồn nằm trong thư mục \`exercises/\` trên máy bạn — mở trực tiếp trong SPSS, không tải từ web.</p>\n`
+    + `</div>\n\n`;
 }
 
 /** Rewrite link cho file track-14day: bạn-cùng-ngày → route /dNN/*, datasets → /du-lieu/, internal → note. */
@@ -192,6 +196,8 @@ function syncTrack() {
 
     // --- lesson ---
     let md = stripInternalStatus(read(`${base}/lesson.md`));
+    // Bỏ H1 trùng lặp — tiêu đề trang đã render từ frontmatter.
+    md = md.replace(/^#\s+[^\n]+\n+/, '');
     md = fixLinksTrack(md, d.slug);
     md = expandExercises(md);
     // {{guide:id}} → <SPSSActionGuide> (phải chạy TRƯỚC mdxEscapeBraces)
@@ -387,8 +393,7 @@ ${grp('Phụ — không tính trong 58 câu', supp)}
   <span class="exd-eyebrow">BÀI TẬP NGUỒN · ${q.src}</span>
   <span class="exd-status" data-exstatus="${q.id}">Chưa làm</span>
 </div>
-<h2 class="exd-title"><span class="exd-id">${q.id}</span> — ${esc(q.summary)}</h2>
-<p class="exd-meta">${esc(PDF_NAME[q.src] || q.src)} · ${esc(q.ref)} · trang ${q.page} · ${esc(q.difficulty)} · ~${q.time} phút</p>
+<p class="exd-meta"><span class="exd-id">${q.id}</span> · ${esc(PDF_NAME[q.src] || q.src)} · ${esc(q.ref)} · trang ${q.page} · ${esc(q.difficulty)} · ~${q.time} phút</p>
 
 <div class="exd-layout">
 <div class="exd-side">

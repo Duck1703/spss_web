@@ -28,9 +28,9 @@ if (!g) throw new Error(`SPSSActionGuide: không tìm thấy guide '${id}' trong
   </figcaption>
 
   <div class="sguide-why">
-    <p><strong>Làm gì:</strong> {g.purpose}</p>
-    <p><strong>Bạn đang ở:</strong> {g.where}</p>
-    {g.menuPath && <p class="sguide-path"><strong>Bấm:</strong> {g.menuPath.map((m, i) => <>{i > 0 && <span class="sguide-arrow"> → </span>}<code class="sguide-menuitem">{m}</code></>)}</p>}
+    <p><span class="sguide-lbl">Mục đích</span>{g.purpose}</p>
+    <p><span class="sguide-lbl">Vị trí</span>{g.where}</p>
+    {g.menuPath && <p class="sguide-path"><span class="sguide-lbl">Bấm theo</span>{g.menuPath.map((m, i) => <>{i > 0 && <span class="sguide-arrow"> → </span>}<code class="sguide-menuitem">{m}</code></>)}</p>}
     {g.osNote && (
       <p class="sguide-os">
         {g.osNote.mac && <span data-os="mac">⌨️ Mac: {g.osNote.mac}</span>}
@@ -54,7 +54,7 @@ if (!g) throw new Error(`SPSSActionGuide: không tìm thấy guide '${id}' trong
   </div>
 
   <div class="sguide-result">
-    <p><strong>Kết quả mong đợi:</strong> {g.expected}</p>
+    <p><span class="sguide-lbl">Kết quả mong đợi</span>{g.expected}</p>
   </div>
 
   {g.ifWrong && g.ifWrong.length > 0 && (

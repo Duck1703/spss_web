@@ -1367,3 +1367,103 @@ html[data-spss-os='win'] .smw-t { order: -1; }
 
 /* [hidden] thua rule display của card → ép ẩn khi lọc */
 .exb-card[hidden], .exb-mini[hidden], h2[hidden] { display: none; }
+
+/* ============================================================
+   PHASE D — LESSON EXPERIENCE (Task 19)
+   ============================================================ */
+
+/* Dataset panel (file cần hôm nay) */
+.lesson-files {
+  border: 1px solid var(--slp-border);
+  border-left: 4px solid var(--slp-accent);
+  border-radius: var(--slp-radius-lg);
+  background: var(--slp-surface);
+  padding: var(--slp-space-4) var(--slp-space-5);
+  margin: 0.9em 0 1.4em;
+  box-shadow: var(--slp-shadow-sm);
+}
+.lesson-files__t {
+  display: block; font-size: var(--slp-text-caption); font-weight: 700;
+  letter-spacing: 0.06em; color: var(--slp-accent-strong); margin-bottom: 0.5em;
+}
+.lesson-files__list { font-size: 0.95rem; line-height: 1.65; }
+.lesson-files__list code {
+  font-family: var(--slp-font-mono); font-size: 0.92em;
+  background: var(--slp-bg-soft); border: 1px solid var(--slp-border);
+  border-radius: 5px; padding: 0.05em 0.4em;
+}
+.lesson-files__note { font-size: 0.85rem; color: var(--slp-muted); margin: 0.55em 0 0; }
+
+/* Source-exercise block → OD scenario card */
+.src-ex { border-left-width: 4px; box-shadow: var(--slp-shadow-sm); }
+.src-ex__id { font-size: 1rem; }
+.src-ex__sum { font-size: 1.02rem; color: var(--slp-text); }
+.src-ex__link {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 10px;
+  font-size: 0.88rem; font-weight: 600; color: var(--slp-accent-strong);
+  text-decoration: none; border-bottom: 1px solid var(--slp-accent);
+}
+.src-ex__link:hover { color: var(--slp-accent); }
+
+/* Guide shell — labelled purpose/result panels */
+.sguide { border-radius: var(--slp-radius-xl); }
+.sguide-why {
+  margin: 0.7em 0 1em; padding: var(--slp-space-4) var(--slp-space-5);
+  background: var(--slp-accent-soft); border: 1px solid color-mix(in srgb, var(--slp-accent) 22%, var(--slp-border));
+  border-radius: var(--slp-radius-md); font-size: 0.98rem;
+}
+.sguide-lbl {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--slp-accent-strong);
+  background: var(--slp-surface); border: 1px solid var(--slp-border);
+  border-radius: var(--slp-radius-full); padding: 0.15em 0.6em; margin-right: 0.5em;
+}
+.sguide-result {
+  margin-top: 1em; padding: var(--slp-space-4) var(--slp-space-5);
+  background: var(--slp-success-soft); border: 1px solid color-mix(in srgb, var(--slp-success-strong, #178a50) 30%, var(--slp-border));
+  border-radius: var(--slp-radius-md); font-size: 0.98rem;
+}
+.sguide-result .sguide-lbl { color: var(--slp-success-strong, #178a50); }
+.sguide-trouble {
+  margin-top: 0.7em; padding: 0.6em 0.9em;
+  border: 1px solid var(--slp-border); border-radius: var(--slp-radius-md);
+  background: var(--slp-warning-soft);
+}
+.sguide-trouble summary { font-weight: 600; }
+.sguide-trouble ul { margin: 0.5em 0 0.3em; padding-inline-start: 1.3em; }
+.sguide-done {
+  margin-top: 1.1em; padding: 0.7em 1em; width: 100%;
+  border: 2px dashed var(--slp-border); border-radius: var(--slp-radius-md);
+  font-size: 0.95rem; font-weight: 600;
+}
+.sguide-done:hover { border-color: var(--slp-accent); }
+.sguide-done input { width: 1.05em; height: 1.05em; }
+.sguide-nav .sguide-btn { border-radius: var(--slp-radius-full); }
+
+/* OS selector — slightly more prominent */
+.os-sel { box-shadow: var(--slp-shadow-sm); }
+
+@media (max-width: 50rem) {
+  .lesson-files { padding: var(--slp-space-3) var(--slp-space-4); }
+}
+
+/* Step headings render inside .sl-heading-wrapper (Starlight anchors). */
+.main-pane:has(.sguide) .sl-markdown-content > .sl-heading-wrapper.level-h3 {
+  display: flex; align-items: center; gap: 0.6em;
+  padding: 0.55em 0.9em; margin-top: 1.8em; margin-bottom: 0.9em;
+  background: var(--slp-surface); border: 1px solid var(--slp-border);
+  border-left: 4px solid var(--slp-accent);
+  border-radius: var(--slp-radius-md);
+  scroll-margin-top: 5rem;
+}
+.main-pane:has(.sguide) .sl-markdown-content > .sl-heading-wrapper.level-h3 h3 {
+  font-size: 1.06rem; font-weight: 700; margin: 0;
+}
+@media (max-width: 50rem) {
+  .main-pane:has(.sguide) .sl-markdown-content > .sl-heading-wrapper.level-h3 h3 { font-size: 0.98rem; }
+}
+
+/* Long menu-path chips must wrap on narrow screens (d13/d14 paths). */
+@media (max-width: 50rem) {
+  .sguide-menuitem { white-space: normal; overflow-wrap: anywhere; }
+}
