@@ -58,12 +58,14 @@
       if (g2) step(g2, 1);
       return;
     }
-    // menu bar click trong mock: bấm menu cha → mở dropdown (nếu scene có) hoặc đánh dấu mở
+    // menu bar click trong mock: chỉ phản hồi nếu scene định nghĩa dropdown cho menu đó
     var mb = e.target.closest && e.target.closest('.sm-menu-btn');
     if (mb) {
-      var wasOpen = mb.classList.contains('is-open');
+      var scene = mb.closest('.spss-scene');
+      var drop = scene && scene.querySelector('.sm-drop-' + mb.getAttribute('data-menu').toLowerCase());
+      if (!drop) return; // menu không mô phỏng — không giả vờ mở được
       mb.closest('.smw-menu').querySelectorAll('.sm-menu-btn').forEach(function (b) { b.classList.remove('is-open'); });
-      if (!wasOpen) mb.classList.add('is-open');
+      mb.classList.add('is-open');
     }
     // legend callout → pulse vùng tương ứng
     var lg = e.target.closest && e.target.closest('.sm-legend-btn');

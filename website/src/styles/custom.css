@@ -1172,3 +1172,12 @@ html[data-spss-os='win'] .smw-t { order: -1; }
 }
 .sm-ol-ind { padding-left: 22px; }
 .sm-grid td.is-selcell { box-shadow: inset 0 0 0 2px #3b7bd4; background: #dce9f8 !important; }
+/* Interaction clarity: chỉ control có data-advance mới "bấm được" trong mô phỏng */
+.sm-item:not(.sm-advance):not(.sm-has-sub),
+.sm-btn:not(.sm-advance):not(.is-primary) { cursor: default; opacity: 0.92; }
+.sm-item:not(.sm-advance):not(.sm-has-sub):hover { background: transparent; }
+.sm-item.sm-advance, .sm-btn.sm-advance, .sm-advance.smw-tab { cursor: pointer; }
+.sm-item.sm-advance:hover, .smw-tab[data-advance]:hover { background: #d4e8fc; }
+.sm-menu-btn[data-advance] { background: #dbe9fb; font-weight: 600; }
+.sguide-key { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.78rem; color: var(--slp-muted); margin-top: 0.5em; }
+.sguide-key span { display: inline-flex; align-items: center; gap: 5px; }

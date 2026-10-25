@@ -27,10 +27,11 @@ const hot = (n) => n ? ` sm-hot` : '';
 
         {/* menu bar — trên Mac thật menu nằm ở thanh hệ thống trên cùng; đặt trong cửa sổ cho dễ nhìn */}
         {s.menubar !== false && (
-          <div class="smw-menu" role="menubar">
+          <div class={`smw-menu${s.menubarHot ? ' sm-hot' : ''}`} role="menubar">
+            {s.menubarHot ? badge(s.menubarHot) : ''}
             {MENUS.map((m) => (
               <button type="button" class={`sm-menu-btn${s.openMenu === m ? ' is-open' : ''}`} data-menu={m}
-                {...(s.advanceMenu === m ? { 'data-advance': true } : {})}>{m}</button>
+                {...(s.advanceMenu === m ? { 'data-advance': true } : {})}>{m}{s.menuHot === m ? badge(s.menuHotN) : ''}</button>
             ))}
           </div>
         )}
@@ -146,10 +147,9 @@ const hot = (n) => n ? ` sm-hot` : '';
                       <div class={`sm-listbox${hot(r.hot)}`}>
                         {r.label && <div class="sm-listbox-h">{r.label}</div>}
                         {r.rows.map((it, i) => (
-                          <div class={`sm-listitem${r.hotRow === i + 1 ? ' is-sel sm-hotcell' : ''}`}>
-                            {it}{r.hotRow === i + 1 ? badge(r.hotRow) : ''}
-                          </div>
+                          <div class={`sm-listitem${r.hotRow === i + 1 ? ' is-sel sm-hotcell' : ''}`}>{it}</div>
                         ))}
+                        {badge(r.hot)}
                       </div>
                     )}
                     {r.type === 'listbox' && (
@@ -201,7 +201,7 @@ const hot = (n) => n ? ` sm-hot` : '';
                 <thead>
                   <tr>
                     <th class="sm-corner"></th>
-                    {s.grid.cols.map((c) => <th>{c}</th>)}
+                    {s.grid.cols.map((c) => <th>{c.label || c}{c.hot ? badge(c.hot) : ''}</th>)}
                   </tr>
                 </thead>
                 <tbody>
@@ -226,7 +226,7 @@ const hot = (n) => n ? ` sm-hot` : '';
               <div class="sm-outline">
                 <div class="sm-ol-h">Outline</div>
                 {(s.outline || []).map((o) => (
-                  <div class={`sm-ol-item${o.ind ? ' sm-ol-ind' : ''}`}>{o.t || o}</div>
+                  <div class={`sm-ol-item${o.ind ? ' sm-ol-ind' : ''}`}>{o.t || o}{o.hot ? badge(o.hot) : ''}</div>
                 ))}
               </div>
               <div class="sm-opane">
@@ -271,7 +271,7 @@ const hot = (n) => n ? ` sm-hot` : '';
 
         {/* view tabs ở đáy Data Editor */}
         {s.tabs && (
-          <div class="smw-tabs">
+          <div class={`smw-tabs${s.tabHot ? ' sm-hot' : ''}`}>
             <button type="button" class={`smw-tab${s.activeTab === 'variable' ? '' : ' is-active'}`} data-tab="data"
               {...(s.advanceTab === 'data' ? { 'data-advance': true } : {})}>Data View</button>
             <button type="button" class={`smw-tab${s.activeTab === 'variable' ? ' is-active' : ''}`} data-tab="variable"

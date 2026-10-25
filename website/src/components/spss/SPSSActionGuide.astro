@@ -42,6 +42,11 @@ if (!g) throw new Error(`SPSSActionGuide: không tìm thấy guide '${id}' trong
 
   <SpssMock scenes={g.scenes} guideId={id} />
 
+  <div class="sguide-key">
+    <span><span class="sm-badge">n</span> mục đánh số = điểm cần bấm trên SPSS thật</span>
+    <span><code class="sguide-menuitem">mục cam/xanh</code> bấm được trong hình mô phỏng</span>
+    <span>mục xám chỉ minh họa vị trí</span>
+  </div>
   <div class="sguide-nav">
     <button type="button" class="sguide-btn snav-prev" data-nav="prev" aria-label="Khung hình trước">‹ Trước</button>
     <span class="sguide-pos" data-pos>1/{g.scenes.length}</span>
