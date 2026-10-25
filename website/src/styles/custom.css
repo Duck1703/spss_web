@@ -122,6 +122,11 @@ body {
   font-family: var(--slp-font-body);
 }
 
+/* Anchored scroll stops below the sticky header (OD remediation pattern) */
+html {
+  scroll-padding-top: calc(var(--sl-nav-height, 3.5rem) + 1rem);
+}
+
 ::selection {
   background: var(--slp-accent-soft-2);
   color: var(--slp-text);

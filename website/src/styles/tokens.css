@@ -88,21 +88,22 @@
 }
 
 :root[data-theme='light'] {
-  --slp-bg: hsl(45, 30%, 97%);
-  --slp-bg-soft: hsl(44, 25%, 95%);
-  --slp-surface: hsl(0, 0%, 100%);
-  --slp-surface-2: hsl(42, 22%, 94%);
-  --slp-border: hsl(40, 14%, 86%);
-  --slp-border-strong: hsl(40, 10%, 76%);
+  /* Open Design v1 (approved): cool gray canvas, white surfaces, indigo primary */
+  --slp-bg: #f3f4f8;
+  --slp-bg-soft: #f8f9fc;
+  --slp-surface: #ffffff;
+  --slp-surface-2: #f8f9fc;
+  --slp-border: #e2e5ee;
+  --slp-border-strong: #cdd2e0;
 
-  --slp-text: hsl(222, 40%, 15%);
-  --slp-text-2: hsl(221, 16%, 38%);
-  --slp-muted: hsl(220, 10%, 52%);
+  --slp-text: #1f2430;
+  --slp-text-2: #4d5568;
+  --slp-muted: #7c8498;
 
-  --slp-accent: hsl(238, 60%, 52%);
-  --slp-accent-strong: hsl(238, 62%, 42%);
-  --slp-accent-soft: hsl(238, 70%, 95%);
-  --slp-accent-soft-2: hsl(238, 60%, 90%);
+  --slp-accent: #4f46e5;
+  --slp-accent-strong: #3730a3;
+  --slp-accent-soft: #eef0fe;
+  --slp-accent-soft-2: #e3e5fd;
   --slp-on-accent: hsl(0, 0%, 100%);
 
   --slp-success: hsl(152, 55%, 32%);

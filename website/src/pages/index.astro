@@ -1,31 +1,29 @@
 ---
-// Landing page — không dùng Starlight template (cần hero + progress UI tùy ý).
+// Trang chủ — dashboard theo Open Design v1 (đã duyệt).
+// Không dùng Starlight template: cần continue-card + stat-grid + roadmap rows.
+// Dữ liệu tiến độ đọc THẬT từ progress.js (spss-mlp-progress-v1) — không hardcode.
 import '../styles/tokens.css';
 
+// Metadata lộ trình — khớp bảng canonical trong lo-trinh-14-ngay.md + sidebar.
 const days = [
-  { slug: 'd01', code: 'Ngày 01', title: 'Mở file bài tập & đọc dữ liệu — P1-Q01', ready: true },
-  { slug: 'd02', code: 'Ngày 02', title: 'Tần số và phần trăm — P1-Q02, P1-Q38', ready: true },
-  { slug: 'd03', code: 'Ngày 03', title: 'Thống kê mô tả biến số — P1-Q03, P1-Q04', ready: true },
-  { slug: 'd04', code: 'Ngày 04', title: 'Tóm tắt theo nhóm — Select Cases · Split File' },
-  { slug: 'd05', code: 'Ngày 05', title: 'Bảng chéo và Chi-square' },
-  { slug: 'd06', code: 'Ngày 06', title: 'Biến đổi dữ liệu — Compute · Recode · Count' },
-  { slug: 'd07', code: 'Ngày 07', title: 'Soi và xử lý dữ liệu nhập sai' },
-  { slug: 'd08', code: 'Ngày 08', title: 'Kiểm định về tỷ lệ' },
-  { slug: 'd09', code: 'Ngày 09', title: 'So sánh trung bình — 1 mẫu & 2 nhóm' },
-  { slug: 'd10', code: 'Ngày 10', title: 'T-test ghép cặp và ANOVA' },
-  { slug: 'd11', code: 'Ngày 11', title: 'Tương quan và hồi quy tuyến tính' },
-  { slug: 'd12', code: 'Ngày 12', title: 'Capstone A — khám phá & chuẩn bị File5' },
-  { slug: 'd13', code: 'Ngày 13', title: 'Capstone B — phân tích & báo cáo File5' },
-  { slug: 'd14', code: 'Ngày 14', title: 'Đánh giá thực hành cuối khóa' },
+  { slug: 'd01', code: '01', title: 'Mở file bài tập & đọc dữ liệu', ex: 'P1-Q01', ds: 'p1_B01_HA (1).sav' },
+  { slug: 'd02', code: '02', title: 'Tần số và phần trăm', ex: 'P1-Q02 · P1-Q38', ds: 'p1_B01_HA (1).sav' },
+  { slug: 'd03', code: '03', title: 'Đại lượng thống kê mô tả', ex: 'P1-Q03 · P1-Q04', ds: 'p1_B01_HA (1).sav' },
+  { slug: 'd04', code: '04', title: 'Tóm tắt theo nhóm — Select Cases · Split File', ex: 'P1-Q08 · P1-Q09 · P1-Q06', ds: 'p1_B01_HA (1).sav' },
+  { slug: 'd05', code: '05', title: 'Bảng chéo và Chi-square', ex: 'P1-Q05 · P1-Q17', ds: 'p1_B01_HA' },
+  { slug: 'd06', code: '06', title: 'Biến đổi dữ liệu — Compute · Recode · Count', ex: 'P1-Q10 · P1-Q11 · P1-Q12', ds: 'p1_B01_HA (1).sav' },
+  { slug: 'd07', code: '07', title: 'Kiểm tra & xử lý dữ liệu nhập sai', ex: 'P1-Q14 · P1-Q13', ds: 'p1_B01_HA (1).sav' },
+  { slug: 'd08', code: '08', title: 'Kiểm định về tỷ lệ', ex: 'P1-Q22 · P2-Q02 · P2-Q03', ds: 'p1_B01_HA · File1.sav' },
+  { slug: 'd09', code: '09', title: 'So sánh trung bình — 1 mẫu & 2 nhóm', ex: 'P2-Q04 · P2-Q05 · P2-Q07', ds: 'File1.sav' },
+  { slug: 'd10', code: '10', title: 'T-test ghép cặp và ANOVA', ex: 'P2-Q06 · P2-Q08', ds: 'File1.sav' },
+  { slug: 'd11', code: '11', title: 'Tương quan và hồi quy tuyến tính', ex: 'P2-Q09 · P2-Q10', ds: 'File1.sav' },
+  { slug: 'd12', code: '12', title: 'Capstone A — khám phá & chuẩn bị File5', ex: 'P2-TH3 · P2-Q11', ds: 'File5.sav' },
+  { slug: 'd13', code: '13', title: 'Capstone B — phân tích & báo cáo File5', ex: 'P2-TH3 · P2-Q12', ds: 'File5.sav' },
+  { slug: 'd14', code: '14', title: 'Đánh giá thực hành cuối khóa', ex: 'Đánh giá tổng hợp', ds: 'File5.sav' },
 ];
 const references = [
-  { href: '/m01/bai-hoc/', code: 'M01', title: 'Tư duy nghiên cứu y khoa & ngôn ngữ thống kê', week: 'Tham khảo' },
-  { href: '/lo-trinh/', code: '16w', title: 'Lộ trình 16 tuần — Blueprint gốc (không phải lộ trình hiện tại)', week: 'Tham khảo' },
-];
-const extensions = [
-  { code: 'E01', title: 'Chẩn đoán: sensitivity, specificity, ROC/AUC' },
-  { code: 'E02', title: 'Kaplan–Meier, log-rank, Cox' },
-  { code: 'E03', title: 'Missing data, complex survey, multiple testing' },
+  { href: '/m01/bai-hoc/', code: 'M01', title: 'Tư duy nghiên cứu y khoa & ngôn ngữ thống kê' },
+  { href: '/lo-trinh/', code: '16w', title: 'Lộ trình 16 tuần — Blueprint gốc (không phải lộ trình hiện tại)' },
 ];
 const outcomes = [
   'Mở file .sav bài tập nguồn, đọc Variable View, codebook và nhãn giá trị.',
@@ -34,12 +32,6 @@ const outcomes = [
   'Biến đổi dữ liệu: Compute (BMI), Recode nhóm, đếm đa biến; soi lỗi nhập liệu.',
   'So sánh trung bình và tỷ lệ: t-test các loại, ANOVA, chi-square, binomial.',
   'Phân tích một dataset mới từ đầu đến báo cáo (Capstone File5).',
-];
-const howTo = [
-  { title: 'Bài tập trước, lý thuyết sau', text: 'Mỗi ngày mở bằng một bài tập gốc (P1-Q01…P2-Q15) — học chỉ đủ để giải nó.' },
-  { title: 'Học theo thứ tự ngày', text: 'Bài sau dùng lại file và kỹ năng bài trước — đừng nhảy cóc.' },
-  { title: 'Mở SPSS ngay', text: '80% thời lượng mỗi ngày là thao tác thật — đọc lý thuyết đúng lúc cần.' },
-  { title: 'Dataset nguồn ở local', text: 'File .sav bài tập nằm trong exercises/ trên máy — mở trực tiếp, không tải từ web.' },
 ];
 ---
 <!doctype html>
@@ -71,7 +63,7 @@ const howTo = [
       font-family: var(--slp-font-body);
       background: var(--slp-bg);
       color: var(--slp-text);
-      line-height: 1.7;
+      line-height: 1.62;
       -webkit-font-smoothing: antialiased;
     }
     a { color: var(--slp-accent-strong); }
@@ -80,17 +72,18 @@ const howTo = [
 
     .wrap { max-width: var(--slp-wide-width); margin: 0 auto; padding: 0 24px; }
 
-    /* Top nav */
+    /* Top nav — cùng 5 điểm đến như sidebar tài liệu */
     .topnav {
       position: sticky; top: 0; z-index: 10;
       background: color-mix(in srgb, var(--slp-bg) 82%, transparent);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--slp-border);
     }
-    .topnav__inner { display: flex; align-items: center; gap: 16px; height: 64px; }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--slp-text); font-weight: 700; letter-spacing: -0.01em; }
-    .brand svg { border-radius: 7px; display: block; }
-    .topnav__links { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+    .topnav__inner { display: flex; align-items: center; gap: 16px; height: 60px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--slp-text); font-weight: 700; letter-spacing: -0.01em; min-width: 0; }
+    .brand span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .brand svg { border-radius: 7px; display: block; flex: none; }
+    .topnav__links { margin-left: auto; display: flex; align-items: center; gap: 4px; flex: none; }
     .topnav__links a {
       text-decoration: none; color: var(--slp-text-2); font-size: var(--slp-text-small);
       font-weight: 500; padding: 8px 12px; border-radius: var(--slp-radius-md);
@@ -109,121 +102,125 @@ const howTo = [
     [data-theme='dark'] .theme-toggle .icon-sun { display: block; }
     [data-theme='dark'] .theme-toggle .icon-moon { display: none; }
 
-    /* Hero */
-    .hero { padding: var(--slp-space-12) 0 var(--slp-space-10); max-width: 56rem; }
-    .kicker {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: var(--slp-text-caption); font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--slp-accent-strong);
-      background: var(--slp-accent-soft); border-radius: var(--slp-radius-full);
-      padding: 6px 14px;
+    /* Page head (OD dashboard) */
+    .page-head { padding: var(--slp-space-8) 0 var(--slp-space-5); }
+    .page-head h1 {
+      font-size: clamp(1.7rem, 3.4vw, 2.2rem); line-height: 1.25;
+      letter-spacing: -0.02em; font-weight: 700; margin: 0;
+      overflow-wrap: anywhere;
     }
-    h1 {
-      font-size: clamp(2.1rem, 5vw, 3.1rem); line-height: 1.2; letter-spacing: -0.02em;
-      font-weight: 700; margin: 20px 0 0; max-width: 20ch;
+    .page-head .lead { color: var(--slp-text-2); margin: 10px 0 0; max-width: 60ch; }
+
+    /* Continue card */
+    .continue-card {
+      display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--slp-space-5);
+      align-items: center;
+      background: var(--slp-surface); border: 1px solid var(--slp-border);
+      border-radius: var(--slp-radius-xl); padding: var(--slp-space-5) var(--slp-space-6);
+      box-shadow: var(--slp-shadow-md);
     }
-    .lead { font-size: 1.15rem; color: var(--slp-text-2); max-width: 56ch; margin: 18px 0 0; }
-    .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .continue-card__eyebrow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: var(--slp-text-caption); font-weight: 600; letter-spacing: 0.04em;
+      padding: 4px 12px; border-radius: var(--slp-radius-full);
+      background: var(--slp-accent-soft); color: var(--slp-accent-strong);
+    }
+    .chip--ghost { background: var(--slp-surface-2); color: var(--slp-muted); border: 1px dashed var(--slp-border-strong); }
+    .continue-card h2 { font-size: var(--slp-text-h3); font-weight: 700; margin: 12px 0 0; line-height: 1.35; letter-spacing: -0.01em; }
+    .continue-card p { color: var(--slp-text-2); font-size: 0.95rem; margin: 8px 0 0; }
+    .continue-card p code { font-family: var(--slp-font-mono); font-size: 0.85em; background: var(--slp-surface-2); padding: 1px 6px; border-radius: 4px; }
+    .continue-card__actions { display: flex; flex-direction: column; gap: 10px; }
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 24px; border-radius: var(--slp-radius-full);
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 22px; border-radius: var(--slp-radius-lg);
       font-weight: 600; font-size: 0.95rem; text-decoration: none;
       border: 1px solid var(--slp-border); background: var(--slp-surface); color: var(--slp-text);
       transition: border-color var(--slp-motion-fast) var(--slp-ease),
         box-shadow var(--slp-motion-fast) var(--slp-ease),
         transform var(--slp-motion-fast) var(--slp-ease);
+      white-space: nowrap;
     }
     .btn:hover { border-color: var(--slp-border-strong); box-shadow: var(--slp-shadow-md); transform: translateY(-1px); }
     .btn-primary { background: var(--slp-accent); border-color: var(--slp-accent); color: var(--slp-on-accent); }
-    .btn-primary:hover { border-color: var(--slp-accent-strong); box-shadow: var(--slp-shadow-md); }
-    .btn-accent-ghost { border-color: var(--slp-accent); color: var(--slp-accent-strong); background: transparent; }
-    .btn-accent-ghost:hover { background: var(--slp-accent-soft); }
+    .btn-primary:hover { border-color: var(--slp-accent-strong); }
     .btn-small { padding: 8px 16px; font-size: var(--slp-text-small); }
-    .hero__meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--slp-border); }
-    .hero__meta div { font-size: var(--slp-text-small); color: var(--slp-muted); }
-    .hero__meta strong { display: block; font-size: 1.05rem; color: var(--slp-text); font-weight: 700; }
+    .resume-link { font-size: var(--slp-text-small); margin-top: 10px; display: inline-block; }
 
-    /* Sections */
-    section { margin-top: var(--slp-space-12); }
-    .section-head { max-width: 44rem; margin-bottom: var(--slp-space-6); }
-    .section-head .eyebrow { font-size: var(--slp-text-caption); font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--slp-accent-strong); }
-    .section-head h2 { font-size: var(--slp-text-h2); font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; margin: 8px 0 0; }
-    .section-head p { color: var(--slp-text-2); margin: 12px 0 0; }
-
-    /* Progress panel */
-    .progress-panel {
+    /* Stat grid */
+    .stats { margin-top: var(--slp-space-6); }
+    .stats h2 { font-size: var(--slp-text-h3); font-weight: 700; margin: 0 0 var(--slp-space-4); }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--slp-space-4); }
+    .stat-card {
       background: var(--slp-surface); border: 1px solid var(--slp-border);
-      border-radius: var(--slp-radius-xl); padding: var(--slp-space-5) var(--slp-space-6);
-      box-shadow: var(--slp-shadow-md);
-      display: flex; flex-direction: column; gap: 14px;
+      border-radius: var(--slp-radius-lg); padding: 18px 20px;
+      box-shadow: var(--slp-shadow-sm);
+    }
+    .stat-card b { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; display: block; }
+    .stat-card b small { font-size: 1rem; color: var(--slp-muted); font-weight: 600; }
+    .stat-card span { font-size: var(--slp-text-small); color: var(--slp-text-2); }
+    .stat-hint { font-size: var(--slp-text-caption); color: var(--slp-muted); margin-top: 8px; }
+
+    /* Progress panel (giữ export/import hiện hữu) */
+    .progress-panel {
+      margin-top: var(--slp-space-5);
+      background: var(--slp-surface); border: 1px solid var(--slp-border);
+      border-radius: var(--slp-radius-lg); padding: 16px 20px;
+      display: flex; flex-direction: column; gap: 12px;
     }
     .progress-panel__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .progress-panel__title { font-weight: 700; font-size: 1.05rem; }
+    .progress-panel__title { font-weight: 700; }
     .progress-panel__count { font-size: var(--slp-text-small); color: var(--slp-text-2); }
     .progress-bar { height: 8px; border-radius: var(--slp-radius-full); background: var(--slp-surface-2); overflow: hidden; }
     .progress-bar__fill { height: 100%; width: 0%; border-radius: inherit; background: var(--slp-accent); transition: width 400ms var(--slp-ease); }
     .progress-panel__actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .progress-panel__note { font-size: var(--slp-text-small); color: var(--slp-muted); margin: 0; }
+    .progress-panel__note { font-size: var(--slp-text-caption); color: var(--slp-muted); margin: 0; }
 
-    /* Cards */
-    .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-    .cards--compact { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+    /* Roadmap rows */
+    section { margin-top: var(--slp-space-8); }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: var(--slp-space-4); flex-wrap: wrap; }
+    .section-head h2 { font-size: var(--slp-text-h3); font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+    .section-head a { font-size: var(--slp-text-small); font-weight: 600; text-decoration: none; }
+    .day-list { display: flex; flex-direction: column; gap: 10px; }
+    .day-row {
+      display: grid; grid-template-columns: auto minmax(0,1fr) auto auto; gap: 16px;
+      align-items: center;
+      background: var(--slp-surface); border: 1px solid var(--slp-border);
+      border-radius: var(--slp-radius-lg); padding: 14px 18px;
+      text-decoration: none; color: inherit;
+      transition: border-color var(--slp-motion-fast) var(--slp-ease), box-shadow var(--slp-motion-fast) var(--slp-ease);
+    }
+    .day-row:hover { border-color: var(--slp-border-strong); box-shadow: var(--slp-shadow-sm); }
+    .day-row__num {
+      width: 40px; height: 40px; border-radius: 12px; flex: none;
+      background: var(--slp-accent-soft); color: var(--slp-accent-strong);
+      font-weight: 700; font-size: 0.95rem;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .day-row__main { min-width: 0; }
+    .day-row__title { font-weight: 600; font-size: 0.98rem; line-height: 1.4; display: block; }
+    .day-row__meta { font-size: var(--slp-text-caption); color: var(--slp-muted); display: block; margin-top: 3px; overflow-wrap: anywhere; }
+    .day-row__status {
+      font-size: var(--slp-text-caption); font-weight: 600; white-space: nowrap;
+      padding: 4px 12px; border-radius: var(--slp-radius-full);
+      background: var(--slp-surface-2); color: var(--slp-muted); border: 1px solid var(--slp-border);
+    }
+    .day-row__status.pill--ready { background: var(--slp-success-soft); color: var(--slp-success-strong); border-color: transparent; }
+    .day-row__chev { color: var(--slp-muted); font-size: 1.1rem; }
+
+    /* Outcomes + how-to + references — giữ nội dung, vẻ theo tokens mới */
+    .cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
     .card {
       background: var(--slp-surface); border: 1px solid var(--slp-border);
       border-radius: var(--slp-radius-lg); padding: 18px 20px;
       display: flex; flex-direction: column; gap: 8px;
       box-shadow: var(--slp-shadow-sm);
     }
-    .card__top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
     .card__code { font-family: var(--slp-font-mono); font-size: var(--slp-text-caption); font-weight: 700; letter-spacing: 0.06em; color: var(--slp-accent-strong); }
-    .card__week { font-size: var(--slp-text-caption); color: var(--slp-muted); }
     .card__title { font-weight: 600; font-size: 0.98rem; line-height: 1.45; }
     .card__title a { color: inherit; text-decoration: none; }
     .card__title a:hover { color: var(--slp-accent-strong); }
-    .card--muted { background: var(--slp-surface); }
-    .card--muted .card__code { color: var(--slp-muted); }
-    .card--muted .card__title { color: var(--slp-text-2); }
-
-    .pill {
-      align-self: flex-start;
-      font-size: var(--slp-text-caption); font-weight: 600; letter-spacing: 0.05em;
-      padding: 4px 12px; border-radius: var(--slp-radius-full);
-      background: var(--slp-surface-2); color: var(--slp-muted); border: 1px solid var(--slp-border);
-    }
-    .pill--ready { background: var(--slp-success-soft); color: var(--slp-success-strong); border-color: transparent; }
-
-    /* Featured module */
-    .module-feature {
-      grid-column: 1 / -1;
-      background: var(--slp-surface);
-      border: 1px solid var(--slp-accent);
-      border-radius: var(--slp-radius-xl);
-      padding: var(--slp-space-6) var(--slp-space-6);
-      display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
-      box-shadow: var(--slp-shadow-md);
-      position: relative; overflow: hidden;
-    }
-    .module-feature::before {
-      content: ''; position: absolute; inset: 0 auto 0 0; width: 5px;
-      background: var(--slp-accent);
-    }
-    .module-feature .card__code { font-size: var(--slp-text-small); }
-    .module-feature h3 { font-size: var(--slp-text-h3); font-weight: 700; letter-spacing: -0.01em; margin: 6px 0 0; line-height: 1.3; }
-    .module-feature p { color: var(--slp-text-2); font-size: 0.95rem; margin: 10px 0 0; max-width: 52ch; }
-    .module-feature__badges { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
-    .module-feature__actions { display: flex; flex-direction: column; gap: 10px; }
-    @media (max-width: 48rem) {
-      .module-feature { grid-template-columns: 1fr; }
-      .module-feature__actions { flex-direction: row; flex-wrap: wrap; }
-    }
-
-    /* Outcomes */
-    .outcomes { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-    .outcome {
-      display: flex; gap: 14px; padding: 18px 20px;
-      background: var(--slp-surface); border: 1px solid var(--slp-border);
-      border-radius: var(--slp-radius-lg); box-shadow: var(--slp-shadow-sm);
-    }
+    .outcome { display: flex; gap: 14px; }
     .outcome__num {
       flex-shrink: 0; width: 28px; height: 28px; border-radius: var(--slp-radius-full);
       background: var(--slp-accent-soft); color: var(--slp-accent-strong);
@@ -231,13 +228,8 @@ const howTo = [
       display: inline-flex; align-items: center; justify-content: center;
     }
     .outcome p { margin: 0; font-size: 0.95rem; color: var(--slp-text-2); }
-
-    /* How to study */
     .steps { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); counter-reset: step; }
-    .step {
-      padding: 18px 20px; border-radius: var(--slp-radius-lg);
-      background: var(--slp-bg-soft); border: 1px solid var(--slp-border);
-    }
+    .step { padding: 18px 20px; border-radius: var(--slp-radius-lg); background: var(--slp-bg-soft); border: 1px solid var(--slp-border); }
     .step::before {
       counter-increment: step; content: counter(step, decimal-leading-zero);
       font-family: var(--slp-font-mono); font-size: var(--slp-text-caption);
@@ -247,16 +239,21 @@ const howTo = [
     .step span { display: block; margin-top: 4px; font-size: var(--slp-text-small); color: var(--slp-text-2); }
 
     footer.site-footer {
-      margin-top: var(--slp-space-12);
+      margin-top: var(--slp-space-10);
       padding: var(--slp-space-6) 0;
       border-top: 1px solid var(--slp-border);
       color: var(--slp-muted); font-size: var(--slp-text-small);
     }
 
     @media (max-width: 48rem) {
-      .hero { padding: var(--slp-space-8) 0 var(--slp-space-8); }
-      section { margin-top: var(--slp-space-8); }
-      .topnav__links a { padding: 8px 9px; }
+      .continue-card { grid-template-columns: 1fr; }
+      .continue-card__actions { flex-direction: row; flex-wrap: wrap; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .topnav__inner { gap: 10px; flex-wrap: wrap; height: auto; padding: 8px 0; }
+      .topnav__links { margin-left: 0; flex: 1 1 100%; overflow-x: auto; scrollbar-width: none; }
+      .topnav__links a { padding: 6px 9px; font-size: 0.8rem; white-space: nowrap; }
+      .day-row { grid-template-columns: auto minmax(0,1fr) auto; }
+      .day-row__status { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; }
@@ -277,8 +274,9 @@ const howTo = [
       </a>
       <div class="topnav__links">
         <a href="/lo-trinh-14-ngay/">Lộ trình 14 ngày</a>
-        <a href="/du-lieu/">Dữ liệu</a>
-        <a href="/tai-lieu/thuat-ngu/">Tài liệu</a>
+        <a href="/kho-bai-tap/">Kho bài tập</a>
+        <a href="#tien-do">Tiến độ học</a>
+        <a href="/du-lieu/">Tài liệu thực hành</a>
         <button class="theme-toggle" type="button" aria-label="Chuyển giao diện sáng/tối" data-theme-toggle>
           <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
@@ -293,31 +291,40 @@ const howTo = [
   </nav>
 
   <div class="wrap">
-    <header class="hero">
-      <span class="kicker">Khóa tự học · 14 ngày · exercise-first</span>
-      <h1>Học SPSS qua bài tập thật — 14 ngày, tiếng Việt.</h1>
-      <p class="lead">
-        Dành cho người <strong>chưa từng dùng SPSS</strong> và <strong>gần như chưa học thống kê</strong>.
-        Mỗi ngày mở bằng một <strong>bài tập gốc</strong> từ đề thực hành (P1-Q01…P2-Q15) —
-        bạn giải bài thật trên dataset thật, lý thuyết chỉ xuất hiện khi bài đòi hỏi.
-      </p>
-      <div class="cta">
-        <a class="btn btn-primary" href="/d01/bai-hoc/">Bắt đầu — Ngày 01</a>
-        <a class="btn btn-accent-ghost" data-continue hidden href="#">Tiếp tục học →</a>
-        <a class="btn" href="/lo-trinh-14-ngay/">Xem lộ trình 14 ngày</a>
-        <a class="btn" href="/du-lieu/">Tải dữ liệu</a>
-      </div>
-      <div class="hero__meta">
-        <div><strong>58 bài tập</strong>nguồn, gắn ID P1-Q01…P2-Q15</div>
-        <div><strong>90–120 phút</strong>mỗi ngày, 80% thực hành</div>
-        <div><strong>Ngày 01–03</strong>sẵn sàng · 04–14 đang DRAFT</div>
-      </div>
+    <header class="page-head">
+      <h1 data-dash-greeting>Tiếp tục hành trình học SPSS</h1>
+      <p class="lead">Học SPSS qua bài tập thống kê y khoa thật — mỗi ngày một kỹ năng, 90–120 phút.</p>
     </header>
 
-    <section aria-label="Tiến độ">
+    <!-- Continue card: nội dung do progress.js điền từ tiến độ THẬT -->
+    <div class="continue-card" data-continue-card>
+      <div class="continue-card__body">
+        <div class="continue-card__eyebrow">
+          <span class="chip" data-dash-next-chip>Ngày 01 / 14</span>
+          <span class="chip chip--ghost">~90–120 phút</span>
+        </div>
+        <h2 data-dash-next-title>Mở file bài tập &amp; đọc dữ liệu</h2>
+        <p data-dash-next-meta>Bài tập hôm nay: <code>P1-Q01</code> · Dataset: <code>p1_B01_HA (1).sav</code></p>
+        <a class="resume-link" data-continue hidden href="#">↩ Quay lại trang đang đọc gần nhất →</a>
+      </div>
+      <div class="continue-card__actions">
+        <a class="btn btn-primary" href="/d01/bai-hoc/" data-dash-next-href>Tiếp tục học</a>
+        <a class="btn" href="/kho-bai-tap/">Luyện tập thêm</a>
+      </div>
+    </div>
+
+    <!-- Stat grid: số liệu THẬT từ localStorage, điền bởi progress.js -->
+    <div class="stats" id="tien-do">
+      <h2>Tiến độ của bạn</h2>
+      <div class="stat-grid">
+        <div class="stat-card"><b data-dash-days>—<small>/14</small></b><span>Ngày đã hoàn thành</span></div>
+        <div class="stat-card"><b data-dash-ex>—<small>/58</small></b><span>Bài tập đã làm</span></div>
+        <div class="stat-card"><b data-dash-remain>—</b><span>Bài tập còn lại</span></div>
+      </div>
+
       <div class="progress-panel">
         <div class="progress-panel__row">
-          <span class="progress-panel__title">Tiến độ của bạn</span>
+          <span class="progress-panel__title">Chi tiết tiến độ</span>
           <span class="progress-panel__count" data-progress-count>Chưa có dữ liệu</span>
         </div>
         <div class="progress-bar" role="progressbar" aria-label="Tiến độ bài tập" aria-valuemin="0" aria-valuemax="100">
@@ -334,82 +341,73 @@ const howTo = [
           và không tự đồng bộ sang thiết bị khác.
         </p>
       </div>
-    </section>
+    </div>
 
     <section>
       <div class="section-head">
-        <span class="eyebrow">Kết quả học tập</span>
-        <h2>Sau khóa học bạn làm được gì?</h2>
-        <p>Dành cho người làm y tế, sinh viên — muốn tự phân tích dữ liệu nghiên cứu, <em>không cần</em> nền thống kê hay lập trình.</p>
+        <h2>Lộ trình 14 ngày</h2>
+        <a href="/lo-trinh-14-ngay/">Xem chi tiết lộ trình →</a>
       </div>
-      <div class="outcomes">
-        {outcomes.map((o, i) => (
-          <div class="outcome"><span class="outcome__num">{i + 1}</span><p>{o}</p></div>
-        ))}
-      </div>
-    </section>
-
-    <section>
-      <div class="section-head">
-        <span class="eyebrow">Chương trình học</span>
-        <h2>Lộ trình 14 ngày — exercise-first</h2>
-        <p>Mỗi ngày mở bằng bài tập nguồn thật. Ngày 01–03 đã hoàn thiện; Ngày 04–14 đã ánh xạ bài tập và đang được xây dựng tiếp.</p>
-      </div>
-      <div class="cards cards--compact">
+      <div class="day-list">
         {days.map((d) => (
-          <div class="card">
-            <div class="card__top">
-              <span class="card__code">{d.code}</span>
-              <span class="pill" data-module-badge={`ef-${d.slug}`}></span>
-            </div>
-            <span class="card__title"><a href={`/${d.slug}/bai-hoc/`}>{d.title}</a></span>
-            <span class={`pill${d.ready ? ' pill--ready' : ''}`}>{d.ready ? 'Đã có bài học' : 'DRAFT — đang xây dựng'}</span>
-          </div>
+          <a class="day-row" href={`/${d.slug}/bai-hoc/`}
+             data-day-row={`ef-${d.slug}`}
+             data-day-code={d.code}
+             data-day-title={d.title}
+             data-day-meta={`Bài tập hôm nay: ${d.ex} · Dataset: ${d.ds}`}
+             data-day-href={`/${d.slug}/bai-hoc/`}>
+            <span class="day-row__num">{d.code}</span>
+            <span class="day-row__main">
+              <span class="day-row__title">Ngày {d.code} — {d.title}</span>
+              <span class="day-row__meta">{d.ex} · {d.ds}</span>
+            </span>
+            <span class="day-row__status pill" data-module-badge={`ef-${d.slug}`} data-empty="Chưa học">Chưa học</span>
+            <span class="day-row__chev" aria-hidden="true">›</span>
+          </a>
         ))}
       </div>
     </section>
 
     <section>
       <div class="section-head">
-        <span class="eyebrow">Tham khảo</span>
-        <h2>Chương trình 16 tuần — bản Blueprint gốc</h2>
-        <p>Giữ làm tài liệu tham khảo dài hạn. Khi có thêm thời gian, quay lại học sâu phần tư duy nghiên cứu.</p>
+        <h2>Sau khóa học bạn làm được gì?</h2>
       </div>
-      <div class="cards cards--compact">
-        {references.map((r) => (
-          <div class="card">
-            <div class="card__top">
-              <span class="card__code">{r.code}</span>
-              <span class="card__week">{r.week}</span>
-            </div>
-            <span class="card__title"><a href={r.href}>{r.title}</a></span>
-            {r.code === 'M01' && <span class="pill" data-module-badge="m01"></span>}
-          </div>
-        ))}
-        {extensions.map((e) => (
-          <div class="card card--muted">
-            <div class="card__top"><span class="card__code">{e.code}</span></div>
-            <span class="card__title">{e.title}</span>
-            <span class="pill">Đang biên soạn</span>
-          </div>
+      <div class="cards">
+        {outcomes.map((o, i) => (
+          <div class="card outcome"><span class="outcome__num">{i + 1}</span><p>{o}</p></div>
         ))}
       </div>
     </section>
 
     <section>
       <div class="section-head">
-        <span class="eyebrow">Cách học hiệu quả</span>
         <h2>Bốn nguyên tắc khi tự học</h2>
       </div>
       <div class="steps">
-        {howTo.map((s) => (
-          <div class="step"><strong>{s.title}</strong><span>{s.text}</span></div>
+        <div class="step"><strong>Bài tập trước, lý thuyết sau</strong><span>Mỗi ngày mở bằng một bài tập gốc (P1-Q01…P2-Q15) — học chỉ đủ để giải nó.</span></div>
+        <div class="step"><strong>Học theo thứ tự ngày</strong><span>Bài sau dùng lại file và kỹ năng bài trước — đừng nhảy cóc.</span></div>
+        <div class="step"><strong>Mở SPSS ngay</strong><span>80% thời lượng mỗi ngày là thao tác thật — đọc lý thuyết đúng lúc cần.</span></div>
+        <div class="step"><strong>Dataset nguồn ở local</strong><span>File .sav bài tập nằm trong exercises/ trên máy — mở trực tiếp, không tải từ web.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Tham khảo — chương trình 16 tuần (Blueprint gốc)</h2>
+      </div>
+      <div class="cards">
+        {references.map((r) => (
+          <div class="card">
+            <span class="card__code">{r.code}</span>
+            <span class="card__title"><a href={r.href}>{r.title}</a></span>
+            {r.code === 'M01' && <span class="pill" data-module-badge="m01"></span>}
+          </div>
         ))}
       </div>
     </section>
 
     <footer class="site-footer">
-      SPSS Medical Learning Pack · Lộ trình exercise-first 14 ngày (Task 13 / D-024) ·
+      SPSS Medical Learning Pack · Lộ trình exercise-first 14 ngày ·
       Website build từ giáo trình Markdown canonical · dataset nguồn trong exercises/ chỉ dùng local.
     </footer>
   </div>

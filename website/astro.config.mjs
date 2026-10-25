@@ -30,11 +30,14 @@ export default defineConfig({
       ],
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
       sidebar: [
-        { label: 'Bắt đầu', items: [
-          { label: 'Trang chủ', link: '/' },
+        { label: 'Học tập', items: [
+          { label: 'Tổng quan', link: '/' },
           { label: 'Lộ trình 14 ngày', slug: 'lo-trinh-14-ngay' },
           { label: 'Kho bài tập (58 câu)', slug: 'kho-bai-tap' },
-          { label: 'Dữ liệu thực hành', slug: 'du-lieu' },
+          { label: 'Tiến độ học', link: '/#tien-do' },
+        ]},
+        { label: 'Hỗ trợ', items: [
+          { label: 'Tài liệu thực hành', slug: 'du-lieu' },
           { label: 'Chuẩn bị SPSS trên Mac', slug: 'tai-lieu/bat-dau-mac' },
           { label: 'Chuẩn bị dữ liệu thực hành', slug: 'tai-lieu/chuan-bi-du-lieu' },
         ]},
