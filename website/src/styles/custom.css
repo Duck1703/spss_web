@@ -1181,3 +1181,18 @@ html[data-spss-os='win'] .smw-t { order: -1; }
 .sm-menu-btn[data-advance] { background: #dbe9fb; font-weight: 600; }
 .sguide-key { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.78rem; color: var(--slp-muted); margin-top: 0.5em; }
 .sguide-key span { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Source-exercise block (Task 13) — khối thông tin bài tập gốc {{exercise:ID}} */
+.src-ex {
+  border: 1px solid var(--slp-border); border-left: 4px solid var(--slp-accent);
+  border-radius: 10px; padding: 12px 16px; margin: 1em 0;
+  background: var(--slp-surface);
+}
+.src-ex__head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.src-ex__id {
+  font-family: var(--slp-font-mono); font-weight: 700; font-size: 0.85rem;
+  color: var(--slp-accent-strong); letter-spacing: 0.04em;
+}
+.src-ex__meta { font-size: 0.8rem; color: var(--slp-muted); }
+.src-ex__sum { font-weight: 600; margin-top: 6px; }
+.src-ex__meta2 { font-size: 0.82rem; color: var(--slp-text-2); margin-top: 6px; }

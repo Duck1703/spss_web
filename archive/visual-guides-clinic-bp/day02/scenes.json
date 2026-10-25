@@ -1,0 +1,1188 @@
+{
+  "guides": {
+    "d02-varview": {
+      "step": "Bước 1",
+      "title": "Mở Variable View — nơi định nghĩa biến",
+      "purpose": "Chuyển sang chế độ nhìn định nghĩa để gắn nhãn tiếng Việt cho biến — việc này chỉ làm ở Variable View.",
+      "where": "Data Editor đang mở clinic_bp.sav → tab góc dưới-trái",
+      "menuPath": [
+        "Tab 'Variable View'"
+      ],
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "data",
+          "advanceTab": "variable",
+          "grid": {
+            "cols": [
+              "patient_id",
+              "age_years",
+              "sex_code",
+              "bmi",
+              "…"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "P001"
+                },
+                {
+                  "label": "36"
+                },
+                {
+                  "label": "2"
+                },
+                {
+                  "label": "22.1"
+                },
+                {
+                  "label": "…"
+                }
+              ]
+            ]
+          },
+          "caption": "Đang ở Data View. Bấm tab Variable View (thử trong hình).",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Bấm tab 'Variable View'"
+            }
+          ],
+          "tabHot": 1
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "variable",
+          "grid": {
+            "kind": "var",
+            "cols": [
+              "Name",
+              "Type",
+              "Width",
+              "Decimals",
+              "Label",
+              "Values",
+              "Missing",
+              "Columns",
+              "Align",
+              "Measure",
+              "Role"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "patient_id",
+                  "hot": 2
+                },
+                {
+                  "label": "String"
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "0"
+                },
+                {
+                  "label": "",
+                  "hot": 3
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "Left"
+                },
+                {
+                  "label": "Nominal"
+                },
+                {
+                  "label": "Input"
+                }
+              ],
+              [
+                {
+                  "label": "age_years"
+                },
+                {
+                  "label": "Numeric"
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "0"
+                },
+                {
+                  "label": "",
+                  "hot": 3
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "Right"
+                },
+                {
+                  "label": "Unknown",
+                  "hot": 5
+                },
+                {
+                  "label": "Input"
+                }
+              ],
+              [
+                {
+                  "label": "sex_code"
+                },
+                {
+                  "label": "Numeric"
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "0"
+                },
+                {
+                  "label": ""
+                },
+                {
+                  "label": "None",
+                  "hot": 4
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "8"
+                },
+                {
+                  "label": "Right"
+                },
+                {
+                  "label": "Unknown"
+                },
+                {
+                  "label": "Input"
+                }
+              ]
+            ]
+          },
+          "caption": "Mỗi DÒNG = một biến; mỗi CỘT = một thuộc tính. Hôm nay chỉ sửa 3 cột: Label, Values, Measure.",
+          "callouts": [
+            {
+              "n": 2,
+              "label": "Cột Name — tên biến, KHÔNG sửa ở đây"
+            },
+            {
+              "n": 3,
+              "label": "Cột Label — nhãn tiếng Việt sẽ gõ vào"
+            },
+            {
+              "n": 4,
+              "label": "Cột Values — bấm vào sẽ có nút '…' mở hộp nhãn mã"
+            },
+            {
+              "n": 5,
+              "label": "Cột Measure — chọn Nominal/Ordinal/Scale"
+            }
+          ]
+        }
+      ],
+      "expected": "Variable View hiện bảng với các cột Name/Type/Width/Decimals/Label/Values/Missing/Columns/Align/Measure/Role, mỗi dòng một biến.",
+      "ifWrong": [
+        "Không thấy các cột như hình → cuộn ngang thanh trượt dưới lưới.",
+        "Bảng trống → file .sav chưa mở đúng; File → Open → Data… → clinic_bp.sav."
+      ]
+    },
+    "d02-label": {
+      "step": "Bước 2",
+      "title": "Gõ nhãn biến vào cột Label",
+      "purpose": "Biến 'age_years' khó hiểu; nhãn 'Tuổi (năm)' sẽ hiện trong mọi bảng kết quả thay cho tên biến.",
+      "where": "Variable View → cột Label",
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "variable",
+          "grid": {
+            "kind": "var",
+            "cols": [
+              "Name",
+              "Type",
+              "Label",
+              "Values",
+              "Measure"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "patient_id"
+                },
+                {
+                  "label": "String"
+                },
+                {
+                  "label": ""
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Nominal"
+                }
+              ],
+              [
+                {
+                  "label": "age_years"
+                },
+                {
+                  "label": "Numeric"
+                },
+                {
+                  "label": "↵ gõ ở đây",
+                  "sel": true,
+                  "hot": 1
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ],
+              [
+                {
+                  "label": "sex_code"
+                },
+                {
+                  "label": "Numeric"
+                },
+                {
+                  "label": ""
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ]
+            ]
+          },
+          "caption": "Double-click ô Label cùng dòng với age_years → gõ 'Tuổi (năm)' → Enter.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Ô Label của age_years — double-click để gõ"
+            }
+          ]
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "variable",
+          "grid": {
+            "kind": "var",
+            "cols": [
+              "Name",
+              "Type",
+              "Label",
+              "Values",
+              "Measure"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "patient_id"
+                },
+                {
+                  "label": "String"
+                },
+                {
+                  "label": "Mã bệnh nhân"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Nominal"
+                }
+              ],
+              [
+                {
+                  "label": "age_years"
+                },
+                {
+                  "label": "Numeric"
+                },
+                {
+                  "label": "Tuổi (năm)",
+                  "hot": 2
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ],
+              [
+                {
+                  "label": "sex_code"
+                },
+                {
+                  "label": "Numeric"
+                },
+                {
+                  "label": "Giới"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ]
+            ]
+          },
+          "caption": "Sau khi gõ: nhãn hiện ngay trong ô. Làm tiếp cho các biến còn lại theo codebook.",
+          "callouts": [
+            {
+              "n": 2,
+              "label": "Nhãn vừa gõ — lặp lại cho từng biến"
+            }
+          ]
+        }
+      ],
+      "expected": "Cột Label hiện nhãn tiếng Việt cho từng biến (Tuổi (năm), Giới, Chỉ số khối cơ thể (kg/m²), HA tâm thu lúc nhập (mmHg)…).",
+      "ifWrong": [
+        "Gõ xong Enter mà nhãn mất → chắc bạn gõ nhầm vào cột Values (cột bên phải) — click lại đúng cột Label.",
+        "Muốn sửa nhãn đã gõ → double-click lại ô đó, gõ đè."
+      ]
+    },
+    "d02-values": {
+      "step": "Bước 3",
+      "title": "Khai báo nhãn mã: sex_code 1 = Nữ, 2 = Nam",
+      "purpose": "Dữ liệu lưu mã số (1, 2) cho gọn; nhãn mã giúp SPSS in 'Nữ/Nam' thay vì '1/2' trong kết quả.",
+      "where": "Variable View → cột Values của sex_code → hộp 'Value Labels'",
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "variable",
+          "grid": {
+            "kind": "var",
+            "cols": [
+              "Name",
+              "Label",
+              "Values",
+              "Missing",
+              "Measure"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "age_years"
+                },
+                {
+                  "label": "Tuổi (năm)"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ],
+              [
+                {
+                  "label": "sex_code"
+                },
+                {
+                  "label": "Giới"
+                },
+                {
+                  "label": "None …",
+                  "sel": true,
+                  "hot": 1
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ],
+              [
+                {
+                  "label": "treatment_group"
+                },
+                {
+                  "label": "Nhóm điều trị"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ]
+            ]
+          },
+          "caption": "Bấm vào ô Values của sex_code → nút '…' hiện ở mép phải ô → bấm '…' mở hộp Value Labels.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Bấm ô Values → xuất hiện nút '…' → bấm '…'"
+            }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Value Labels",
+          "dim": true,
+          "dialog": {
+            "title": "Value Labels",
+            "rows": [
+              {
+                "type": "field",
+                "label": "Value:",
+                "value": "1",
+                "hot": 2
+              },
+              {
+                "type": "field",
+                "label": "Label:",
+                "value": "Nữ",
+                "hot": 3
+              },
+              {
+                "type": "list",
+                "rows": [
+                  "1 = \"Nữ\"",
+                  "2 = \"Nam\""
+                ],
+                "hotRow": 5,
+                "hot": 5
+              },
+              {
+                "type": "note",
+                "text": "Thứ tự thao tác: gõ Value → gõ Label → bấm Add. Lặp lại: Value '2' → Label 'Nam' → Add."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "Add",
+                "hot": 4
+              },
+              {
+                "label": "Change"
+              },
+              {
+                "label": "Remove"
+              },
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 6
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Gõ Value '1' + Label 'Nữ' → Add; gõ '2' + 'Nam' → Add; danh sách hiện 2 dòng → OK.",
+          "callouts": [
+            {
+              "n": 2,
+              "label": "Ô Value — gõ mã số"
+            },
+            {
+              "n": 3,
+              "label": "Ô Label — gõ nhãn chữ"
+            },
+            {
+              "n": 4,
+              "label": "Add — thêm cặp vào danh sách (quên Add = mất)"
+            },
+            {
+              "n": 5,
+              "label": "Danh sách các nhãn đã khai báo"
+            },
+            {
+              "n": 6,
+              "label": "OK khi đủ các mã"
+            }
+          ]
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "variable",
+          "grid": {
+            "kind": "var",
+            "cols": [
+              "Name",
+              "Label",
+              "Values",
+              "Missing",
+              "Measure"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "age_years"
+                },
+                {
+                  "label": "Tuổi (năm)"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ],
+              [
+                {
+                  "label": "sex_code"
+                },
+                {
+                  "label": "Giới"
+                },
+                {
+                  "label": "{1, Nữ}…",
+                  "hot": 7
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ],
+              [
+                {
+                  "label": "treatment_group"
+                },
+                {
+                  "label": "Nhóm điều trị"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Unknown"
+                }
+              ]
+            ]
+          },
+          "caption": "Ô Values đổi từ 'None' → '{1, Nữ}…' = nhãn mã đã lưu. Làm tiếp cho treatment_group (A/B) và bp_controlled (0/1).",
+          "callouts": [
+            {
+              "n": 7,
+              "label": "'{1, Nữ}…' = đã có nhãn mã"
+            }
+          ]
+        }
+      ],
+      "expected": "Ô Values của sex_code hiển thị '{1, Nữ}…' thay vì 'None'. Kết quả tương tự cho các biến mã khác.",
+      "ifWrong": [
+        "Bấm OK xong Values vẫn 'None' → bạn quên bấm Add trước khi OK. Mở lại hộp thoại và Add đúng thứ tự.",
+        "Gõ nhầm mã/nhãn → trong hộp thoại chọn dòng sai trong danh sách → sửa → bấm Change (không phải Add).",
+        "Nút '…' không hiện → phải bấm chọn ô Values trước (ô đang được chọn mới hiện nút)."
+      ]
+    },
+    "d02-measure": {
+      "step": "Bước 4",
+      "title": "Chọn Measure: Nominal, Ordinal hay Scale",
+      "purpose": "Measure báo cho SPSS biết biến là loại nào — ảnh hưởng đến việc SPSS gợi ý phép phân tích và biểu đồ đúng.",
+      "where": "Variable View → cột Measure",
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "variable",
+          "grid": {
+            "kind": "var",
+            "cols": [
+              "Name",
+              "Label",
+              "Values",
+              "Measure"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "age_years"
+                },
+                {
+                  "label": "Tuổi (năm)"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Scale",
+                  "sel": true
+                }
+              ],
+              [
+                {
+                  "label": "sex_code"
+                },
+                {
+                  "label": "Giới"
+                },
+                {
+                  "label": "{1, Nữ}…"
+                },
+                {
+                  "label": "Nominal",
+                  "sel": true,
+                  "hot": 1
+                }
+              ],
+              [
+                {
+                  "label": "treatment_group"
+                },
+                {
+                  "label": "Nhóm điều trị"
+                },
+                {
+                  "label": "{A, Điều trị chuẩn}…"
+                },
+                {
+                  "label": "Nominal"
+                }
+              ],
+              [
+                {
+                  "label": "sbp_baseline"
+                },
+                {
+                  "label": "HA tâm thu lúc nhập (mmHg)"
+                },
+                {
+                  "label": "None"
+                },
+                {
+                  "label": "Scale"
+                }
+              ]
+            ]
+          },
+          "caption": "Bấm ô Measure → chọn từ danh sách sổ xuống. Quy tắc nhớ: mã nhóm không thứ tự → Nominal; số đo được → Scale; thứ hạng → Ordinal.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "sex_code = mã nhóm (1,2) → chọn Nominal"
+            }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Ba lựa chọn trong danh sách Measure",
+          "menubar": false,
+          "dialog": {
+            "title": "Measure — danh sách sổ xuống",
+            "rows": [
+              {
+                "type": "list",
+                "rows": [
+                  "Scale — số đo thật (tuổi, BMI, mmHg)",
+                  "Ordinal — thứ hạng (nhẹ/trung bình/nặng)",
+                  "Nominal — mã nhóm không thứ tự (giới, nhóm thuốc)"
+                ],
+                "hotRow": 2,
+                "hot": 2
+              },
+              {
+                "type": "note",
+                "text": "Sau import CSV, SPSS thường để 'Unknown' — bạn tự chọn lại cho đúng từng biến."
+              }
+            ],
+            "buttons": []
+          },
+          "caption": "Ba giá trị Measure — chọn theo bản chất biến, không phải theo mã số.",
+          "callouts": [
+            {
+              "n": 2,
+              "label": "sex_code dù là số 1,2 vẫn là Nominal — vì 1,2 chỉ là mã nhóm"
+            }
+          ]
+        }
+      ],
+      "expected": "Các biến mã nhóm = Nominal; biến đo lường (age, bmi, sbp…) = Scale; không còn 'Unknown' nếu đã khai báo hết.",
+      "ifWrong": [
+        "Chọn nhầm → bấm lại ô Measure và chọn lại — sửa được mọi lúc, không mất dữ liệu.",
+        "Không rõ biến này loại nào → tra codebook (cột 'measure') trong mục Dữ liệu."
+      ]
+    },
+    "d02-toggle": {
+      "step": "Bước 5",
+      "title": "Xem nhãn mã thay cho số trong Data View",
+      "purpose": "Kiểm tra nhãn vừa khai báo: bật 'Value Labels' để ô dữ liệu hiện 'Nữ/Nam' thay vì '1/2' — dữ liệu gốc không đổi.",
+      "where": "Data View → menu View → Value Labels",
+      "menuPath": [
+        "View",
+        "Value Labels"
+      ],
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "openMenu": "View",
+          "items": [
+            {
+              "label": "Status Bar"
+            },
+            {
+              "label": "Toolbars"
+            },
+            {
+              "label": "Value Labels",
+              "hot": 1,
+              "advance": true
+            },
+            {
+              "label": "Fonts"
+            }
+          ],
+          "grid": {
+            "cols": [
+              "patient_id",
+              "age_years",
+              "sex_code",
+              "treatment_group",
+              "…"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "P001"
+                },
+                {
+                  "label": "36"
+                },
+                {
+                  "label": "2",
+                  "hot": 2
+                },
+                {
+                  "label": "A"
+                },
+                {
+                  "label": "…"
+                }
+              ],
+              [
+                {
+                  "label": "P002"
+                },
+                {
+                  "label": "46"
+                },
+                {
+                  "label": "2"
+                },
+                {
+                  "label": "A"
+                },
+                {
+                  "label": "…"
+                }
+              ],
+              [
+                {
+                  "label": "P003"
+                },
+                {
+                  "label": "47"
+                },
+                {
+                  "label": "2"
+                },
+                {
+                  "label": "B"
+                },
+                {
+                  "label": "…"
+                }
+              ]
+            ]
+          },
+          "caption": "Menu View → tick 'Value Labels'. Lúc này các ô đang hiện mã số 1/2.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "View → Value Labels — bật/tắt cách hiển thị"
+            },
+            {
+              "n": 2,
+              "label": "Đang hiện mã số gốc"
+            }
+          ]
+        },
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "toolbar": true,
+          "tabs": true,
+          "activeTab": "data",
+          "grid": {
+            "cols": [
+              "patient_id",
+              "age_years",
+              "sex_code",
+              "treatment_group",
+              "…"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "P001"
+                },
+                {
+                  "label": "36"
+                },
+                {
+                  "label": "Nam",
+                  "hot": 3
+                },
+                {
+                  "label": "Điều trị chuẩn"
+                },
+                {
+                  "label": "…"
+                }
+              ],
+              [
+                {
+                  "label": "P002"
+                },
+                {
+                  "label": "46"
+                },
+                {
+                  "label": "Nam"
+                },
+                {
+                  "label": "Điều trị chuẩn"
+                },
+                {
+                  "label": "…"
+                }
+              ],
+              [
+                {
+                  "label": "P003"
+                },
+                {
+                  "label": "47"
+                },
+                {
+                  "label": "Nam"
+                },
+                {
+                  "label": "Chuẩn + hỗ trợ"
+                },
+                {
+                  "label": "…"
+                }
+              ]
+            ]
+          },
+          "caption": "Sau khi bật: ô 1/2 đổi thành Nữ/Nam; A/B/C thành tên nhóm. Dữ liệu gốc VẪN là số — chỉ cách hiển thị đổi.",
+          "callouts": [
+            {
+              "n": 3,
+              "label": "Hiển thị nhãn — dữ liệu bên trong vẫn là mã số"
+            }
+          ]
+        }
+      ],
+      "expected": "Bật Value Labels: ô sex_code hiện 'Nữ'/'Nam'. Tắt đi: lại hiện 1/2. Bật/tắt không ảnh hưởng dữ liệu.",
+      "ifWrong": [
+        "Bật rồi mà vẫn hiện số → biến đó chưa có nhãn mã (kiểm tra lại bước Values), hoặc bật ở cửa sổ khác.",
+        "Thấy biểu tượng bảng nhỏ trên toolbar (hình tag giá trị) → đó là nút tắt nhanh tương đương — CHƯA XÁC MINH TRÊN PHẦN MỀM THẬT."
+      ]
+    },
+    "d02-save": {
+      "step": "Bước 6",
+      "title": "Lưu và kiểm chứng bằng Frequencies",
+      "purpose": "Lưu định nghĩa vào clinic_bp.sav (Ctrl+S / ⌘S), rồi chạy Frequencies trên sex_code để xác nhận nhãn hiện trong kết quả.",
+      "where": "Data Editor → File → Save; sau đó Analyze → Descriptive Statistics → Frequencies",
+      "menuPath": [
+        "Analyze",
+        "Descriptive Statistics",
+        "Frequencies…"
+      ],
+      "osNote": {
+        "mac": "Lưu: ⌘S",
+        "win": "Lưu: Ctrl+S"
+      },
+      "scenes": [
+        {
+          "kind": "editor",
+          "title": "clinic_bp.sav — Data Editor",
+          "openMenu": "Analyze",
+          "items": [
+            {
+              "label": "Reports"
+            },
+            {
+              "label": "Descriptive Statistics",
+              "hot": 1,
+              "sub": [
+                {
+                  "label": "Frequencies…",
+                  "hot": 2,
+                  "advance": true
+                },
+                {
+                  "label": "Descriptives…"
+                },
+                {
+                  "label": "Explore…"
+                },
+                {
+                  "label": "Crosstabs…"
+                }
+              ]
+            },
+            {
+              "label": "Compare Means"
+            },
+            {
+              "label": "Correlate"
+            },
+            {
+              "label": "Regression"
+            }
+          ],
+          "grid": {
+            "cols": [
+              "patient_id",
+              "age_years",
+              "…"
+            ],
+            "rows": [
+              [
+                {
+                  "label": "P001"
+                },
+                {
+                  "label": "36"
+                },
+                {
+                  "label": "…"
+                }
+              ]
+            ]
+          },
+          "caption": "Sau khi lưu (Ctrl+S / ⌘S): Analyze → Descriptive Statistics → Frequencies… để kiểm chứng.",
+          "callouts": [
+            {
+              "n": 1,
+              "label": "Analyze → Descriptive Statistics"
+            },
+            {
+              "n": 2,
+              "label": "Frequencies… — thống kê tần số từng giá trị"
+            }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Frequencies",
+          "dim": true,
+          "dialog": {
+            "title": "Frequencies",
+            "rows": [
+              {
+                "type": "lists",
+                "left": [
+                  "patient_id [patient_id]",
+                  "age_years [Tuổi (năm)]",
+                  "sex_code [Giới]",
+                  "bmi [BMI]",
+                  "sbp_baseline [HA tâm thu…]"
+                ],
+                "right": [
+                  "sex_code [Giới]"
+                ],
+                "hot": 3,
+                "rightLabel": "Variable(s):"
+              },
+              {
+                "type": "note",
+                "text": "Chọn sex_code ở danh sách trái → bấm mũi tên → biến nhảy sang ô Variable(s). Chú ý: tên biến đã kèm [nhãn] tiếng Việt."
+              }
+            ],
+            "buttons": [
+              {
+                "label": "OK",
+                "primary": true,
+                "advance": true,
+                "hot": 4
+              },
+              {
+                "label": "Paste"
+              },
+              {
+                "label": "Reset"
+              },
+              {
+                "label": "Cancel"
+              }
+            ]
+          },
+          "caption": "Đưa sex_code sang ô Variable(s) → OK.",
+          "callouts": [
+            {
+              "n": 3,
+              "label": "Chọn biến → mũi tên → sang ô phải"
+            },
+            {
+              "n": 4,
+              "label": "OK chạy phân tích"
+            }
+          ]
+        },
+        {
+          "kind": "output",
+          "title": "Output1 — IBM SPSS Statistics Viewer",
+          "dim": true,
+          "outline": [
+            {
+              "t": "Frequencies",
+              "hot": 6
+            },
+            {
+              "t": "Statistics",
+              "ind": true
+            },
+            {
+              "t": "Giới",
+              "ind": true
+            }
+          ],
+          "tables": [
+            {
+              "title": "Giới",
+              "cols": [
+                "",
+                "Frequency",
+                "Percent",
+                "Valid Percent",
+                "Cumulative Percent"
+              ],
+              "rows": [
+                [
+                  {
+                    "label": "Valid  Nữ",
+                    "hot": 5
+                  },
+                  "76",
+                  "47.5",
+                  "47.8",
+                  "47.8"
+                ],
+                [
+                  "Nam",
+                  "83",
+                  "51.9",
+                  "52.2",
+                  "100.0"
+                ],
+                [
+                  "Total",
+                  "159",
+                  "99.4",
+                  "100.0",
+                  ""
+                ],
+                [
+                  "Missing  System",
+                  "1",
+                  "0.6",
+                  "",
+                  ""
+                ],
+                [
+                  "Total",
+                  "160",
+                  "100.0",
+                  "",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "caption": "Cửa sổ MỚI xuất hiện = Output Viewer. Hàng nhóm hiện chữ 'Nữ/Nam' — nhãn mã hoạt động. Cột Percent: 47.5% / 51.9%, còn 1 dòng Missing.",
+          "callouts": [
+            {
+              "n": 5,
+              "label": "Nhãn 'Nữ/Nam' thay cho 1/2 = khai báo đúng"
+            },
+            {
+              "n": 6,
+              "label": "Output là cửa sổ RIÊNG — muốn giữ phải lưu .spv"
+            }
+          ]
+        }
+      ],
+      "expected": "Output Viewer hiện bảng 'Giới' với Nữ = 76 (47.5%) và Nam = 83 (51.9%), cộng 1 dòng Missing (hệ thống) — tên nhãn tiếng Việt xuất hiện thay mã số.",
+      "ifWrong": [
+        "Bảng hiện 1/2 thay vì Nữ/Nam → nhãn mã chưa lưu hoặc đang tắt hiển thị nhãn: View → Value Labels.",
+        "Con số khác 76/83, hoặc bảng hiện thêm giá trị '9'/'F' → đang mở nhầm file (file _raw có 161 dòng). Kiểm tra tên file trên thanh tiêu đề.",
+        "Đóng SPSS mất output → output nằm ở file .spv riêng; lưu File → Save trong cửa sổ Output."
+      ]
+    }
+  }
+}

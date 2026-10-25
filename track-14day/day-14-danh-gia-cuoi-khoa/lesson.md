@@ -1,60 +1,41 @@
-# Ngày 14 — Đánh giá thực hành cuối khóa
+# Ngày 14 — Đánh giá cuối khóa
 
-> **Lộ trình:** Practice-first 14 ngày · **Thời lượng:** ~120 phút làm bài + 30 phút tự chấm
-> **Dataset:** `assessment_gp_raw.csv` — **dataset hoàn toàn mới**, chưa từng mở.
-> **Trạng thái:** DRAFT — `MAC_SPSS_VERIFICATION_PENDING`. Kết quả mong đợi `NOT_RUN`.
+> **Lộ trình:** Exercise-first 14 ngày · **Dataset:** `p1_B01_HA (1).sav · File1.sav`
+> **Trạng thái:** DRAFT — đã ánh xạ đầy đủ bài tập nguồn (bảng dưới). Hướng dẫn từng bước,
+> mô phỏng SPSSActionGuide và đáp án sẽ hoàn thiện theo mẫu Ngày 01–03 (READY).
+> Số liệu kỳ vọng đã tái tính: `curriculum/exercise-verified-stats.md` (nhãn NOT_RUN).
 
 ---
 
-## A. Hôm nay bạn sẽ làm gì
+## A. Bài tập nguồn của ngày này
 
-Không có bài học mới. Bạn nhận **một tình huống hoàn chỉnh** và phải tự đi từ đầu đến cuối —
-đây là bài kiểm tra xem 14 ngày có để lại kỹ năng thật không.
+| Mã | Gốc | Nội dung (tóm tắt — đọc đề đầy đủ trong PDF nguồn) | Vai trò |
+|---|---|---|---|
+| **P1-Q24** | Câu 24 (tr.3) | Đại lượng cho HA tối đa & tối thiểu (trung bình 2 lần đo): mean, SEM, mode, P30, median | core |
+| **P1-Q26** | Câu 26 (tr.3) | Đại lượng HA tối đa trung bình theo trình độ học vấn (3 nhóm) | core |
+| **P1-Q31** | Câu 31 (tr.4) | Người mới phát hiện bệnh HA: học vấn × mức độ HA (+p) | core |
+| **P1-Q33** | Câu 33 (tr.4) | Tỷ lệ các mức chẩn đoán cao HA theo bệnh mạn tính | core |
+| **P1-Q43** | Câu 43 (tr.5) | Bảng đại lượng Tuổi theo giới tính | core |
+| **P2-Q08** | Câu 8 (tr.3) | So sánh tuổi TB bệnh nhân ở 3 tỉnh | core |
+| P1-Q28 | Câu 28 (tr.4) | Đại lượng HA tối đa/tối thiểu lần 1 theo chẩn đoán HA (bình thường vs độ 1,2,3) | assessment |
 
-## B. Đề bài
 
-Phòng khám đa khoa gửi bạn `assessment_gp_raw.csv` — sàng lọc sức khỏe của người lớn, kèm
-codebook `datasets/codebooks/assessment_gp_codebook.md`. Họ hỏi:
 
-> *"Trong mẫu này, các đặc điểm chính của người được sàng lọc là gì? Và có yếu tố nào trong dữ
-> liệu đi cùng với huyết áp tâm thu không?"*
+## B. Kỹ năng mục tiêu
 
-## C. Sản phẩm phải nộp (checklist bắt buộc)
+- Tự làm trọn chuỗi câu hỏi đã học — không hướng dẫn từng bước; tự chấm theo đáp án.
 
-| # | Sản phẩm | Chi tiết |
-|---|---|---|
-| 1 | File `.sav` đã chuẩn bị | Import + đầy đủ Label/Values/Missing/Measure + làm sạch **4 lỗi** trong file raw |
-| 2 | Cleaning log | Bảng ghi 4 vấn đề + cách phát hiện + xử lý |
-| 3 | Bảng mô tả | Bảng 1: tuổi, giới, BMI, SBP, glucose, hút thuốc, vận động — đúng chỉ số cho từng kiểu biến |
-| 4 | ≥1 phân tích suy luận | Chọn bằng bảng quyết định Ngày 10; ghi lý do chọn; đã kiểm tra điều kiện |
-| 5 | File output `.spv` | Có đủ output cho mục 3–4, đã đặt tên bảng |
-| 6 | Bản kết quả viết tay | 1 trang: mô tả + kết quả phân tích + **ít nhất 2 giới hạn** |
+## C. Vì sao ngày này nằm ở đây
 
-**Điều kiện làm bài:** tự làm, không mở đáp án các ngày trước; mở codebook và dùng lại bảng
-quyết định Ngày 10 được phép (thi mở tài liệu là đúng nghề).
+Đánh giá bao phủ: mô tả theo nhóm (Q24/Q26/Q43), bảng chéo (Q31/Q33), so sánh trung bình 3 nhóm (P2-Q08).
 
-## D. Lộ trình gợi ý 120 phút
+## D. Kế hoạch hoàn thiện (theo mẫu Ngày 01–03)
 
-| Thời gian | Việc |
-|---|---|
-| 0–15' | Đọc codebook, import, thiết lập Variable View |
-| 15–40' | Quét + xử lý lỗi, viết cleaning log, lưu `assessment_my_clean.sav` |
-| 40–60' | Bảng mô tả + 1 biểu đồ nếu hữu ích |
-| 60–90' | Chọn + chạy phân tích suy luận, kiểm tra điều kiện |
-| 90–110' | Viết trang kết quả |
-| 110–120' | Đối chiếu checklist, lưu `.spv` |
+1. Mở bằng bài tập gốc đầu tiên của ngày (khối thông tin ở cuối trang này).
+2. Thêm mục D. "Kiến thức cần biết" — chỉ đủ để giải các câu trên.
+3. Hướng dẫn menu chi tiết + `{{guide:...}}` mô phỏng đúng dataset thật.
+4. Workbook BT1–BTn với gợi ý nấc + sản phẩm bắt buộc; đáp án bọc `<details>`.
 
-## E. Sau khi nộp — tự chấm bằng rubric
+### Bài tập gốc dẫn đầu ngày
 
-Mở `workbook.md` → rubric chấm 100 điểm → tự chấm trung thực trước khi đọc `answer-key.md`
-(đáp án có kết quả mong đợi của mọi phân tích khả dĩ trên dataset này).
-
-**Ngưỡng:** ≥85/100 và không mất hoàn toàn hạng mục nào → đạt chuẩn cuối khóa.
-Dưới ngưỡng → rubric chỉ ra ngày nào cần học lại.
-
-## F. Giới hạn của đánh giá (thành thật)
-
-Đạt chuẩn nghĩa là bạn **đã thực hiện được quy trình phân tích cơ bản từ đầu đến cuối trên một
-dataset mới** — không nghĩa là "thành thạo SPSS". Hồi quy, điều chỉnh nhiễu, nonparametric,
-syntax… vẫn chờ ở chương trình mở rộng. Nhưng bạn đã có đủ nền để tự học tiếp đúng hướng —
-đó là mục tiêu của 14 ngày.
+{{exercise:P1-Q24}}

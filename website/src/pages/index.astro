@@ -3,19 +3,19 @@
 import '../styles/tokens.css';
 
 const days = [
-  { slug: 'd01', code: 'Ngày 01', title: 'Lần đầu mở SPSS — import CSV, lưu .sav' },
-  { slug: 'd02', code: 'Ngày 02', title: 'Biến và mã hóa — Variable View, nhãn giá trị' },
-  { slug: 'd03', code: 'Ngày 03', title: 'Làm sạch dữ liệu — lỗi, trùng lặp, missing' },
-  { slug: 'd04', code: 'Ngày 04', title: 'Thống kê mô tả — Bảng 1 đầu tiên của bạn' },
-  { slug: 'd05', code: 'Ngày 05', title: 'Biểu đồ và mô tả theo nhóm' },
-  { slug: 'd06', code: 'Ngày 06', title: 'T-test hai nhóm độc lập' },
-  { slug: 'd07', code: 'Ngày 07', title: 'T-test mẫu ghép cặp (trước–sau)' },
-  { slug: 'd08', code: 'Ngày 08', title: 'Bảng chéo và Chi-square' },
-  { slug: 'd09', code: 'Ngày 09', title: 'Tương quan — Pearson và Spearman' },
-  { slug: 'd10', code: 'Ngày 10', title: 'Chọn phép phân tích phù hợp' },
-  { slug: 'd11', code: 'Ngày 11', title: 'Đọc và báo cáo output' },
-  { slug: 'd12', code: 'Ngày 12', title: 'Capstone 1 — chuẩn bị dữ liệu' },
-  { slug: 'd13', code: 'Ngày 13', title: 'Capstone 2 — phân tích' },
+  { slug: 'd01', code: 'Ngày 01', title: 'Mở file bài tập & đọc dữ liệu — P1-Q01', ready: true },
+  { slug: 'd02', code: 'Ngày 02', title: 'Tần số và phần trăm — P1-Q02, P1-Q38', ready: true },
+  { slug: 'd03', code: 'Ngày 03', title: 'Thống kê mô tả biến số — P1-Q03, P1-Q04', ready: true },
+  { slug: 'd04', code: 'Ngày 04', title: 'Tóm tắt theo nhóm — Select Cases · Split File' },
+  { slug: 'd05', code: 'Ngày 05', title: 'Bảng chéo và Chi-square' },
+  { slug: 'd06', code: 'Ngày 06', title: 'Biến đổi dữ liệu — Compute · Recode · Count' },
+  { slug: 'd07', code: 'Ngày 07', title: 'Soi và xử lý dữ liệu nhập sai' },
+  { slug: 'd08', code: 'Ngày 08', title: 'Kiểm định về tỷ lệ' },
+  { slug: 'd09', code: 'Ngày 09', title: 'So sánh trung bình — 1 mẫu & 2 nhóm' },
+  { slug: 'd10', code: 'Ngày 10', title: 'T-test ghép cặp và ANOVA' },
+  { slug: 'd11', code: 'Ngày 11', title: 'Tương quan và hồi quy tuyến tính' },
+  { slug: 'd12', code: 'Ngày 12', title: 'Capstone A — khám phá & chuẩn bị File5' },
+  { slug: 'd13', code: 'Ngày 13', title: 'Capstone B — phân tích & báo cáo File5' },
   { slug: 'd14', code: 'Ngày 14', title: 'Đánh giá thực hành cuối khóa' },
 ];
 const references = [
@@ -28,18 +28,18 @@ const extensions = [
   { code: 'E03', title: 'Missing data, complex survey, multiple testing' },
 ];
 const outcomes = [
-  'Mở SPSS, import CSV, thiết lập Variable View và lưu/mở lại file .sav.',
-  'Làm sạch dữ liệu: phát hiện lỗi, trùng lặp, missing — có cleaning log.',
-  'Tạo Bảng 1 mô tả và biểu đồ phù hợp cho dữ liệu nghiên cứu.',
-  'Chọn đúng phép phân tích (t-test, chi-square, tương quan) và chạy trên SPSS.',
-  'Đọc output, viết kết quả thận trọng — không nhầm liên quan với nhân quả.',
-  'Hoàn thành một mini-project phân tích độc lập từ dataset mới.',
+  'Mở file .sav bài tập nguồn, đọc Variable View, codebook và nhãn giá trị.',
+  'Chạy Frequencies/Descriptives và đọc đúng các cột output.',
+  'Tóm tắt theo nhóm: Select Cases, Split File, Crosstabs và Chi-square.',
+  'Biến đổi dữ liệu: Compute (BMI), Recode nhóm, đếm đa biến; soi lỗi nhập liệu.',
+  'So sánh trung bình và tỷ lệ: t-test các loại, ANOVA, chi-square, binomial.',
+  'Phân tích một dataset mới từ đầu đến báo cáo (Capstone File5).',
 ];
 const howTo = [
+  { title: 'Bài tập trước, lý thuyết sau', text: 'Mỗi ngày mở bằng một bài tập gốc (P1-Q01…P2-Q15) — học chỉ đủ để giải nó.' },
   { title: 'Học theo thứ tự ngày', text: 'Bài sau dùng lại file và kỹ năng bài trước — đừng nhảy cóc.' },
   { title: 'Mở SPSS ngay', text: '80% thời lượng mỗi ngày là thao tác thật — đọc lý thuyết đúng lúc cần.' },
-  { title: 'Làm bài tập trước, xem đáp án sau', text: 'Đáp án ẩn sau <details> — chỉ mở khi đã tự làm.' },
-  { title: 'Mọi dữ liệu đều giả lập', text: 'Luyện kỹ năng, không phải bằng chứng lâm sàng.' },
+  { title: 'Dataset nguồn ở local', text: 'File .sav bài tập nằm trong exercises/ trên máy — mở trực tiếp, không tải từ web.' },
 ];
 ---
 <!doctype html>
@@ -294,12 +294,12 @@ const howTo = [
 
   <div class="wrap">
     <header class="hero">
-      <span class="kicker">Khóa tự học · 14 ngày · practice-first</span>
-      <h1>Học SPSS y khoa bằng thực hành — 14 ngày, tiếng Việt.</h1>
+      <span class="kicker">Khóa tự học · 14 ngày · exercise-first</span>
+      <h1>Học SPSS qua bài tập thật — 14 ngày, tiếng Việt.</h1>
       <p class="lead">
-        Dành cho người <strong>chưa từng dùng SPSS</strong> và <strong>gần như chưa học thống kê</strong>
-        mà muốn tự phân tích dữ liệu nghiên cứu y khoa. Mở SPSS ngay từ Ngày 01 —
-        ~80% thời lượng là thao tác thật trên MacBook, lý thuyết chỉ đúng lúc cần.
+        Dành cho người <strong>chưa từng dùng SPSS</strong> và <strong>gần như chưa học thống kê</strong>.
+        Mỗi ngày mở bằng một <strong>bài tập gốc</strong> từ đề thực hành (P1-Q01…P2-Q15) —
+        bạn giải bài thật trên dataset thật, lý thuyết chỉ xuất hiện khi bài đòi hỏi.
       </p>
       <div class="cta">
         <a class="btn btn-primary" href="/d01/bai-hoc/">Bắt đầu — Ngày 01</a>
@@ -308,9 +308,9 @@ const howTo = [
         <a class="btn" href="/du-lieu/">Tải dữ liệu</a>
       </div>
       <div class="hero__meta">
-        <div><strong>14 ngày</strong>bài học + workbook + đáp án</div>
+        <div><strong>58 bài tập</strong>nguồn, gắn ID P1-Q01…P2-Q15</div>
         <div><strong>90–120 phút</strong>mỗi ngày, 80% thực hành</div>
-        <div><strong>100% giả lập</strong>dữ liệu — không cần tài khoản</div>
+        <div><strong>Ngày 01–03</strong>sẵn sàng · 04–14 đang DRAFT</div>
       </div>
     </header>
 
@@ -352,8 +352,8 @@ const howTo = [
     <section>
       <div class="section-head">
         <span class="eyebrow">Chương trình học</span>
-        <h2>Lộ trình 14 ngày — practice-first</h2>
-        <p>Mỗi ngày ~90–120 phút trên SPSS thật (macOS). 14/14 ngày đã có bài học + bài tập + đáp án.</p>
+        <h2>Lộ trình 14 ngày — exercise-first</h2>
+        <p>Mỗi ngày mở bằng bài tập nguồn thật. Ngày 01–03 đã hoàn thiện; Ngày 04–14 đã ánh xạ bài tập và đang được xây dựng tiếp.</p>
       </div>
       <div class="cards cards--compact">
         {days.map((d) => (
@@ -363,7 +363,7 @@ const howTo = [
               <span class="pill" data-module-badge={d.slug}></span>
             </div>
             <span class="card__title"><a href={`/${d.slug}/bai-hoc/`}>{d.title}</a></span>
-            <span class="pill pill--ready">Đã có bài học</span>
+            <span class={`pill${d.ready ? ' pill--ready' : ''}`}>{d.ready ? 'Đã có bài học' : 'DRAFT — đang xây dựng'}</span>
           </div>
         ))}
       </div>
@@ -409,8 +409,8 @@ const howTo = [
     </section>
 
     <footer class="site-footer">
-      SPSS Medical Learning Pack · Lộ trình thực hành 14 ngày (D-020) ·
-      Website build từ giáo trình Markdown canonical · toàn bộ dữ liệu giả lập.
+      SPSS Medical Learning Pack · Lộ trình exercise-first 14 ngày (Task 13 / D-024) ·
+      Website build từ giáo trình Markdown canonical · dataset nguồn trong exercises/ chỉ dùng local.
     </footer>
   </div>
 

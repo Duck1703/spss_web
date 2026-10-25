@@ -121,9 +121,14 @@ function auditDesc(sceneCtx, cols, rows, ctx) {
 const FORBIDDEN = [/Amlodipine/i, /Valsartan/i, /Losartan/i];
 
 /* ---------- duyệt tất cả scenes ---------- */
+/* Task 13: visual-guides/dayNN mới dùng dataset .sav nguồn (exercises/) thay vì clinic_bp CSV.
+ * File có "audit": "external-sav" → chỉ kiểm tra cấu trúc + callout + forbidden tokens;
+ * số liệu kiểm chứng riêng bằng Python (curriculum/exercise-verified-stats.md). */
 ['day01', 'day02', 'day03'].forEach((day) => {
   const file = path.join(VG, day, 'scenes.json');
-  const guides = JSON.parse(fs.readFileSync(file, 'utf8')).guides;
+  const meta = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const guides = meta.guides;
+  const external = meta.audit === 'external-sav';
   const ctx = day === 'day03' ? 'raw' : 'clean';
   Object.entries(guides).forEach(([gid, g]) => {
     // cấu trúc bắt buộc
@@ -137,8 +142,10 @@ const FORBIDDEN = [/Amlodipine/i, /Valsartan/i, /Losartan/i];
     g.scenes.forEach((s, si) => {
       const w = `${gid}[${si}]`;
       const sctx = s.dataState || ctx; // scene có thể ghi đè trạng thái dữ liệu
-      if (s.grid && s.grid.kind !== 'var') auditGridRows(day, sctx, s.grid.cols, s.grid.rows);
-      (s.tables || []).forEach((t) => { auditFreqSex(w, t.cols, t.rows, sctx); auditDesc(w, t.cols, t.rows, sctx === 'work' ? 'raw' : sctx); });
+      if (!external) {
+        if (s.grid && s.grid.kind !== 'var') auditGridRows(day, sctx, s.grid.cols, s.grid.rows);
+        (s.tables || []).forEach((t) => { auditFreqSex(w, t.cols, t.rows, sctx); auditDesc(w, t.cols, t.rows, sctx === 'work' ? 'raw' : sctx); });
+      }
       // callout phải có điểm đánh dấu trong scene
       (s.callouts || []).forEach((c) => {
         const sj = JSON.stringify(s);

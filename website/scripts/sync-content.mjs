@@ -55,46 +55,71 @@ function mdxEscapeLt(md) { return md.replace(/<(?=\d)/g, '&lt;'); }
 /** Escape `{}` trong nội dung canonical — MDX parse {…} như expression → escape thành entity. */
 function mdxEscapeBraces(md) { return md.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;'); }
 
-/* ---------- 14-day practice-first track (D-020) ---------- */
+/* ---------- 14-day exercise-first track (Task 13, D-024) ---------- */
+/* Dataset nguồn (.sav trong exercises/) chỉ tồn tại local — hiển thị đường dẫn, không link tải. */
+const P1SAV = { savLocal: 'exercises/bai_1/p1_B01_HA (1).sav', note: 'dataset chính Phần 1 — 620×40' };
 const DAYS = [
-  { dir: 'day-01-lan-dau-mo-spss', slug: 'd01', num: '01', title: 'Ngày 01 — Lần đầu mở SPSS',
-    files: [{ csv: 'clinic_bp_v1_clean.csv', note: 'import đầu tiên' }, { csv: 'exercise_hba1c_pairs.csv', note: 'cho workbook BT1' }] },
-  { dir: 'day-02-bien-va-ma-hoa', slug: 'd02', num: '02', title: 'Ngày 02 — Biến và mã hóa',
-    files: [{ sav: 'clinic_bp.sav', from: 'Ngày 01' }, { sav: 'hba1c_pairs.sav', from: 'workbook Ngày 01' }] },
-  { dir: 'day-03-lam-sach-du-lieu', slug: 'd03', num: '03', title: 'Ngày 03 — Làm sạch dữ liệu',
-    files: [{ csv: 'clinic_bp_v1_raw.csv', note: 'bản có lỗi gài — bài làm sạch' }, { sav: 'clinic_bp.sav', from: 'Ngày 02 — bản tham chiếu có nhãn' }] },
-  { dir: 'day-04-thong-ke-mo-ta', slug: 'd04', num: '04', title: 'Ngày 04 — Thống kê mô tả',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03 — file làm việc chính' }] },
-  { dir: 'day-05-bieu-do-va-tom-tat-nhom', slug: 'd05', num: '05', title: 'Ngày 05 — Biểu đồ và mô tả theo nhóm',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03 — file làm việc chính' }] },
-  { dir: 'day-06-ttest-doc-lap', slug: 'd06', num: '06', title: 'Ngày 06 — T-test hai nhóm độc lập',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03 — file làm việc chính' }] },
-  { dir: 'day-07-ttest-ghep-cap', slug: 'd07', num: '07', title: 'Ngày 07 — T-test mẫu ghép cặp',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03' }, { csv: 'exercise_hba1c_pairs.csv', note: 'paired t-test' }] },
-  { dir: 'day-08-crosstabs-chisquare', slug: 'd08', num: '08', title: 'Ngày 08 — Bảng chéo và Chi-square',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03 — file làm việc chính' }] },
-  { dir: 'day-09-tuong-quan', slug: 'd09', num: '09', title: 'Ngày 09 — Tương quan',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03 — file làm việc chính' }] },
-  { dir: 'day-10-chon-phep-phan-tich', slug: 'd10', num: '10', title: 'Ngày 10 — Chọn phép phân tích',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03 — file làm việc chính' }] },
-  { dir: 'day-11-doc-va-bao-cao', slug: 'd11', num: '11', title: 'Ngày 11 — Đọc và báo cáo output',
-    files: [{ sav: 'clinic_bp_my_clean.sav', from: 'Ngày 03 — file làm việc chính' }] },
-  { dir: 'day-12-capstone-chuan-bi', slug: 'd12', num: '12', title: 'Ngày 12 — Capstone 1: Chuẩn bị dữ liệu',
-    files: [{ csv: 'capstone_screening_raw.csv', note: 'bản có lỗi gài — làm sạch như Ngày 03' }] },
-  { dir: 'day-13-capstone-phan-tich', slug: 'd13', num: '13', title: 'Ngày 13 — Capstone 2: Phân tích',
-    files: [{ sav: 'capstone_my_clean.sav', from: 'Ngày 12 — file bạn tự làm sạch' }] },
+  { dir: 'day-01-mo-file-bai-tap', slug: 'd01', num: '01', title: 'Ngày 01 — Mở file bài tập & đọc dữ liệu', ready: true,
+    files: [P1SAV, { savLocal: 'exercises/bai_1/So_Lieu_NC.sav', note: 'cho BT4 — nhận file lạ' }] },
+  { dir: 'day-02-tan-so-phan-tram', slug: 'd02', num: '02', title: 'Ngày 02 — Tần số và phần trăm', ready: true,
+    files: [P1SAV] },
+  { dir: 'day-03-mo-ta-bien-so', slug: 'd03', num: '03', title: 'Ngày 03 — Thống kê mô tả biến số', ready: true,
+    files: [P1SAV] },
+  { dir: 'day-04-tom-tat-theo-nhom', slug: 'd04', num: '04', title: 'Ngày 04 — Tóm tắt theo nhóm',
+    files: [P1SAV] },
+  { dir: 'day-05-bang-cheo-chi-square', slug: 'd05', num: '05', title: 'Ngày 05 — Bảng chéo và Chi-square',
+    files: [P1SAV, { savLocal: 'exercises/bai_1/P1_B02 CrossTab (2).sav', note: 'cho P1-Q21' }, { savLocal: 'exercises/bai_2/File1.sav', note: 'cho P2-Q01' }] },
+  { dir: 'day-06-bien-doi-du-lieu', slug: 'd06', num: '06', title: 'Ngày 06 — Biến đổi dữ liệu',
+    files: [P1SAV] },
+  { dir: 'day-07-kiem-tra-du-lieu-sai', slug: 'd07', num: '07', title: 'Ngày 07 — Soi & xử lý dữ liệu sai',
+    files: [P1SAV] },
+  { dir: 'day-08-kiem-dinh-ty-le', slug: 'd08', num: '08', title: 'Ngày 08 — Kiểm định về tỷ lệ',
+    files: [P1SAV, { savLocal: 'exercises/bai_2/File1.sav', note: 'cho P2-Q02, P2-Q03' }] },
+  { dir: 'day-09-so-sanh-trung-binh', slug: 'd09', num: '09', title: 'Ngày 09 — So sánh trung bình',
+    files: [{ savLocal: 'exercises/bai_2/File1.sav', note: 'dataset chính Phần 2 — 50×18' }] },
+  { dir: 'day-10-ttest-ghep-cap-anova', slug: 'd10', num: '10', title: 'Ngày 10 — T-test ghép cặp & ANOVA',
+    files: [{ savLocal: 'exercises/bai_2/File1.sav' }, { savLocal: 'exercises/bai_2/File2_Phan2.sav', note: 'cho P2-Q13' }] },
+  { dir: 'day-11-tuong-quan-hoi-quy', slug: 'd11', num: '11', title: 'Ngày 11 — Tương quan & hồi quy',
+    files: [{ savLocal: 'exercises/bai_2/File1.sav' }] },
+  { dir: 'day-12-capstone-a-chuan-bi', slug: 'd12', num: '12', title: 'Ngày 12 — Capstone A: chuẩn bị File5',
+    files: [{ savLocal: 'exercises/bai_2/File5_Phan2.sav', note: '296×7 — sinh thiết tuyến tiền liệt' }] },
+  { dir: 'day-13-capstone-b-phan-tich', slug: 'd13', num: '13', title: 'Ngày 13 — Capstone B: phân tích & báo cáo',
+    files: [{ savLocal: 'exercises/bai_2/File5_Phan2.sav' }] },
   { dir: 'day-14-danh-gia-cuoi-khoa', slug: 'd14', num: '14', title: 'Ngày 14 — Đánh giá cuối khóa',
-    files: [{ csv: 'assessment_gp_raw.csv', note: 'đánh giá cuối khóa — có lỗi gài' }] },
+    files: [P1SAV, { savLocal: 'exercises/bai_2/File1.sav' }] },
 ];
 
-/** Dòng 📦 file cần hôm nay — inject ngay đầu mỗi lesson; CSV → link tải trực tiếp, .sav → chỉ nguồn. */
+/** Inventory bài tập nguồn → khối {{exercise:P1-Q02}} trong canonical md. */
+const INV = JSON.parse(read('curriculum/exercise-inventory.json'));
+const EXQ = Object.fromEntries(INV.exercises.map(q => [q.id, q]));
+const PDF_NAME = { P1: 'Bai thuc hanh SDH P1.pdf', P2: 'BSNT_Bài TH_Phần 2_Cô Hiền.pdf' };
+function expandExercises(md) {
+  return md.replace(/\{\{exercise:([\w-]+)\}\}/g, (_, id) => {
+    const q = EXQ[id];
+    if (!q) { console.log('  ! exercise không có trong inventory:', id); return `> ⚠️ Bài tập \`${id}\` chưa có trong inventory.`; }
+    const vars = (q.vars || []).map(v => `<code>${v}</code>`).join(' ');
+    return [
+      '',
+      `<div class="src-ex">`,
+      `<div class="src-ex__head"><span class="src-ex__id">${id}</span>`,
+      `<span class="src-ex__meta">${PDF_NAME[q.src] || q.src} · ${q.ref} · trang ${q.page} · ${q.difficulty} · ~${q.time} phút · vai trò: ${q.role}</span></div>`,
+      `<div class="src-ex__sum">${q.summary}</div>`,
+      `<div class="src-ex__meta2">Dataset: <code>${q.dataset}</code>${vars ? ` · Biến: ${vars}` : ''} · Sản phẩm: ${q.artifact}</div>`,
+      `</div>`,
+      ''
+    ].join('\n');
+  });
+}
+
+/** Dòng 📦 file cần hôm nay — inject ngay đầu mỗi lesson; CSV → link tải, savLocal → đường dẫn local-only. */
 function fileBox(d) {
   if (!d.files || !d.files.length) return '';
   const parts = d.files.map(f => f.csv
     ? `[\`${f.csv}\`](/datasets/${f.csv})${f.note ? ` — ${f.note}` : ''}`
+    : f.savLocal ? `\`${f.savLocal}\`${f.note ? ` — ${f.note}` : ''}`
     : `\`${f.sav}\` — file bạn đã tạo ở ${f.from}`);
   return `> 📦 **File cần hôm nay:** ${parts.join(' · ')}\n`
-    + `> *(File \`.sav\` là sản phẩm bạn tự tạo — không phải tải; CSV tải từ trang [Dữ liệu](/du-lieu/) hoặc link trên.)*\n\n`;
+    + `> *(File \`.sav\` nguồn nằm trong thư mục \`exercises/\` trên máy bạn — mở trực tiếp trong SPSS, không tải từ web.)*\n\n`;
 }
 
 /** Rewrite link cho file track-14day: bạn-cùng-ngày → route /dNN/*, datasets → /du-lieu/, internal → note. */
@@ -152,14 +177,19 @@ function injectTrackCards(md, slug) {
 function syncTrack() {
   const TRACK_NOTICE = '> ⏳ **Bài học thực hành SPSS — đã kiểm chứng số liệu bằng tính toán độc lập (Python), '
     + 'chưa chạy thử trên SPSS/macOS.** Các bước menu ghi rõ `MAC_SPSS_VERIFICATION_PENDING`.\n\n';
+  const DRAFT_NOTICE = '> 🚧 **DRAFT — ngày này chưa hoàn thiện.** Bài tập nguồn đã được ánh xạ đầy đủ '
+    + '(xem bảng trong bài), số liệu kỳ vọng đã tái tính bằng Python; hướng dẫn từng bước, '
+    + 'mô phỏng và đáp án sẽ hoàn thiện theo mẫu Ngày 01–03.\n\n';
   DAYS.forEach((d, i) => {
     const base = `track-14day/${d.dir}`;
     const prevDay = DAYS[i - 1];
     const nextDay = DAYS[i + 1];
+    const notice = d.ready ? TRACK_NOTICE : DRAFT_NOTICE;
 
     // --- lesson ---
     let md = stripInternalStatus(read(`${base}/lesson.md`));
     md = fixLinksTrack(md, d.slug);
+    md = expandExercises(md);
     // {{guide:id}} → <SPSSActionGuide> (phải chạy TRƯỚC mdxEscapeBraces)
     const hasGuides = /\{\{guide:[\w-]+\}\}/.test(md);
     if (hasGuides) {
@@ -177,10 +207,11 @@ function syncTrack() {
     const osBlock = hasGuides
       ? '\n<OSSelector />\n\n'
       : '';
-    write(`${d.slug}/bai-hoc.mdx`, `---\ntitle: "${d.title}"\ndescription: "Bài học thực hành ${d.title} — lộ trình practice-first 14 ngày."\n${lessonPrev}\nnext:\n  link: /${d.slug}/bai-tap/\n  label: Làm bài tập Ngày ${d.num}\n---\n\nimport CompleteModuleButton from '../../../components/CompleteModuleButton.astro';\n${guideImports}\n${BANNER}${TRACK_NOTICE}${fileBox(d)}${osBlock}${md}`);
+    write(`${d.slug}/bai-hoc.mdx`, `---\ntitle: "${d.title}"\ndescription: "Bài học thực hành ${d.title} — lộ trình practice-first 14 ngày."\n${lessonPrev}\nnext:\n  link: /${d.slug}/bai-tap/\n  label: Làm bài tập Ngày ${d.num}\n---\n\nimport CompleteModuleButton from '../../../components/CompleteModuleButton.astro';\n${guideImports}\n${BANNER}${notice}${fileBox(d)}${osBlock}${md}`);
 
     // --- workbook ---
     let wb = fixLinksTrack(read(`${base}/workbook.md`), d.slug);
+    wb = expandExercises(wb);
     wb = mdxEscapeBraces(wb);
     wb = mdxEscapeLt(injectTrackCards(wb, d.slug));
     if (d.slug === 'd14') {
@@ -212,18 +243,20 @@ function syncTrack() {
 
 /* ---------- Roadmap 14 ngày ---------- */
 function syncTrackRoadmap() {
-  let md = read('curriculum/PRACTICE-FIRST-14-DAY-TRACK.md');
+  let md = read('curriculum/EXERCISE-FIRST-14-DAY-ROADMAP.md');
   md = md.replace(/`?project-control\/decisions\.md`?/g, '_tài liệu nội bộ_');
   md = md.replace(/`datasets\/([\w./-]+)`/g, '[`datasets/$1`](/du-lieu/)');
   md = md.replace(/`(\w+_raw\.csv|\w+_clean\.csv|exercise_\w+\.csv)`/g, '[`$1`](/du-lieu/)');
   md = md.replace(/`curriculum\/roadmap\.md`/g, '[lộ trình 16 tuần — tham khảo](/lo-trinh/)');
+  md = md.replace(/`curriculum\/exercise-verified-stats\.md`/g, '_tài liệu nội bộ_');
   md = md.replace(/`lessons\/M01[\w./-]*`/g, '[M01 — tham khảo](/m01/bai-hoc/)');
   // Gắn link bài học vào cột Ngày trong bảng lịch.
   md = md.replace(/^\| (\d{2}) \|/gm, (_, n) => `| [${n} →](/d${n}/bai-hoc/) |`);
-  const status = `> 🚀 **Đây là lộ trình mặc định hiện tại** — mỗi ngày ~90–120 phút, 80% thực hành SPSS.\n`
-    + `> Trạng thái kiểm chứng: số liệu cross-check Python (NOT_RUN); menu SPSS/macOS chờ verify thủ công.\n`
-    + `> Chương trình 16 tuần giờ ở mục [Tham khảo](/lo-trinh/).\n\n`;
-  write('lo-trinh-14-ngay.md', `---\ntitle: Lộ trình 14 ngày — Practice-first\ndescription: Học SPSS y khoa bằng thực hành — mỗi ngày ~90–120 phút, 80% thao tác thật.\n---\n\n${BANNER}${status}${md}`);
+  const status = `> 🚀 **Đây là lộ trình mặc định hiện tại** — bài tập nguồn thật (P1-Q01…P2-Q15) quyết định nội dung.\n`
+    + `> Ngày 01–03 READY; Ngày 04–14 DRAFT (đã ánh xạ bài tập, đang hoàn thiện). `
+    + `Số liệu cross-check Python (NOT_RUN); menu SPSS/macOS chờ verify thủ công.\n`
+    + `> Lộ trình cũ quanh dataset giả lập đã lưu ở \`archive/\`; chương trình 16 tuần ở mục [Tham khảo](/lo-trinh/).\n\n`;
+  write('lo-trinh-14-ngay.md', `---\ntitle: Lộ trình 14 ngày — Exercise-first\ndescription: Học SPSS qua bài tập thật — mỗi ngày mở bằng bài tập nguồn (P1-Q01…P2-Q15), lý thuyết vừa đủ để giải.\n---\n\n${BANNER}${status}${md}`);
 }
 
 /* ---------- Datasets: trang tải + copy CSV public ---------- */
@@ -245,38 +278,43 @@ function syncDatasets() {
   const demote = (md) => md.replace(/^# /gm, '### ').replace(/^## /gm, '#### ');
   const dl = (f) => `[\`${f}\`](/datasets/${f})`;
   const cb = (f, label) => `<details><summary>${label}</summary>\n\n${demote(read(`datasets/codebooks/${f}`))}\n\n</details>`;
-  let md = `# Dữ liệu thực hành — 100% giả lập\n\n${notice}\n\n`
-    + `## 1. File bạn cần tải — theo ngày\n\n`
-    + `Mỗi ngày chỉ cần đúng file của ngày đó — tải luôn từ đây hoặc từ ô **📦 File cần hôm nay** đầu mỗi bài học.\n\n`
-    + `| Ngày | File tải về | Vai trò |\n|---|---|---|\n`
-    + `| [01](/d01/bai-hoc/) | ${dl('clinic_bp_v1_clean.csv')} | Import đầu tiên — bản **sạch** (chữ _clean) |\n`
-    + `| [01](/d01/bai-tap/) — workbook | ${dl('exercise_hba1c_pairs.csv')} | Bài tập import thứ hai (24 dòng) |\n`
-    + `| [03](/d03/bai-hoc/) | ${dl('clinic_bp_v1_raw.csv')} | Bản **gốc có lỗi gài** — bài làm sạch |\n`
-    + `| [07](/d07/bai-hoc/) | ${dl('exercise_hba1c_pairs.csv')} | Paired t-test (file nhỏ) |\n`
-    + `| [12](/d12/bai-hoc/) | ${dl('capstone_screening_raw.csv')} | Capstone — có lỗi gài |\n`
-    + `| [14](/d14/bai-hoc/) | ${dl('assessment_gp_raw.csv')} | Đánh giá cuối khóa — có lỗi gài |\n\n`
-    + `> Các ngày còn lại dùng file \`.sav\` **bạn tự tạo** (\`clinic_bp.sav\`, \`clinic_bp_my_clean.sav\`, `
-    + `\`capstone_my_clean.sav\`…) — đó là sản phẩm của bạn, không cần tải. Mỗi bài học nói rõ `
-    + `file nào ở mục "A. Điểm xuất phát".\n\n`
-    + `## 2. Codebooks — tra cứu khi cần\n\n`
-    + `Mở khi bài học bảo tra codebook, hoặc khi cần hiểu một biến.\n\n`
-    + cb('clinic_bp_codebook.md', '📖 clinic_bp — dataset chính Ngày 01–11') + `\n\n`
-    + cb('exercise_hba1c_codebook.md', '📖 exercise_hba1c — Ngày 07') + `\n\n`
-    + cb('capstone_screening_codebook.md', '📖 capstone_screening — Ngày 12–13') + `\n\n`
-    + cb('assessment_gp_codebook.md', '📖 assessment_gp — Ngày 14') + `\n\n`
-    + `## 3. Bản sạch tham chiếu — ⚠️ chỉ mở sau khi đã tự làm xong\n\n`
+  let md = `# Dữ liệu thực hành\n\n`
+    + `> ⚠️ **Từ Task 13, dataset chính của khóa học là các file \`.sav\` nguồn trong thư mục \`exercises/\` `
+    + `trên máy bạn** (tài liệu bên thứ ba — chỉ dùng local, không tải được từ trang này và không `
+    + `được phát hành kèm website). Các file CSV giả lập bên dưới là tài liệu luyện thêm tùy chọn.\n\n`
+    + `## 1. Dataset nguồn — mở trực tiếp trong SPSS (local only)\n\n`
+    + `| Ngày | File (trong \`exercises/\`) | Dùng cho |\n|---|---|---|\n`
+    + `| 01–08, 14 | \`bai_1/p1_B01_HA (1).sav\` | 620×40 — khảo sát tăng huyết áp; gần hết bài tập Phần 1 |\n`
+    + `| 05 | \`bai_1/P1_B02 CrossTab (2).sav\` | P1-Q21 — bảng 2×2 HPV tổng hợp (Weight Cases) |\n`
+    + `| 05, 08–11, 14 | \`bai_2/File1.sav\` | 50×18 — chấn thương giao thông; bài tập Phần 2 |\n`
+    + `| 10 | \`bai_2/File2_Phan2.sav\` | P2-Q13 — giờ ngủ thuốc vs giả dược |\n`
+    + `| 12–13 | \`bai_2/File5_Phan2.sav\` | 296×7 — capstone sinh thiết tuyến tiền liệt |\n`
+    + `| extension | \`bai_1/P1_B03 ROC.sav\` · \`bai_2/File3_Phan2.sav\` · \`bai_2/File4_Phan2.sav\` | nội dung hoãn: ROC, tiên lượng |\n`
+    + `| tự do | \`bai_1/So_Lieu_NC.sav\` | dataset phụ — nhận diện file lạ (Ngày 01, BT4) |\n\n`
+    + `Đề gốc đi kèm: \`bai_1/Bai thuc hanh SDH P1.pdf\` (43 câu) · \`bai_2/BSNT_Bài TH_Phần 2_Cô Hiền.pdf\` (15 câu).\n\n`
+    + `## 2. CSV giả lập — luyện thêm tùy chọn\n\n`
+    + `Bộ CSV cũ của lộ trình practice-first (dataset \`clinic_bp\` giả lập) vẫn tải được để luyện `
+    + `thao tác import/làm sạch — **không còn là dataset chính của bài học**.\n\n`
+    + `- ${dl('clinic_bp_v1_clean.csv')} · ${dl('clinic_bp_v1_raw.csv')} · ${dl('exercise_hba1c_pairs.csv')} · `
+    + `${dl('capstone_screening_raw.csv')} · ${dl('assessment_gp_raw.csv')}\n\n`
+    + `## 3. Codebooks của CSV giả lập — tra cứu khi cần\n\n`
+    + `Codebook cho các file \`.sav\` nguồn nằm ngay trong Variable View của từng file và đề PDF gốc; `
+    + `bên dưới là codebook của các CSV giả lập phụ.\n\n`
+    + cb('clinic_bp_codebook.md', '📖 clinic_bp — CSV giả lập luyện thêm') + `\n\n`
+    + cb('exercise_hba1c_codebook.md', '📖 exercise_hba1c — CSV giả lập luyện thêm') + `\n\n`
+    + cb('capstone_screening_codebook.md', '📖 capstone_screening — CSV giả lập luyện thêm') + `\n\n`
+    + cb('assessment_gp_codebook.md', '📖 assessment_gp — CSV giả lập luyện thêm') + `\n\n`
+    + `## 4. Bản sạch tham chiếu của CSV — ⚠️ chỉ mở sau khi đã tự làm xong\n\n`
     + `<details><summary>⚠️ Các file <code>*_clean.csv</code> — mở sớm = tự lộ đáp án làm sạch</summary>\n\n`
     + `Đây là bản sạch **chuẩn** để *đối chiếu* sau khi bạn tự làm sạch file raw xong — `
     + `**không phải** file để bạn import vào bài tập Ngày 03/12/14.\n\n`
-    + `- ${dl('clinic_bp_v1_clean.csv')} — đối chiếu sau Ngày 03 (cũng là file Ngày 01 dùng)\n`
-    + `- ${dl('capstone_screening_clean.csv')} — đối chiếu sau Ngày 12\n`
-    + `- ${dl('assessment_gp_clean.csv')} — đối chiếu sau Ngày 14\n\n`
+    + `- ${dl('clinic_bp_v1_clean.csv')} · ${dl('capstone_screening_clean.csv')} · ${dl('assessment_gp_clean.csv')}\n\n`
     + `</details>\n\n`
-    + `## 4. Kết quả mong đợi\n\n`
+    + `## 5. Kết quả mong đợi\n\n`
     + `Bảng expected-results đầy đủ (N, mean, p-value…) cố tình **không đặt lên trang này** — `
     + `nó chứa đáp án của các bài kiểm tra. Con số đối chiếu cần thiết đã nằm sẵn trong `
     + `trang Đáp án của từng ngày (mở sau khi đã tự làm).\n`;
-  write('du-lieu.md', `---\ntitle: Dữ liệu thực hành\ndescription: Dataset giả lập của lộ trình 14 ngày — tải đúng file theo ngày, tra codebook, đối chiếu bản chuẩn.\n---\n\n${BANNER}${md}`);
+  write('du-lieu.md', `---\ntitle: Dữ liệu thực hành\ndescription: File .sav nguồn (local) của lộ trình exercise-first + CSV giả lập luyện thêm.\n---\n\n${BANNER}${md}`);
 }
 
 function syncLesson() {

@@ -1,1055 +1,355 @@
 {
+  "dataset": "p1_B01_HA (1).sav (exercises/bai_1) — file bài tập nguồn, local-only",
+  "audit": "external-sav",
+  "note": "Số liệu mô phỏng trong grid = minh họa (không phải hồ sơ thật). Số đếm tổng hợp (620, 244, 376) = giá trị kiểm chứng từ file thật (NOT_RUN).",
   "guides": {
-    "d01-open": {
-      "step": "Bước 1–2",
-      "title": "Mở SPSS và nhận diện cửa sổ Data Editor",
-      "purpose": "Khởi động IBM SPSS Statistics và nhận ra cửa sổ làm việc chính (Data Editor) — nơi toàn bộ dữ liệu sẽ nằm.",
-      "where": "Màn hình máy tính → cửa sổ SPSS vừa mở",
-      "menuPath": [
-        "Applications / Start",
-        "IBM SPSS Statistics"
-      ],
-      "osNote": {
-        "mac": "Finder → Applications → IBM SPSS Statistics — hoặc Spotlight (⌘Space) gõ 'SPSS'",
-        "win": "Nút Start → gõ 'SPSS' → IBM SPSS Statistics"
-      },
+    "d01-open-sav": {
+      "step": "Bước 1",
+      "title": "Mở file .sav bài tập nguồn",
+      "purpose": "Mở `p1_B01_HA (1).sav` — dataset chính của Phần 1 — vào Data Editor.",
+      "where": "Data Editor, chưa mở file nào",
+      "menuPath": ["File", "Open", "Data…"],
+      "osNote": { "mac": "File → Open → Data… (hoặc ⌘O)", "win": "File → Open → Data… (hoặc Ctrl+O)" },
       "scenes": [
+        {
+          "kind": "editor",
+          "title": "Untitled1 — IBM SPSS Statistics Data Editor",
+          "openMenu": "File",
+          "items": [
+            { "label": "New" },
+            { "label": "Open", "hot": 1, "sub": [
+              { "label": "Data…", "hot": 2, "advance": true },
+              { "label": "Output…" },
+              { "label": "Syntax…" }
+            ]},
+            { "label": "Import Data" },
+            { "label": "Save" },
+            { "label": "Save As…" }
+          ],
+          "grid": { "cols": ["var", "var", "var"], "rows": [["", "", ""], ["", "", ""]] },
+          "caption": "File → Open → Data…",
+          "callouts": [
+            { "n": 1, "label": "File → Open" },
+            { "n": 2, "label": "Data…" }
+          ]
+        },
         {
           "kind": "finder",
-          "title": "Tìm và mở ứng dụng",
-          "menubar": false,
-          "tabs": false,
-          "path": "Applications / Start Menu",
+          "title": "Open Data",
+          "path": "D:\\spss\\exercises\\bai_1   (Mac: ~/Documents/spss-learning/exercises/bai_1)",
           "files": [
-            {
-              "name": "IBM SPSS Statistics",
-              "sel": true,
-              "hot": 1
-            },
-            {
-              "name": "IBM SPSS Statistics License Authorization",
-              "dir": false
-            },
-            {
-              "name": "SPSS Statistics Student Version",
-              "dir": false
-            }
+            { "name": "Bai thuc hanh SDH P1.pdf", "dir": false },
+            { "name": "p1_B01_HA (1).sav", "dir": false, "sel": true, "hot": 3 },
+            { "name": "P1_B02 CrossTab (2).sav", "dir": false },
+            { "name": "P1_B03 ROC.sav", "dir": false },
+            { "name": "So_Lieu_NC.sav", "dir": false }
           ],
-          "caption": "Tìm biểu tượng IBM SPSS Statistics và mở (double-click / Enter).",
-          "callouts": [
-            {
-              "n": 1,
-              "label": "Ứng dụng cần mở — tên có thể kèm số phiên bản"
-            }
-          ]
-        },
-        {
-          "kind": "dialog",
-          "title": "IBM SPSS Statistics",
-          "menubar": false,
-          "dim": true,
-          "dialog": {
-            "title": "IBM SPSS Statistics",
-            "rows": [
-              {
-                "type": "note",
-                "text": "What's New in IBM SPSS Statistics — cửa sổ chào mừng có thể hiện ở lần chạy đầu."
-              },
-              {
-                "type": "check",
-                "label": "Don't show this dialog again",
-                "checked": false
-              }
-            ],
-            "buttons": [
-              {
-                "label": "Close",
-                "primary": true,
-                "advance": true,
-                "hot": 1
-              }
-            ]
-          },
-          "caption": "Nếu có cửa sổ chào mừng → bấm Close để vào màn hình chính.",
-          "callouts": [
-            {
-              "n": 1,
-              "label": "Đóng cửa sổ chào mừng"
-            }
-          ]
+          "caption": "Chọn đúng file `p1_B01_HA (1).sav` → Open. Nếu ô \"Files of type\" đang chọn định dạng khác, đổi về SPSS Statistics (*.sav).",
+          "callouts": [{ "n": 3, "label": "Chọn p1_B01_HA (1).sav → Open" }]
         },
         {
           "kind": "editor",
-          "title": "Untitled — IBM SPSS Statistics Data Editor",
-          "toolbar": true,
+          "title": "p1_B01_HA (1).sav — IBM SPSS Statistics Data Editor",
           "tabs": true,
           "activeTab": "data",
           "grid": {
-            "cols": [
-              "var",
-              "var",
-              "var",
-              "var",
-              "var",
-              "var"
-            ],
+            "cols": ["ID", "Tuoi", "GTinh", "DToc", "HVan", "NNghiep", "…"],
             "rows": [
-              [],
-              [],
-              [],
-              [],
-              []
-            ]
+              [{ "label": "1" }, { "label": "72" }, { "label": "Nam" }, { "label": "Kinh" }, { "label": "THCS" }, { "label": "Lao động phổ thông" }, { "label": "…" }],
+              [{ "label": "2" }, { "label": "65" }, { "label": "Nữ" }, { "label": "Kinh" }, { "label": "THPT" }, { "label": "Nghề Nông" }, { "label": "…" }],
+              [{ "label": "3" }, { "label": "78" }, { "label": "Nữ" }, { "label": "Kinh" }, { "label": "Tiểu học" }, { "label": "Khác" }, { "label": "…" }]
+            ],
+            "hotRow": 0
           },
-          "note": "Cửa sổ bảng trống = Data Editor — 'bảng tính' của SPSS. Mọi thao tác phân tích bắt đầu từ đây.",
-          "caption": "Data Editor vừa mở — lưới trống vì chưa có dữ liệu.",
-          "callouts": [
-            {
-              "n": 1,
-              "label": "Thanh menu — mọi lệnh phân tích ở đây (Analyze, Data, Transform…)"
-            },
-            {
-              "n": 2,
-              "label": "Hai tab góc dưới-trái: Data View (số liệu) / Variable View (định nghĩa biến)"
-            }
-          ],
-          "menubarHot": 1,
-          "tabHot": 2
+          "note": "620 dòng × 40 biến. Ô GTinh hiện chữ (Nam/Nữ) vì View → Value Labels đang bật; tắt nó sẽ thấy số 1/2.",
+          "caption": "Dữ liệu đã nạp: mỗi dòng = một người khảo sát. Kiểm chứng: cuộn cuối → dòng 620.",
+          "callouts": []
         }
       ],
-      "expected": "Cửa sổ Data Editor hiện ra — bảng lưới trống với thanh menu ở trên và 2 tab 'Data View / Variable View' ở góc dưới-trái.",
+      "expected": "Data Editor hiện bảng `p1_B01_HA (1).sav` — 620 dòng, 40 biến; cột đầu là ID.",
       "ifWrong": [
-        "Không thấy 2 tab → bạn có thể đang mở Output Viewer hoặc Syntax Editor (cửa sổ khác). File → New → Data để mở Data Editor mới.",
-        "Không tìm thấy ứng dụng → Mac: Spotlight ⌘Space gõ 'SPSS'; Windows: Start → gõ 'SPSS'.",
-        "Trên Mac, thanh menu nằm ở mép trên màn hình (thanh menu hệ thống), không trong cửa sổ — hình mô phỏng gộp vào cho dễ nhìn."
+        "Mở ra cửa sổ Output/Syntax trống → File → New → Data rồi Open lại file.",
+        "Không thấy file trong hộp chọn → kiểm tra 'Files of type' = SPSS Statistics (*.sav) và đúng thư mục bai_1.",
+        "File chỉ đọc được cái khác (So_Lieu_NC) → đóng, mở lại đúng tên p1_B01_HA (1).sav."
       ]
     },
-    "d01-two-views": {
+
+    "d01-varview": {
       "step": "Bước 2",
-      "title": "Hai tab Data View và Variable View khác nhau thế nào",
-      "purpose": "Phân biệt hai chế độ nhìn của cùng một bảng: Data View chứa số liệu; Variable View chứa định nghĩa của từng biến.",
-      "where": "Data Editor → 2 tab góc dưới-trái",
-      "menuPath": [
-        "Tab 'Variable View' (góc dưới-trái)"
-      ],
+      "title": "Đọc định nghĩa biến & nhãn giá trị ở Variable View",
+      "purpose": "Tìm 4 biến của bài (ID, GTinh, Cannang, Tuoi) và kiểm tra mã giới tính ở cột Values.",
+      "where": "Data Editor → tab Variable View",
+      "menuPath": ["(tab) Variable View", "Values → …"],
+      "osNote": { "both": "Hai tab Data View / Variable View nằm góc dưới-trái Data Editor, giống nhau trên Mac và Windows." },
       "scenes": [
         {
           "kind": "editor",
-          "title": "clinic_bp.sav — Data Editor",
-          "toolbar": true,
+          "title": "p1_B01_HA (1).sav — Data Editor",
           "tabs": true,
           "activeTab": "data",
+          "tabHot": 1,
           "advanceTab": "variable",
           "grid": {
-            "cols": [
-              "patient_id",
-              "age_years",
-              "sex_code",
-              "bmi",
-              "sbp_baseline",
-              "…"
-            ],
+            "cols": ["ID", "Tuoi", "GTinh", "DToc", "HVan", "…"],
             "rows": [
-              [
-                {
-                  "label": "P001"
-                },
-                {
-                  "label": "36"
-                },
-                {
-                  "label": "2"
-                },
-                {
-                  "label": "22.1"
-                },
-                {
-                  "label": "139"
-                },
-                {
-                  "label": "…"
-                }
-              ],
-              [
-                {
-                  "label": "P002"
-                },
-                {
-                  "label": "46"
-                },
-                {
-                  "label": "2"
-                },
-                {
-                  "label": "27.0"
-                },
-                {
-                  "label": "140"
-                },
-                {
-                  "label": "…"
-                }
-              ]
+              [{ "label": "1" }, { "label": "72" }, { "label": "Nam" }, { "label": "Kinh" }, { "label": "THCS" }, { "label": "…" }],
+              [{ "label": "2" }, { "label": "65" }, { "label": "Nữ" }, { "label": "Kinh" }, { "label": "THPT" }, { "label": "…" }]
             ]
           },
-          "caption": "Đang ở Data View — mỗi dòng một bệnh nhân. Bấm tab Variable View để xem định nghĩa (bấm thử tab trong hình → chuyển khung hình).",
-          "callouts": [
-            {
-              "n": 1,
-              "label": "Bấm tab 'Variable View' — thử ngay trong hình mô phỏng này"
-            }
-          ],
-          "tabHot": 1
+          "caption": "Bấm tab Variable View để xem định nghĩa từng biến.",
+          "callouts": [{ "n": 1, "label": "Variable View (góc dưới-trái)" }]
         },
         {
           "kind": "editor",
-          "title": "clinic_bp.sav — Data Editor",
-          "toolbar": true,
+          "title": "p1_B01_HA (1).sav — Data Editor",
           "tabs": true,
           "activeTab": "variable",
           "grid": {
             "kind": "var",
-            "cols": [
-              "Name",
-              "Type",
-              "Width",
-              "Decimals",
-              {
-                "label": "Label",
-                "hot": 2
-              },
-              {
-                "label": "Values",
-                "hot": 2
-              },
-              "Missing",
-              "Measure"
-            ],
+            "cols": ["Name", "Type", "Label", "Values", "Missing", "Measure"],
             "rows": [
-              [
-                {
-                  "label": "patient_id"
-                },
-                {
-                  "label": "String"
-                },
-                {
-                  "label": "8"
-                },
-                {
-                  "label": "0"
-                },
-                {
-                  "label": ""
-                },
-                {
-                  "label": "None"
-                },
-                {
-                  "label": "None"
-                },
-                {
-                  "label": "Nominal"
-                }
-              ],
-              [
-                {
-                  "label": "age_years"
-                },
-                {
-                  "label": "Numeric"
-                },
-                {
-                  "label": "8"
-                },
-                {
-                  "label": "0"
-                },
-                {
-                  "label": ""
-                },
-                {
-                  "label": "None"
-                },
-                {
-                  "label": "None"
-                },
-                {
-                  "label": "Unknown"
-                }
-              ],
-              [
-                {
-                  "label": "sex_code"
-                },
-                {
-                  "label": "Numeric"
-                },
-                {
-                  "label": "8"
-                },
-                {
-                  "label": "0"
-                },
-                {
-                  "label": ""
-                },
-                {
-                  "label": "None"
-                },
-                {
-                  "label": "None"
-                },
-                {
-                  "label": "Unknown"
-                }
-              ]
+              [{ "label": "ID" }, { "label": "Numeric" }, { "label": "Mã số bệnh nhân" }, { "label": "None" }, { "label": "None" }, { "label": "Nominal" }],
+              [{ "label": "Tuoi" }, { "label": "Numeric" }, { "label": "Tuổi" }, { "label": "None" }, { "label": "None" }, { "label": "Scale" }],
+              [{ "label": "GTinh" }, { "label": "Numeric" }, { "label": "Giới tính" }, { "label": "{1, Nữ}…", "hot": 2, "sel": true }, { "label": "None" }, { "label": "Nominal" }],
+              [{ "label": "DToc" }, { "label": "Numeric" }, { "label": "Dân tộc" }, { "label": "{1, Kinh}…" }, { "label": "None" }, { "label": "Nominal" }],
+              [{ "label": "HVan" }, { "label": "Numeric" }, { "label": "Trình độ học vấn" }, { "label": "{1, Không b…" }, { "label": "None" }, { "label": "Ordinal" }],
+              [{ "label": "Cannang" }, { "label": "Numeric" }, { "label": "Cân nặng (kg)" }, { "label": "None" }, { "label": "None" }, { "label": "Scale" }]
             ]
           },
-          "caption": "Variable View — mỗi DÒNG là một biến, mỗi CỘT là một thuộc tính (kiểu, nhãn, mã). Ngày 02 bạn sẽ điền cột Label/Values/Measure ở đây.",
+          "note": "Mỗi DÒNG ở đây là một biến. Cột Values cho biết mã số nghĩa là gì.",
+          "caption": "Dòng `GTinh`: bấm ô cột Values → nút … để mở hộp Value Labels.",
+          "callouts": [{ "n": 2, "label": "Ô Values của GTinh → nút …" }]
+        },
+        {
+          "kind": "dialog",
+          "title": "Value Labels",
+          "dim": true,
+          "dialog": {
+            "title": "Value Labels",
+            "rows": [
+              { "type": "table", "cols": ["Value", "Label"], "rows": [
+                [{ "label": "1.00", "hot": 3 }, { "label": "Nữ", "hot": 4 }],
+                [{ "label": "2.00", "hot": 5 }, { "label": "Nam", "hot": 5 }]
+              ]},
+              { "type": "note", "text": "MÃ NGƯỢC TRỰC GIÁC: 1 = Nữ, 2 = Nam. Ghi nhớ — mọi điều kiện lọc giới trong file này đều dùng mã này." }
+            ],
+            "buttons": [
+              { "label": "OK", "primary": true, "advance": true },
+              { "label": "Cancel" },
+              { "label": "Help" }
+            ]
+          },
+          "caption": "Nam = 2 · Nữ = 1. Đừng bao giờ đoán mã — mỗi file .sav có thể mã khác nhau (So_Lieu_NC.sav mã ngược lại!).",
           "callouts": [
-            {
-              "n": 2,
-              "label": "Các cột trống (Label/Values) — sẽ điền ở Ngày 02"
-            }
+            { "n": 3, "label": "Mã 1 → Nữ" },
+            { "n": 4, "label": "Nhãn giá trị tương ứng" },
+            { "n": 5, "label": "Mã 2 → Nam" }
           ]
         }
       ],
-      "expected": "Bấm được qua lại hai tab: Data View hiện số liệu, Variable View hiện bảng định nghĩa các biến.",
+      "expected": "Biết được GTinh: 1=Nữ, 2=Nam; HVan, Cannang, Tuoi, ID có nhãn tiếng Việt rõ ràng.",
       "ifWrong": [
-        "Không thấy tab → cửa sổ quá hẹp hoặc đang ở Output Viewer — tìm cửa sổ có thanh menu + lưới.",
-        "Variable View trông 'lạ' → đúng rồi: ở đây mỗi dòng là một BIẾN, không phải một bệnh nhân."
+        "Không thấy cột Values → đang ở Data View; bấm tab Variable View trước.",
+        "Ô Values ghi 'None' → đúng cho biến số (Tuoi, Cannang) — nhãn chỉ có ở biến mã.",
+        "Data View hiện số 1/2 thay vì chữ → menu View → Value Labels để bật/tắt hiển thị nhãn."
       ]
     },
-    "d01-import": {
+
+    "d01-select": {
       "step": "Bước 3",
-      "title": "Mở đường dẫn nhập CSV",
-      "purpose": "Đưa file clinic_bp_v1_clean.csv vào SPSS bằng menu File → Import Data → CSV Data.",
-      "where": "Data Editor → thanh menu File",
-      "menuPath": [
-        "File",
-        "Import Data",
-        "CSV Data…"
-      ],
+      "title": "Chọn mẫu chỉ gồm nam — Select Cases",
+      "purpose": "Lọc tạm các dòng Nam (GTinh=2) để tìm cân nặng nhỏ nhất chỉ trong nhóm này.",
+      "where": "Data → Select Cases…",
+      "menuPath": ["Data", "Select Cases…", "If condition is satisfied", "If…"],
+      "osNote": { "both": "Toán tử trong ô điều kiện: = (bằng), & (và), | (hoặc). Dấu & đôi khi hiển thị 'and' tùy phiên bản." },
       "scenes": [
         {
           "kind": "editor",
-          "title": "Untitled — IBM SPSS Statistics Data Editor",
-          "toolbar": true,
-          "tabs": true,
-          "advanceMenu": "File",
+          "title": "p1_B01_HA (1).sav — Data Editor",
+          "openMenu": "Data",
+          "items": [
+            { "label": "Define Variable Properties…" },
+            { "label": "Sort Cases…" },
+            { "label": "Select Cases…", "hot": 1, "advance": true },
+            { "label": "Weight Cases…" },
+            { "label": "Split File…" }
+          ],
           "grid": {
-            "cols": [
-              "var",
-              "var",
-              "var",
-              "var"
-            ],
+            "cols": ["ID", "Tuoi", "GTinh", "…"],
             "rows": [
-              [],
-              [],
-              []
+              [{ "label": "1" }, { "label": "72" }, { "label": "Nam" }, { "label": "…" }],
+              [{ "label": "2" }, { "label": "65" }, { "label": "Nữ" }, { "label": "…" }]
             ]
           },
-          "caption": "Bấm menu File — thử ngay trong hình (bấm 'File' sẽ qua khung hình tiếp theo).",
+          "caption": "Data → Select Cases…",
+          "callouts": [{ "n": 1, "label": "Select Cases…" }]
+        },
+        {
+          "kind": "dialog",
+          "title": "Select Cases",
+          "dim": true,
+          "dialog": {
+            "title": "Select Cases",
+            "rows": [
+              { "type": "radio", "label": "Select", "options": [
+                { "label": "All cases" },
+                { "label": "If condition is satisfied", "checked": true, "hot": 2 },
+                { "label": "Random sample of cases" },
+                { "label": "Based on time or case range" },
+                { "label": "Use filter variable" }
+              ]},
+              { "type": "ellipsis", "label": "", "hot": 3, "advance": true },
+              { "type": "radio", "label": "Output", "options": [
+                { "label": "Filter out unselected cases", "checked": true },
+                { "label": "Copy selected cases to a new dataset" },
+                { "label": "Delete unselected cases" }
+              ]},
+              { "type": "note", "text": "Giữ mặc định 'Filter out unselected cases' — dòng bị loại chỉ bị gạch chéo, KHÔNG bị xóa. Tuyệt đối không chọn 'Delete unselected cases' trên file gốc." }
+            ],
+            "buttons": [
+              { "label": "If…", "hot": 4 },
+              { "label": "OK", "primary": true, "advance": true, "hot": 6 },
+              { "label": "Reset" },
+              { "label": "Cancel" }
+            ]
+          },
+          "caption": "Chọn 'If condition is satisfied' → nút If… để gõ điều kiện.",
           "callouts": [
-            {
-              "n": 1,
-              "label": "Bấm File trên thanh menu"
-            }
-          ],
-          "menuHot": "File",
-          "menuHotN": 1
+            { "n": 2, "label": "If condition is satisfied" },
+            { "n": 3, "label": "Nút If… mở ô gõ điều kiện" },
+            { "n": 4, "label": "If…" },
+            { "n": 6, "label": "OK" }
+          ]
+        },
+        {
+          "kind": "dialog",
+          "title": "Select Cases: If",
+          "dim": true,
+          "dialog": {
+            "title": "Select Cases: If",
+            "rows": [
+              { "type": "lists", "left": ["ID", "Tuoi", "GTinh", "DToc", "HVan", "NNghiep", "Cannang"], "right": [], "rightLabel": "" },
+              { "type": "field", "label": "", "value": "GTinh = 2", "hot": 5 },
+              { "type": "note", "text": "Gõ trực tiếp hoặc kéo GTinh vào ô rồi gõ ' = 2'. Nhớ: 2 = Nam (đã kiểm ở Values). Có thể viết 'GTinh=2' hoặc 'GTinh EQ 2'." }
+            ],
+            "buttons": [
+              { "label": "Continue", "primary": true, "advance": true, "hot": 6 },
+              { "label": "Cancel" }
+            ]
+          },
+          "caption": "Gõ điều kiện `GTinh = 2` → Continue → OK ở hộp trước.",
+          "callouts": [
+            { "n": 5, "label": "Gõ: GTinh = 2" },
+            { "n": 6, "label": "Continue → OK" }
+          ]
         },
         {
           "kind": "editor",
-          "title": "Untitled — IBM SPSS Statistics Data Editor",
-          "openMenu": "File",
-          "items": [
-            {
-              "label": "New",
-              "sub": [
-                {
-                  "label": "Data"
-                },
-                {
-                  "label": "Syntax"
-                },
-                {
-                  "label": "Output"
-                }
-              ]
-            },
-            {
-              "label": "Open",
-              "sub": [
-                {
-                  "label": "Data…"
-                },
-                {
-                  "label": "Syntax"
-                },
-                {
-                  "label": "Output"
-                }
-              ]
-            },
-            {
-              "label": "Import Data",
-              "hot": 2,
-              "sub": [
-                {
-                  "label": "CSV Data…",
-                  "hot": 3,
-                  "advance": true
-                },
-                {
-                  "label": "Excel Data…"
-                },
-                {
-                  "label": "Text Data…"
-                },
-                {
-                  "label": "Database…"
-                }
-              ]
-            },
-            {
-              "label": "Open Database"
-            },
-            {
-              "label": "Save"
-            },
-            {
-              "label": "Save As…"
-            },
-            {
-              "label": "Export"
-            },
-            {
-              "label": "Print"
-            },
-            {
-              "label": "Exit"
-            }
-          ],
+          "title": "p1_B01_HA (1).sav — Data Editor  [Filter On]",
+          "tabs": true,
           "grid": {
-            "cols": [
-              "var",
-              "var",
-              "var",
-              "var"
-            ],
+            "cols": ["ID", "Tuoi", "GTinh", "…"],
             "rows": [
-              [],
-              [],
-              []
+              [{ "label": "1" }, { "label": "72" }, { "label": "Nam" }, { "label": "…" }],
+              [{ "label": "2", "m": true }, { "label": "65", "m": true }, { "label": "Nữ", "m": true }, { "label": "…", "m": true }],
+              [{ "label": "4" }, { "label": "70" }, { "label": "Nam" }, { "label": "…" }]
             ]
           },
-          "caption": "Rê chuột vào 'Import Data' → menu con hiện → chọn 'CSV Data…' (bấm thử trong hình).",
-          "callouts": [
-            {
-              "n": 2,
-              "label": "Chọn Import Data — mở menu con"
-            },
-            {
-              "n": 3,
-              "label": "Chọn CSV Data… — mở hộp thoại đọc file"
-            }
-          ]
-        },
-        {
-          "kind": "finder",
-          "title": "Open Data — chọn file",
-          "menubar": false,
-          "path": "~/Documents/spss-learning/",
-          "files": [
-            {
-              "name": "clinic_bp_v1_clean.csv",
-              "sel": true,
-              "hot": 4
-            },
-            {
-              "name": "clinic_bp_v1_raw.csv"
-            },
-            {
-              "name": "exercise_hba1c_pairs.csv"
-            },
-            {
-              "name": "clinic_bp.sav"
-            }
-          ],
-          "note": "Chọn đúng file có chữ _clean — file _raw dành cho Ngày 03 (có lỗi gài). Bấm Open.",
-          "caption": "Chọn đúng clinic_bp_v1_clean.csv → Open.",
-          "callouts": [
-            {
-              "n": 4,
-              "label": "File có đuôi _clean — đừng chọn _raw"
-            }
-          ]
+          "note": "Dòng nữ bị gạch chéo (minh họa mờ ở đây); thanh trạng thái ghi 'Filter On'. Chỉ 244 dòng nam còn dùng được.",
+          "caption": "Kết quả: các dòng nữ bị loại tạm (gạch chéo ở số dòng) — dữ liệu vẫn còn nguyên, chỉ bị che.",
+          "callouts": []
         }
       ],
-      "expected": "Hộp thoại đọc file CSV mở ra sau khi chọn File → Import Data → CSV Data… → chọn file → Open.",
+      "expected": "Filter bật: chỉ các dòng GTinh=2 (Nam) còn dùng — 244 dòng; dòng nữ gạch chéo; 'Filter On' ở status bar.",
       "ifWrong": [
-        "Không có mục 'Import Data' (phiên bản cũ) → dùng File → Open → Data…, đổi 'Files of type' thành CSV (*.csv).",
-        "Hộp chọn file không thấy CSV → kiểm tra bộ lọc đuôi file ở góc dưới hộp thoại, chọn 'CSV (*.csv)' hoặc 'All files'."
+        "Thấy 376 dòng → gõ nhầm GTinh = 1 (đó là Nữ): sửa lại điều kiện.",
+        "Không thấy gạch chéo → chưa OK ở hộp Select Cases chính, hoặc chọn 'Delete unselected' (KHÔNG làm vậy trên file gốc — undo ngay).",
+        "Muốn hủy filter → Data → Select Cases → All cases → OK."
       ]
     },
-    "d01-wizard": {
+
+    "d01-sort": {
       "step": "Bước 4",
-      "title": "Trả lời hộp thoại đọc CSV (3 lựa chọn quan trọng)",
-      "purpose": "Báo cho SPSS cách đọc file: dòng đầu là tên biến, cột ngăn bởi dấu phẩy, thập phân dùng dấu chấm.",
-      "where": "Hộp thoại 'Read CSV File' (tên có thể khác tùy phiên bản — CHƯA XÁC MINH TRÊN PHẦN MỀM THẬT)",
-      "scenes": [
-        {
-          "kind": "dialog",
-          "title": "Read CSV File",
-          "dim": true,
-          "dialog": {
-            "title": "Read CSV File",
-            "rows": [
-              {
-                "type": "field",
-                "label": "File",
-                "value": "clinic_bp_v1_clean.csv"
-              },
-              {
-                "type": "check",
-                "label": "Read variable names from first row of data",
-                "checked": true,
-                "hot": 1
-              },
-              {
-                "type": "radio",
-                "label": "Delimiter:",
-                "options": [
-                  {
-                    "label": "Tab"
-                  },
-                  {
-                    "label": "Comma",
-                    "checked": true,
-                    "hot": 2
-                  },
-                  {
-                    "label": "Semicolon"
-                  },
-                  {
-                    "label": "Space"
-                  }
-                ]
-              },
-              {
-                "type": "radio",
-                "label": "Decimal symbol:",
-                "options": [
-                  {
-                    "label": "Period",
-                    "checked": true,
-                    "hot": 3
-                  },
-                  {
-                    "label": "Comma"
-                  }
-                ]
-              },
-              {
-                "type": "note",
-                "text": "Bản xem trước phía dưới hộp thoại (nếu có) sẽ hiện vài dòng đầu để bạn kiểm tra cột tách đúng chưa."
-              }
-            ],
-            "buttons": [
-              {
-                "label": "OK",
-                "primary": true,
-                "advance": true,
-                "hot": 4
-              },
-              {
-                "label": "Cancel"
-              }
-            ]
-          },
-          "caption": "3 ô quan trọng: ① dòng đầu = tên biến (tick), ② delimiter = Comma, ③ decimal = Period → OK.",
-          "callouts": [
-            {
-              "n": 1,
-              "label": "Bắt buộc tick — không tick thì tên biến thành V1,V2…"
-            },
-            {
-              "n": 2,
-              "label": "CSV = comma-separated → chọn Comma"
-            },
-            {
-              "n": 3,
-              "label": "File ghi 25.9 bằng chấm → Period"
-            },
-            {
-              "n": 4,
-              "label": "OK để đọc file"
-            }
-          ]
-        },
-        {
-          "kind": "editor",
-          "title": "clinic_bp_v1_clean.csv — Data Editor",
-          "toolbar": true,
-          "tabs": true,
-          "activeTab": "data",
-          "grid": {
-            "cols": [
-              {
-                "label": "patient_id",
-                "hot": 5
-              },
-              "age_years",
-              "sex_code",
-              "bmi",
-              "sbp_baseline",
-              "treatment_group",
-              "…"
-            ],
-            "rows": [
-              [
-                {
-                  "label": "P001"
-                },
-                {
-                  "label": "36"
-                },
-                {
-                  "label": "2"
-                },
-                {
-                  "label": "22.1"
-                },
-                {
-                  "label": "139"
-                },
-                {
-                  "label": "A"
-                },
-                {
-                  "label": "…"
-                }
-              ],
-              [
-                {
-                  "label": "P002"
-                },
-                {
-                  "label": "46"
-                },
-                {
-                  "label": "2"
-                },
-                {
-                  "label": "27.0"
-                },
-                {
-                  "label": "140"
-                },
-                {
-                  "label": "A"
-                },
-                {
-                  "label": "…"
-                }
-              ],
-              [
-                {
-                  "label": "P003"
-                },
-                {
-                  "label": "47"
-                },
-                {
-                  "label": "2"
-                },
-                {
-                  "label": "23.9"
-                },
-                {
-                  "label": "131"
-                },
-                {
-                  "label": "B"
-                },
-                {
-                  "label": "…"
-                }
-              ]
-            ]
-          },
-          "caption": "Dữ liệu đã vào: tên biến thật ở đầu cột, số hiển thị đúng.",
-          "callouts": [
-            {
-              "n": 5,
-              "label": "Tên cột = tên biến thật (patient_id, age_years…) — dấu hiệu import đúng"
-            }
-          ]
-        }
-      ],
-      "expected": "Sau OK: Data View đầy số liệu, đầu cột là tên biến thật (patient_id, age_years, sex_code…), không có V1/V2/V3.",
-      "ifWrong": [
-        "Cột tên V1, V2… và dòng 1 là 'patient_id,age_years…' → bạn quên tick 'Read variable names…'. Import lại với tick Yes.",
-        "Số thập phân bị tách thành 2 cột (25 | 9) → bạn chọn Decimal = Comma. Import lại với Period.",
-        "Toàn bộ dữ liệu dồn vào 1 cột → chọn sai delimiter. Chọn Comma.",
-        "Tên cột đầu hiện 'ï»¿patient_id' hoặc '?' → vấn đề mã hóa (BOM): chọn encoding UTF-8 nếu hộp thoại có; hoặc sau import sửa Name cột đầu về 'patient_id' ở Variable View. CHƯA XÁC MINH TRÊN PHẦN MỀM THẬT."
-      ]
-    },
-    "d01-verify": {
-      "step": "Bước 5",
-      "title": "Kiểm chứng dữ liệu: 160 dòng × 12 cột",
-      "purpose": "Chắc chắn import đúng trước khi làm việc tiếp — đếm dòng/cột và đọc thử một ô.",
-      "where": "Data View sau import",
+      "title": "Sắp xếp theo cân nặng & đọc mã số",
+      "purpose": "Sort Cases trên Cannang (tăng dần) để dòng nhẹ nhất của nhóm nam lên đầu.",
+      "where": "Data → Sort Cases… (filter Nam đang bật)",
+      "menuPath": ["Data", "Sort Cases…", "Cannang → Sort by", "Ascending"],
+      "osNote": { "both": "Sort chỉ đổi thứ tự hàng hiển thị — không đổi dữ liệu." },
       "scenes": [
         {
           "kind": "editor",
-          "title": "clinic_bp_v1_clean.csv — Data Editor",
-          "toolbar": true,
-          "tabs": true,
-          "activeTab": "data",
-          "grid": {
-            "cols": [
-              "patient_id",
-              "age_years",
-              "sex_code",
-              "bmi",
-              "sbp_baseline",
-              "sbp_followup",
-              "…"
-            ],
-            "rows": [
-              [
-                {
-                  "label": "P001"
-                },
-                {
-                  "label": "36"
-                },
-                {
-                  "label": "2"
-                },
-                {
-                  "label": "22.1"
-                },
-                {
-                  "label": "139"
-                },
-                {
-                  "label": ".",
-                  "m": true,
-                  "hot": 2
-                },
-                {
-                  "label": "…"
-                }
-              ],
-              [
-                {
-                  "label": "P002"
-                },
-                {
-                  "label": "46"
-                },
-                {
-                  "label": "2"
-                },
-                {
-                  "label": "27.0"
-                },
-                {
-                  "label": "140"
-                },
-                {
-                  "label": "139"
-                },
-                {
-                  "label": "…"
-                }
-              ],
-              [
-                {
-                  "label": "…"
-                },
-                {
-                  "label": "…"
-                },
-                {
-                  "label": "…"
-                },
-                {
-                  "label": "…"
-                },
-                {
-                  "label": "…"
-                },
-                {
-                  "label": "…"
-                },
-                {
-                  "label": "…"
-                }
-              ],
-              [
-                {
-                  "label": "P160",
-                  "hot": 1
-                },
-                {
-                  "label": "44"
-                },
-                {
-                  "label": "1"
-                },
-                {
-                  "label": "21.6"
-                },
-                {
-                  "label": "118"
-                },
-                {
-                  "label": "103"
-                },
-                {
-                  "label": "…"
-                }
-              ]
-            ]
-          },
-          "caption": "Cuộn xuống đáy: dòng cuối phải là 160 với patient_id P160. Ô trống hiển thị '.' = missing.",
-          "callouts": [
-            {
-              "n": 1,
-              "label": "Dòng cuối: số dòng xám = 160, P160 — nếu 161/P088×2 là mở nhầm file _raw"
-            },
-            {
-              "n": 2,
-              "label": "Ô '.' = missing thật (bệnh nhân không tái khám) — không phải lỗi"
-            }
-          ]
-        }
-      ],
-      "expected": "160 dòng dữ liệu (dòng cuối P160), 12 cột tên đúng, vài ô sbp_followup hiển thị '.'.",
-      "ifWrong": [
-        "161 dòng hoặc thấy sex_code = 9 / chữ F → mở nhầm clinic_bp_v1_raw.csv. Đóng không lưu, import lại file _clean.",
-        "Số dòng ít hơn 160 → kiểm tra lại đã chọn đúng file chưa."
-      ]
-    },
-    "d01-save": {
-      "step": "Bước 6",
-      "title": "Lưu thành .sav và mở lại kiểm chứng",
-      "purpose": "Lưu dữ liệu dạng .sav để giữ cả dữ liệu lẫn định nghĩa biến (CSV không lưu được nhãn), rồi mở lại để chắc file đọc được.",
-      "where": "Data Editor → File → Save As…",
-      "menuPath": [
-        "File",
-        "Save As…"
-      ],
-      "osNote": {
-        "mac": "⌘S lưu nhanh; thoát app: ⌘Q",
-        "win": "Ctrl+S lưu nhanh; thoát app: Alt+F4 hoặc ✕"
-      },
-      "scenes": [
-        {
-          "kind": "editor",
-          "title": "clinic_bp_v1_clean.csv — Data Editor",
-          "openMenu": "File",
+          "title": "p1_B01_HA (1).sav — Data Editor  [Filter On]",
+          "openMenu": "Data",
           "items": [
-            {
-              "label": "New"
-            },
-            {
-              "label": "Open"
-            },
-            {
-              "label": "Import Data"
-            },
-            {
-              "label": "Open Database"
-            },
-            {
-              "label": "Save"
-            },
-            {
-              "label": "Save As…",
-              "hot": 1,
-              "advance": true
-            },
-            {
-              "label": "Export"
-            },
-            {
-              "label": "Print"
-            },
-            {
-              "label": "Exit"
-            }
+            { "label": "Define Variable Properties…" },
+            { "label": "Sort Cases…", "hot": 1, "advance": true },
+            { "label": "Select Cases…" },
+            { "label": "Weight Cases…" },
+            { "label": "Split File…" }
           ],
           "grid": {
-            "cols": [
-              "patient_id",
-              "age_years",
-              "…"
-            ],
+            "cols": ["ID", "Tuoi", "GTinh", "Cannang", "…"],
             "rows": [
-              [
-                {
-                  "label": "P001"
-                },
-                {
-                  "label": "36"
-                },
-                {
-                  "label": "…"
-                }
-              ]
+              [{ "label": "1" }, { "label": "72" }, { "label": "Nam" }, { "label": "58" }, { "label": "…" }],
+              [{ "label": "4" }, { "label": "70" }, { "label": "Nam" }, { "label": "61" }, { "label": "…" }]
             ]
           },
-          "caption": "File → Save As… (lần đầu dùng Save As để chọn tên + vị trí).",
-          "callouts": [
-            {
-              "n": 1,
-              "label": "Save As… — chọn tên file và thư mục"
-            }
-          ]
+          "caption": "Data → Sort Cases…",
+          "callouts": [{ "n": 1, "label": "Sort Cases…" }]
         },
         {
           "kind": "dialog",
-          "title": "Save Data As",
+          "title": "Sort Cases",
           "dim": true,
           "dialog": {
-            "title": "Save Data As",
+            "title": "Sort Cases",
             "rows": [
-              {
-                "type": "field",
-                "label": "Save As / File name:",
-                "value": "clinic_bp.sav",
-                "hot": 2
-              },
-              {
-                "type": "select",
-                "label": "Save as type:",
-                "value": "SPSS Statistics (*.sav)",
-                "hot": 3
-              },
-              {
-                "type": "field",
-                "label": "Vào thư mục:",
-                "value": "spss-learning"
-              },
-              {
-                "type": "note",
-                "text": "Đuôi .sav là định dạng riêng của SPSS — lưu được cả dữ liệu và định nghĩa biến sẽ gắn ở Ngày 02."
-              }
+              { "type": "lists", "left": ["ID", "Tuoi", "GTinh", "DToc", "HVan", "NNghiep"], "right": ["Cannang (A)"], "hot": 2, "rightLabel": "Sort by:" },
+              { "type": "radio", "label": "Sort Order", "options": [
+                { "label": "Ascending", "checked": true, "hot": 3 },
+                { "label": "Descending" }
+              ]}
             ],
             "buttons": [
-              {
-                "label": "Save",
-                "primary": true,
-                "advance": true,
-                "hot": 4
-              },
-              {
-                "label": "Cancel"
-              }
+              { "label": "OK", "primary": true, "advance": true, "hot": 4 },
+              { "label": "Paste" },
+              { "label": "Reset" },
+              { "label": "Cancel" }
             ]
           },
-          "caption": "Đặt tên clinic_bp.sav, kiểu file SPSS Statistics (*.sav), đúng thư mục khóa học → Save.",
+          "caption": "Kéo `Cannang` sang ô Sort by → Ascending → OK.",
           "callouts": [
-            {
-              "n": 2,
-              "label": "Tên file: clinic_bp.sav"
-            },
-            {
-              "n": 3,
-              "label": "Kiểu: SPSS Statistics (*.sav) — thường là mặc định"
-            },
-            {
-              "n": 4,
-              "label": "Save"
-            }
+            { "n": 2, "label": "Cannang → Sort by" },
+            { "n": 3, "label": "Ascending (nhỏ → lớn)" },
+            { "n": 4, "label": "OK" }
           ]
         },
         {
           "kind": "editor",
-          "title": "clinic_bp.sav — Data Editor",
-          "openMenu": "File",
-          "items": [
-            {
-              "label": "New"
-            },
-            {
-              "label": "Open",
-              "hot": 5,
-              "sub": [
-                {
-                  "label": "Data…",
-                  "advance": true,
-                  "hot": 6
-                },
-                {
-                  "label": "Syntax"
-                },
-                {
-                  "label": "Output"
-                }
-              ]
-            },
-            {
-              "label": "Import Data"
-            },
-            {
-              "label": "Open Database"
-            },
-            {
-              "label": "Save"
-            },
-            {
-              "label": "Save As…"
-            },
-            {
-              "label": "Exit"
-            }
-          ],
+          "title": "p1_B01_HA (1).sav — Data Editor  [Filter On]",
           "grid": {
-            "cols": [
-              "patient_id",
-              "age_years",
-              "…"
-            ],
+            "cols": ["ID", "Tuoi", "GTinh", "Cannang", "Chieucao", "…"],
             "rows": [
-              [
-                {
-                  "label": "P001"
-                },
-                {
-                  "label": "36"
-                },
-                {
-                  "label": "…"
-                }
-              ]
+              [{ "label": "89", "hot": 5 }, { "label": "85" }, { "label": "Nam" }, { "label": "45", "hot": 6 }, { "label": "148" }, { "label": "…" }],
+              [{ "label": "167", "hot": 5 }, { "label": "84" }, { "label": "Nam" }, { "label": "45" }, { "label": "150" }, { "label": "…" }],
+              [{ "label": "429", "hot": 5 }, { "label": "85" }, { "label": "Nam" }, { "label": "45" }, { "label": "146" }, { "label": "…" }],
+              [{ "label": "507", "hot": 5 }, { "label": "84" }, { "label": "Nam" }, { "label": "45" }, { "label": "149" }, { "label": "…" }],
+              [{ "label": "12" }, { "label": "80" }, { "label": "Nam" }, { "label": "46" }, { "label": "155" }, { "label": "…" }]
             ]
           },
-          "caption": "Thoát hẳn SPSS rồi mở lại → File → Open → Data… → chọn clinic_bp.sav → dữ liệu hiện lại đủ 160×12 là xong.",
+          "note": "Đọc kết quả: 4 người nam cùng nặng 45 kg — ID 89, 167, 429, 507 (tuổi 85, 84, 85, 84). Dữ liệu số liệu tổng hợp đã kiểm chứng; các cột phụ (Chieucao) chỉ minh họa.",
+          "caption": "Dòng đầu = cân nặng nhỏ nhất trong nhóm đang lọc. Ghi đủ 4 mã số — đề hỏi 'những người'.",
           "callouts": [
-            {
-              "n": 5,
-              "label": "Sau khi mở lại SPSS: File → Open"
-            },
-            {
-              "n": 6,
-              "label": "Data… → chọn clinic_bp.sav"
-            }
+            { "n": 5, "label": "ID — mã số cần ghi" },
+            { "n": 6, "label": "45 kg — cân nặng nhỏ nhất (nam)" }
           ]
         }
       ],
-      "expected": "File clinic_bp.sav nằm trong thư mục khóa học; thoát SPSS mở lại, mở file thấy đủ 160 dòng × 12 cột.",
+      "expected": "Sau sort: 4 dòng đầu là ID 89, 167, 429, 507 — cùng Cannang 45 (nam).",
       "ifWrong": [
-        "File mở lại trống → có thể lưu nhầm chỗ. Dùng Finder/Explorer tìm 'clinic_bp.sav', mở trực tiếp từ đó.",
-        "Không thấy .sav trong hộp Open → bộ lọc 'Files of type' đang là CSV — đổi về 'SPSS Statistics (*.sav)'.",
-        "Mac: hộp Save As có nút mũi tên nhỏ để mở rộng chọn thư mục — bấm nó nếu không thấy cây thư mục."
+        "Thấy 35 kg ở đầu → filter chưa bật (đó là nữ, ID 320): quay lại Bước 3.",
+        "Thứ tự giảm dần → chọn nhầm Descending: mở lại Sort Cases, đổi Ascending.",
+        "Muốn trả thứ tự gốc → sort theo ID ascending."
       ]
     }
   }

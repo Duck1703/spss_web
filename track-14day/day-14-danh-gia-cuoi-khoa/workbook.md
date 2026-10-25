@@ -1,38 +1,71 @@
-# Ngày 14 — Rubric chấm bài cuối khóa (100 điểm)
+# Ngày 14 — Đánh giá cuối khóa — Workbook
 
-> Tự chấm sau khi nộp bài, **trước** khi mở `answer-key.md`.
-> Đạt chuẩn: **≥85/100** và không hạng mục nào = 0.
+> **Trạng thái:** DRAFT — khi hoàn thiện sẽ có BT1–BT4 theo mẫu Ngày 01–03: mỗi BT gắn một
+> bài tập nguồn, gợi ý mở theo nấc, sản phẩm bắt buộc. Tạm thời dùng khối thông tin bài
+> tập nguồn dưới đây để tự thử trên SPSS trước.
 
 ---
 
-## Rubric
+## BT1 — Bài tập nguồn: P1-Q24
 
-| Hạng mục | Tiêu chí chi tiết | Tối đa | Tự chấm |
-|---|---|---|---|
-| **1. Chuẩn bị dữ liệu** | Import đúng; Variable View đủ Label/Values/Missing/Measure theo codebook | 10 | |
-| | Phát hiện đủ 4 lỗi gài | 10 | |
-| | Xử lý đúng nguyên tắc (missing thay đoán số; raw bất biến; log đủ 4 dòng) | 10 | |
-| **2. Bảng mô tả** | Đúng chỉ số cho từng kiểu biến (n% vs mean±SD vs median) | 10 | |
-| | Có mẫu số n, ghi nhận missing | 5 | |
-| **3. Phân tích suy luận** | Chọn phương pháp phù hợp câu hỏi + ghi lý do | 10 | |
-| | Kiểm tra điều kiện trước khi chạy (phân phối/Levene/expected count/n) | 10 | |
-| | Đọc đúng output (đúng bảng, đúng dòng, đúng con số) | 10 | |
-| **4. Diễn giải & báo cáo** | Câu kết quả đủ: n, độ lớn, CI/p, hướng | 10 | |
-| | Không quá tay: không "chứng minh/gây", phân biệt significance vs clinical | 10 | |
-| | ≥2 giới hạn thật sự (missing, thiết kế cắt ngang, giả lập…) | 5 | |
-| **Tổng** | | **100** | |
+{{exercise:P1-Q24}}
 
-## Bảng tra cứu ngày cần học lại
+1. Mở `p1_B01_HA (1).sav` trong SPSS; xác định biến cần dùng và kỹ năng cần thiết.
+2. Tự thử giải; ghi lại thao tác menu đã dùng và kết quả thu được.
 
-| Mất điểm ở hạng mục | Học lại |
-|---|---|
-| 1 (chuẩn bị dữ liệu) | Ngày 02–03 |
-| 2 (mô tả) | Ngày 04–05 |
-| 3 (phân tích) | Ngày 06–10 tương ứng phương pháp đã chọn |
-| 4 (diễn giải) | Ngày 08, 09 mục E + Ngày 11 |
+> ✅ **Sản phẩm:** kết quả P1-Q24 ghi vào bảng trả lời của đề · thao tác menu ghi chú lại
 
-## Câu hỏi tự vấn khi chấm
+---
 
-- Nếu người chấm lạnh mở cleaning log của bạn, họ truy lại được 4 lỗi không?
-- Câu kết quả của bạn có số nào "rơi từ trời" không — số nào cũng truy được về `.spv` không?
-- Câu giới hạn có phải câu mẫu học thuộc không, hay thật sự đúng với dataset này?
+## BT2 — Bài tập nguồn: P1-Q26
+
+{{exercise:P1-Q26}}
+
+1. Mở `p1_B01_HA (1).sav` trong SPSS; xác định biến cần dùng và kỹ năng cần thiết.
+2. Tự thử giải; ghi lại thao tác menu đã dùng và kết quả thu được.
+
+> ✅ **Sản phẩm:** kết quả P1-Q26 ghi vào bảng trả lời của đề · thao tác menu ghi chú lại
+
+---
+
+## BT3 — Bài tập nguồn: P1-Q31
+
+{{exercise:P1-Q31}}
+
+1. Mở `p1_B01_HA (1).sav` trong SPSS; xác định biến cần dùng và kỹ năng cần thiết.
+2. Tự thử giải; ghi lại thao tác menu đã dùng và kết quả thu được.
+
+> ✅ **Sản phẩm:** kết quả P1-Q31 ghi vào bảng trả lời của đề · thao tác menu ghi chú lại
+
+---
+
+## BT4 — Bài tập nguồn: P1-Q33
+
+{{exercise:P1-Q33}}
+
+1. Mở `p1_B01_HA (1).sav` trong SPSS; xác định biến cần dùng và kỹ năng cần thiết.
+2. Tự thử giải; ghi lại thao tác menu đã dùng và kết quả thu được.
+
+> ✅ **Sản phẩm:** kết quả P1-Q33 ghi vào bảng trả lời của đề · thao tác menu ghi chú lại
+
+---
+
+## BT5 — Bài tập nguồn: P1-Q43
+
+{{exercise:P1-Q43}}
+
+1. Mở `p1_B01_HA (1).sav` trong SPSS; xác định biến cần dùng và kỹ năng cần thiết.
+2. Tự thử giải; ghi lại thao tác menu đã dùng và kết quả thu được.
+
+> ✅ **Sản phẩm:** kết quả P1-Q43 ghi vào bảng trả lời của đề · thao tác menu ghi chú lại
+
+---
+
+## BT6 — Bài tập nguồn: P2-Q08
+
+{{exercise:P2-Q08}}
+
+1. Mở `File1.sav` trong SPSS; xác định biến cần dùng và kỹ năng cần thiết.
+2. Tự thử giải; ghi lại thao tác menu đã dùng và kết quả thu được.
+
+> ✅ **Sản phẩm:** kết quả P2-Q08 ghi vào bảng trả lời của đề · thao tác menu ghi chú lại
