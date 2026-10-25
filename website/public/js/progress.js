@@ -17,7 +17,7 @@
   var state = load();
 
   // Ghi lastPage cho trang học (docs pages) — bao gồm lộ trình 14 ngày (dNN) + du-lieu
-  if (/^\/(m01|m\d|d\d{2}|du-lieu|tai-lieu|lo-trinh|lo-trinh-14-ngay)\//.test(location.pathname)) {
+  if (/^\/(m01|m\d|d\d{2}|du-lieu|tai-lieu|lo-trinh|lo-trinh-14-ngay|kho-bai-tap)\//.test(location.pathname)) {
     state.lastPage = location.pathname;
     save(state);
   }

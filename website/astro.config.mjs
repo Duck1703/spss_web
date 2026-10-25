@@ -17,6 +17,7 @@ export default defineConfig({
       head: [
         { tag: 'script', attrs: { src: '/js/progress.js', defer: true } },
         { tag: 'script', attrs: { src: '/js/spss-guides.js', defer: true } },
+        { tag: 'script', attrs: { src: '/js/exercise-bank.js', defer: true } },
         { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
         { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
         {
@@ -32,6 +33,7 @@ export default defineConfig({
         { label: 'Bắt đầu', items: [
           { label: 'Trang chủ', link: '/' },
           { label: 'Lộ trình 14 ngày', slug: 'lo-trinh-14-ngay' },
+          { label: 'Kho bài tập (58 câu)', slug: 'kho-bai-tap' },
           { label: 'Dữ liệu thực hành', slug: 'du-lieu' },
           { label: 'Chuẩn bị SPSS trên Mac', slug: 'tai-lieu/bat-dau-mac' },
           { label: 'Chuẩn bị dữ liệu thực hành', slug: 'tai-lieu/chuan-bi-du-lieu' },
