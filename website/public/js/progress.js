@@ -108,34 +108,43 @@
       el.textContent = EX_TOTAL - nEx;
     });
     // next lesson = ngày ef- đầu tiên chưa 'module:…' done, theo thứ tự [data-day-row] trong DOM
+    // (chỉ có trên dashboard — trang khác giữ link 'Bài học' tĩnh trong Bv2Nav)
+    var dayRows = document.querySelectorAll('[data-day-row]');
     var nextRow = null;
-    document.querySelectorAll('[data-day-row]').forEach(function (r) {
-      if (!nextRow && !state.done['module:' + r.getAttribute('data-day-row')]) nextRow = r;
+    dayRows.forEach(function (r) {
+      var done = !!state.done['module:' + r.getAttribute('data-day-row')];
+      r.classList.toggle('done', done);
+      if (!nextRow && !done) nextRow = r;
     });
-    document.querySelectorAll('[data-dash-next-href]').forEach(function (a) {
+    dayRows.forEach(function (r) {
+      r.classList.toggle('active', r === nextRow);
+    });
+    if (dayRows.length) {
+      document.querySelectorAll('[data-dash-next-href]').forEach(function (a) {
+        if (nextRow) {
+          a.setAttribute('href', nextRow.getAttribute('data-day-href'));
+          a.textContent = nDays ? 'Tiếp tục học' : 'Bắt đầu — Ngày ' + nextRow.getAttribute('data-day-code');
+        } else {
+          a.setAttribute('href', '/kho-bai-tap/');
+          a.textContent = 'Ôn tập — Kho bài tập';
+        }
+      });
       if (nextRow) {
-        a.setAttribute('href', nextRow.getAttribute('data-day-href'));
-        a.textContent = nDays ? 'Tiếp tục học' : 'Bắt đầu — Ngày ' + nextRow.getAttribute('data-day-code');
+        var nn = nextRow.getAttribute('data-day-code');
+        var t = document.querySelector('[data-dash-next-title]');
+        var m = document.querySelector('[data-dash-next-meta]');
+        var c = document.querySelector('[data-dash-next-chip]');
+        if (t) t.textContent = nextRow.getAttribute('data-day-title');
+        if (m) m.textContent = nextRow.getAttribute('data-day-meta');
+        if (c) c.textContent = 'Ngày ' + nn + ' / ' + DAY_TOTAL;
       } else {
-        a.setAttribute('href', '/kho-bai-tap/');
-        a.textContent = 'Ôn tập — Kho bài tập';
+        var t2 = document.querySelector('[data-dash-next-title]');
+        var m2 = document.querySelector('[data-dash-next-meta]');
+        var c2 = document.querySelector('[data-dash-next-chip]');
+        if (t2) t2.textContent = 'Hoàn thành 14 ngày — ôn tập trong Kho bài tập';
+        if (m2) m2.textContent = 'Tất cả module ef-d01…ef-d14 đã đánh dấu xong.';
+        if (c2) c2.textContent = '14 / ' + DAY_TOTAL;
       }
-    });
-    if (nextRow) {
-      var nn = nextRow.getAttribute('data-day-code');
-      var t = document.querySelector('[data-dash-next-title]');
-      var m = document.querySelector('[data-dash-next-meta]');
-      var c = document.querySelector('[data-dash-next-chip]');
-      if (t) t.textContent = nextRow.getAttribute('data-day-title');
-      if (m) m.textContent = nextRow.getAttribute('data-day-meta');
-      if (c) c.textContent = 'Ngày ' + nn + ' / ' + DAY_TOTAL;
-    } else if (document.querySelector('[data-day-row]')) {
-      var t2 = document.querySelector('[data-dash-next-title]');
-      var m2 = document.querySelector('[data-dash-next-meta]');
-      var c2 = document.querySelector('[data-dash-next-chip]');
-      if (t2) t2.textContent = 'Hoàn thành 14 ngày — ôn tập trong Kho bài tập';
-      if (m2) m2.textContent = 'Tất cả module ef-d01…ef-d14 đã đánh dấu xong.';
-      if (c2) c2.textContent = '14 / ' + DAY_TOTAL;
     }
     // step checkpoint (hướng dẫn trực quan SPSS): data-stepdone → done['step:id']
     document.querySelectorAll('[data-stepdone]').forEach(function (cb) {

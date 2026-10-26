@@ -1,40 +1,96 @@
 ---
+/**
+ * PageTitle.astro — header B v2 cho mọi trang docs (splash template).
+ * Crumb + eyebrow + H1 + meta chips; metadata ngày/bài tập từ src/data/course-meta.json
+ * (generated bởi scripts/sync-content.mjs — chạy `npm run sync` trước build).
+ */
+import meta from '../data/course-meta.json';
+
 const { entry, id } = Astro.locals.starlightRoute;
 const { title, description } = entry.data;
 const slug = id ?? '';
-const [section, page] = slug.split('/');
+const parts = slug.split('/');
+const section = parts[0];
+const sub = parts[1] || '';
 
-const kindLabels: Record<string, string> = {
-  'bai-hoc': 'Bài học',
-  'bai-tap': 'Bài tập',
-  'dap-an': 'Đáp án',
-};
+const KIND: Record<string, string> = { 'bai-hoc': 'Bài học', 'bai-tap': 'Bài tập', 'dap-an': 'Đáp án' };
+const TIER: Record<string, string> = { essential: 'Bắt buộc', reinforcement: 'Luyện thêm', optional: 'Tùy chọn', advanced: 'Nâng cao', none: 'Bài phụ' };
+const LEVEL: Record<string, string> = { Beginner: 'Cơ bản', Intermediate: 'Trung cấp', Advanced: 'Nâng cao' };
 
-const crumbs: { label: string; module?: boolean }[] = [];
-if (/^m\d{2}$/.test(section)) {
-  crumbs.push({ label: section.toUpperCase(), module: true });
-  crumbs.push({ label: kindLabels[page] ?? 'Bài học' });
-} else if (slug === 'lo-trinh') {
-  crumbs.push({ label: 'Lộ trình' });
-} else if (section === 'tai-lieu') {
+const day = /^d\d{2}$/.test(section) ? (meta.days as any)[section] : null;
+const kind = KIND[sub] || 'Bài học';
+const ex = section === 'kho-bai-tap' && sub ? (meta.exercises as any)[sub.toUpperCase()] : null;
+
+type Crumb = { label: string; href?: string; here?: boolean };
+const crumbs: Crumb[] = [{ label: 'SPSS Medical', href: '/' }];
+let eyebrow = '';
+const chips: string[] = [];
+
+if (day) {
+  crumbs.push({ label: 'Lộ trình 14 ngày', href: '/lo-trinh-14-ngay/' });
+  crumbs.push({ label: `Ngày ${day.num}`, href: `/${section}/bai-hoc/` });
+  crumbs.push({ label: kind, here: true });
+  eyebrow = sub === 'bai-tap' ? `WORKBOOK · NGÀY ${day.num}` : sub === 'dap-an' ? `ĐÁP ÁN · NGÀY ${day.num}` : `BÀI HỌC THỰC HÀNH · NGÀY ${day.num}`;
+  if (sub === 'bai-hoc') {
+    chips.push(`~${day.mins + 40} phút`, `Bài tập: ${day.ex}`, `Dataset: ${day.ds}`);
+  }
+} else if (section === 'kho-bai-tap') {
+  crumbs.push({ label: 'Kho bài tập', href: '/kho-bai-tap/' });
+  if (ex) {
+    crumbs.push({ label: ex.id, here: true });
+    eyebrow = `BÀI TẬP NGUỒN · ${ex.src === 'P1' ? 'BÀI 1 — PHẦN 1' : ex.src === 'P2' ? 'BÀI 2 — PHẦN 2' : 'BỔ SUNG'}`;
+    chips.push(`${LEVEL[ex.difficulty] || ex.difficulty}`, `~${ex.time} phút`, TIER[ex.tier] || '');
+  } else {
+    crumbs.push({ label: 'Danh sách', here: true });
+    eyebrow = 'KHO BÀI TẬP';
+  }
+} else if (section === 'm01') {
   crumbs.push({ label: 'Tài liệu' });
+  crumbs.push({ label: 'M01 — tham khảo', href: '/m01/bai-hoc/' });
+  if (sub) crumbs.push({ label: KIND[sub] || sub, here: true });
+  eyebrow = 'MODULE THAM KHẢO';
+} else if (section === 'lo-trinh-14-ngay' || section === 'lo-trinh') {
+  crumbs.push({ label: 'Lộ trình', here: true });
+  eyebrow = 'LỘ TRÌNH';
+} else if (section === 'du-lieu' || section === 'tai-lieu') {
+  crumbs.push({ label: 'Tài liệu', href: '/du-lieu/' });
+  crumbs.push({ label: title, here: true });
+  eyebrow = 'TÀI LIỆU';
+} else {
+  crumbs.push({ label: title, here: true });
 }
+const chipList = chips.filter(Boolean);
 ---
 
-<header class="page-title">
-  {
-    crumbs.length > 0 && (
-      <nav class="page-title__crumbs" aria-label="Phân loại trang">
-        <span>SPSS MLP</span>
-        {crumbs.map((c) => (
-          <>
-            <span class="crumb-sep" aria-hidden="true">/</span>
-            <span class:list={[{ 'crumb-module': c.module }]}>{c.label}</span>
-          </>
-        ))}
-      </nav>
-    )
-  }
-  <h1 id="_top">{title}</h1>
-  {description && <p class="page-title__desc">{description}</p>}
+<nav class="crumb" aria-label="Đường dẫn">
+  {crumbs.map((c, i) => (
+    <>
+      {i > 0 && <span aria-hidden="true">›</span>}
+      {c.here ? <b>{c.label}</b> : c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
+    </>
+  ))}
+</nav>
+
+<header class={ex || day ? 'lessonhead learnerhead' : 'pageheading'}>
+  <div class="head-copy">
+    {eyebrow && <div class="eyebrow">{eyebrow}</div>}
+    {ex && (
+      <div class="exercise-identity">
+        <span class="labelbadge">{ex.id}</span>
+        <span class="tagsoft">{ex.catLabel}</span>
+        <span class="tagsoft">{TIER[ex.tier] || ''}</span>
+      </div>
+    )}
+    <h1 id="_top">{ex ? ex.summary : title}</h1>
+    {ex ? (
+      <p class="sourcedetail">{ex.ref}{ex.page ? ` · trang ${ex.page}` : ''} — {ex.src === 'P1' ? 'Bai thuc hanh SDH P1.pdf' : ex.src === 'P2' ? 'BSNT_Bài TH_Phần 2_Cô Hiền.pdf' : ex.src} · dataset {ex.dataset}</p>
+    ) : (
+      (day && sub === 'bai-hoc' ? <p class="desc">Mục tiêu hôm nay: {day.goal}</p> : description && <p class={day ? 'desc' : 'subtext'}>{description}</p>)
+    )}
+  </div>
+  {section === 'kho-bai-tap' && !ex ? (
+    <div class="head-badge"><span class="count">60</span><span class="count-label">bài tập nguồn<br />có trang riêng</span></div>
+  ) : chipList.length > 0 && (
+    <div class="headmeta">{chipList.map((c) => <span class="tinychip">{c}</span>)}</div>
+  )}
 </header>

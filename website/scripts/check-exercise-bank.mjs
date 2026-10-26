@@ -33,11 +33,11 @@ ok(n2.every((n, i) => n === i + 1), 'P2-Q01..Q15 liền mạch');
 // ---- 2. Trang chi tiết tồn tại & đầy đủ trường ----
 const exDir = path.join(DOCS, 'kho-bai-tap');
 ok(fs.existsSync(exDir), 'thư mục kho-bai-tap/ được generate');
-const pages = fs.readdirSync(exDir).filter(f => f.endsWith('.md'));
+const pages = fs.readdirSync(exDir).filter(f => f.endsWith('.mdx'));
 ok(pages.length === 60, `60 trang chi tiết (thực tế ${pages.length})`);
 let missing = [], noMeta = [], noDataset = [], noOps = [], noStatus = [];
 for (const q of inv) {
-  const f = path.join(exDir, q.id.toLowerCase() + '.md');
+  const f = path.join(exDir, q.id.toLowerCase() + '.mdx');
   if (!fs.existsSync(f)) { missing.push(q.id); continue; }
   const t = fs.readFileSync(f, 'utf8');
   if (re.test(q.id) && (!t.includes(q.ref) || !/trang \d+/.test(t))) noMeta.push(q.id); // mục phụ không bắt buộc ref/trang
@@ -53,9 +53,12 @@ ok(noStatus.length === 0, 'mọi trang có nút hoàn thành + ô nhập' + (noS
 
 // ---- 3. Hub ----
 const hub = fs.readFileSync(path.join(DOCS, 'kho-bai-tap.md'), 'utf8');
-ok((hub.match(/class="exb-card"/g) || []).length === 60, 'hub list 60 thẻ');
-ok(hub.includes('Bài 1 — Bài thực hành SDH Phần 1 (43 câu)') && hub.includes('Bài 2 — Bài TH Phần 2 (15 câu)'), 'nhãn nhóm 43+15 đúng');
-ok(hub.includes('Phụ — không tính trong 58 câu (2 câu)'), 'mục phụ tách riêng');
+ok((hub.match(/class="exercise-row"/g) || []).length === 60, 'hub list 60 thẻ');
+const rowP1 = (hub.match(/class="exercise-row"[^>]*data-src="P1"/g) || []).length;
+const rowP2 = (hub.match(/class="exercise-row"[^>]*data-src="P2"/g) || []).length;
+const rowSupp = (hub.match(/class="exercise-row"[^>]*data-src="supp"/g) || []).length;
+ok(hub.includes('Bài 1 — Phần 1') && hub.includes('Bài 2 — Phần 2') && rowP1 === 43 && rowP2 === 15, `nhãn nhóm 43+15 đúng (P1=${rowP1}, P2=${rowP2})`);
+ok(hub.includes('Bổ sung') && rowSupp === 2, `mục phụ tách riêng (supp=${rowSupp})`);
 ok(hub.includes('data-f="cat"') && hub.includes('data-f="tier"') && hub.includes('data-f="status"') && hub.includes('exb-search'), 'đủ 4 bộ lọc + ô tìm kiếm');
 
 // ---- 4. Đáp án thiếu được đánh dấu; không lộ số đáp án trên trang bài ----
@@ -68,7 +71,7 @@ let noFlag = [], leakWarn = [];
 for (const q of inv) {
   const days = (q.day || '').split('+').map(s => s.trim()).filter(d => /^d\d{2}$/.test(d));
   const verified = days.some(n => AK[n] && AK[n].includes(q.id));
-  const f = path.join(exDir, q.id.toLowerCase() + '.md');
+  const f = path.join(exDir, q.id.toLowerCase() + '.mdx');
   if (!fs.existsSync(f)) continue;
   const t = fs.readFileSync(f, 'utf8');
   if (!verified && !t.includes('ANSWER_NOT_VERIFIED')) noFlag.push(q.id);

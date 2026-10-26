@@ -2,15 +2,19 @@
 /**
  * SPSSActionGuide.astro — khối hướng dẫn thao tác có hình mô phỏng (A–H).
  * props.id: id guide trong public/visual-guides/dayNN/scenes.json
+ * props.part: 'window' (mặc định 'all') — chỉ khung mô phỏng + nav;
+ *             'followup' — kết quả mong đợi + troubleshooting + checkpoint;
+ *             'all' — toàn bộ (dùng khi guide đứng một mình trong flow).
  * Dữ liệu đọc lúc build từ public/visual-guides/ (cũng tải được qua HTTP).
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import SpssMock from './SpssMock.astro';
+import OSSelector from './OSSelector.astro';
 
-interface Props { id: string; step?: string; }
-const { id, step } = Astro.props;
+interface Props { id: string; step?: string; part?: 'window' | 'followup' | 'all'; }
+const { id, step, part = 'all' } = Astro.props;
 
 const day = 'day' + id.slice(1, 3); // 'd01' → 'day01' (thư mục public/visual-guides/dayNN)
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -18,18 +22,23 @@ const scenesPath = path.join(root, 'public', 'visual-guides', day, 'scenes.json'
 const all = JSON.parse(fs.readFileSync(scenesPath, 'utf8')).guides;
 const g = all[id];
 if (!g) throw new Error(`SPSSActionGuide: không tìm thấy guide '${id}' trong ${scenesPath}`);
+const stepDoneId = /^d\d/.test(id) ? `ef-${id}` : id;
+const showWindow = part === 'all' || part === 'window';
+const showFollow = part === 'all' || part === 'followup';
 ---
 
-<figure class="sguide" id={`guide-${id}`} data-sguide={id}>
-  <figcaption class="sguide-head">
-    <span class="sguide-step">{step || g.step}</span>
-    <span class="sguide-title">{g.title}</span>
-    <span class="sguide-sim" title="Hình mô phỏng thao tác SPSS — không phải ảnh chụp phần mềm thật">MÔ PHỎNG</span>
-  </figcaption>
+{showWindow && (
+<figure class="sguide sim-frame" id={`guide-${id}`} data-sguide={id}>
+  <div class="simtop">
+    <div class="simtop-l">
+      <span class="simtitle">{g.title}</span>
+      <span class="simsub">{step || g.step} · {g.where}</span>
+    </div>
+    <OSSelector inline />
+  </div>
 
   <div class="sguide-why">
     <p><span class="sguide-lbl">Mục đích</span>{g.purpose}</p>
-    <p><span class="sguide-lbl">Vị trí</span>{g.where}</p>
     {g.menuPath && <p class="sguide-path"><span class="sguide-lbl">Bấm theo</span>{g.menuPath.map((m, i) => <>{i > 0 && <span class="sguide-arrow"> → </span>}<code class="sguide-menuitem">{m}</code></>)}</p>}
     {g.osNote && (
       <p class="sguide-os">
@@ -42,35 +51,35 @@ if (!g) throw new Error(`SPSSActionGuide: không tìm thấy guide '${id}' trong
 
   <SpssMock scenes={g.scenes} guideId={id} />
 
-  <div class="sguide-key">
+  <div class="simaction">
+    <button type="button" class="sguide-btn simbtn snav-prev" data-nav="prev" aria-label="Khung hình trước">‹ Khung trước</button>
+    <span class="sguide-pos simcount" data-pos>1/{g.scenes.length}</span>
+    <button type="button" class="sguide-btn simbtn snav-next" data-nav="next" aria-label="Khung hình tiếp theo">Khung tiếp ›</button>
+  </div>
+
+  <div class="sguide-key simhint">
     <span><span class="sm-badge">n</span> mục đánh số = điểm cần bấm trên SPSS thật</span>
     <span><code class="sguide-menuitem">mục cam/xanh</code> bấm được trong hình mô phỏng</span>
     <span>mục xám chỉ minh họa vị trí</span>
   </div>
-  <div class="sguide-nav">
-    <button type="button" class="sguide-btn snav-prev" data-nav="prev" aria-label="Khung hình trước">‹ Trước</button>
-    <span class="sguide-pos" data-pos>1/{g.scenes.length}</span>
-    <button type="button" class="sguide-btn snav-next" data-nav="next" aria-label="Khung hình tiếp theo">Tiếp ›</button>
-  </div>
+  <p class="sguide-disclaim simdisclaim">
+    Hình mô phỏng thao tác SPSS — giao diện thực tế có thể khác tùy phiên bản và hệ điều hành.
+    {g.uncertain && <strong> Một số mục đánh dấu CHƯA XÁC MINH TRÊN PHẦN MỀM THẬT.</strong>}
+  </p>
+</figure>
+)}
 
-  <div class="sguide-result">
-    <p><span class="sguide-lbl">Kết quả mong đợi</span>{g.expected}</p>
+{showFollow && (
+<div class="sguide-follow">
+  <div class="resultpreview">
+    <div class="rtext"><strong>Kết quả mong đợi</strong><span>{g.expected}</span></div>
+    <label class="checkrow"><input type="checkbox" data-stepdone={stepDoneId} /><span>Tôi đã làm trên SPSS</span></label>
   </div>
-
   {g.ifWrong && g.ifWrong.length > 0 && (
-    <details class="sguide-trouble">
+    <details class="support sguide-trouble">
       <summary>🔧 Nếu màn hình của bạn khác / không thấy</summary>
       <ul>{g.ifWrong.map((t) => <li>{t}</li>)}</ul>
     </details>
   )}
-
-  <p class="sguide-disclaim">
-    Hình mô phỏng thao tác SPSS — giao diện thực tế có thể khác tùy phiên bản và hệ điều hành.
-    {g.uncertain && <strong> Một số mục đánh dấu CHƯA XÁC MINH TRÊN PHẦN MỀM THẬT.</strong>}
-  </p>
-
-  <label class="sguide-done">
-    <input type="checkbox" data-stepdone={/^d\d/.test(id) ? `ef-${id}` : id} />
-    <span>Tôi đã thực hiện xong bước này</span>
-  </label>
-</figure>
+</div>
+)}

@@ -1,132 +1,32 @@
 /* ============================================================
-   SPSS Medical Learning Pack — Design tokens
-   Shared by Starlight pages (custom.css) and the homepage.
-   Convention follows Starlight: :root = dark, [data-theme='light'] = light.
+   DESIGN TOKENS — Clinical Editorial B v2 (approved design)
+   Source: design-prototypes/SPSS_Figma_B_v2_Approved_Design_Handoff/FIGMA_TOKENS.json
    ============================================================ */
-
 :root {
-  /* ---- Typography ---- */
-  --slp-font-body:
-    'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', 'Noto Sans', Arial, sans-serif;
-  --slp-font-display: var(--slp-font-body);
-  --slp-font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
+  /* B v2 core palette */
+  --ce-ink: #143139;
+  --ce-muted: #617981;
+  --ce-accent: #087d77;
+  --ce-accent-deep: #055f5a;
+  --ce-accent-tint: #e9f5f2;
+  --ce-accent-tint2: #f2faf8;
+  --ce-border: #dde9e6;
+  --ce-canvas: #f7faf8;
+  --ce-surface: #ffffff;
+  --ce-success: #277961;
+  --ce-warm: #faf6e9;
+  --ce-warm-border: #e5d9ae;
+  --ce-danger: #a03b3b;
+  --ce-font: 'Be Vietnam Pro', system-ui, sans-serif;
 
-  --slp-text-display: 3rem;      /* 48px */
-  --slp-text-h1: 2.25rem;        /* 36px */
-  --slp-text-h2: 1.75rem;        /* 28px */
-  --slp-text-h3: 1.375rem;       /* 22px */
-  --slp-text-h4: 1.125rem;       /* 18px */
-  --slp-text-body: 1.0625rem;    /* 17px */
-  --slp-text-small: 0.875rem;    /* 14px */
-  --slp-text-caption: 0.75rem;   /* 12px */
-
-  /* ---- Spacing (4px base) ---- */
-  --slp-space-1: 0.25rem;
-  --slp-space-2: 0.5rem;
-  --slp-space-3: 0.75rem;
-  --slp-space-4: 1rem;
-  --slp-space-5: 1.5rem;
-  --slp-space-6: 2rem;
-  --slp-space-8: 3rem;
-  --slp-space-10: 4rem;
-  --slp-space-12: 6rem;
-
-  /* ---- Radius ---- */
-  --slp-radius-sm: 6px;
-  --slp-radius-md: 10px;
-  --slp-radius-lg: 14px;
-  --slp-radius-xl: 20px;
-  --slp-radius-full: 999px;
-
-  /* ---- Colors: dark theme (default) ---- */
-  --slp-bg: hsl(224, 32%, 8%);
-  --slp-bg-soft: hsl(224, 27%, 11%);
-  --slp-surface: hsl(224, 22%, 14%);
-  --slp-surface-2: hsl(224, 18%, 18%);
-  --slp-border: hsl(224, 14%, 25%);
-  --slp-border-strong: hsl(224, 12%, 34%);
-
-  --slp-text: hsl(220, 25%, 93%);
-  --slp-text-2: hsl(221, 14%, 72%);
-  --slp-muted: hsl(222, 10%, 55%);
-
-  --slp-accent: hsl(237, 80%, 74%);
-  --slp-accent-strong: hsl(237, 84%, 81%);
-  --slp-accent-soft: hsl(237, 42%, 20%);
-  --slp-accent-soft-2: hsl(237, 35%, 25%);
-  --slp-on-accent: hsl(237, 55%, 10%);
-
-  --slp-success: hsl(152, 55%, 58%);
-  --slp-success-strong: hsl(152, 60%, 70%);
-  --slp-success-soft: hsl(152, 40%, 15%);
-  --slp-warning: hsl(38, 85%, 64%);
-  --slp-warning-strong: hsl(38, 88%, 72%);
-  --slp-warning-soft: hsl(38, 50%, 15%);
-  --slp-danger: hsl(0, 70%, 66%);
-  --slp-danger-soft: hsl(0, 45%, 18%);
-  --slp-info: hsl(210, 80%, 66%);
-  --slp-info-soft: hsl(210, 45%, 17%);
-
-  /* ---- Shadows ---- */
-  --slp-shadow-sm: 0 1px 2px hsla(224, 30%, 4%, 0.4);
-  --slp-shadow-md:
-    0 2px 4px hsla(224, 30%, 4%, 0.3), 0 8px 16px hsla(224, 30%, 4%, 0.25);
-  --slp-shadow-lg:
-    0 4px 8px hsla(224, 30%, 4%, 0.3), 0 16px 40px hsla(224, 30%, 4%, 0.35);
-
-  /* ---- Motion ---- */
-  --slp-motion-fast: 150ms;
-  --slp-motion-med: 250ms;
-  --slp-ease: cubic-bezier(0.2, 0.6, 0.2, 1);
-
-  /* ---- Layout ---- */
-  --slp-content-width: 46rem;
-  --slp-wide-width: 72rem;
-}
-
-:root[data-theme='light'] {
-  /* Open Design v1 (approved): cool gray canvas, white surfaces, indigo primary */
-  --slp-bg: #f3f4f8;
-  --slp-bg-soft: #f8f9fc;
-  --slp-surface: #ffffff;
-  --slp-surface-2: #f8f9fc;
-  --slp-border: #e2e5ee;
-  --slp-border-strong: #cdd2e0;
-
-  --slp-text: #1f2430;
-  --slp-text-2: #4d5568;
-  --slp-muted: #7c8498;
-
-  --slp-accent: #4f46e5;
-  --slp-accent-strong: #3730a3;
-  --slp-accent-soft: #eef0fe;
-  --slp-accent-soft-2: #e3e5fd;
-  --slp-on-accent: hsl(0, 0%, 100%);
-
-  --slp-success: hsl(152, 55%, 32%);
-  --slp-success-strong: hsl(152, 60%, 26%);
-  --slp-success-soft: hsl(150, 55%, 92%);
-  --slp-warning: hsl(32, 85%, 35%);
-  --slp-warning-strong: hsl(32, 88%, 28%);
-  --slp-warning-soft: hsl(40, 90%, 92%);
-  --slp-danger: hsl(0, 65%, 45%);
-  --slp-danger-soft: hsl(0, 70%, 94%);
-  --slp-info: hsl(215, 70%, 45%);
-  --slp-info-soft: hsl(212, 80%, 94%);
-
-  --slp-shadow-sm: 0 1px 2px hsla(222, 30%, 20%, 0.06);
-  --slp-shadow-md:
-    0 1px 3px hsla(222, 30%, 20%, 0.07), 0 6px 16px hsla(222, 30%, 20%, 0.06);
-  --slp-shadow-lg:
-    0 2px 6px hsla(222, 30%, 20%, 0.06), 0 16px 40px hsla(222, 30%, 20%, 0.1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --slp-motion-fast: 0ms;
-    --slp-motion-med: 0ms;
-  }
+  /* Legacy aliases — existing component rules resolve to B v2 palette */
+  --slp-accent: #087d77;
+  --slp-accent-deep: #055f5a;
+  --slp-accent-soft: #e9f5f2;
+  --slp-warn-bg: #faf6e9;
+  --slp-warn-border: #e5d9ae;
+  --slp-warn-text: #7a6410;
+  --slp-ok-bg: #e9f5f2;
+  --slp-ok-border: #bfe0d6;
+  --slp-ok-text: #277961;
 }

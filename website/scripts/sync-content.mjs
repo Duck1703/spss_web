@@ -21,6 +21,10 @@ const BANNER_MD = '<!-- GENERATED FILE — do not edit. Source: canonical repo f
 let changed = 0;
 function write(rel, content) {
   if (rel.endsWith('.md')) content = content.replace(BANNER, BANNER_MD); // MDX-comment → HTML-comment
+  // B v2: mọi trang docs dùng template splash → Starlight không render sidebar/TOC mặc định.
+  if (content.startsWith('---\n') && !/\ntemplate:/.test(content)) {
+    content = content.replace(/\n---\n/, '\ntemplate: splash\n---\n');
+  }
   const p = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(p), { recursive: true });
   fs.writeFileSync(p, content, 'utf8');
@@ -91,6 +95,32 @@ const DAYS = [
     files: [P1SAV, { savLocal: 'exercises/bai_2/File1.sav' }] },
 ];
 
+/** Clinical Editorial B v2 — day metadata cho header/dashboard (canonical roadmap short-forms).
+ *  stage: 1→"Tuần 1 · Nền tảng dữ liệu" 2→"Tuần 1 · Phân tích có chọn lọc"
+ *         3→"Tuần 2 · Kiểm định & mô hình" 4→"Tuần 2 · Tổng hợp & đánh giá" */
+const STAGES = [
+  'Tuần 1 · Nền tảng dữ liệu',
+  'Tuần 1 · Phân tích có chọn lọc',
+  'Tuần 2 · Kiểm định & mô hình',
+  'Tuần 2 · Tổng hợp & đánh giá',
+];
+const DAY_META = {
+  d01: { short: 'Mở file & đọc dữ liệu',      goal: 'Mở .sav, đọc Variable View, hiểu bản chất file dữ liệu trước khi phân tích.', ex: 'P1-Q01',         mins: 30, ds: 'p1_B01_HA (1).sav', stage: 1 },
+  d02: { short: 'Tần số & phần trăm',        goal: 'Dùng Frequencies, phân biệt Frequency / Percent / Valid Percent / Cumulative.', ex: 'P1-Q02 · P1-Q38', mins: 45, ds: 'p1_B01_HA (1).sav', stage: 1 },
+  d03: { short: 'Thống kê mô tả',            goal: 'Descriptives và năm chỉ số trung tâm — phân tán; biết khi nào Mean nói dối.', ex: 'P1-Q03 · P1-Q04', mins: 50, ds: 'p1_B01_HA (1).sav', stage: 1 },
+  d04: { short: 'Tóm tắt theo nhóm',         goal: 'Select Cases + Split File: chọn đúng mẫu trước khi phân tích.', ex: 'P1-Q08 · P1-Q09 · P1-Q06 · P1-Q41', mins: 45, ds: 'p1_B01_HA (1).sav', stage: 1 },
+  d05: { short: 'Bảng chéo & Chi-square',    goal: 'Crosstabs + Chi-square: đọc quan hệ hai biến định tính.', ex: 'P1-Q05 · P1-Q17', mins: 55, ds: 'p1_B01_HA (1).sav', stage: 2 },
+  d06: { short: 'Biến đổi dữ liệu',          goal: 'Compute + Recode: tạo và chuyển đổi biến an toàn, giữ nguyên file gốc.', ex: 'P1-Q10 – P1-Q12', mins: 60, ds: 'bản sao làm việc', stage: 2 },
+  d07: { short: 'Soi dữ liệu sai',           goal: 'Làm sạch dữ liệu: phát hiện lỗi nhập, sửa và kiểm chứng sau sửa.', ex: 'P1-Q14', mins: 55, ds: '_work.sav', stage: 2 },
+  d08: { short: 'Kiểm định tỷ lệ',           goal: 'Kiểm định tỷ lệ: Chi-square GOF + Binomial test.', ex: 'P1-Q22 · P2-Q02 · P2-Q03', mins: 50, ds: 'p1_B01_HA · File1.sav', stage: 3 },
+  d09: { short: 'So sánh trung bình',        goal: 'So sánh trung bình: 1-Sample và Independent t-test.', ex: 'P2-Q04 · P2-Q05 · P2-Q07', mins: 55, ds: 'File1.sav', stage: 3 },
+  d10: { short: 'T-test cặp & ANOVA',        goal: 'Paired t-test và One-way ANOVA cho dữ liệu lâm sàng thực.', ex: 'P2-Q09 · P2-Q13 · P2-Q06 · P2-Q08', mins: 60, ds: 'File1.sav · File2_Phan2.sav', stage: 3 },
+  d11: { short: 'Tương quan & hồi quy',      goal: 'Tương quan Pearson + hồi quy tuyến tính đơn giản.', ex: 'P2-Q10 · P2-Q11', mins: 55, ds: 'File1.sav', stage: 3 },
+  d12: { short: 'Capstone — chuẩn bị',       goal: 'Capstone phần 1 — ứng dụng Bài TH3: chuẩn bị File5 và viết kế hoạch phân tích.', ex: 'P2-TH3', mins: 70, ds: 'File5_Phan2.sav', stage: 4 },
+  d13: { short: 'Capstone — phân tích',      goal: 'Capstone phần 2 — ứng dụng Bài TH3: chạy phân tích và viết báo cáo ngắn.', ex: 'P2-TH3', mins: 70, ds: 'File5_Phan2.sav', stage: 4 },
+  d14: { short: 'Đánh giá cuối khóa',        goal: 'Kiểm tra đánh giá — 6 câu tổng hợp trên cả hai dataset.', ex: 'P1-Q24 · Q26 · Q31 · Q33 · Q43 · P2-Q08', mins: 60, ds: 'p1_B01_HA · File1.sav', stage: 4 },
+};
+
 /** Inventory bài tập nguồn → khối {{exercise:P1-Q02}} trong canonical md. */
 const INV = JSON.parse(read('curriculum/exercise-inventory.json'));
 const EXQ = Object.fromEntries(INV.exercises.map(q => [q.id, q]));
@@ -114,18 +144,87 @@ function expandExercises(md) {
   });
 }
 
-/** Dòng 📦 file cần hôm nay — inject ngay đầu mỗi lesson; CSV → link tải, savLocal → đường dẫn local-only. */
+/** B v2 `.fileline` — file cần mở trong SPSS, inject ngay đầu mỗi lesson.
+ *  CSV → link tải; savLocal → đường dẫn local-only (không phát hành qua web). */
 function fileBox(d) {
   if (!d.files || !d.files.length) return '';
-  const parts = d.files.map(f => f.csv
-    ? `[\`${f.csv}\`](/datasets/${f.csv})${f.note ? ` — ${f.note}` : ''}`
-    : f.savLocal ? `\`${f.savLocal}\`${f.note ? ` — ${f.note}` : ''}`
-    : `\`${f.sav}\` — file bạn đã tạo ở ${f.from}`);
-  return `<div class="lesson-files">\n`
-    + `<span class="lesson-files__t">📦 File cần hôm nay</span>\n`
-    + `<div class="lesson-files__list">${parts.join('<br />')}</div>\n`
-    + `<p class="lesson-files__note">File \`.sav\` nguồn nằm trong thư mục \`exercises/\` trên máy bạn — mở trực tiếp trong SPSS, không tải từ web.</p>\n`
-    + `</div>\n\n`;
+  const chips = d.files.map(f => f.csv
+    ? `<a class="filechip" href="/datasets/${f.csv}">📄 ${f.csv}</a>`
+    : `<code class="filechip">${f.savLocal || `\`${f.sav}\` — từ ${f.from}`}</code>`);
+  const notes = d.files.map(f => f.note).filter(Boolean).join(' · ');
+  return `<div class="fileline"><span class="fileicon" aria-hidden="true">📂</span>`
+    + `<div class="filebody"><strong>File cần mở trong SPSS</strong>`
+    + `<span class="filelist">${chips.join('')}</span>`
+    + `<span class="filenote">${notes ? notes + ' — ' : ''}file nằm trong thư mục <code>exercises/</code> trên máy bạn — không tải từ web.</span>`
+    + `</div></div>\n\n`;
+}
+
+/* ---------- B v2 lesson transform ----------
+ * '### Bước N — title' → workbench `.lstep`: instruction (trái ~1/3) + mô phỏng (phải ~2/3)
+ * + `.lstep-follow` (kết quả mong đợi / troubleshooting / checkpoint) full-width.
+ * Bước không có guide → lstep--nosim (info full width).
+ */
+function emitStep(out, cur, idx) {
+  const text = cur.lines.join('\n');
+  const guides = [...text.matchAll(/<SPSSActionGuide id="([\w-]+)"\s*\/>/g)].map(m => m[1]);
+  const body = text.replace(/<SPSSActionGuide id="[\w-]+"\s*\/>/g, '').trim();
+  const label = `BƯỚC ${String(idx).padStart(2, '0')}`;
+  out.push(`<div class="lstep${guides.length ? '' : ' lstep--nosim'}" id="buoc-${idx}">`);
+  out.push(`<div class="lstep-info">`, `<div class="number">${label}</div>`, '', cur.head, '', body, '', `</div>`);
+  if (guides.length) {
+    out.push(`<div class="lstep-sim">`);
+    guides.forEach(gid => out.push(`<SPSSActionGuide id="${gid}" part="window" />`));
+    out.push(`</div>`);
+    out.push(`<div class="lstep-follow">`);
+    guides.forEach(gid => out.push(`<SPSSActionGuide id="${gid}" part="followup" />`));
+    out.push(`</div>`);
+  }
+  out.push(`</div>`, '');
+}
+
+/** Tách các bước '### Bước' ra khỏi flow, wrap thành workbench; trả {md, steps}. */
+function transformLessonSteps(md) {
+  const lines = md.split('\n');
+  const out = [];
+  const steps = [];
+  let cur = null;
+  const flush = () => {
+    if (!cur) return;
+    emitStep(out, cur, steps.length + 1);
+    steps.push(cur.title);
+    cur = null;
+  };
+  for (const l of lines) {
+    const m = l.match(/^###\s+Bước\s*(\d+)\s*[—–-]\s*(.+)$/);
+    if (m) { flush(); cur = { head: l, title: m[2].trim(), lines: [] }; continue; }
+    (cur ? cur.lines : out).push(l);
+  }
+  flush();
+  return { md: out.join('\n'), steps };
+}
+
+/** Thanh điều hướng bước (anchor → #buoc-N) — đặt trên fileline, theo approved lesson layout. */
+function lessonStepsNav(steps) {
+  if (!steps.length) return '';
+  const items = steps.map((t, i) =>
+    `<a class="course-step${i === 0 ? ' active' : ''}" href="#buoc-${i + 1}">`
+    + `<span class="circle">${i + 1}</span><span class="stepname">${t}</span></a>`);
+  return `<nav class="course-steps" aria-label="Các bước thực hành">${items.join('')}</nav>\n\n`;
+}
+
+/** Sắp xếp lại section: brief bài tập (A) + mục tiêu (B) → workbench (E) → phần còn lại
+ *  (theo hierarchy approved: brief → làm việc → tham chiếu). Chỉ áp dụng khi có bước. */
+function reorderLessonSections(md) {
+  const chunks = md.split(/(?=^## )/m);
+  const head = chunks[0];
+  const secs = chunks.slice(1);
+  const letter = (s) => (s.match(/^## ([A-Z])\./) || [])[1] || '';
+  const keep = (s) => !'ABE'.includes(letter(s));
+  return head
+    + secs.filter(s => letter(s) === 'A').join('')
+    + secs.filter(s => letter(s) === 'B').join('')
+    + secs.filter(s => letter(s) === 'E').join('')
+    + secs.filter(keep).join('');
 }
 
 /** Rewrite link cho file track-14day: bạn-cùng-ngày → route /dNN/*, datasets → /du-lieu/, internal → note. */
@@ -186,11 +285,11 @@ function injectTrackCards(md, slug) {
 }
 
 function syncTrack() {
-  const TRACK_NOTICE = '> ⏳ **Bài học thực hành SPSS — đã kiểm chứng số liệu bằng tính toán độc lập (Python), '
-    + 'chưa chạy thử trên SPSS/macOS.** Các bước menu ghi rõ `MAC_SPSS_VERIFICATION_PENDING`.\n\n';
-  const DRAFT_NOTICE = '> 🚧 **DRAFT — ngày này chưa hoàn thiện.** Bài tập nguồn đã được ánh xạ đầy đủ '
+  const TRACK_NOTICE = '<p class="protonote">⏳ Bài học thực hành SPSS — đã kiểm chứng số liệu bằng tính toán độc lập (Python), '
+    + 'chưa chạy thử trên SPSS/macOS. Các bước menu ghi rõ <code>MAC_SPSS_VERIFICATION_PENDING</code>.</p>\n';
+  const DRAFT_NOTICE = '<p class="protonote">🚧 DRAFT — ngày này chưa hoàn thiện. Bài tập nguồn đã được ánh xạ đầy đủ '
     + '(xem bảng trong bài), số liệu kỳ vọng đã tái tính bằng Python; hướng dẫn từng bước, '
-    + 'mô phỏng và đáp án sẽ hoàn thiện theo mẫu Ngày 01–03.\n\n';
+    + 'mô phỏng và đáp án sẽ hoàn thiện theo mẫu Ngày 01–03.</p>\n';
   DAYS.forEach((d, i) => {
     const base = `track-14day/${d.dir}`;
     const prevDay = DAYS[i - 1];
@@ -210,18 +309,22 @@ function syncTrack() {
     }
     md = mdxEscapeBraces(md);
     md = mdxEscapeLt(md);
+    // B v2: bỏ blockquote intro 'Lộ trình/Bài tập nguồn' — metadata đã hiển thị trong page header.
+    md = md.replace(/^> \*\*Lộ trình:[^\n]*\n(?:> [^\n]*\n)*/, '');
+    md = md.replace(/^---\s*\n+/, '');
+    // B v2: '### Bước' → workbench instruction+sim; thứ tự section A,B → E → còn lại.
+    const tf = transformLessonSteps(md);
+    md = tf.steps.length ? reorderLessonSections(tf.md) : tf.md;
     md += exDayBlock(d.slug);
     md += `\n\n---\n\n<CompleteModuleButton id="ef-${d.slug}" label="Đánh dấu đã học xong Ngày ${d.num}" />\n`;
+    md += `\n\n${notice}`;
     const lessonPrev = prevDay
       ? `prev:\n  link: /${prevDay.slug}/dap-an/\n  label: Ngày ${prevDay.num} — đáp án`
       : `prev:\n  link: /lo-trinh-14-ngay/\n  label: Lộ trình 14 ngày`;
     const guideImports = hasGuides
-      ? `import SPSSActionGuide from '../../../components/spss/SPSSActionGuide.astro';\nimport OSSelector from '../../../components/spss/OSSelector.astro';\n`
+      ? `import SPSSActionGuide from '../../../components/spss/SPSSActionGuide.astro';\n`
       : '';
-    const osBlock = hasGuides
-      ? '\n<OSSelector />\n\n'
-      : '';
-    write(`${d.slug}/bai-hoc.mdx`, `---\ntitle: "${d.title}"\ndescription: "Bài học thực hành ${d.title} — lộ trình practice-first 14 ngày."\n${lessonPrev}\nnext:\n  link: /${d.slug}/bai-tap/\n  label: Làm bài tập Ngày ${d.num}\n---\n\nimport CompleteModuleButton from '../../../components/CompleteModuleButton.astro';\n${guideImports}\n${BANNER}${notice}${fileBox(d)}${osBlock}${md}`);
+    write(`${d.slug}/bai-hoc.mdx`, `---\ntitle: "${d.title}"\ndescription: "Bài học thực hành ${d.title} — lộ trình practice-first 14 ngày."\ntemplate: splash\n${lessonPrev}\nnext:\n  link: /${d.slug}/bai-tap/\n  label: Làm bài tập Ngày ${d.num}\n---\n\nimport CompleteModuleButton from '../../../components/CompleteModuleButton.astro';\n${guideImports}\n${BANNER}${lessonStepsNav(tf.steps)}${fileBox(d)}${md}`);
 
     // --- workbook ---
     let wb = stripH1(fixLinksTrack(read(`${base}/workbook.md`), d.slug));
@@ -281,6 +384,36 @@ function exCategory(q) {
 }
 const EX_TIER_LABEL = { essential: 'BẮT BUỘC', reinforcement: 'LUYỆN THÊM', optional: 'TÙY CHỌN', advanced: 'NÂNG CAO' };
 const EX_ROLE_LABEL = { core: 'cốt lõi', optional: 'tùy chọn', deferred: 'nâng cao — hoãn khỏi lộ trình', assessment: 'đánh giá', bonus: 'phụ' };
+/** Bài tập ↔ SPSSActionGuide trực tiếp (guide title nêu rõ Câu/Bài TH tương ứng trong scenes.json).
+ *  Chỉ map khi guide dạy đúng câu đó — không suy diễn theo kỹ năng chung. */
+const EX_GUIDES = {
+  'P1-Q01': ['d01-open-sav', 'd01-varview', 'd01-select', 'd01-sort'],
+  'P1-Q02': ['d02-frequencies'],
+  'P1-Q38': ['d02-cdha-freq'],
+  'P1-Q03': ['d03-freq-stats'],
+  'P1-Q04': ['d03-descriptives'],
+  'P1-Q05': ['d05-crosstabs'],
+  'P1-Q17': ['d05-chisq'],
+  'P1-Q08': ['d04-select-age'],
+  'P1-Q09': ['d04-split'],
+  'P1-Q06': ['d04-means'],
+  'P1-Q10': ['d06-compute'],
+  'P1-Q11': ['d06-recode'],
+  'P1-Q12': ['d06-count'],
+  'P1-Q14': ['d07-freq-errors', 'd07-select-bad', 'd07-keep-clean'],
+  'P1-Q21': ['d08-weight'],
+  'P1-Q22': ['d08-gof'],
+  'P2-Q03': ['d08-binomial'],
+  'P2-Q04': ['d09-1sample'],
+  'P2-Q05': ['d09-independent'],
+  'P2-Q06': ['d10-anova'],
+  'P2-Q09': ['d10-paired'],
+  'P2-Q13': ['d10-paired'],
+  'P2-Q10': ['d11-correlate'],
+  'P2-Q11': ['d11-regression'],
+  'P2-TH3': ['d12-explore', 'd13-crosstab', 'd13-ttest'],
+  'P1-Q24': ['d14-compute'],
+};
 /** Đáp án đã verify? — id xuất hiện trong answer-key.md của ngày được map. */
 // (pre-load answer keys một lần — đơn giản, deterministic)
 const AK_TEXT = {};
@@ -330,115 +463,173 @@ function syncExerciseBank() {
   const p2 = INV.exercises.filter(q => /^P2-Q\d+$/.test(q.id)).sort((a, b) => a.id.localeCompare(b.id));
   const all = [...p1, ...p2, ...supp];
 
-  // ----- hub -----
-  const card = (q) => {
+  // ----- hub (Clinical Editorial B v2: filters + category tabs + compact rows + pagination) -----
+  const EX_LEVEL_LABEL = { Beginner: 'Cơ bản', Intermediate: 'Trung cấp', Advanced: 'Nâng cao' };
+  const EX_LEVEL_TAG = { Beginner: 't-basic', Intermediate: 't-mid', Advanced: 't-adv' };
+  const row = (q) => {
     const cat = exCategory(q);
-    const ver = exVerified(q);
     const dayLinks = (q.day || '').split('+').map(s => s.trim()).filter(d => /^d\d{2}$/.test(d))
-      .map(n => `Ngày ${n.slice(1)}`).join('+');
+      .map(n => 'Ngày ' + n.slice(1)).join('+');
     const tier = q.tier || (q.role === 'deferred' ? 'advanced' : 'none');
-    return `<a class="exb-card" href="${exHref(q.id)}" data-exid="${q.id}" `
-      + `data-cat="${cat}" data-tier="${tier}" data-src="${q.src}" `
-      + `data-search="${esc((q.id + ' ' + q.summary + ' ' + (q.dataset || '') + ' ' + (q.vars || []).join(' ')).toLowerCase())}">`
-      + `<span class="exb-card__head"><b class="exb-card__id">${q.id}</b>`
-      + `<span class="exb-card__tier exb-card__tier--${tier}">${EX_TIER_LABEL[tier] || tier}</span>`
-      + `<span class="exb-card__status" data-exstatus="${q.id}">Chưa làm</span></span>`
-      + `<span class="exb-card__sum">${esc(q.summary)}</span>`
-      + `<span class="exb-card__meta">${esc(q.ref)} tr.${q.page} · ${esc(q.difficulty)} · ~${q.time}′ · <span class="exb-card__skill">${EX_CAT_LABEL[cat]}</span>${dayLinks ? ` · ${dayLinks}` : ''}${ver ? ' · ✓ đáp án' : ''}</span>`
-      + `<span class="exb-card__cta">Bắt đầu làm bài →</span>`
-      + `</a>`;
+    const tierLbl = tier === 'essential' ? 'Bắt buộc' : tier === 'reinforcement' ? 'Luyện thêm'
+      : tier === 'advanced' ? 'Nâng cao' : tier === 'optional' ? 'Tùy chọn' : 'Bài phụ';
+    const srcTab = /^P\d-Q\d+$/.test(q.id) ? q.src : 'supp';
+    return '<a class="exercise-row" href="' + exHref(q.id) + '" data-exid="' + q.id + '" '
+      + 'data-src="' + srcTab + '" data-cat="' + cat + '" data-tier="' + tier + '" data-level="' + q.difficulty + '" '
+      + 'data-search="' + esc((q.id + ' ' + q.summary + ' ' + EX_CAT_LABEL[cat] + ' ' + (q.dataset || '') + ' ' + (q.vars || []).join(' ') + ' ' + dayLinks).toLowerCase()) + '">'
+      + '<span class="ident"><span class="excode">' + q.id + '</span>'
+      + '<span class="entext"><strong>' + esc(q.summary) + '</strong><small>' + (dayLinks || 'Tự do') + ' · ~' + q.time + ' phút · ' + tierLbl + '</small></span></span>'
+      + '<span class="col-skill skill">' + EX_CAT_LABEL[cat] + '</span>'
+      + '<span class="col-level level"><span class="tag ' + (EX_LEVEL_TAG[q.difficulty] || 't-basic') + '">' + (EX_LEVEL_LABEL[q.difficulty] || q.difficulty) + '</span></span>'
+      + '<span class="col-status status" data-exstatus="' + q.id + '">Chưa làm</span>'
+      + '<span class="col-action action"><span class="go">Mở bài →</span></span>'
+      + '</a>';
   };
-  const filters = `<div class="exb-filters">
-  <input type="search" class="exb-search" placeholder="Tìm theo mã / nội dung / biến / dataset…" aria-label="Tìm bài tập" />
-  <div class="exb-row">
-    <select class="exb-f" data-f="src"><option value="">Nguồn: tất cả</option><option value="P1">Bài 1 (43)</option><option value="P2">Bài 2 (15)</option></select>
-    <select class="exb-f" data-f="cat"><option value="">Kỹ năng: tất cả</option>${EX_CATS.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select>
-    <select class="exb-f" data-f="tier"><option value="">Mức: tất cả</option><option value="essential">Bắt buộc</option><option value="reinforcement">Luyện thêm</option><option value="optional">Tùy chọn</option><option value="advanced">Nâng cao</option><option value="none">Chưa xếp</option></select>
-    <select class="exb-f" data-f="status"><option value="">Trạng thái: tất cả</option><option value="done">Đã làm</option><option value="draft">Đang làm</option><option value="empty">Chưa làm</option></select>
-    <span class="exb-count" data-exb-count></span>
+  const filters = `<div class="filters">
+  <div class="filter-top">
+    <div class="searchbox"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="6.2" stroke="currentColor" stroke-width="1.8"/><path d="m14 14 3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="exb-search" class="exb-search" type="search" placeholder="Mã bài, nội dung, biến, dataset…" autocomplete="off" /></div>
+    <span class="filtercount" id="exb-count">60/60 bài</span>
   </div>
-</div>`;
-  const grp = (title, xs) => `\n\n## ${title} (${xs.length} câu)\n\n<div class="exb-list">${xs.map(card).join('\n')}</div>`;
+  <div class="filterbottom">
+    <div class="fgroup"><label for="exb-cat">Kỹ năng</label><select id="exb-cat" class="exb-f" data-f="cat"><option value="">Tất cả</option>${EX_CATS.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></div>
+    <div class="fgroup"><label for="exb-level">Mức độ</label><select id="exb-level" class="exb-f" data-f="level"><option value="">Tất cả</option><option value="Beginner">Cơ bản</option><option value="Intermediate">Trung cấp</option><option value="Advanced">Nâng cao</option></select></div>
+    <div class="fgroup"><label for="exb-tier">Loại bài</label><select id="exb-tier" class="exb-f" data-f="tier"><option value="">Tất cả</option><option value="essential">Bắt buộc</option><option value="reinforcement">Luyện thêm</option><option value="optional">Tùy chọn</option><option value="advanced">Nâng cao</option><option value="none">Bài phụ</option></select></div>
+    <div class="fgroup"><label for="exb-status">Trạng thái</label><select id="exb-status" class="exb-f" data-f="status"><option value="">Tất cả</option><option value="done">Đã làm</option><option value="draft">Đang làm</option><option value="empty">Chưa làm</option></select></div>
+    <button type="button" class="reset" id="exb-reset">↺ Đặt lại</button>
+  </div>
+</div>
+<nav class="category-nav" aria-label="Lọc theo bộ đề">
+  <button type="button" class="catbtn active" data-src="">Tất cả<span class="number">60</span></button>
+  <button type="button" class="catbtn" data-src="P1">Bài 1 — Phần 1<span class="number">43</span></button>
+  <button type="button" class="catbtn" data-src="P2">Bài 2 — Phần 2<span class="number">15</span></button>
+  <button type="button" class="catbtn" data-src="supp">Bổ sung<span class="number">2</span></button>
+</nav>`;
   write('kho-bai-tap.md', `---
 title: "Kho bài tập — 58 câu nguồn"
 description: "Toàn bộ 58 câu hỏi nguồn từ 2 đề thực hành của chủ khóa học: Bài 1 (43 câu) và Bài 2 (15 câu), kèm 2 mục phụ. Lọc theo kỹ năng, mức độ, trạng thái."
-tableOfContents: false
+template: splash
 ---
 
-${BANNER}> 📚 **Kho bài tập = toàn bộ bài tập nguồn.** Lộ trình 14 ngày là *con đường dẫn* chọn lọc;
-> ở đây bạn luyện tự do thêm bất kỳ câu nào — mỗi câu có trang riêng với hướng dẫn thao tác, gợi ý và ô ghi kết quả.
-> File \`.sav\`/PDF nguồn nằm trong thư mục \`exercises/\` trên máy bạn (không tải từ web).
-
-${filters}
-<div class="exb-empty" data-exb-empty hidden>Không có bài tập nào khớp bộ lọc hiện tại. <button type="button" data-exb-reset>Xóa bộ lọc</button></div>
-${grp('Bài 1 — Bài thực hành SDH Phần 1', p1)}
-${grp('Bài 2 — Bài TH Phần 2', p2)}
-${grp('Phụ — không tính trong 58 câu', supp)}
+${BANNER}${filters}
+<div class="listhead"><span>BÀI TẬP</span><span>KỸ NĂNG</span><span>MỨC ĐỘ</span><span>TRẠNG THÁI</span><span class="listhead-note"></span></div>
+<div class="exercise-list" id="exb-list">
+${all.map(row).join('\n')}
+</div>
+<div class="empty-state" id="exb-empty" hidden><strong>Không có bài tập nào khớp bộ lọc</strong><p>Thử nới điều kiện tìm kiếm hoặc đặt lại bộ lọc.</p><button type="button" data-exb-reset>Đặt lại bộ lọc</button></div>
+<div class="pagination"><button type="button" id="exb-prev" disabled>‹ Trước</button><span class="pageinfo" id="exb-pageinfo">Trang 1 / 4</span><button type="button" id="exb-next">Sau ›</button></div>
+<p class="protonote">58 câu từ hai bộ đề gốc (<code>Bai thuc hanh SDH P1.pdf</code> · <code>BSNT_Bài TH_Phần 2_Cô Hiền.pdf</code>) + 2 mục phụ. Mỗi bài có trang riêng với thao tác SPSS, gợi ý và ô ghi kết quả.</p>
 `);
 
-  // ----- detail pages -----
+  // ----- detail pages (B v2 exercise-detail: brief → ops → sim → hints → answer) -----
   for (const q of all) {
     const cat = exCategory(q);
     const ver = exVerified(q);
     const days = (q.day || '').split('+').map(s => s.trim()).filter(d => /^d\d{2}$/.test(d));
-    const lessonLinks = days.map(n => `<a href="/${n}/bai-hoc/">Ngày ${n.slice(1)} — bài học</a>`).join(' · ');
-    const answerLink = ver && days.length
-      ? `[Đáp án chi tiết — Ngày ${days[0].slice(1)}](/${days[0]}/dap-an/) *(mở sau khi đã tự làm)*`
-      : null;
     const siblings = INV.exercises.filter(o => o.id !== q.id && exCategory(o) === cat && /^P\d-Q\d+$/.test(o.id)).slice(0, 4);
     const hints = (q.hint || []);
     const steps = (q.ops || []);
     const ansFields = q.answerSpec || null;
+    const guides = EX_GUIDES[q.id] || [];
+    const nextEx = all[all.indexOf(q) + 1] || null;
+    const tier = q.tier || (q.role === 'deferred' ? 'advanced' : 'none');
+    const tierLbl = tier === 'essential' ? 'Bắt buộc' : tier === 'reinforcement' ? 'Luyện thêm'
+      : tier === 'advanced' ? 'Nâng cao' : tier === 'optional' ? 'Tùy chọn' : 'Bài phụ';
+    const hasTransform = steps.some(s => /compute|recode|count|weight/i.test(s));
 
-    const box = (t, inner, cls = '') => `<div class="exd-box${cls}"><span class="exd-box__t">${t}</span>${inner}</div>`;
+    const guideImports = guides.length
+      ? `import SPSSActionGuide from '../../../components/spss/SPSSActionGuide.astro';\n\n`
+      : '';
+    const simBlock = guides.length
+      ? `<div class="lstep-sim" id="ex-sim">${guides.map(g => `<SPSSActionGuide id="${g}" part="window" />`).join('\n')}</div>`
+      : `<div class="lstep-sim" id="ex-sim"><div class="sim-nosim"><div class="sim-nosim__t">Chưa có mô phỏng tương tác cho bài này</div>`
+        + `<p>Làm theo các bước thao tác bên trái trên SPSS thật.${days.length ? ` Hướng dẫn trực quan từng bước của kỹ năng này nằm trong ${days.map(n => `<a href="/${n}/bai-hoc/">bài học Ngày ${n.slice(1)}</a>`).join(' và ')}.` : ' Bài này nằm ngoài lộ trình 14 ngày — dành cho luyện tập tự do / nâng cao.'}</p></div></div>`;
+    const followBlock = guides.length
+      ? `<div class="lstep-follow">${guides.map(g => `<SPSSActionGuide id="${g}" part="followup" />`).join('\n')}</div>`
+      : '';
+    const opItems = steps.map(s => {
+      const parts = esc(s).split('→').map(p => `<code>${p.trim()}</code>`).join('<span class="path-arrow"> → </span>');
+      return `<li><span class="oppath">${parts}</span></li>`;
+    }).join('\n');
+
     const body = `
-<div class="exd-head">
-  <span class="exd-eyebrow">BÀI TẬP NGUỒN · ${q.src}</span>
-  <span class="exd-status" data-exstatus="${q.id}">Chưa làm</span>
+<div class="fileline"><span class="fileicon" aria-hidden="true">📂</span><div class="filebody"><strong>File gốc</strong><span class="filelist"><code class="filechip">${esc(q.dataset || '—')}</code></span><span class="filenote">${hasTransform ? 'Làm việc trên bản sao <code>_work.sav</code> — không ghi đè file gốc' : 'Mở trực tiếp trong SPSS từ thư mục'} <code>exercises/</code> — không tải từ web.</span></div></div>
+<nav class="course-steps" aria-label="Các bước làm bài">
+  <a class="course-step active" href="#ex-brief"><span class="circle">1</span><span class="stepname">Đề bài & dữ liệu</span></a>
+  <a class="course-step" href="#ex-ops"><span class="circle">2</span><span class="stepname">Thao tác SPSS</span></a>
+  <a class="course-step" href="#ex-sim"><span class="circle">3</span><span class="stepname">Mô phỏng</span></a>
+  <a class="course-step" href="#ex-hints"><span class="circle">4</span><span class="stepname">Gợi ý</span></a>
+  <a class="course-step" href="#answer"><span class="circle">5</span><span class="stepname">Nhập kết quả</span></a>
+</nav>
+<div class="workbench">
+<div class="instruction" id="ex-brief">
+  <div class="number">ĐỀ BÀI NGUỒN · ${esc(q.src)}</div>
+  <div class="purposebox"><strong>Mục đích</strong><p>${esc(q.summary)}</p><p class="artifact">Sản phẩm: ${esc(q.artifact || 'Ghi kết quả vào workbook')}</p></div>
+  <div class="actiontitle">Thông tin đề</div>
+  <ul class="exmeta">
+    <li><b>Nguồn</b>${esc(PDF_NAME[q.src] || q.src)} · ${esc(q.ref)}${q.page ? ` · trang ${q.page}` : ''}</li>
+    <li><b>Mức độ</b>${EX_LEVEL_LABEL[q.difficulty] || esc(q.difficulty)} · ~${q.time} phút · ${tierLbl}</li>
+    ${(q.vars && q.vars.length) ? `<li><b>Biến</b><span class="varchips">${q.vars.map(v => `<code>${esc(v)}</code>`).join(' ')}</span></li>` : ''}
+    ${(q.skills && q.skills.length) ? `<li><b>Kỹ năng</b>${q.skills.map(s => esc(s)).join(' · ')}</li>` : ''}
+    ${(q.prereq && q.prereq.length) ? `<li class="warn"><b>Yêu cầu trước</b>${q.prereq.map(s => esc(s)).join(' · ')}</li>` : ''}
+  </ul>
 </div>
-<p class="exd-meta"><span class="exd-id">${q.id}</span> · ${esc(PDF_NAME[q.src] || q.src)} · ${esc(q.ref)} · trang ${q.page} · ${esc(q.difficulty)} · ~${q.time} phút</p>
-
-<div class="exd-layout">
-<div class="exd-side">
-${box('Yêu cầu', `<p>${esc(q.summary)}</p>`)}
-${box('Sản phẩm', `<p>${esc(q.artifact || 'Ghi kết quả vào workbook')}</p>`)}
-${box('Dataset (local)', `<p><code>${esc(q.dataset || '—')}</code></p><p class="exd-note">Mở trực tiếp trong SPSS từ thư mục <code>exercises/</code> — không tải từ web.</p>`)}
-${(q.vars && q.vars.length) ? box('Biến cần dùng', `<div class="exd-vars">${q.vars.map(v => `<code>${esc(v)}</code>`).join('')}</div>`) : ''}
-${(q.skills && q.skills.length) ? box('Kỹ năng', `<p>${q.skills.map(s => esc(s)).join(' · ')}</p>`) : ''}
-${(q.prereq && q.prereq.length) ? box('Yêu cầu trước', `<p>${q.prereq.map(s => esc(s)).join(' · ')}</p>`, ' exd-box--warn') : ''}
-${box('Độ khó · Thời gian', `<p>${esc(q.difficulty)} · ~${q.time} phút</p><p class="exd-note">${EX_ROLE_LABEL[q.role] || q.role}${q.tier ? ` · ${EX_TIER_LABEL[q.tier] || q.tier}` : ''}</p>`)}
+${simBlock}
+${followBlock}
 </div>
-<div class="exd-brief">
-${steps.length ? `<h2 class="exd-h">Thao tác SPSS</h2>\n<ol class="exd-steps">${steps.map(s => `<li><code>${esc(s)}</code></li>`).join('')}</ol>\n` : ''}
-<h2 class="exd-h">Nhập kết quả của bạn</h2>
-${ansFields
-  ? ansFields.map(f => `<div class="exd-ans"><label>${esc(f.label)}<input type="text" data-answer="exercise:${q.id}:${f.key}" placeholder="Gõ kết quả…" /></label></div>`).join('\n')
-  : `<textarea class="exercise-card__input" rows="4" placeholder="Ghi kết quả / tính toán của bạn — tự lưu trong trình duyệt…" data-answer="exercise:${q.id}"></textarea>`}
-<div class="exd-actions">
-  <button type="button" class="exercise-card__done" data-done="exercise:${q.id}">Đánh dấu đã làm xong</button>
-  ${answerLink ? `<a class="exd-alink" href="/${days[0]}/dap-an/">Xem đáp án (${days[0].toUpperCase()}) →</a>` : `<span class="exd-nover">⚠️ ANSWER_NOT_VERIFIED — chưa có đáp án kiểm chứng; đối chiếu kết quả khi chạy thật trên SPSS.</span>`}
+<section class="opslist" id="ex-ops">
+  <h2 class="opslist__h">Thao tác SPSS</h2>
+  <ol class="actions">${opItems || '<li><span class="oppath">Làm theo đề bài trên SPSS thật và ghi lại kết quả.</span></li>'}</ol>
+  ${days.length ? `<p class="opslist__lesson">Hướng dẫn từng bước: ${days.map(n => `<a href="/${n}/bai-hoc/">bài học Ngày ${n.slice(1)}</a>`).join(' · ')}</p>` : ''}
+</section>
+<div class="resultpreview">
+  <div class="rtext"><strong>Sản phẩm cần có</strong><span>${esc(q.artifact || 'Kết quả ghi trong workbook')}</span></div>
+  <label class="checkrow"><input type="checkbox" data-check="exercise:${q.id}#selfcheck" /><span>Tôi đã làm trên SPSS</span></label>
 </div>
-${ver ? '' : `<p class="exd-nover">Trạng thái đáp án: <b>ANSWER_NOT_VERIFIED</b>${q.role === 'deferred' ? ' (bài nâng cao — ngoài lộ trình beginner)' : ''}.</p>`}
-</div>
-<aside class="exd-rail">
-${hints.length ? `<h2 class="exd-h">Gợi ý (mở từng cái một)</h2>\n` + hints.map((h, i) => `<details class="exd-hint"><summary>💡 Gợi ý ${i + 1}</summary>\n\n${esc(h)}\n\n</details>`).join('\n\n') + '\n' : ''}
-<h2 class="exd-h">Liên quan</h2>
-${lessonLinks ? `<p>Bài học hướng dẫn: ${lessonLinks}</p>\n` : '<p>Ngoài lộ trình 14 ngày — bài tập tự do / nâng cao.</p>\n'}<p>Cùng nhóm kỹ năng: ${siblings.length ? siblings.map(o => `<a href="${exHref(o.id)}">${o.id}</a>`).join(' · ') : '—'}</p>
-<p><a href="/kho-bai-tap/">← Quay lại Kho bài tập</a></p>
-</aside>
-</div>
+<section class="foothelp" id="ex-hints">
+  ${hints.length ? hints.map((h, i) => `<details class="support"><summary>💡 Gợi ý ${i + 1}</summary><p>${esc(h)}</p></details>`).join('\n  ') : `<details class="support"><summary>💡 Gợi ý</summary><p>Bài này không có gợi ý riêng — làm theo đề bài và các bước thao tác.</p></details>`}
+  <details class="support"><summary>📋 Checklist trước khi nộp</summary><ul><li>Đã mở đúng file <code>${esc(q.dataset || '')}</code>${hasTransform ? ' trên bản sao <code>_work.sav</code>' : ''}</li><li>Đã thực hiện đủ ${steps.length || 'các'} thao tác SPSS trong đề</li><li>Đã ghi sản phẩm/kết quả vào ô bên dưới</li><li>File nguồn gốc không bị sửa</li></ul></details>
+  ${ver && days.length
+    ? `<details class="support"><summary>👁️ Đáp án — chỉ mở sau khi đã tự làm</summary><p>Đáp án chi tiết nằm trong trang đáp án của ngày hướng dẫn: <a href="/${days[0]}/dap-an/">Đáp án Ngày ${days[0].slice(1)} →</a></p></details>`
+    : `<details class="support"><summary>⚠️ Trạng thái đáp án</summary><p><b>ANSWER_NOT_VERIFIED</b>${q.role === 'deferred' ? ' — bài nâng cao ngoài lộ trình beginner' : ''}: chưa có đáp án kiểm chứng trong khóa học; đối chiếu kết quả khi chạy thật trên SPSS.</p></details>`}
+</section>
+<section class="nextpanel" id="answer">
+  <div class="np-head"><span class="np-kicker">BƯỚC CUỐI · GHI LẠI KẾT QUẢ</span><span class="np-status" data-exstatus="${q.id}">Chưa làm</span></div>
+  <h2 class="np-title">Nhập kết quả của bạn</h2>
+  <p class="np-sub">Tự động lưu trong trình duyệt này — không gửi lên server.</p>
+  <div class="answer-grid">
+  ${ansFields
+    ? ansFields.map(f => `<label class="field"><span>${esc(f.label)}</span><input type="text" data-answer="exercise:${q.id}:${f.key}" placeholder="Gõ kết quả…" /></label>`).join('\n  ')
+    : `<label class="field field--wide"><span>Kết quả / tính toán của bạn</span><textarea rows="4" data-answer="exercise:${q.id}" placeholder="Ghi kết quả — tự lưu trong trình duyệt…"></textarea></label>`}
+  </div>
+  <div class="np-actions">
+    <button type="button" class="btn" data-done="exercise:${q.id}">Đánh dấu đã làm xong</button>
+    ${ver && days.length ? `<a class="ghostbtn" href="/${days[0]}/dap-an/">Xem đáp án (${days[0].toUpperCase()}) →</a>` : ''}
+  </div>
+  ${ver ? '' : `<p class="smallnote warn">⚠️ ANSWER_NOT_VERIFIED — bài này chưa có đáp án kiểm chứng; đối chiếu khi chạy thật trên SPSS.</p>`}
+</section>
+<nav class="progress-rail">
+  <a class="footbtn" href="/kho-bai-tap/">← Kho bài tập</a>
+  <span class="rail-mid">${siblings.length ? 'Cùng nhóm ' + EX_CAT_LABEL[cat] + ': ' + siblings.map(o => `<a href="${exHref(o.id)}">${o.id}</a>`).join(' · ') : ''}</span>
+  ${nextEx ? `<a class="footbtn" href="${exHref(nextEx.id)}">Bài tiếp: ${nextEx.id} →</a>` : '<span></span>'}
+</nav>
+<p class="protonote">${esc(q.ref)}${q.page ? ` · trang ${q.page}` : ''} — ${esc(PDF_NAME[q.src] || q.src)}. Mô phỏng SPSS là hình minh họa thao tác; luôn đối chiếu trên phần mềm thật.</p>
 `;
 
-    write(`kho-bai-tap/${exSlug(q.id)}.md`, `---
+    write(`kho-bai-tap/${exSlug(q.id)}.mdx`, `---
 title: "${q.id} — ${esc(q.summary).slice(0, 70)}"
-description: "Bài tập ${q.id} (${q.ref}, trang ${q.page}) — ${esc(q.dataset)}. Kho bài tập SPSS nguồn."
-tableOfContents: false
+description: "Bài tập ${q.id} (${q.ref}${q.page ? `, trang ${q.page}` : ''}) — ${esc(q.dataset)}. Kho bài tập SPSS nguồn."
 prev:
   link: /kho-bai-tap/
   label: Kho bài tập
 ---
 
-${BANNER}${body}`);
+${guideImports}${BANNER}${body}`);
+  }
+
+  // Xóa trang .md cũ của kho-bai-tap nếu còn (trước đây sync xuất .md, nay .mdx)
+  for (const q of all) {
+    const old = path.join(OUT, 'kho-bai-tap', exSlug(q.id) + '.md');
+    if (fs.existsSync(old)) fs.rmSync(old);
   }
 
   console.log(`  + kho-bai-tap/ (${all.length} trang chi tiết + hub)`);
@@ -631,8 +822,37 @@ function syncDocs() {
   write('tai-lieu/chuan-bi-du-lieu.md', `---\ntitle: Chuẩn bị dữ liệu thực hành\ndescription: File .sav nguồn đi đâu, làm việc ở đâu — hai kịch bản Windows/Mac, quy tắc không ghi đè gốc.\n---\n\n${BANNER}${fixLinks(stripH1(read('curriculum/spss-practice-setup.md')))}`);
 }
 
+/* ---------- 6. B v2 course metadata → src/data/course-meta.json ----------
+ * Header/dashboard cần day + exercise meta không qua frontmatter (custom PageTitle). */
+function syncCourseMeta() {
+  const days = {};
+  for (const d of DAYS) {
+    const m = DAY_META[d.slug];
+    days[d.slug] = {
+      num: d.num, slug: d.slug, title: d.title, short: m.short, goal: m.goal,
+      ex: m.ex, mins: m.mins, ds: m.ds, stage: m.stage, stageName: STAGES[m.stage - 1],
+    };
+  }
+  const exercises = {};
+  for (const q of INV.exercises) {
+    const cat = exCategory(q);
+    const days = (q.day || '').split('+').map(s => s.trim()).filter(d => /^d\d{2}$/.test(d));
+    exercises[q.id] = {
+      id: q.id, src: q.src, summary: q.summary, cat, catLabel: EX_CAT_LABEL[cat],
+      difficulty: q.difficulty, time: q.time, tier: q.tier || (q.role === 'deferred' ? 'advanced' : 'none'),
+      role: q.role, days, ref: q.ref, page: q.page, dataset: q.dataset,
+      ver: exVerified(q), guides: EX_GUIDES[q.id] || [],
+    };
+  }
+  const meta = { stages: STAGES, days, exercises };
+  const dir = path.resolve(OUT, '..', '..', 'data');
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'course-meta.json'), JSON.stringify(meta, null, 1) + '\n', 'utf8');
+  console.log('  + src/data/course-meta.json');
+}
+
 console.log('Syncing canonical → website/src/content/docs/ ...');
 fs.rmSync(OUT, { recursive: true, force: true });
 syncTrackRoadmap(); syncTrack(); syncDatasets(); syncExerciseBank();
-syncLesson(); syncWorkbook(); syncAnswers(); syncRoadmap(); syncDocs();
+syncLesson(); syncWorkbook(); syncAnswers(); syncRoadmap(); syncDocs(); syncCourseMeta();
 console.log(`Done — ${changed} file(s) generated.`);
