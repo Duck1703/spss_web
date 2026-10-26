@@ -11,6 +11,7 @@ export default defineConfig({
       favicon: '/favicon.svg',
       customCss: ['./src/styles/tokens.css', './src/styles/custom.css'],
       components: {
+        Header: './src/components/Header.astro',
         PageTitle: './src/components/PageTitle.astro',
         Pagination: './src/components/Pagination.astro',
       },
@@ -24,7 +25,7 @@ export default defineConfig({
           tag: 'link',
           attrs: {
             rel: 'stylesheet',
-            href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap',
+            href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap',
           },
         },
       ],

@@ -1,0 +1,26 @@
+---
+/**
+ * Bv2Nav.astro — thanh điều hướng ngang duy nhất của site (Clinical Editorial B v2).
+ * Dùng chung cho dashboard (src/pages/index.astro) và mọi trang docs (qua Header override).
+ * 'Bài học' trỏ tới bài chưa xong đầu tiên — progress.js repoint qua data-dash-next-href.
+ */
+interface Props { active?: 'home' | 'roadmap' | 'lesson' | 'bank' | 'docs' | ''; }
+const { active = '' } = Astro.props;
+const cls = (k: string) => 'navlink' + (active === k ? ' active' : '');
+---
+<div class="top-inner">
+  <a class="brand" href="/" aria-label="SPSS Medical — trang tổng quan">
+    <span class="brandmark" aria-hidden="true">S</span>
+    <span class="brandtext">SPSS Medical<small>learning pack</small></span>
+  </a>
+  <nav class="topnav" aria-label="Điều hướng chính">
+    <a class={cls('home')} href="/">Tổng quan</a>
+    <a class={cls('roadmap')} href="/#lo-trinh">Lộ trình 14 ngày</a>
+    <a class={cls('lesson')} href="/d01/bai-hoc/" data-dash-next-href>Bài học</a>
+    <a class={cls('bank')} href="/kho-bai-tap/">Kho bài tập</a>
+    <a class={cls('docs')} href="/du-lieu/">Tài liệu</a>
+  </nav>
+  <div class="topright">
+    <a class="pill" href="/#tien-do" data-progress-count>Đang tải tiến độ…</a>
+  </div>
+</div>

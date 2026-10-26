@@ -1,0 +1,15 @@
+---
+/**
+ * Header.astro — Starlight override: thanh nav ngang B v2 thay cho header docs mặc định
+ * (không search box, không theme toggle — B v2 là single light Clinical Editorial theme).
+ */
+import Bv2Nav from './Bv2Nav.astro';
+const id = Astro.locals.starlightRoute?.id || '';
+const active =
+  /^kho-bai-tap/.test(id) ? 'bank'
+  : /^(d\d\d|m01)\//.test(id) ? 'lesson'
+  : /^(lo-trinh|lo-trinh-14-ngay)/.test(id) ? 'roadmap'
+  : /^(tai-lieu|du-lieu)/.test(id) ? 'docs'
+  : '';
+---
+<Bv2Nav active={active} />
