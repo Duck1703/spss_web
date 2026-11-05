@@ -39,7 +39,7 @@ const exDir = path.join(DOCS, 'kho-bai-tap');
 ok(fs.existsSync(exDir), 'thư mục kho-bai-tap/ được generate');
 const pages = fs.readdirSync(exDir).filter(f => f.endsWith('.mdx'));
 ok(pages.length === 75, `75 trang chi tiết (thực tế ${pages.length})`);
-let missing = [], noMeta = [], noDataset = [], noOps = [], noStatus = [];
+let missing = [], noMeta = [], noDataset = [], noOps = [], noStatus = [], noSim = [];
 for (const q of inv) {
   const f = path.join(exDir, q.id.toLowerCase() + '.mdx');
   if (!fs.existsSync(f)) { missing.push(q.id); continue; }
@@ -48,12 +48,14 @@ for (const q of inv) {
   if (!q.dataset) noDataset.push(q.id);
   if (/^P([123])-Q\d+$/.test(q.id) && !t.includes('Thao tác SPSS') && !t.includes('Gợi ý')) noOps.push(q.id);
   if (!/data-done="exercise:/.test(t) || !/data-answer="exercise:/.test(t)) noStatus.push(q.id);
+  if (t.includes('sim-nosim') || !t.includes('SPSSActionGuide')) noSim.push(q.id); // mọi bài phải có mô phỏng thật
 }
 ok(missing.length === 0, 'mọi exercise có trang' + (missing.length ? ' — thiếu: ' + missing.join(',') : ''));
 ok(noMeta.length === 0, 'mọi trang có ref+trang nguồn' + (noMeta.length ? ' — ' + noMeta.join(',') : ''));
 ok(noDataset.length === 0, 'mọi exercise có dataset mapped' + (noDataset.length ? ' — ' + noDataset.join(',') : ''));
 ok(noOps.length === 0, 'mọi trang có hướng dẫn thao tác/gợi ý' + (noOps.length ? ' — ' + noOps.join(',') : ''));
 ok(noStatus.length === 0, 'mọi trang có nút hoàn thành + ô nhập' + (noStatus.length ? ' — ' + noStatus.join(',') : ''));
+ok(noSim.length === 0, 'mọi bài có mô phỏng tương tác (không còn sim-nosim)' + (noSim.length ? ' — ' + noSim.join(',') : ''));
 
 // ---- 3. Hub ----
 const hub = fs.readFileSync(path.join(DOCS, 'kho-bai-tap.md'), 'utf8');

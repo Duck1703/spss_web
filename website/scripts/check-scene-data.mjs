@@ -125,7 +125,7 @@ const FORBIDDEN = [/Amlodipine/i, /Valsartan/i, /Losartan/i];
  * File có "audit": "external-sav" → chỉ kiểm tra cấu trúc + callout + forbidden tokens;
  * số liệu kiểm chứng riêng bằng Python (curriculum/exercise-verified-stats.md). */
 ['day01', 'day02', 'day03', 'day04', 'day05', 'day06', 'day07', 'day08', 'day09', 'day10',
-  'day11', 'day12', 'day13', 'day14'].forEach((day) => {
+  'day11', 'day12', 'day13', 'day14', 'exercises'].forEach((day) => {
   const file = path.join(VG, day, 'scenes.json');
   const meta = JSON.parse(fs.readFileSync(file, 'utf8'));
   const guides = meta.guides;
@@ -150,7 +150,7 @@ const FORBIDDEN = [/Amlodipine/i, /Valsartan/i, /Losartan/i];
       // callout phải có điểm đánh dấu trong scene
       (s.callouts || []).forEach((c) => {
         const sj = JSON.stringify(s);
-        const re = new RegExp(`"(hot|tabHot|menubarHot|menuHotN|hotRow|colHot)":\\s*${c.n}\\b|"hot"\\s*:\\s*${c.n}\\b|"tabHot"\\s*:\\s*${c.n}\\b|"menubarHot"\\s*:\\s*${c.n}\\b`);
+        const re = new RegExp(`"(hot|tabHot|menubarHot|menuHotN|hotRow|colHot|arrowHot)":\\s*${c.n}\\b|"hot"\\s*:\\s*${c.n}\\b|"tabHot"\\s*:\\s*${c.n}\\b|"menubarHot"\\s*:\\s*${c.n}\\b`);
         if (!re.test(sj)) bad(w, `callout ${c.n} không có control nào mang hot=${c.n}`);
         ok(1);
       });

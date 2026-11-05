@@ -535,7 +535,9 @@ ${all.map(row).join('\n')}
     const hints = (q.hint || []);
     const steps = (q.ops || []);
     const ansFields = q.answerSpec || null;
-    const guides = EX_GUIDES[q.id] || [];
+    // Bài không có guide dNN riêng → guide mô phỏng riêng của bài trong visual-guides/exercises/
+    // (id 'x-<exid>' — sinh bởi .workspace/build_ex_sims.py). Mọi bài đều có mô phỏng.
+    const guides = EX_GUIDES[q.id] || ['x-' + q.id.toLowerCase().replace(/-/g, '')];
     const nextEx = all[all.indexOf(q) + 1] || null;
     const tier = q.tier || (q.role === 'deferred' ? 'advanced' : 'none');
     const tierLbl = tier === 'essential' ? 'Bắt buộc' : tier === 'reinforcement' ? 'Luyện thêm'
@@ -552,9 +554,16 @@ ${all.map(row).join('\n')}
     const followBlock = guides.length
       ? `<div class="lstep-follow">${guides.map(g => `<SPSSActionGuide id="${g}" part="followup" />`).join('\n')}</div>`
       : '';
-    const opItems = steps.map(s => {
-      const parts = esc(s).split('→').map(p => `<code>${p.trim()}</code>`).join('<span class="path-arrow"> → </span>');
-      return `<li><span class="oppath">${parts}</span></li>`;
+    // Mỗi thao tác = 1 khối riêng (opblock) — không gom chung 1 danh sách liền khối.
+    // String có '→' → hiển thị chuỗi menu-path dạng chip; không có '→' → đoạn chữ thường.
+    const opItems = steps.map((s, i) => {
+      const hasPath = s.includes('→');
+      const segs = hasPath ? s.split('→').map(p => p.trim()).filter(Boolean) : [];
+      const tag = segs.length ? segs[0] : '';
+      const inner = hasPath
+        ? `<span class="oppath">${segs.map(p => `<code>${esc(p)}</code>`).join('<span class="path-arrow"> → </span>')}</span>`
+        : `<span class="optext">${esc(s)}</span>`;
+      return `<div class="opblock"><div class="opblock-head"><span class="opblock-num">Bước ${i + 1}</span>${tag ? `<span class="opblock-tag">${esc(tag)}</span>` : ''}</div><div class="opblock-body">${inner}</div></div>`;
     }).join('\n');
 
     const body = `
@@ -584,7 +593,7 @@ ${followBlock}
 </div>
 <section class="opslist" id="ex-ops">
   <h2 class="opslist__h">Thao tác SPSS</h2>
-  <ol class="actions">${opItems || '<li><span class="oppath">Làm theo đề bài trên SPSS thật và ghi lại kết quả.</span></li>'}</ol>
+  <div class="opsteps">${opItems || '<div class="opblock"><div class="opblock-body"><span class="optext">Làm theo đề bài trên SPSS thật và ghi lại kết quả.</span></div></div>'}</div>
   ${days.length ? `<p class="opslist__lesson">Hướng dẫn từng bước: ${days.map(n => `<a href="/${n}/bai-hoc/">bài học Ngày ${n.slice(1)}</a>`).join(' · ')}</p>` : ''}
 </section>
 <div class="resultpreview">
