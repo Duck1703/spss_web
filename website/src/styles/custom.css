@@ -330,6 +330,8 @@ details.sguide-trouble li { margin-top: 6px; }
 .tag.t-basic { background: #e8f5ee; color: #267258; }
 .tag.t-mid { background: #eef2fa; color: #3d5a99; }
 .tag.t-adv { background: #fff1e0; color: #96621f; }
+/* Đánh dấu bài tập mới (P3 — bộ bài tập bổ sung) */
+.newtag { display: inline-block; vertical-align: 1px; margin-left: 5px; padding: 2px 7px; border-radius: 24px; background: #f3e8fd; color: #7c3aed; font-size: 10px; font-weight: 800; letter-spacing: 0.2px; white-space: nowrap; }
 .status { text-align: center; font-size: 11px; font-weight: 600; color: #75878a; }
 .status.done, .status[data-state='done'] { color: #217c64; }
 .status.draft, .status[data-state='draft'] { color: #9f742f; }

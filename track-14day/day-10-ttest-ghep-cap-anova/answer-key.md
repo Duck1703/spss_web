@@ -70,3 +70,17 @@ mọi khác biệt CLCS (nếu có) không thể đổ cho chênh tuổi.
 3. "Cặp nhóm nào khác nhau?" → nút **Post Hoc…** trong hộp One-Way ANOVA (Tukey khi
    phương sai đồng nhất; Games-Howell khi không). ANOVA tổng thể chỉ trả lời "có hay
    không có khác biệt".
+
+## P3-Q14 — ANOVA nsonga ~ cchanthuon (File1) *(bài mới)*
+
+| Vị trí chấn thương nặng | n | Mean nsonga | SD |
+|---|---|---|---|
+| Đầu/cột sống (1) | 17 | 2,71 | 2,54 |
+| Thân mình (2) | 18 | 2,33 | 2,54 |
+| Tay/chân (3) | 15 | 1,87 | 2,42 |
+
+**ANOVA: F = 0,447, df = (2, 47), Sig. = 0,642** → số ngày nằm viện trung bình
+**không khác nhau có ý nghĩa** giữa 3 vị trí chấn thương.
+
+*Lỗi hay gặp:* đảo Dependent/Factor; mong "so sánh từng cặp" — ANOVA tổng thể chỉ
+trả lời có/không, muốn từng cặp phải bấm Post Hoc (ở đây không cần vì F không ý nghĩa).

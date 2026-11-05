@@ -10,7 +10,7 @@ Hai bộ đề thực hành SPSS do chủ dự án cung cấp — **là nền t�
 | `bai_2/` | `BSNT_Bài TH_Phần 2_Cô Hiền.pdf` | `File1.sav` · `File2_Phan2.sav` · `File3_Phan2.sav` · `File4_Phan2.sav` · `File5_Phan2.sav` | 15 (P2-Q01–Q15) + hoạt động P2-TH3 |
 
 - Ánh xạ câu hỏi ↔ dataset ↔ ngày học: `curriculum/EXERCISE-SOURCE-MAP.md`
-- Inventory máy đọc: `curriculum/exercise-inventory.json` (60 bản ghi)
+- Inventory máy đọc: `curriculum/exercise-inventory.json` (75 bản ghi — gồm bộ mới **P3-Q01…Q15** thiết kế bổ sung, đánh dấu `(new)` trên web)
 - Số liệu kiểm chứng (Python, NOT_RUN): `curriculum/exercise-verified-stats.md`
 - Lộ trình: `curriculum/EXERCISE-FIRST-14-DAY-ROADMAP.md`
 

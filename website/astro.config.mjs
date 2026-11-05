@@ -34,7 +34,7 @@ export default defineConfig({
         { label: 'Học tập', items: [
           { label: 'Tổng quan', link: '/' },
           { label: 'Lộ trình 14 ngày', slug: 'lo-trinh-14-ngay' },
-          { label: 'Kho bài tập (58 câu)', slug: 'kho-bai-tap' },
+          { label: 'Kho bài tập (75 bài)', slug: 'kho-bai-tap' },
           { label: 'Tiến độ học', link: '/#tien-do' },
         ]},
         { label: 'Hỗ trợ', items: [

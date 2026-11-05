@@ -66,3 +66,19 @@ dù SD của Cannang nhỏ hơn nhiều — đây chính là giá trị của CV
 2. "Nghề nghiệp trung bình = 2,4" là vô nghĩa — mã nghề nghiệp không phải số lượng;
    đúng ra phải báo cáo tần số/% từng nghề (như Ngày 02).
 3. Tứ vị thứ 1 (Q1) = bách phân vị **25**; trung vị = bách phân vị **50** (cũng là Q2).
+
+## P3-Q02 — Đại lượng Tuổi B8 (So_Lieu_NC) *(bài mới)*
+
+n = 360, không missing.
+
+| Đại lượng | Giá trị |
+|---|---|
+| Mean | 54,31 |
+| Median | 56,00 |
+| Std. Deviation | 10,81 |
+| Minimum | 30 |
+| Maximum | 69 |
+| Khoảng biến thiên (range) | 39 |
+
+*Lỗi hay gặp:* hộp Descriptives **không in Median** — phải qua Frequencies →
+Statistics → tick Median; đừng ghi nhầm Mean=54,31 thành Median.

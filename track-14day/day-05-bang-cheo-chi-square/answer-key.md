@@ -77,3 +77,30 @@ nữ **rất có ý nghĩa thống kê**. Đây là khác biệt lớn nhất tr
    không chứng minh được hai tỷ lệ bằng nhau (muốn chứng minh tương đương cần phân
    tích tương đương/equivalence — khác hẳn). Cách viết đúng: "tỷ lệ ĐTĐ ở nữ (30,1%)
    và nam (34,0%) không khác nhau có ý nghĩa thống kê (χ²=1,075, p=0,300)".
+
+## P3-Q06 — C13 × giới tính (So_Lieu_NC) *(bài mới)*
+
+| C13 — đã được chẩn đoán THA | Nam (n=131) | Nữ (n=229) |
+|---|---|---|
+| Có (1) | 74 (**56,5%**) | 119 (**52,0%**) |
+| Chưa (2) | 57 (43,5%) | 110 (48,0%) |
+
+Pearson χ² = **0,686**, df = 1, Sig. (2-sided) = **0,408** → tỷ lệ đã từng được
+chẩn đoán THA **không khác nhau có ý nghĩa** giữa hai giới (mọi ô expected ≥ 5 —
+chi-square hợp lệ).
+
+## P3-Q10 — Gộp CD.HA 2 nhóm × M.LucAn (p1_B01_HA) *(bài mới)*
+
+Biến mới `CDHA_2n`: 0 = CD.HA 1–2 ("chưa THA", n=285); 1 = THA độ 1–3 (n=335).
+
+| M.LucAn (thêm muối lúc nấu) | Chưa THA | THA độ 1–3 |
+|---|---|---|
+| Không bao giờ (1) | 2 (0,7%) | 0 (0,0%) |
+| Hiếm khi (2) | 120 (42,1%) | 82 (24,5%) |
+| Thỉnh thoảng (3) | 142 (49,8%) | 199 (59,4%) |
+| Thường xuyên (4) | 21 (7,4%) | 54 (16,1%) |
+
+Pearson χ² = **29,36**, df = 3, p **< 0,001** — **NHƯNG** output cảnh báo 1 ô (25%)
+có expected < 5 (ô "Không bao giờ" nhóm THA ≈ 0,92) → chi-square **chỉ nên tham khảo**.
+Cách xử lý đúng: gộp "Không bao giờ"+"Hiếm khi" rồi chạy lại, hoặc chỉ nhận xét mô tả:
+người THA cho thêm muối thỉnh thoảng–thường xuyên nhiều hơn rõ (75,5% vs 57,2%).

@@ -24,7 +24,7 @@
 
   var BT_TOTAL = 16; // số câu hỏi có id bt* trong workbook M01
   var DAY_TOTAL = 14; // 14 ngày exercise-first — done keys 'module:ef-dNN' (khóa 'module:dNN' cũ giữ nguyên, không đếm)
-  var EX_TOTAL = 58; // bài tập nguồn P1-Q01…P1-Q43 + P2-Q01…P2-Q15 — done keys 'exercise:P1-QNN'
+  var EX_TOTAL = 73; // bài tập nguồn P1-Q01…Q43 + P2-Q01…Q15 + P3-Q01…Q15 (bộ mới) — done keys 'exercise:P?-QNN'
 
   function setStatus(el, mode) {
     if (!el) return;
@@ -97,7 +97,7 @@
       el.style.width = Math.round(pct * 100) + '%';
     });
     // dashboard (trang chủ OD): số liệu THẬT — không dùng key 'odp-*' của prototype
-    var nEx = Object.keys(state.done).filter(function (k) { return /^exercise:P[12]-Q\d{2}$/.test(k); }).length;
+    var nEx = Object.keys(state.done).filter(function (k) { return /^exercise:P[123]-Q\d{2}$/.test(k); }).length;
     document.querySelectorAll('[data-dash-days]').forEach(function (el) {
       el.innerHTML = nDays + '<small>/' + DAY_TOTAL + '</small>';
     });

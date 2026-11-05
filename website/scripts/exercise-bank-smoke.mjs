@@ -18,15 +18,16 @@ const visRows = () => p.locator('.exercise-row:visible').count();
 
 // A. Hub
 await p.goto(BASE + '/kho-bai-tap/', { waitUntil: 'networkidle' });
-ok(await p.locator('.exercise-row').count() === 60, 'A1 hub: 60 dòng bài tập');
+ok(await p.locator('.exercise-row').count() === 75, 'A1 hub: 75 dòng bài tập');
 ok(await p.locator('.exb-search').isVisible(), 'A2 ô tìm kiếm hiển thị');
 ok(await p.locator('.exb-f[data-f="cat"]').isVisible() && await p.locator('.exb-f[data-f="level"]').isVisible()
    && await p.locator('.exb-f[data-f="tier"]').isVisible() && await p.locator('.exb-f[data-f="status"]').isVisible(), 'A3 đủ 4 bộ lọc');
 ok((await p.locator('.catbtn[data-src="P1"]').textContent()).includes('43')
    && (await p.locator('.catbtn[data-src="P2"]').textContent()).includes('15')
-   && (await p.locator('.catbtn[data-src="supp"]').textContent()).includes('2'), 'A4 tab nhóm 43+15+2 đúng nhãn');
+   && (await p.locator('.catbtn[data-src="P3"]').textContent()).includes('15')
+   && (await p.locator('.catbtn[data-src="supp"]').textContent()).includes('2'), 'A4 tab nhóm 43+15+15+2 đúng nhãn');
 ok(await visRows() === 15, 'A5 trang 1 hiển thị 15 dòng (pagination)');
-ok((await p.locator('#exb-count').textContent()).includes('60/60'), 'A6 counter 60/60');
+ok((await p.locator('#exb-count').textContent()).includes('75/75'), 'A6 counter 75/75');
 
 // B. Search
 await p.fill('.exb-search', 'p1-q10');
@@ -41,10 +42,14 @@ await p.fill('.exb-search', '');
 await p.click('.catbtn[data-src="P2"]');
 await p.waitForTimeout(150);
 ok(await visRows() === 15, 'C1 tab Bài 2 → 15 dòng');
-ok((await p.locator('#exb-count').textContent()).includes('15/60'), 'C1b counter 15/60');
+ok((await p.locator('#exb-count').textContent()).includes('15/75'), 'C1b counter 15/75');
+await p.click('.catbtn[data-src="P3"]');
+await p.waitForTimeout(150);
+ok(await visRows() === 15, 'C1c tab Bài mới → 15 dòng');
+ok((await p.locator('.exercise-row .newtag').count()) >= 15, 'C1c2 ≥15 nhãn (new) trên tab Bài mới');
 await p.click('.catbtn[data-src="supp"]');
 await p.waitForTimeout(150);
-ok(await visRows() === 2, 'C1c tab Bổ sung → 2 dòng');
+ok(await visRows() === 2, 'C1d tab Bổ sung → 2 dòng');
 await p.click('.catbtn[data-src=""]');
 await p.selectOption('.exb-f[data-f="cat"]', 'ttest');
 await p.waitForTimeout(150);
@@ -58,10 +63,10 @@ await p.selectOption('.exb-f[data-f="tier"]', '');
 await p.selectOption('.exb-f[data-f="level"]', 'Beginner');
 await p.waitForTimeout(150);
 const nB = await visRows();
-ok(nB === 15 && (await p.locator('#exb-count').textContent()).match(/^\d+\/60/)[0] !== '60/60', 'C4 lọc Cơ bản → trang đầy đủ');
+ok(nB === 15 && (await p.locator('#exb-count').textContent()).match(/^\d+\/75/)[0] !== '75/75', 'C4 lọc Cơ bản → trang đầy đủ');
 await p.click('#exb-reset');
 await p.waitForTimeout(150);
-ok((await p.locator('#exb-count').textContent()).includes('60/60'), 'C5 reset → 60/60');
+ok((await p.locator('#exb-count').textContent()).includes('75/75'), 'C5 reset → 75/75');
 
 // D. Detail page
 await p.goto(BASE + '/kho-bai-tap/p1-q10/', { waitUntil: 'networkidle' });
@@ -108,7 +113,7 @@ const m = await browser.newContext({ viewport: { width: 375, height: 700 } });
 const mp = await m.newPage();
 await mp.goto(BASE + '/kho-bai-tap/', { waitUntil: 'networkidle' });
 ok(await mp.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2), 'H1 mobile: không overflow ngang');
-ok(await mp.locator('.exercise-row').count() === 60, 'H2 mobile: 60 dòng render');
+ok(await mp.locator('.exercise-row').count() === 75, 'H2 mobile: 75 dòng render');
 await mp.goto(BASE + '/kho-bai-tap/p2-q14/', { waitUntil: 'networkidle' });
 ok(await mp.locator('.lessonhead').isVisible(), 'H3 mobile: detail page dùng được');
 await mp.goto(BASE + '/kho-bai-tap/', { waitUntil: 'networkidle' });
