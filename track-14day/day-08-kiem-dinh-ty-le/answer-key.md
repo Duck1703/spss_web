@@ -102,3 +102,23 @@ Recode `MDoSD.RB` → `RB_now` (0=không, 1=đang uống). Bảng ghép cặp TS
 3. Chi-square thường giả định hai mẫu **độc lập** (người khác nhau hai ô); McNemar
    cho **cùng một người đo hai lần** — chỉ các ô bất đồng (đổi trạng thái) quyết định
    kiểm định, ô đồng thuận không đóng góp.
+
+## P3-Q11 — Binomial RauCu vs 0,50 (p1_B01_HA) *(bài mới)*
+
+Observed: `RauCu=1` (ăn đủ rau củ) = **544/620 = 0,877**; nhóm 2 = 76/620.
+Binomial **Exact Sig. (2-tailed)** với Test Prop. = 0,50: **p < 0,001** → tỷ lệ ăn
+đủ rau củ **khác có ý nghĩa** so với 50% — thực tế cao hơn hẳn (~88%).
+
+## P3-Q15 — McNemar Khám_TT vs Siêu_âmTT (File5) *(bài mới)*
+
+| Khám_TT \ Siêu_âmTT | Âm (0) | Dương (1) |
+|---|---|---|
+| Âm (0) | 69 | **42** |
+| Dương (1) | **85** | 100 |
+
+- Ô bất đồng: **85** (khám+ / siêu âm−) vs **42** (khám− / siêu âm+).
+- McNemar: χ² ≈ **14,56** asymptotic (hiệu chỉnh continuity ≈ 13,89); Sig. **< 0,001**;
+  exact binomial ≈ 0,0002.
+- → Hai test **không đồng nhất có ý nghĩa**: khám trực tràng phát hiện dương tính
+  nhiều hơn siêu âm rõ → **không thể thay thế cho nhau**. Đây là câu hỏi về "đồng
+  thuận" giữa 2 test trên cùng người — khác hẳn câu "có liên quan" của Chi-square.

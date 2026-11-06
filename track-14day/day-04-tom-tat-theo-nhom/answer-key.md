@@ -101,3 +101,19 @@ người không có — hợp lý (HA di truyền/lão hóa). Nhóm nam không t
 2. Quên **tắt Split File** → Data → Split File → Analyze all cases → OK.
 3. Hai sai lầm: (a) so sánh **số lượng thô** khi mẫu hai nhóm khác nhau (phải so %);
    (b) diễn giải sai hướng mã (GTinh=1 là Nữ chứ không phải Nam).
+
+## P3-Q03 — Split theo B7 → tần số B11 (So_Lieu_NC) *(bài mới)*
+
+| Trình độ học vấn (B11) | Nam (n=131) | % | Nữ (n=229) | % |
+|---|---|---|---|---|
+| Biết đọc, biết viết (2) | 4 | 3,1 | 6 | 2,6 |
+| TN tiểu học (3) | 25 | 19,1 | 35 | 15,3 |
+| TN THCS (4) | 26 | 19,8 | 63 | 27,5 |
+| TN phổ thông (5) | 41 | 31,3 | 73 | 31,9 |
+| TN THCN/CĐ-ĐH trở lên (6) | 35 | 26,7 | 52 | 22,7 |
+
+- Cả hai giới đều chiếm đa số ở nhóm **TN phổ thông trung học** (Nam 31,3% · Nữ 31,9%).
+- Nam có tỷ lệ học vấn cao nhất (B11=6) lớn hơn nữ: **26,7% vs 22,7%**; nữ lệch về
+  nhóm TN THCS hơn (27,5% vs 19,8%).
+- Không ai có B11=1 "Không biết đọc/viết" — bảng tần số chỉ in giá trị quan sát được.
+- Nhớ **Split File → Analyze all cases** sau khi làm xong.

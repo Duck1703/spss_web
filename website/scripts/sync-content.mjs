@@ -124,7 +124,7 @@ const DAY_META = {
 /** Inventory bài tập nguồn → khối {{exercise:P1-Q02}} trong canonical md. */
 const INV = JSON.parse(read('curriculum/exercise-inventory.json'));
 const EXQ = Object.fromEntries(INV.exercises.map(q => [q.id, q]));
-const PDF_NAME = { P1: 'Bai thuc hanh SDH P1.pdf', P2: 'BSNT_Bài TH_Phần 2_Cô Hiền.pdf' };
+const PDF_NAME = { P1: 'Bai thuc hanh SDH P1.pdf', P2: 'BSNT_Bài TH_Phần 2_Cô Hiền.pdf', P3: 'Bộ bài tập mới — thiết kế bổ sung (NEW)' };
 function expandExercises(md) {
   return md.replace(/\{\{exercise:([\w-]+)\}\}/g, (_, id) => {
     const q = EXQ[id];
@@ -431,11 +431,15 @@ const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</
 const exSlug = (id) => id.toLowerCase();
 function exHref(id) { return `/kho-bai-tap/${exSlug(id)}/`; }
 
+/** Bài tập P3 = bộ bài tập mới — đánh dấu "(new)" mọi nơi hiển thị. */
+const isNew = (q) => q.src === 'P3';
+const NEW_MARK = ' <span class="newtag">(new)</span>';
+
 /** Thẻ bài tập nhỏ trong khối "Luyện thêm" của từng ngày — link sang trang chi tiết. */
 function exMiniCard(q) {
   const cat = exCategory(q);
   return `<a class="exb-mini" href="${exHref(q.id)}" data-exid="${q.id}">`
-    + `<span class="exb-mini__id">${q.id}</span>`
+    + `<span class="exb-mini__id">${q.id}${isNew(q) ? NEW_MARK : ''}</span>`
     + `<span class="exb-mini__sum">${esc(q.summary)}</span>`
     + `<span class="exb-mini__meta">${esc(q.ref)} · ${esc(q.difficulty)} · ~${q.time}′ · ${EX_CAT_LABEL[cat]}</span>`
     + `</a>`;
@@ -461,7 +465,8 @@ function syncExerciseBank() {
   const supp = INV.exercises.filter(q => !/^P\d-Q\d+$/.test(q.id));
   const p1 = INV.exercises.filter(q => /^P1-Q\d+$/.test(q.id)).sort((a, b) => a.id.localeCompare(b.id));
   const p2 = INV.exercises.filter(q => /^P2-Q\d+$/.test(q.id)).sort((a, b) => a.id.localeCompare(b.id));
-  const all = [...p1, ...p2, ...supp];
+  const p3 = INV.exercises.filter(q => /^P3-Q\d+$/.test(q.id)).sort((a, b) => a.id.localeCompare(b.id));
+  const all = [...p1, ...p2, ...p3, ...supp];
 
   // ----- hub (Clinical Editorial B v2: filters + category tabs + compact rows + pagination) -----
   const EX_LEVEL_LABEL = { Beginner: 'Cơ bản', Intermediate: 'Trung cấp', Advanced: 'Nâng cao' };
@@ -476,8 +481,8 @@ function syncExerciseBank() {
     const srcTab = /^P\d-Q\d+$/.test(q.id) ? q.src : 'supp';
     return '<a class="exercise-row" href="' + exHref(q.id) + '" data-exid="' + q.id + '" '
       + 'data-src="' + srcTab + '" data-cat="' + cat + '" data-tier="' + tier + '" data-level="' + q.difficulty + '" '
-      + 'data-search="' + esc((q.id + ' ' + q.summary + ' ' + EX_CAT_LABEL[cat] + ' ' + (q.dataset || '') + ' ' + (q.vars || []).join(' ') + ' ' + dayLinks).toLowerCase()) + '">'
-      + '<span class="ident"><span class="excode">' + q.id + '</span>'
+      + 'data-search="' + esc((q.id + ' ' + q.summary + ' ' + EX_CAT_LABEL[cat] + ' ' + (q.dataset || '') + ' ' + (q.vars || []).join(' ') + ' ' + dayLinks + (isNew(q) ? ' new mới bài mới' : '')).toLowerCase()) + '">'
+      + '<span class="ident"><span class="excode">' + q.id + (isNew(q) ? NEW_MARK : '') + '</span>'
       + '<span class="entext"><strong>' + esc(q.summary) + '</strong><small>' + (dayLinks || 'Tự do') + ' · ~' + q.time + ' phút · ' + tierLbl + '</small></span></span>'
       + '<span class="col-skill skill">' + EX_CAT_LABEL[cat] + '</span>'
       + '<span class="col-level level"><span class="tag ' + (EX_LEVEL_TAG[q.difficulty] || 't-basic') + '">' + (EX_LEVEL_LABEL[q.difficulty] || q.difficulty) + '</span></span>'
@@ -488,7 +493,7 @@ function syncExerciseBank() {
   const filters = `<div class="filters">
   <div class="filter-top">
     <div class="searchbox"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="6.2" stroke="currentColor" stroke-width="1.8"/><path d="m14 14 3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="exb-search" class="exb-search" type="search" placeholder="Mã bài, nội dung, biến, dataset…" autocomplete="off" /></div>
-    <span class="filtercount" id="exb-count">60/60 bài</span>
+    <span class="filtercount" id="exb-count">${all.length}/${all.length} bài</span>
   </div>
   <div class="filterbottom">
     <div class="fgroup"><label for="exb-cat">Kỹ năng</label><select id="exb-cat" class="exb-f" data-f="cat"><option value="">Tất cả</option>${EX_CATS.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></div>
@@ -499,14 +504,15 @@ function syncExerciseBank() {
   </div>
 </div>
 <nav class="category-nav" aria-label="Lọc theo bộ đề">
-  <button type="button" class="catbtn active" data-src="">Tất cả<span class="number">60</span></button>
-  <button type="button" class="catbtn" data-src="P1">Bài 1 — Phần 1<span class="number">43</span></button>
-  <button type="button" class="catbtn" data-src="P2">Bài 2 — Phần 2<span class="number">15</span></button>
-  <button type="button" class="catbtn" data-src="supp">Bổ sung<span class="number">2</span></button>
+  <button type="button" class="catbtn active" data-src="">Tất cả<span class="number">${all.length}</span></button>
+  <button type="button" class="catbtn" data-src="P1">Bài 1 — Phần 1<span class="number">${p1.length}</span></button>
+  <button type="button" class="catbtn" data-src="P2">Bài 2 — Phần 2<span class="number">${p2.length}</span></button>
+  <button type="button" class="catbtn" data-src="P3">Bài mới (new)<span class="number">${p3.length}</span></button>
+  <button type="button" class="catbtn" data-src="supp">Bổ sung<span class="number">${supp.length}</span></button>
 </nav>`;
   write('kho-bai-tap.md', `---
-title: "Kho bài tập — 58 câu nguồn"
-description: "Toàn bộ 58 câu hỏi nguồn từ 2 đề thực hành của chủ khóa học: Bài 1 (43 câu) và Bài 2 (15 câu), kèm 2 mục phụ. Lọc theo kỹ năng, mức độ, trạng thái."
+title: "Kho bài tập — ${p1.length + p2.length} câu nguồn + ${p3.length} bài mới"
+description: "${p1.length + p2.length} câu hỏi nguồn từ 2 đề thực hành của chủ khóa học (Bài 1: ${p1.length} câu, Bài 2: ${p2.length} câu) + ${p3.length} bài tập mới thiết kế bổ sung, kèm ${supp.length} mục phụ. Lọc theo kỹ năng, mức độ, trạng thái."
 template: splash
 ---
 
@@ -516,8 +522,8 @@ ${BANNER}${filters}
 ${all.map(row).join('\n')}
 </div>
 <div class="empty-state" id="exb-empty" hidden><strong>Không có bài tập nào khớp bộ lọc</strong><p>Thử nới điều kiện tìm kiếm hoặc đặt lại bộ lọc.</p><button type="button" data-exb-reset>Đặt lại bộ lọc</button></div>
-<div class="pagination"><button type="button" id="exb-prev" disabled>‹ Trước</button><span class="pageinfo" id="exb-pageinfo">Trang 1 / 4</span><button type="button" id="exb-next">Sau ›</button></div>
-<p class="protonote">58 câu từ hai bộ đề gốc (<code>Bai thuc hanh SDH P1.pdf</code> · <code>BSNT_Bài TH_Phần 2_Cô Hiền.pdf</code>) + 2 mục phụ. Mỗi bài có trang riêng với thao tác SPSS, gợi ý và ô ghi kết quả.</p>
+<div class="pagination"><button type="button" id="exb-prev" disabled>‹ Trước</button><span class="pageinfo" id="exb-pageinfo">Trang 1 / ${Math.ceil(all.length / 15)}</span><button type="button" id="exb-next">Sau ›</button></div>
+<p class="protonote">${p1.length + p2.length} câu từ hai bộ đề gốc (<code>Bai thuc hanh SDH P1.pdf</code> · <code>BSNT_Bài TH_Phần 2_Cô Hiền.pdf</code>) + ${p3.length} bài tập mới đánh dấu <span class="newtag">(new)</span> (nhóm <b>Bài mới</b> — do khóa học thiết kế bổ sung trên cùng dataset) + ${supp.length} mục phụ. Mỗi bài có trang riêng với thao tác SPSS, gợi ý và ô ghi kết quả.</p>
 `);
 
   // ----- detail pages (B v2 exercise-detail: brief → ops → sim → hints → answer) -----
@@ -529,7 +535,9 @@ ${all.map(row).join('\n')}
     const hints = (q.hint || []);
     const steps = (q.ops || []);
     const ansFields = q.answerSpec || null;
-    const guides = EX_GUIDES[q.id] || [];
+    // Bài không có guide dNN riêng → guide mô phỏng riêng của bài trong visual-guides/exercises/
+    // (id 'x-<exid>' — sinh bởi .workspace/build_ex_sims.py). Mọi bài đều có mô phỏng.
+    const guides = EX_GUIDES[q.id] || ['x-' + q.id.toLowerCase().replace(/-/g, '')];
     const nextEx = all[all.indexOf(q) + 1] || null;
     const tier = q.tier || (q.role === 'deferred' ? 'advanced' : 'none');
     const tierLbl = tier === 'essential' ? 'Bắt buộc' : tier === 'reinforcement' ? 'Luyện thêm'
@@ -546,9 +554,16 @@ ${all.map(row).join('\n')}
     const followBlock = guides.length
       ? `<div class="lstep-follow">${guides.map(g => `<SPSSActionGuide id="${g}" part="followup" />`).join('\n')}</div>`
       : '';
-    const opItems = steps.map(s => {
-      const parts = esc(s).split('→').map(p => `<code>${p.trim()}</code>`).join('<span class="path-arrow"> → </span>');
-      return `<li><span class="oppath">${parts}</span></li>`;
+    // Mỗi thao tác = 1 khối riêng (opblock) — không gom chung 1 danh sách liền khối.
+    // String có '→' → hiển thị chuỗi menu-path dạng chip; không có '→' → đoạn chữ thường.
+    const opItems = steps.map((s, i) => {
+      const hasPath = s.includes('→');
+      const segs = hasPath ? s.split('→').map(p => p.trim()).filter(Boolean) : [];
+      const tag = segs.length ? segs[0] : '';
+      const inner = hasPath
+        ? `<span class="oppath">${segs.map(p => `<code>${esc(p)}</code>`).join('<span class="path-arrow"> → </span>')}</span>`
+        : `<span class="optext">${esc(s)}</span>`;
+      return `<div class="opblock"><div class="opblock-head"><span class="opblock-num">Bước ${i + 1}</span>${tag ? `<span class="opblock-tag">${esc(tag)}</span>` : ''}</div><div class="opblock-body">${inner}</div></div>`;
     }).join('\n');
 
     const body = `
@@ -562,7 +577,7 @@ ${all.map(row).join('\n')}
 </nav>
 <div class="workbench">
 <div class="instruction" id="ex-brief">
-  <div class="number">ĐỀ BÀI NGUỒN · ${esc(q.src)}</div>
+  <div class="number">ĐỀ BÀI ${isNew(q) ? 'MỚI' : 'NGUỒN'} · ${esc(q.src)}${isNew(q) ? NEW_MARK : ''}</div>
   <div class="purposebox"><strong>Mục đích</strong><p>${esc(q.summary)}</p><p class="artifact">Sản phẩm: ${esc(q.artifact || 'Ghi kết quả vào workbook')}</p></div>
   <div class="actiontitle">Thông tin đề</div>
   <ul class="exmeta">
@@ -578,7 +593,7 @@ ${followBlock}
 </div>
 <section class="opslist" id="ex-ops">
   <h2 class="opslist__h">Thao tác SPSS</h2>
-  <ol class="actions">${opItems || '<li><span class="oppath">Làm theo đề bài trên SPSS thật và ghi lại kết quả.</span></li>'}</ol>
+  <div class="opsteps">${opItems || '<div class="opblock"><div class="opblock-body"><span class="optext">Làm theo đề bài trên SPSS thật và ghi lại kết quả.</span></div></div>'}</div>
   ${days.length ? `<p class="opslist__lesson">Hướng dẫn từng bước: ${days.map(n => `<a href="/${n}/bai-hoc/">bài học Ngày ${n.slice(1)}</a>`).join(' · ')}</p>` : ''}
 </section>
 <div class="resultpreview">
@@ -616,7 +631,7 @@ ${followBlock}
 `;
 
     write(`kho-bai-tap/${exSlug(q.id)}.mdx`, `---
-title: "${q.id} — ${esc(q.summary).slice(0, 70)}"
+title: "${q.id}${isNew(q) ? ' (new)' : ''} — ${esc(q.summary).slice(0, 70)}"
 description: "Bài tập ${q.id} (${q.ref}${q.page ? `, trang ${q.page}` : ''}) — ${esc(q.dataset)}. Kho bài tập SPSS nguồn."
 prev:
   link: /kho-bai-tap/

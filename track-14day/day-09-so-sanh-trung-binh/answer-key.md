@@ -61,3 +61,23 @@ hai nhóm tuổi tương đương cho các so sánh sau.
 3. Không. p=0,227 = "chưa đủ bằng chứng cho khác biệt" — CI −3,9…17,2 vẫn chứa khả
    năng chênh ~17 điểm. Câu chặt: "chưa phát hiện khác biệt có ý nghĩa giữa hai
    tỉnh trên mẫu n=30".
+
+## P3-Q08 — t-test E29 ~ giới (So_Lieu_NC) *(bài mới)*
+
+**Group Statistics:** Nam (1): n=131, E29 = 128,85 ± 13,16 · Nữ (2): n=229,
+126,35 ± 14,14.
+**Levene's:** F = 0,774, Sig. = 0,380 → dòng assumed: **t = 1,655**, df = 358,
+**Sig. (2-tailed) = 0,099**; diff ≈ +2,50 mmHg, 95% CI ≈ −0,5…5,5.
+(Dòng Welch tham khảo: t = 1,688, p = 0,093 — cùng kết luận.)
+
+→ HA tâm thu nam cao hơn nữ ~2,5 mmHg nhưng **chưa có ý nghĩa thống kê**
+(p = 0,099). Viết đúng: "chưa đủ bằng chứng khác biệt" — không viết "bằng nhau".
+
+## P3-Q12 — One-sample t E29 vs 120 (So_Lieu_NC) *(bài mới)*
+
+n = 360, E29 = 127,26 ± 13,83. Test Value = 120:
+**t = 9,968**, df = 359, **Sig. (2-tailed) < 0,001**; Mean Difference = **+7,26**,
+95% CI của diff ≈ 5,8…8,7 (CI của mean: 125,83–128,70).
+
+→ HA tâm thu trung bình mẫu này **cao hơn 120 mmHg có ý nghĩa** — hợp lý với bối
+cảnh mẫu người lớn tuổi nhiều yếu tố nguy cơ.

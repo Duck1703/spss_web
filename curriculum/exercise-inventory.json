@@ -60,6 +60,30 @@
      "note": "nghiên cứu sinh thiết tuyến tiền liệt: Tuoi, Khám_TT, Siêu_âmTT, PSA, Thetich, Sinhthiet"
     }
    }
+  },
+  "P3": {
+   "pdf": null,
+   "title": "BÀI TẬP MỚI — 15 câu bổ sung (NEW)",
+   "note": "Bộ bài tập thiết kế bổ sung 2026-11 — không thuộc 2 đề PDF nguồn; tái sử dụng các dataset .sav hiện có, khai thác So_Lieu_NC.sav và các biến chưa dùng. Đáp án tái tính Python (nhãn NOT_RUN).",
+   "datasets": {
+    "So_Lieu_NC.sav": {
+     "n": 360,
+     "role": "dataset chính bộ mới — Q01–Q09, Q12 (STEPS-like: nhân khẩu, THA/ĐTĐ tiền sử, số đo E25–E30)",
+     "note": "B7 giới tính: 1=Nam, 2=Nữ — NGƯỢC mã với p1_B01_HA (1=Nữ, 2=Nam); B11=1 không có ai"
+    },
+    "p1_B01_HA (1).sav": {
+     "n": 620,
+     "role": "Q10–Q11 — các biến ít dùng (CD.HA, M.LucAn, RauCu)"
+    },
+    "File1.sav": {
+     "n": 50,
+     "role": "Q13–Q14 — mnannha, phương tiện 0/1, nsonga chưa dùng trong đề gốc"
+    },
+    "File5_Phan2.sav": {
+     "n": 296,
+     "role": "Q15 — McNemar Khám_TT vs Siêu_âmTT (hai test trên cùng người)"
+    }
+   }
   }
  },
  "exercises": [
@@ -2248,6 +2272,684 @@
    "mapping": "VERIFIED — không câu nào trong PDF dùng file này",
    "role": "bonus",
    "day": null
-  }
+  },
+ {
+  "id": "P3-Q01",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Tần số và tỷ lệ % người tham gia theo giới tính (B7)",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "B7"
+  ],
+  "skills": [
+   "Frequencies",
+   "đọc Frequency/Percent/Valid Percent"
+  ],
+  "ops": [
+   "Analyze→Descriptive Statistics→Frequencies"
+  ],
+  "prereq": [
+   "mở file",
+   "nhận diện biến"
+  ],
+  "difficulty": "Beginner",
+  "time": 20,
+  "artifact": "Bảng tần số giới tính: số lượng + % mỗi nhóm",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d02",
+  "hint": [
+   "Mở Variable View kiểm tra nhãn giá trị B7 trước: file này 1=Nam, 2=Nữ — NGƯỢC với p1_B01_HA (1=Nữ, 2=Nam)",
+   "Analyze → Descriptive Statistics → Frequencies → đưa B7 vào Variable(s)",
+   "File không có missing nên cột Percent và Valid Percent giống nhau"
+  ],
+  "answerSpec": [
+   {
+    "key": "nam",
+    "label": "Số người Nam"
+   },
+   {
+    "key": "nu_pct",
+    "label": "Tỷ lệ % Nữ"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q02",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Đại lượng thống kê mô tả cho Tuổi (B8): mean, median, SD, min, max, khoảng biến thiên",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "B8"
+  ],
+  "skills": [
+   "Descriptives",
+   "Frequencies→Statistics (median)",
+   "khoảng biến thiên"
+  ],
+  "ops": [
+   "Analyze→Descriptive Statistics→Descriptives",
+   "Analyze→Descriptive Statistics→Frequencies→Statistics→Median"
+  ],
+  "prereq": [],
+  "difficulty": "Beginner",
+  "time": 25,
+  "artifact": "Bảng đại lượng Tuổi: mean, median, SD, min, max, range",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d03",
+  "hint": [
+   "Descriptives chỉ cho Mean/SD/Min/Max — muốn Median phải dùng Frequencies → Statistics → tick Median",
+   "Khoảng biến thiên = Max − Min"
+  ],
+  "answerSpec": [
+   {
+    "key": "mean",
+    "label": "Mean tuổi"
+   },
+   {
+    "key": "sd",
+    "label": "SD"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q03",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Tách file theo giới tính (B7), lập tần số trình độ học vấn (B11) từng nhóm và nhận xét",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "B7",
+   "B11"
+  ],
+  "skills": [
+   "Split File",
+   "Compare groups",
+   "Frequencies theo nhóm"
+  ],
+  "ops": [
+   "Data→Split File",
+   "Analyze→Descriptive Statistics→Frequencies",
+   "Data→Split File→Analyze all cases"
+  ],
+  "prereq": [
+   "Frequencies"
+  ],
+  "difficulty": "Beginner",
+  "time": 25,
+  "artifact": "Hai bảng tần số học vấn (Nam/Nữ) + nhận xét so sánh",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d04",
+  "hint": [
+   "Data → Split File → Compare groups → đưa B7 vào ô Groups Based on",
+   "Nhớ quay lại Split File → Analyze all cases khi làm xong — quên là lỗi kinh điển",
+   "B11=1 'Không biết đọc/viết' không có ai — bảng chỉ hiện giá trị quan sát được"
+  ],
+  "answerSpec": [
+   {
+    "key": "nam",
+    "label": "Nam — nhóm học vấn chiếm đa số"
+   },
+   {
+    "key": "nu",
+    "label": "Nữ — nhóm học vấn chiếm đa số"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q04",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Tạo biến BMI = E26/(E25/100)²; thống kê mean, SD, min, max",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "E25",
+   "E26"
+  ],
+  "skills": [
+   "Compute Variable",
+   "Descriptives",
+   "kiểm chứng kết quả"
+  ],
+  "ops": [
+   "Transform→Compute Variable",
+   "Analyze→Descriptive Statistics→Descriptives"
+  ],
+  "prereq": [],
+  "difficulty": "Beginner",
+  "time": 30,
+  "artifact": "Biến BMI mới + bảng đại lượng (mean, SD, min, max)",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d06",
+  "hint": [
+   "E25 đo bằng cm — công thức BMI cần mét: E26/(E25/100)**2",
+   "Transform → Compute Variable → đặt tên BMI, nhập biểu thức, OK → biến mới ở cột cuối Data View",
+   "Kiểm chứng: BMI ~21–22 là hợp lý; nếu ra ~0,002 nghĩa là quên chia 100"
+  ],
+  "answerSpec": [
+   {
+    "key": "mean",
+    "label": "Mean BMI"
+   },
+   {
+    "key": "sd",
+    "label": "SD BMI"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q05",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Recode HA tâm thu (E29) → 3 nhóm (<120, 120–139, ≥140 mmHg); tần số và % từng nhóm",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "E29"
+  ],
+  "skills": [
+   "Recode into Different Variables",
+   "đặt nhãn giá trị",
+   "Frequencies"
+  ],
+  "ops": [
+   "Transform→Recode into Different Variables",
+   "Analyze→Descriptive Statistics→Frequencies"
+  ],
+  "prereq": [
+   "Frequencies"
+  ],
+  "difficulty": "Intermediate",
+  "time": 35,
+  "artifact": "Biến nhóm HA + bảng tần số 3 nhóm",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d06",
+  "hint": [
+   "Dùng Recode into DIFFERENT Variables (đặt tên vd NhomHA) — không ghi đè E29 gốc",
+   "Khoảng <120 → 1; 120 đến 139 → 2; ≥140 → 3; nhớ đặt Value Labels cho biến mới",
+   "Frequencies trên biến mới để đếm — kiểm tra tổng 3 nhóm = 360"
+  ],
+  "answerSpec": [
+   {
+    "key": "n140",
+    "label": "Số người HA ≥140 mmHg"
+   },
+   {
+    "key": "pct_mid",
+    "label": "Tỷ lệ % nhóm 120–139"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q06",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Tỷ lệ đã được chẩn đoán tăng huyết áp (C13) theo giới tính — bảng chéo + Chi-square",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "C13",
+   "B7"
+  ],
+  "skills": [
+   "Crosstabs",
+   "Chi-square",
+   "Column %"
+  ],
+  "ops": [
+   "Analyze→Descriptive Statistics→Crosstabs",
+   "Crosstabs→Cells→Column percentages",
+   "Crosstabs→Statistics→Chi-square"
+  ],
+  "prereq": [
+   "Frequencies"
+  ],
+  "difficulty": "Beginner",
+  "time": 30,
+  "artifact": "Bảng chéo C13 × giới + χ², p + nhận xét",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d05",
+  "hint": [
+   "C13: 1=Đã từng được chẩn đoán THA, 2=Chưa — đọc nhãn ở Variable View trước",
+   "Hàng C13, cột B7; Cells → tick Column %",
+   "Statistics → Chi-square → đọc dòng Pearson Chi-Square và footnote expected count"
+  ],
+  "answerSpec": [
+   {
+    "key": "nam_pct",
+    "label": "% Nam đã chẩn đoán THA"
+   },
+   {
+    "key": "p",
+    "label": "Chi-square — Sig. (2-sided)"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q07",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Đếm số loại người thân mắc đái tháo đường (C16.1–C16.4); bao nhiêu người có ≥2 loại",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "C16.1",
+   "C16.2",
+   "C16.3",
+   "C16.4"
+  ],
+  "skills": [
+   "Count Values within Cases",
+   "Frequencies"
+  ],
+  "ops": [
+   "Transform→Count Values within Cases",
+   "Analyze→Descriptive Statistics→Frequencies"
+  ],
+  "prereq": [
+   "Compute",
+   "Frequencies"
+  ],
+  "difficulty": "Intermediate",
+  "time": 35,
+  "artifact": "Biến đếm + bảng tần số + số người ≥2 loại người thân ĐTĐ",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d06",
+  "hint": [
+   "Transform → Count Values within Cases → đưa 4 biến C16.1–C16.4 vào, Numeric Values = 1",
+   "Frequencies trên biến đếm mới",
+   "'≥2 loại' = cộng các ô giá trị 2 và 3 trong bảng tần số"
+  ],
+  "answerSpec": [
+   {
+    "key": "n2",
+    "label": "Số người có ≥2 loại người thân ĐTĐ"
+   },
+   {
+    "key": "pct",
+    "label": "Tỷ lệ %"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q08",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "So sánh HA tâm thu trung bình (E29) giữa Nam và Nữ — Independent-Samples T Test",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "E29",
+   "B7"
+  ],
+  "skills": [
+   "Independent-Samples T Test",
+   "Levene's Test",
+   "Group Statistics"
+  ],
+  "ops": [
+   "Analyze→Compare Means→Independent-Samples T Test",
+   "Define Groups→B7: 1 và 2"
+  ],
+  "prereq": [
+   "Descriptives"
+  ],
+  "difficulty": "Intermediate",
+  "time": 30,
+  "artifact": "Bảng Group Statistics + dòng kết quả t-test đúng theo Levene",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d09",
+  "hint": [
+   "Nhập đúng mã nhóm vào Define Groups: 1=Nam, 2=Nữ (đúng cho file này)",
+   "Đọc Levene's Test trước: Sig. > 0,05 → dùng dòng 'Equal variances assumed'",
+   "Kiểm tra hướng chênh lệch bằng Group Statistics trước khi kết luận giới nào cao hơn"
+  ],
+  "answerSpec": [
+   {
+    "key": "t",
+    "label": "t"
+   },
+   {
+    "key": "p",
+    "label": "Sig. (2-tailed)"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q09",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Tương quan giữa chiều cao (E25) và cân nặng (E26) — hệ số Pearson + scatterplot",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "E25",
+   "E26"
+  ],
+  "skills": [
+   "Scatterplot",
+   "Bivariate Correlations",
+   "Pearson r"
+  ],
+  "ops": [
+   "Graphs→Chart Builder→Scatter/Dot",
+   "Analyze→Correlate→Bivariate"
+  ],
+  "prereq": [],
+  "difficulty": "Intermediate",
+  "time": 30,
+  "artifact": "Scatterplot + bảng Correlations (r, Sig., N)",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d11",
+  "hint": [
+   "Vẽ scatterplot trước khi tính r — Graphs → Chart Builder → Scatter/Dot",
+   "Analyze → Correlate → Bivariate → Pearson, Two-tailed",
+   "r gần 1 = tương quan dương mạnh — kết quả sinh học hợp lý (cao hơn thì nặng hơn)"
+  ],
+  "answerSpec": [
+   {
+    "key": "r",
+    "label": "Hệ số Pearson r"
+   },
+   {
+    "key": "p",
+    "label": "Sig. (2-tailed)"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q10",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Gộp chẩn đoán HA thành 2 nhóm (CD.HA 1–2 vs THA độ 1–3), so sánh thói quen thêm muối lúc nấu (M.LucAn)",
+  "dataset": "p1_B01_HA (1).sav",
+  "vars": [
+   "CD.HA",
+   "M.LucAn"
+  ],
+  "skills": [
+   "Recode nhóm",
+   "Crosstabs",
+   "Chi-square",
+   "đọc expected count"
+  ],
+  "ops": [
+   "Transform→Recode into Different Variables",
+   "Analyze→Descriptive Statistics→Crosstabs",
+   "Crosstabs→Statistics→Chi-square"
+  ],
+  "prereq": [
+   "Recode",
+   "Crosstabs"
+  ],
+  "difficulty": "Intermediate",
+  "time": 40,
+  "artifact": "Biến CDHA_2nhom + bảng chéo + χ²/p + nhận xét về ô expected",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d05",
+  "hint": [
+   "CD.HA 5 mã: 1=Bình thường, 2=Tiền tăng HA, 3–5=THA độ 1–3 → Recode 1,2→0 và 3,4,5→1 vào biến mới",
+   "Crosstabs: hàng M.LucAn, cột biến mới; Cells → Column %",
+   "Đọc footnote 'expected count' — có ô <5 nên kết quả chi-square chỉ mang tính tham khảo / cân nhắc gộp mức M.LucAn"
+  ],
+  "answerSpec": [
+   {
+    "key": "chi2",
+    "label": "Pearson Chi-Square"
+   },
+   {
+    "key": "p",
+    "label": "Sig. (2-sided)"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q11",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Tỷ lệ ăn đủ 400g rau củ quả (RauCu) có thể xem là 50%? — Binomial test",
+  "dataset": "p1_B01_HA (1).sav",
+  "vars": [
+   "RauCu"
+  ],
+  "skills": [
+   "Binomial test",
+   "Test Proportion",
+   "đọc Observed Prop."
+  ],
+  "ops": [
+   "Analyze→Nonparametric Tests→Legacy Dialogs→Binomial"
+  ],
+  "prereq": [],
+  "difficulty": "Intermediate",
+  "time": 25,
+  "artifact": "Observed proportion + Sig. của Binomial test",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d08",
+  "hint": [
+   "Analyze → Nonparametric Tests → Legacy Dialogs → Binomial → Test Proportion nhập 0.50",
+   "RauCu: 1=Có ăn đủ, 2=Không — SPSS lấy nhóm mã đầu tiên làm 'thành công'",
+   "Observed Prop. trong output so với Test Prop. 0,5 → kết luận"
+  ],
+  "answerSpec": [
+   {
+    "key": "obs",
+    "label": "Tỷ lệ quan sát (0–1)"
+   },
+   {
+    "key": "p",
+    "label": "Exact Sig. (2-tailed)"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q12",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "HA tâm thu trung bình (E29) có thể xem là 120 mmHg? — One-Sample T Test",
+  "dataset": "So_Lieu_NC.sav",
+  "vars": [
+   "E29"
+  ],
+  "skills": [
+   "One-Sample T Test",
+   "95% CI của Difference"
+  ],
+  "ops": [
+   "Analyze→Compare Means→One-Sample T Test"
+  ],
+  "prereq": [],
+  "difficulty": "Beginner",
+  "time": 25,
+  "artifact": "Bảng One-Sample Test: t, df, Sig., Mean Difference, 95% CI",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d09",
+  "hint": [
+   "Analyze → Compare Means → One-Sample T Test → Test Value nhập 120",
+   "120 mmHg = ngưỡng HA tâm thu bình thường theo phân loại JNC",
+   "Mean Difference = mean mẫu − 120; CI không chứa 0 → khác biệt có ý nghĩa"
+  ],
+  "answerSpec": [
+   {
+    "key": "t",
+    "label": "t"
+   },
+   {
+    "key": "p",
+    "label": "Sig. (2-tailed)"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q13",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Tần số vai trò nạn nhân (mnannha) và các phương tiện liên quan tai nạn (bảng đa trả lời)",
+  "dataset": "File1.sav",
+  "vars": [
+   "mnannha",
+   "npt_ot",
+   "opt_xema",
+   "ypt_xeda",
+   "ppt_dib",
+   "opt_kha"
+  ],
+  "skills": [
+   "Frequencies nhiều biến",
+   "bảng đa trả lời (đa nhị phân)"
+  ],
+  "ops": [
+   "Analyze→Descriptive Statistics→Frequencies"
+  ],
+  "prereq": [
+   "Frequencies"
+  ],
+  "difficulty": "Beginner",
+  "time": 30,
+  "artifact": "Bảng tần số vai trò nạn nhân + số vụ theo từng phương tiện",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d02",
+  "hint": [
+   "mnannha danh định 4 mức — đọc cột % trực tiếp",
+   "5 biến phương tiện là nhị phân 0/1 — đưa cả 5 vào một bảng Frequencies, đếm số 'Có' mỗi biến",
+   "Tổng % phương tiện >100% là bình thường: một tai nạn có thể liên quan nhiều phương tiện"
+  ],
+  "answerSpec": [
+   {
+    "key": "vaitro",
+    "label": "Vai trò nạn nhân phổ biến nhất"
+   },
+   {
+    "key": "pt",
+    "label": "Phương tiện liên quan nhiều nhất"
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q14",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "So sánh số ngày nằm viện (nsonga) giữa 3 vị trí chấn thương nặng nhất (cchanthuon) — One-Way ANOVA",
+  "dataset": "File1.sav",
+  "vars": [
+   "nsonga",
+   "cchanthuon"
+  ],
+  "skills": [
+   "One-Way ANOVA",
+   "Descriptives theo nhóm"
+  ],
+  "ops": [
+   "Analyze→Compare Means→One-Way ANOVA",
+   "One-Way ANOVA→Options→Descriptive"
+  ],
+  "prereq": [
+   "Descriptives"
+  ],
+  "difficulty": "Intermediate",
+  "time": 30,
+  "artifact": "Bảng Descriptives 3 nhóm + bảng ANOVA (F, Sig.)",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d10",
+  "hint": [
+   "nsonga vào Dependent List; cchanthuon vào Factor",
+   "Options → tick Descriptive để có mean ± SD từng nhóm",
+   "Sig. > 0,05 → số ngày nằm viện không khác nhau có ý nghĩa giữa 3 vị trí chấn thương"
+  ],
+  "answerSpec": [
+   {
+    "key": "f",
+    "label": "F"
+   },
+   {
+    "key": "p",
+    "label": "Sig."
+   }
+  ],
+  "tier": "reinforcement"
+ },
+ {
+  "id": "P3-Q15",
+  "src": "P3",
+  "page": null,
+  "ref": "Bài mới",
+  "summary": "Khám trực tràng (Khám_TT) và siêu âm (Siêu_âmTT) có thay thế cho nhau? — McNemar trên 2 test chẩn đoán",
+  "dataset": "File5_Phan2.sav",
+  "vars": [
+   "Khám_TT",
+   "Siêu_âmTT"
+  ],
+  "skills": [
+   "McNemar",
+   "Crosstabs ghép cặp",
+   "ô bất đồng"
+  ],
+  "ops": [
+   "Analyze→Descriptive Statistics→Crosstabs",
+   "Crosstabs→Statistics→McNemar"
+  ],
+  "prereq": [
+   "Crosstabs"
+  ],
+  "difficulty": "Intermediate",
+  "time": 30,
+  "artifact": "Bảng 2×2 hai test + số ô bất đồng + p McNemar + kết luận thay thế được không",
+  "mapping": "NEW",
+  "role": "optional",
+  "day": "d08",
+  "hint": [
+   "Hai test đo trên CÙNG một người → dữ liệu ghép cặp — không dùng Chi-square thường",
+   "Crosstabs → Statistics → tick McNemar (bảng 2×2 mới có tùy chọn này)",
+   "Chỉ hai ô bất đồng (khám+ / siêu âm− và khám− / siêu âm+) quyết định kiểm định"
+  ],
+  "answerSpec": [
+   {
+    "key": "batdong",
+    "label": "Số cặp bất đồng lớn hơn (khám+ siêu âm−)"
+   },
+   {
+    "key": "p",
+    "label": "Sig. (McNemar)"
+   }
+  ],
+  "tier": "reinforcement"
+ }
  ]
 }

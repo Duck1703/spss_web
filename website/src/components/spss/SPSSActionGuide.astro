@@ -16,9 +16,10 @@ import OSSelector from './OSSelector.astro';
 interface Props { id: string; step?: string; part?: 'window' | 'followup' | 'all'; }
 const { id, step, part = 'all' } = Astro.props;
 
-const day = 'day' + id.slice(1, 3); // 'd01' → 'day01' (thư mục public/visual-guides/dayNN)
+// 'd01-…' → 'day01'; 'x-…' (guide bài tập kho, sinh bởi build_ex_sims) → 'exercises'
+const dir = /^x-/.test(id) ? 'exercises' : 'day' + id.slice(1, 3);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
-const scenesPath = path.join(root, 'public', 'visual-guides', day, 'scenes.json');
+const scenesPath = path.join(root, 'public', 'visual-guides', dir, 'scenes.json');
 const all = JSON.parse(fs.readFileSync(scenesPath, 'utf8')).guides;
 const g = all[id];
 if (!g) throw new Error(`SPSSActionGuide: không tìm thấy guide '${id}' trong ${scenesPath}`);

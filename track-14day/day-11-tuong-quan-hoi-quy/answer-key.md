@@ -40,6 +40,15 @@ theo tuổi (r=−0,35, p=0,013).
 - Bài học: R² tăng ít so với mô hình đơn (0,623 vs 0,589) vì `htuo`/`nsonga`
   không còn đóng góp khi đã có `ytruo` — "nhiều biến ≠ mô hình tốt hơn".
 
+
+## P3-Q09 — Tương quan E25–E26 (So_Lieu_NC) *(bài mới)*
+
+n = 360: Pearson **r = 0,823**, Sig. (2-tailed) **< 0,001** → chiều cao và cân nặng
+tương quan **dương, mạnh** (hợp lý sinh học). Spearman tham khảo: ρ = 0,752,
+p < 0,001 — cùng dấu, cùng kết luận.
+Scatterplot cho thấy đám mây dạng elip dốc lên, không outlier cực đoan → điều kiện
+dùng Pearson thỏa.
+
 ## Lỗi người mới hay gặp
 
 - **Đảo X/Y trong regression:** `csa~htuo` và `htuo~csa` cho B khác nhau — luôn

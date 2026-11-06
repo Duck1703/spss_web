@@ -65,3 +65,43 @@ trước khi cộng; bạn sẽ làm gộp bằng Recode ở Ngày 06 thay vì c
 2. Có khác nhau: 2 dòng missing làm `Percent` (trên 620) < `Valid Percent` (trên 618).
    Đây là lý do báo cáo % nên đọc Valid Percent.
 3. Để nguyên — **Câu 14 (Ngày 07)** sẽ yêu cầu liệt kê mã số các phiếu sai này và loại bỏ.
+
+## P3-Q01 — Tần số giới tính B7 (So_Lieu_NC) *(bài mới)*
+
+`So_Lieu_NC.sav`, n = 360, không missing. Chú ý mã giới tính file này **ngược** với
+p1_B01_HA: **1 = Nam, 2 = Nữ**.
+
+| Giới tính | Số lượng | % |
+|---|---|---|
+| Nam (1) | 131 | 36,4 |
+| Nữ (2) | 229 | 63,6 |
+| **Total** | **360** | 100,0 |
+
+*Lỗi hay gặp:* đọc ngược nhãn vì quen mã của file P1 — luôn kiểm tra Variable View
+của đúng file đang mở.
+
+## P3-Q13 — Vai trò nạn nhân & phương tiện (File1) *(bài mới)*
+
+**a) `mnannha` — vai trò khi tai nạn (n=50):**
+
+| Vai trò | Số lượng | % |
+|---|---|---|
+| Người lái xe (1) | 13 | 26,0 |
+| Hành khách (2) | 8 | 16,0 |
+| Người đi bộ (3) | 18 | 36,0 |
+| Khác (4) | 11 | 22,0 |
+
+→ **Người đi bộ chiếm đa số (36,0%)**.
+
+**b) Phương tiện liên quan (5 biến nhị phân 0/1, đếm số "Có"):**
+
+| Phương tiện | Số vụ |
+|---|---|
+| Xe máy (`opt_xema`) | 30 |
+| Ô tô (`npt_ot`) | 26 |
+| Xe đạp (`ypt_xeda`) | 17 |
+| Người đi bộ (`ppt_dib`) | 14 |
+| Khác (`opt_kha`) | 14 |
+
+→ **Xe máy liên quan nhiều nhất (30/50 vụ)**. Tổng 101 > 50 là đúng — một tai nạn
+có thể liên quan nhiều phương tiện (dữ liệu đa trả lời), không cộng thành 100%.

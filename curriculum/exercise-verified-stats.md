@@ -252,3 +252,40 @@ DEATH
 - Q33 % THA độ1–3 trong nhóm có bệnh: ĐTĐ n=196 (58,2/17,9/0) χ²=87,60 p<0,001 · Tim n=92 (58,7/28,3/0) χ²=61,13 p<0,001 · Than n=16, Gan n=11, Gút n=9 → expected<5 nhiều ô → chỉ mô tả
 - Q43 Tuoi×GTinh: Nữ(1) n=376 67,16±11,06 (41–97); Nam(2) n=244 66,51±10,74 (41–94); Tổng 66,90±10,93
 - P2-Q08 ANOVA htuo~otin: F=0,090 df(2,47) p=0,914
+
+## Bài tập mới P3-Q01…Q15 (bộ bổ sung 2026-11 — Python cross-check, NOT_RUN)
+```
+So_Lieu_NC.sav (n=360, không missing trên các biến dùng):
+Q01 B7: Nam(1)=131 (36,4%) · Nữ(2)=229 (63,6%)   [chú ý mã NGƯỢC với p1_B01_HA]
+Q02 B8: n=360 mean=54,31 sd=10,81 median=56 min=30 max=69 range=39 p25=46 p75=64
+Q03 B11 x B7 (n/% cột):
+        Nam   Nữ
+  B11=2   4    6    (3,1/2,6)
+  B11=3  25   35    (19,1/15,3)
+  B11=4  26   63    (19,8/27,5)
+  B11=5  41   73    (31,3/31,9)
+  B11=6  35   52    (26,7/22,7)   — B11=1 không có ai
+Q04 BMI=E26/(E25/100)^2: n=360 mean=21,83 sd=1,39 min=18,90 max=25,88
+Q05 E29 nhóm [<120|120–139|>=140]: 91 (25,3%) / 137 (38,1%) / 132 (36,7%)
+Q06 C13 x B7: Nam Có 74/131 (56,5%) · Nữ Có 119/229 (52,0%); chi2=0,686 p=0,408 (expmin=60,77)
+Q07 Count C16.1–C16.4 (=1): {0:210, 1:1, 2:107, 3:42}; >=2 loại = 149 (41,4%)
+Q08 E29 ~ B7: Nam 128,85±13,16 (n=131) vs Nữ 126,35±14,14 (n=229);
+    Levene F=0,774 p=0,380; pooled t=1,655 df=358 p=0,099 (Welch 1,688 p=0,093); diff=+2,50 CI −0,47..5,47
+Q09 r(E25,E26)=0,823 p<0,001 n=360 (Spearman 0,752 p<0,001)
+Q12 E29 vs 120: mean=127,26 sd=13,83; t=9,968 df=359 p<0,001; diff=+7,26 CI 5,83..8,70
+
+p1_B01_HA (1).sav:
+Q10 CDHA_2n (CD.HA 1,2→0 n=285; 3–5→1 n=335) x M.LucAn:
+    {không bao giờ 2/0, hiếm khi 120/82, thỉnh thoảng 142/199, thường xuyên 21/54}
+    chi2=29,355 df=3 p<0,001 — NHƯNG 1 ô expected=0,92 <5 → chỉ tham khảo
+Q11 Binomial RauCu: Có=544/620 (0,877) vs Test 0,50 → exact p<0,001
+
+File1.sav:
+Q13 mnannha: {1:13 (26%), 2:8 (16%), 3:18 (36%), 4:11 (22%)} — người đi bộ đa số
+    phương tiện (đa trả lời): xe máy 30, ô tô 26, xe đạp 17, đi bộ 14, khác 14
+Q14 ANOVA nsonga ~ cchanthuon: means 2,71/2,33/1,87; F=0,447 df(2,47) p=0,642
+
+File5_Phan2.sav:
+Q15 McNemar Khám_TT x Siêu_âmTT: bất đồng 85 (khám+ SA−) vs 42 (khám− SA+)
+    chi2=14,559 p<0,001 (Yates 13,89; exact binomial ≈0,0002) → không thay thế cho nhau
+```
